@@ -33,6 +33,7 @@ class Dashboard extends Component {
       password:'',
       helperTextpassowrd:""
     };
+    this.arrowButton = this.arrowButton.bind(this);
   }
 
    //setState for email field
@@ -77,6 +78,7 @@ onChangePassword(event) {
   }
   //ArrowButton
   arrowButton(event){
+    event.preventDefault();
     this.setState({next:false})
   }
   render() {
@@ -93,11 +95,12 @@ onChangePassword(event) {
             <div className="border">
               <div className="loginFrom">
               <div className="arrow">
-              <Button onClick={this.arrowButton}>
+              <Button onClick={e => this.arrowButton(e)}>
               <ArrowBackIcon />
               </Button></div>
               
                 <img src={profile} id="img" />
+                <div className="emaildisplay">{this.state.email}</div>
                 <div className="inputField">
                   <TextField
                    hintText="Password"
@@ -160,12 +163,6 @@ onChangePassword(event) {
               Create account
             </Button>
        </div> 
-        
-
-
-
-
-
       </div>
     );
   }

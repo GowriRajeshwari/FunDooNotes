@@ -2,7 +2,7 @@
   /* margin-top : 100px; */
   /* padding : 40px; */
   width:25%;
-  height: 300px;
+  height: 320px;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -22,7 +22,7 @@
   justify-content: center;
 }
 .container {
-    height: 300px;
+    height: 320px;
     font-size: 28px;
     color: rgb(228, 86, 86);
     display: flex;
@@ -43,8 +43,8 @@
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    width: 450px;
-    height: 280px;
+    width: 333px;
+    height: 320px;
     max-width: 400px;
     align-items: center;
     justify-content: center;
@@ -89,7 +89,7 @@
     justify-content: center;
   }
   .fundootitle{
-    font-size: 28px;
+    font-size: 18px;
     color: rgb(228, 86, 86);
     display: flex;
     flex-direction: column;
@@ -118,9 +118,20 @@
   .arrow{
     color: #292929;
     margin-top: 5px;
-    width:  290px;
+    width:  300px;
     align-items: flex-start;
     justify-content: flex-start;
+  }
+  .emaildisplay{
+    margin-top: 2px;
+    font-size: 15px;
+    color:#292929;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F8F8F8;
+
   }
 
 
