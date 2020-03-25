@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemTest from "@material-ui/core/ListItemText";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import Snackbar from '@material-ui/core/Snackbar';
-import { IconButton } from "@material-ui/core";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -17,23 +11,40 @@ class Dashboard extends Component {
     this.state = {
       helperText: "",
       error: false,
-      messagebox: "",
-      users: [], topic: "",
       username: "",
-      allchat: [],
-      messages: [],
-      message: "",
-      id: "",
       userdata: [],
       show: false,
-      snackbaropen: false,
-      snackbarmsg: '',
       login: "Sign in",
       next : false,
       password:'',
       helperTextpassowrd:""
     };
     this.arrowButton = this.arrowButton.bind(this);
+    this.register = this.register.bind(this);
+    this.ForgotButton = this.ForgotButton.bind(this);
+    this.resetpassword = this.resetpassword.bind(this);
+  }
+  resetpassword(event){
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/Reset",
+    });
+  }
+  //ForgotButton
+  ForgotButton(event){
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/Forgot",
+    });
+    localStorage.setItem("email", this.state.email);
+  }
+  //Register Button
+  register(event){
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/Register",
+    });
+
   }
 
    //setState for email field
@@ -74,7 +85,7 @@ onChangePassword(event) {
 //Next Button
   Next(event){
     event.preventDefault();
-    this.setState({next:true , password :'' })
+    this.setState({next:true  })
   }
   //ArrowButton
   arrowButton(event){
@@ -100,7 +111,7 @@ onChangePassword(event) {
               </Button></div>
               
                 <img src={profile} id="img" />
-                <div className="emaildisplay">{this.state.email}</div>
+                <div className="emaildisplay">{this.state.email}{this.state.password}</div>
                 <div className="inputField">
                   <TextField
                    hintText="Password"
@@ -110,7 +121,7 @@ onChangePassword(event) {
                    type="password"
                    label="Password"
                    helperText={this.state.helperTextpassowrd}
-                   onChangepassword={this.onChangePassword.bind(this)}
+                   onChange={this.onChangePassword.bind(this)}
                   />
                 </div>
 
@@ -120,9 +131,9 @@ onChangePassword(event) {
                 </Button>
                 </div>
                 <div className="belowlogin">
-                  <Button id="forgotstyle" onClick={e => this.register(e)}>
+                  <Button id="forgotstyle" onClick={e => this.ForgotButton(e)}>
                    Forgot Password
-            </Button>
+                   </Button>
                 </div>
               </div>
             </div>
@@ -149,9 +160,9 @@ onChangePassword(event) {
                 </Button>
                 </div>
                 <div className="belowlogin">
-                  <Button id="forgotstyle" onClick={e => this.register(e)}>
-                    Find my account
-            </Button>
+                  <Button id="forgotstyle" onClick={e => this.resetpassword(e)}>
+                  Create account(RP)
+                   </Button>
                 </div>
               </div>
             </div>

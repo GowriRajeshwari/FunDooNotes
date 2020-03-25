@@ -1,0 +1,205 @@
+#rootpaperReg{
+    margin-top : 70px;
+    margin-bottom: 70px;
+    /* padding : 40px; */
+    width:65%;
+    height: 500px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  .firstcontainerReg{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .containerReg {
+    width: 70%;
+      height: 500px;
+      font-size: 28px;
+      color: rgb(228, 86, 86);
+      display: flex;
+      flex-direction: column;
+      background-color: rgb(160, 23, 23);
+    }
+    .loginstyleReg{
+        margin-top: 10px;
+        font-size: 25px;
+        /* padding: 16px; */
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+  .container2Reg{
+      padding : 35px;
+    height: 500px;
+    font-size: 15px;
+    color:black;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+  }
+  .usernameReg span {
+    color: red;
+    font-size: 25px;
+  }
+  .usernameReg span:nth-child(2n+1) {
+    color: blue;
+  }
+  .rowReg{
+    /* padding: 10px; */
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    /* justify-content: space-between */
+
+  }
+  #btnReg {
+    width: 190px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  .inputFieldReg {
+    padding: 1px;
+    margin-right: 10px;
+  }
+  #btnEmailReg{
+    width: 420px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  .submitButtonReg {
+    display: flex;
+    justify-content: flex-end;
+    /* padding: 1px; */
+    width: 450px;
+    /* width: 294px; */
+    margin-top: 20px;
+  }
+  #subbtnReg {
+    justify-content: flex-end;
+    background-color: #1189de;
+    font-weight: bold;
+    color: #fff;
+    width: 100px;
+  }
+  
+  @media only screen 
+  and (max-width : 375px) {
+    #rootpaperReg{
+      margin-top : 70px;
+      margin-bottom: 70px;
+      /* padding : 40px; */
+      width:320px;
+      height: 500px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    
+    .firstcontainerReg{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .containerReg {
+      /* width: 320%; */
+        height: 500px;
+        font-size: 28px;
+        color: rgb(228, 86, 86);
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(160, 23, 23);
+      }
+      .loginstyleReg{
+          margin-top: 10px;
+          font-size: 25px;
+          /* padding: 16px; */
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+      }
+    .container2Reg{
+        padding : 35px;
+      height: 500px;
+      font-size: 15px;
+      color:black;
+      display: flex;
+      flex-direction: column;
+      background-color: #FFFFFF;
+    }
+    .usernameReg span {
+      color: red;
+      font-size: 25px;
+    }
+    .usernameReg span:nth-child(2n+1) {
+      color: blue;
+    }
+    .rowReg{
+      /* padding: 10px; */
+      display: flex;
+      flex-direction: row;
+      margin-top: 20px;
+      /* justify-content: space-between */
+  
+    }
+    #btnReg {
+      width: 90px;
+      /* min-width: 265px; */
+      color: #565656;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      height: 20px;
+    }
+    .inputFieldReg {
+      padding: 1px;
+      margin-right: 10px;
+    }
+    #btnEmailReg{
+      width: 210px;
+      /* min-width: 265px; */
+      color: #565656;
+      font-size: 12px;
+      font-weight: bold;
+      border-radius: 4px;
+      background: #fff;
+      cursor: pointer;
+      height: 20px;
+    }
+    .submitButtonReg {
+      display: flex;
+      justify-content: flex-end;
+      padding: 1px;
+      width: 215px;
+      /* width: 294px; */
+      margin-top: 20px;
+    }
+    #subbtnReg {
+      justify-content: flex-end;
+      background-color: #1189de;
+      font-weight: bold;
+      color: #fff;
+      width: 50px;
+    }
+   
+  }

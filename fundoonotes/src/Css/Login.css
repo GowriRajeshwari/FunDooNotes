@@ -1,7 +1,7 @@
 #rootpaper{
   /* margin-top : 100px; */
   /* padding : 40px; */
-  width:25%;
+  width:333px;
   height: 320px;
   flex-direction: column;
   align-items: center;
@@ -140,64 +140,35 @@
 
 @media only screen 
 and (max-width : 375px) {
-.container {
-  height: 640px;
-  font-size: 28px;
-  color: #73ad21;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-}
-.loginFromforgot{
-  box-sizing: border-box;
-  width: 320px;
-  height: 160px;
-  border: 3px solid #73ad21;
-}
-#input{
-  box-sizing: border-box;
-  outline: none;
-  border: solid 2px #1189de;
-  border-radius: 4px;
-  color: #292929;
-  font-size: 14px;
-  background: rgba(255, 255, 255, 1);
-}
-#subbtn {
-  background-color: #1189de;
-  font-weight: bold;
-  color: #fff;
-}
+  #rootpaper{
+    /* margin-top : 100px; */
+    /* padding : 40px; */
+    width:310px;
+    height: 320px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .container {
+      height: 320px;
+      font-size: 28px;
+      color: rgb(228, 86, 86);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #F8F8F8;
+    }
 
-#btn {
-  width: 40%;
-  color: #565656;
-  font-size: 14px;
-  font-weight: bold;
-  border-radius: 4px;
-  background: #fff;
-  cursor: pointer;
-}
-.border{
-    width: 320px;
-}
-.loginFrom {
-    box-sizing: border-box;
-    width: 320px;
-    height: 280px;
-    max-width: 320px;
-    border: 3px solid #73ad21;
-  }
-  .inputField {
-    padding: 10px;
-  }
-  .belowlogin {
-    padding: 10px;
-    flex-direction: row;
-    display: flex;
-    justify-content: space-between;
-    width: 320px;
-  }
+    .loginFrom {
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+      width: 310px;
+      height: 320px;
+      max-width: 400px;
+      align-items: center;
+      justify-content: center;
+      /* border: 3px solid #73ad21; */
+    }
 }

@@ -3,6 +3,10 @@ import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import history from "./history";
 import Login from './components/Login';
+import Register from './components/Register';
+import ForgotPassword from './components/ForgotPassword';
+import ResetPassword from './components/ResetPassword';
+
 
 
 function App() {
@@ -10,6 +14,9 @@ function App() {
     <Router history={history}>
       <Switch>
         <Route path="/" exact component={Login} />
+        <Route path="/Register" component={Register} />
+        <Route path="/Forgot" component={ForgotPassword} />
+        <Route path="/Reset" component={ResetPassword} />
       </Switch>
     </Router>
   );
