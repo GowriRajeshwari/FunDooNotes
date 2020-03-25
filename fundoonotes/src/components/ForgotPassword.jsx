@@ -21,7 +21,6 @@ class Dashboard extends Component {
             emailfrom :''
         };
      this.Send =this.Send.bind(this);
-
     }
     //Send Button
     Send(){
