@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-class Dashboard extends Component {
+class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -178,4 +178,4 @@ onChangePassword(event) {
     );
   }
 }
-export default Dashboard;
+export default Login;
