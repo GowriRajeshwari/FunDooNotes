@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import mail from '../assets/mail.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-class Dashboard extends Component {
+class ForgotPassword extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -89,4 +89,4 @@ class Dashboard extends Component {
         );
     }
 }
-export default Dashboard;
+export default ForgotPassword;
