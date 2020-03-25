@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-class Dashboard extends Component {
+class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -152,4 +152,4 @@ class Dashboard extends Component {
         );
     }
 }
-export default Dashboard;
+export default Register;
