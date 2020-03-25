@@ -2,17 +2,86 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import mail from '../assets/mail.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import sidenavicon from '../assets/sidenavicon.png';
+import search from '../assets/search.png';
+import clear from '../assets/clear.png';
+import refresh from '../assets/refresh.png';
+import box from '../assets/box.png';
+
+
+
+
 
 class Dashboard extends Component {
 
- 
+
     render() {
         return (
-         <div>
-             hello
-         </div>  
+
+            <div className="dashContainer">
+
+                <Paper className="dashsearch">
+
+                    <div>
+                        <Button onClick={e => this.arrowButton(e)}>
+                            <img src={sidenavicon} id="imgdash" />
+                        </Button>
+                    </div>
+                    <div>
+                        <div className="textremainderDash">Remainder</div>
+                    </div>
+
+
+                    <div className="searcheledash">
+                            <Paper>
+                                    <img src={search} id="imgdash" />
+                                    <TextField
+                                    hintText="Password"
+                                    floatingLabelText="Password"
+                                    id="inputFielddash"
+                                    //    variant="outlined"
+                                        //    label="Search"
+                                        InputProps={{disableUnderline: true}}
+                                        style ={{width : '380px', backgroundColor : '#ff00',border:'none',disableUnderline: true}}
+                                        //    helperText={this.state.helperTextpassowrd}
+                                        //    onChange={this.onChangePassword.bind(this)}
+                                        />
+                                <img src={clear} id="imgdash" />
+                            </Paper>
+                    </div>
+                    <div className="icondash">
+                    <div>
+                    <img src={refresh} id="imgdash" />
+                    </div>
+                    <div className="columimg">
+                        <img src={box} id="imgdash" />
+                    </div>
+                    <div>
+                    <img src={search} id="imgdash" />
+                    </div>
+                 
+                   
+                    </div>
+                    <div className="icondashlast">
+
+                    <div>
+                    <img src={search} id="imgdash" />
+                    </div>
+                    <div>
+                    <img src={search} id="imgdash" />
+                    </div>
+                    </div>
+
+                </Paper>
+                <div>
+                    hello
+                </div>
+
+
+
+            </div>
+
+
         );
     }
 }
