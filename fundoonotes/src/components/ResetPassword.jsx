@@ -71,7 +71,7 @@ class Dashboard extends Component {
 
             <div className="borderReset">
               <div className="loginFromReset">
-              <div>Reset Your Password</div>
+              {/* <div>Reset Your Password</div> */}
                 <div className="inputFieldReset">
                 <TextField
                    hintText="Password"
