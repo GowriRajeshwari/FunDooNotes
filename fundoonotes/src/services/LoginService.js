@@ -1,5 +1,4 @@
 import axios from "axios";
-require('dotenv').config();
 export async function login(data) {
   //console.log(process.env);
   console.log(process.env.REACT_APP_URL)

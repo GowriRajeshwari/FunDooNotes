@@ -53,18 +53,18 @@ class Register extends Component {
         if (data.email || data.password != '') {
             register(data).then(response => {
                 console.log(response);
-              //  if (response.status === 200) {
+               if (response.status === 200) {
                     this.setState({
                         snackbarOpen: true,
                         snackbarMessage: "Succefully Registered."
                       })
                     // localStorage.setItem("username", this.state.username);
                     this.props.history.push({
-                        pathname: "/Login",
+                        pathname: "/",
                     });
-               // } else {
-                  //  this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
-              //  }
+               } else {
+                   this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
+               }
             });
         }
         else {
@@ -91,7 +91,7 @@ class Register extends Component {
 
 
     onchangeFirstName = (event) => {
-        if (/^[a-zA-Z]*$/.test(event.target.value)) {
+        if (/^[a-zA-Z].*[\s\.]*$/g.test(event.target.value)) {
             this.setState({
                 firstname: event.target.value, helpTextFN: "",
                 error: false
@@ -106,7 +106,7 @@ class Register extends Component {
     }
 
     onchangeLastName = event => {
-        if (/^[a-zA-Z]*$/.test(event.target.value)) {
+        if (/^[a-zA-Z].*[\s\.]*$/g.test(event.target.value)) {
             this.setState({
                 lastname: event.target.value, helpTextLN: "",
                 error: false
@@ -129,7 +129,7 @@ class Register extends Component {
 
     onchangeEmail=(event)=>{
         console.log(event)
-        if ( event.target.value.length > 7 ) {
+        if ( /\S+@\S+\.\S+/.test(event.target.value)) {
             this.setState({
                 email: event.target.value, helperTextEmail: "",
                 error: false
@@ -145,13 +145,13 @@ class Register extends Component {
     }
 
     onchangePassword = event => {
-        if (event.target.value.match('^[A-Za-z0-9]*$') != null) {
+        if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
           // console.log("on click function is working", event.target.value)
           this.setState({ password: event.target.value , helperTextpassowrd: "",
           error: false})
         } else {
           this.setState({
-            helperTextpassowrd: "Enter validate Email",
+            helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
             error: true,
             password: event.target.value
         })
@@ -265,7 +265,7 @@ class Register extends Component {
                                         id="btnReg"
                                         variant="outlined"
                                         label="Phone"
-                                        type="number"
+                                        // type="number"
                                         helperText={this.state.helperTextCountry}
                                         onChange={this.onchangePhone}
                                     />

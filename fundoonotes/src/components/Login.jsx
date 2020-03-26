@@ -4,6 +4,8 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+require('dotenv').config();
+
 
 class Login extends Component {
   constructor(props) {
