@@ -19,10 +19,10 @@ class Login extends Component {
       password:'',
       helperTextpassowrd:""
     };
-    this.arrowButton = this.arrowButton.bind(this);
-    this.register = this.register.bind(this);
-    this.ForgotButton = this.ForgotButton.bind(this);
-    this.resetpassword = this.resetpassword.bind(this);
+    // this.arrowButton = this.arrowButton.bind(this);
+    // this.register = this.register.bind(this);
+    // this.ForgotButton = this.ForgotButton.bind(this);
+    // this.resetpassword = this.resetpassword.bind(this);
   }
   resetpassword(event){
     event.preventDefault();
@@ -48,7 +48,7 @@ class Login extends Component {
   }
 
    //setState for email field
-   onChangeEmail(event) {
+   onChangeEmail=(event)=>{
     if (event.target.value.length > 2) {
       this.setState({
         helperText: "",
@@ -61,13 +61,11 @@ class Login extends Component {
         helperText: "Invalid format",
         error: true,
         email: event.target.value,
-      
-
       });
     }
   }
   //setState for password field
-onChangePassword(event) {
+onChangePassword=(event)=> {
   if (event.target.value.length > 7) {
     this.setState({
       helperTextpassowrd: "",
@@ -83,12 +81,12 @@ onChangePassword(event) {
   }
 }
 //Next Button
-  Next(event){
+  Next=(event)=>{
     event.preventDefault();
     this.setState({next:true  })
   }
   //ArrowButton
-  arrowButton(event){
+  arrowButton=(event)=>{
     event.preventDefault();
     this.setState({next:false})
   }
@@ -111,7 +109,7 @@ onChangePassword(event) {
               </Button></div>
               
                 <img src={profile} id="img" />
-                <div className="emaildisplay">{this.state.email}{this.state.password}</div>
+                <div className="emaildisplay">{this.state.email}</div>
                 <div className="inputField">
                   <TextField
                    hintText="Password"
@@ -121,7 +119,7 @@ onChangePassword(event) {
                    type="password"
                    label="Password"
                    helperText={this.state.helperTextpassowrd}
-                   onChange={this.onChangePassword.bind(this)}
+                   onChange={this.onChangePassword}
                   />
                 </div>
 
@@ -150,7 +148,7 @@ onChangePassword(event) {
                     id="btn"
                     variant="outlined"
                     label="Emails"
-                   onChange={this.onChangeEmail.bind(this)}
+                     onChange={this.onChangeEmail}
                   />
                 </div>
 

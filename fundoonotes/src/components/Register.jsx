@@ -2,60 +2,81 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import profile from '../assets/profile.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { register } from "../services/LoginService"
+import Snackbar from '@material-ui/core/Snackbar';
+import { IconButton } from "@material-ui/core";
+
 
 class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            firstName: "",
+            lastName: "",
+            country: "",
+            confirmpassword: "",
             helperText: "",
+            phone: "",
             error: false,
-            username: "",
-            userdata: [],
             show: false,
             login: "Create your FunDoo Account",
             next: false,
             password: '',
-            helperTextpassowrd: ""
+            helperTextpassowrd: "",
+            helperTextCountry: "",
+            helperTextCpassowrd: "",
+            helperTextEmail:"",
+            helpTextFN: "",
+            helpTextLN: "",
+            snackbaropen: false,
+            snackbarmsg: '',
+            email:""
         };
         this.arrowButton = this.arrowButton.bind(this);
+        this.handleClose = this.handleClose.bind(this);
+
     }
-
-    //setState for email field
-    onChangeEmail(event) {
-        if (event.target.value.length > 2) {
-            this.setState({
-                helperText: "",
-                error: false,
-                email: event.target.value,
-
-            });
-        } else {
-            this.setState({
-                helperText: "Invalid format",
-                error: true,
-                email: event.target.value,
-
-
+    //Register Button
+    Register = (event) => {
+        const errors = this.validate(this.state)
+        event.preventDefault();
+        console.log("login clicked");
+        let data = {
+            firstName: this.state.firstname,
+            lastName: this.state.lastname,
+            email: this.state.email,
+            service: 'advance',
+            password: this.state.password,
+            phoneNumber: this.state.phone
+        };
+        console.log(data);
+        if (data.email || data.password != '') {
+            register(data).then(response => {
+                console.log(response);
+              //  if (response.status === 200) {
+                    this.setState({
+                        snackbarOpen: true,
+                        snackbarMessage: "Succefully Registered."
+                      })
+                    // localStorage.setItem("username", this.state.username);
+                    this.props.history.push({
+                        pathname: "/Login",
+                    });
+               // } else {
+                  //  this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
+              //  }
             });
         }
-    }
-    //setState for password field
-    onChangePassword(event) {
-        if (event.target.value.length > 7) {
-            this.setState({
-                helperTextpassowrd: "",
-                error: false,
-                password: event.target.value
-            });
-        } else {
-            this.setState({
-                helperTextpassowrd: "Password should be 7 letters",
-                error: true,
-                password: event.target.value
-            });
+        else {
+            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+
         }
+    }
+
+    //close snackbar
+    handleClose(event) {
+        // event.preventDefault();
+        this.setState({ snackbaropen: false });
     }
     //Next Button
     Next(event) {
@@ -67,6 +88,108 @@ class Register extends Component {
         event.preventDefault();
         this.setState({ next: false })
     }
+
+
+    onchangeFirstName = (event) => {
+        if (/^[a-zA-Z]*$/.test(event.target.value)) {
+            this.setState({
+                firstname: event.target.value, helpTextFN: "",
+                error: false
+            })
+        } else {
+            this.setState({
+                helpTextFN: "Enter only alphabets",
+                error: true,
+                firstname: event.target.value
+            })
+        }
+    }
+
+    onchangeLastName = event => {
+        if (/^[a-zA-Z]*$/.test(event.target.value)) {
+            this.setState({
+                lastname: event.target.value, helpTextLN: "",
+                error: false
+            })
+        } else {
+            this.setState({
+                helpTextLN: "Enter only alphabets",
+                error: true,
+                lastname: event.target.value
+            })
+        }
+    }
+
+    validate = data => {
+        const errors = {}
+        if (!/([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(data.Email))
+            errors.email = 'Invalid email'
+        return errors
+    }
+
+    onchangeEmail=(event)=>{
+        console.log(event)
+        if ( event.target.value.length > 7 ) {
+            this.setState({
+                email: event.target.value, helperTextEmail: "",
+                error: false
+            })
+        } else {
+            this.setState({
+                helperTextEmail: "Enter validate Email",
+                error: true,
+                email: event.target.value
+            })
+        }
+
+    }
+
+    onchangePassword = event => {
+        if (event.target.value.match('^[A-Za-z0-9]*$') != null) {
+          // console.log("on click function is working", event.target.value)
+          this.setState({ password: event.target.value , helperTextpassowrd: "",
+          error: false})
+        } else {
+          this.setState({
+            helperTextpassowrd: "Enter validate Email",
+            error: true,
+            password: event.target.value
+        })
+        }
+      }
+    
+      onchangePasswordagain = async event => {
+
+        await this.setState({
+          confirmpassword: event.target.value
+        })
+        this.checkPassword()
+      }
+    
+      checkPassword () {
+        if (this.state.password === this.state.confirmpassword) {
+          this.setState({ snackbarOpen: true, snackbarmsg: 'done' })
+        } else {
+          this.setState({
+            snackbarOpen: true,
+            snackbarmsg: 'enter same password'
+          })
+        }
+      }
+      onchangePhone = event => {
+        if (/^[0-9]*$/.test(event.target.value)) {
+          this.setState({ phone: event.target.value ,helperTextCountry: "",
+          error: false })
+        } else {
+            this.setState({
+                helperTextCountry: "Enter No only",
+                error: true,
+                phone: event.target.value
+            })
+        }
+      }
+
+      
     render() {
         return (
             <div className="firstcontainerReg">
@@ -80,20 +203,20 @@ class Register extends Component {
                             <div className="rowReg">
                                 <div className="inputFieldReg">
                                     <TextField
-                                        helperText={this.state.helperText}
+                                        helperText={this.state.helpTextFN}
                                         id="btnReg"
                                         variant="outlined"
                                         label="First Name"
-                                        onChange={this.onChangeEmail.bind(this)}
+                                        onChange={this.onchangeFirstName}
                                     />
                                 </div>
                                 <div className="inputFieldReg">
                                     <TextField
-                                        helperText={this.state.helperText}
+                                        helperText={this.state.helpTextLN}
                                         id="btnReg"
                                         variant="outlined"
                                         label="Last name"
-                                        onChange={this.onChangeEmail.bind(this)}
+                                        onChange={this.onchangeLastName}
                                     />
                                 </div>
                             </div>
@@ -101,11 +224,11 @@ class Register extends Component {
 
                                 <div className="inputFieldReg">
                                     <TextField
-                                        helperText={this.state.helperText}
+                                        helperText={this.state.helperTextEmail}
                                         id="btnEmailReg"
                                         variant="outlined"
                                         label="Email"
-                                        onChange={this.onChangeEmail.bind(this)}
+                                        onChange={this.onchangeEmail}
                                     />
                                 </div>
                             </div>
@@ -114,31 +237,42 @@ class Register extends Component {
 
                                 <div className="inputFieldReg">
                                     <TextField
-                                        hintText="Password"
-                                        floatingLabelText="Password"
                                         id="btnReg"
                                         variant="outlined"
                                         type="password"
                                         label="NewPassword"
                                         helperText={this.state.helperTextpassowrd}
-                                    // onChange={this.onChangeNewPassword.bind(this)}
+                                        onChange={this.onchangePassword}
                                     />
                                 </div>
                                 <div className="inputFieldReg">
                                     <TextField
-                                        hintText="Password"
-                                        floatingLabelText="Password"
                                         id="btnReg"
                                         variant="outlined"
                                         type="password"
-                                        label="Re-enter New Password"
+                                        label="Confirm Password"
                                         helperText={this.state.helperTextCpassowrd}
-                                    // onChange={this.onChangeConfirmPassword.bind(this)}
+                                        onChange={this.onchangePasswordagain}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="rowReg">
+
+                                
+                                <div className="inputFieldReg">
+                                    <TextField
+                                        id="btnReg"
+                                        variant="outlined"
+                                        label="Phone"
+                                        type="number"
+                                        helperText={this.state.helperTextCountry}
+                                        onChange={this.onchangePhone}
                                     />
                                 </div>
                             </div>
                             <div className="submitButtonReg">
-                                <Button id="subbtnReg" onClick={e => this.Next(e)}>
+                                <Button id="subbtnReg" onClick={e => this.Register(e)}>
                                     Register
                                 </Button>
                             </div>
@@ -148,6 +282,13 @@ class Register extends Component {
 
 
                 </Paper>
+                <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+                    message={<span>{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+                            x</IconButton>
+                    ]}>
+                </Snackbar>
             </div>
         );
     }

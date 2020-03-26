@@ -14,7 +14,7 @@ class ResetPassword extends Component {
       username: "",
       userdata: [],
       show: false,
-      login: "Sign in",
+      login: "Reset Password",
       next : false,
       password:'',
       helperTextpassowrd:"",
