@@ -7,6 +7,7 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard';
+import TakeaNotes from './components/TakeaNotes';
 
 
 
@@ -20,9 +21,12 @@ function App() {
         <Route path="/Forgot" component={ForgotPassword} />
         <Route path="/resetpassword/qjq5ohwD3lU3C21LfQCiTnKlnZHSiqFftBYoxh8QaYGg1sV2V41TOBOoJIH2w7zC" component={ResetPassword} />
         <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/TakeaNotes" component={TakeaNotes} />
+
+
+
       </Switch>
     </Router>
   );
 }
-
 export default App;

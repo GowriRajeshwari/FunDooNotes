@@ -8,10 +8,6 @@ import clear from '../assets/clear.png';
 import refresh from '../assets/refresh.png';
 import box from '../assets/box.png';
 
-
-
-
-
 class Dashboard extends Component {
     constructor(props) {
         super(props);

@@ -44,7 +44,7 @@ class Login extends Component {
                     localStorage.setItem("id", response.data.id);
                     
                     this.props.history.push({
-                        pathname: "/Dashboard",
+                        pathname: "/TakeaNotes",
                     });
                } else {
                    this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
