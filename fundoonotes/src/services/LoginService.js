@@ -21,20 +21,16 @@ export async function register(data) {
     return error;
   }
 }
-// //Calling the Forgot Password API using axios
-// export async function forgotpassword(data) {
-//   try {
-//     const response = await axios.post(process.env.REACT_APP_urlforgot, data, {
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// }
+//Calling the Forgot Password API using axios
+export async function forgotpassword(data) {
+  try {
+    const response = await axios.post(process.env.REACT_APP_URLFORGOT,data);
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
 // //Calling the ResetPAssword API using axios
 // export async function resetPassword(data,token) {
 //   try {

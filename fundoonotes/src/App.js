@@ -18,7 +18,7 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
-        <Route path="/Reset" component={ResetPassword} />
+        <Route path="/resetpassword/qjq5ohwD3lU3C21LfQCiTnKlnZHSiqFftBYoxh8QaYGg1sV2V41TOBOoJIH2w7zC" component={ResetPassword} />
         <Route path="/Dashboard" component={Dashboard} />
       </Switch>
     </Router>
