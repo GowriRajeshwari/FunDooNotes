@@ -31,60 +31,18 @@ export async function forgotpassword(data) {
     return error;
   }
 }
-// //Calling the ResetPAssword API using axios
-// export async function resetPassword(data,token) {
-//   try {
-//     const response = await axios.post(process.env.REACT_APP_urlresetpassword, data, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         "Authorization" : `Bearer ${token}`
-//       }
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// }
-// //Calling the ResetPAssword API using axios
-// export async function getUser() {
-//   console.log(process.env.REACT_APP_getuser)
+//Calling the ResetPAssword API using axios
+export async function resetPassword(data,access_token) {
+  // console.log(data,token);
+  const localtoken = localStorage.getItem("token");
+  // console.log(id);
 
-//   try {
-//     const response = await axios.get(process.env.REACT_APP_getuser);
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// }
-
-// export async function getChat(data) {
-//   try {
-//     const response = await axios.post(process.env.REACT_APP_getchat, data, {
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// }
-
-
-// export async function saveChat(data) {
-//   try {
-//     const response = await axios.post(process.env.REACT_APP_savechat, data, {
-//       headers: {
-//         "Content-Type": "application/json"
-//       }
-//     });
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//     return error;
-//   }
-// }
-
+  try {
+    const response = await axios.post(process.env.REACT_APP_urlresetpassword , data, {params : { access_token }},
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}

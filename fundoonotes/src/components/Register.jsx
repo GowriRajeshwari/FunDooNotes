@@ -30,7 +30,8 @@ class Register extends Component {
             helpTextLN: "",
             snackbaropen: false,
             snackbarmsg: '',
-            email:""
+            email:"",
+            id:""
         };
         this.arrowButton = this.arrowButton.bind(this);
         this.handleClose = this.handleClose.bind(this);
@@ -58,7 +59,6 @@ class Register extends Component {
                         snackbarOpen: true,
                         snackbarMessage: "Succefully Registered."
                       })
-                    // localStorage.setItem("username", this.state.username);
                     this.props.history.push({
                         pathname: "/",
                     });

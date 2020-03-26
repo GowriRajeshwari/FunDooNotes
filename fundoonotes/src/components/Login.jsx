@@ -41,7 +41,8 @@ class Login extends Component {
                         snackbarOpen: true,
                         snackbarMessage: "Succefully Registered."
                       })
-                    // localStorage.setItem("username", this.state.username);
+                    localStorage.setItem("id", response.data.id);
+                    
                     this.props.history.push({
                         pathname: "/Dashboard",
                     });
@@ -78,7 +79,7 @@ class Login extends Component {
 
   }
   onchangeEmail=(event)=>{
-    console.log(event)
+    // console.log(event)
     if ( /\S+@\S+\.\S+/.test(event.target.value)) {
         this.setState({
             email: event.target.value, helperTextEmail: "",
@@ -197,6 +198,7 @@ onchangePassword = event => {
               Create account
             </Button>
        </div> 
+       
       </div>
     );
   }

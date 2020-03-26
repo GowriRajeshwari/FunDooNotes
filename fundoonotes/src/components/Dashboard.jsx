@@ -25,10 +25,14 @@ class Dashboard extends Component {
             next: false,
             password: '',
             helperTextpassowrd: "",
-            showtakeNotes: false
+            showtakeNotes: false,
+            snackbaropen: false,
+            snackbarmsg: '',
 
         };
         this.Takeanote = this.Takeanote.bind(this);
+        // this.handleClose = this.handleClose.bind(this);
+
 
     }
     //take noe
