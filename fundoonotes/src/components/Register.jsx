@@ -38,9 +38,9 @@ class Register extends Component {
     }
     //Register Button
     Register = (event) => {
-        const errors = this.validate(this.state)
+       // const errors = this.validate(this.state)
         event.preventDefault();
-        console.log("login clicked");
+        console.log("register clicked");
         let data = {
             firstName: this.state.firstname,
             lastName: this.state.lastname,
@@ -68,7 +68,7 @@ class Register extends Component {
             });
         }
         else {
-            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+            this.setState({  snackbarmsg: "Make sure all the fields are filled", snackbaropen: true });
 
         }
     }

@@ -4,6 +4,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { login } from "../services/LoginService"
 require('dotenv').config();
 
 
@@ -21,10 +22,38 @@ class Login extends Component {
       password:'',
       helperTextpassowrd:""
     };
-    // this.arrowButton = this.arrowButton.bind(this);
-    // this.register = this.register.bind(this);
-    // this.ForgotButton = this.ForgotButton.bind(this);
-    // this.resetpassword = this.resetpassword.bind(this);
+  }
+
+  //sign in
+  SignIn=(event)=>{
+    event.preventDefault();
+        console.log("login clicked");
+        let data = {
+          email: this.state.email,
+          password: this.state.password
+        };
+        console.log(data);
+        if (data.email || data.password != '') {
+            login(data).then(response => {
+                console.log(response);
+               if (response.status === 200) {
+                    this.setState({
+                        snackbarOpen: true,
+                        snackbarMessage: "Succefully Registered."
+                      })
+                    // localStorage.setItem("username", this.state.username);
+                    this.props.history.push({
+                        pathname: "/Dashboard",
+                    });
+               } else {
+                   this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
+               }
+            });
+        }
+        else {
+            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+
+        }
   }
   resetpassword(event){
     event.preventDefault();
@@ -48,40 +77,36 @@ class Login extends Component {
     });
 
   }
+  onchangeEmail=(event)=>{
+    console.log(event)
+    if ( /\S+@\S+\.\S+/.test(event.target.value)) {
+        this.setState({
+            email: event.target.value, helperTextEmail: "",
+            error: false
+        })
+    } else {
+        this.setState({
+            helperTextEmail: "Enter validate Email",
+            error: true,
+            email: event.target.value
+        })
+    }
 
-   //setState for email field
-   onChangeEmail=(event)=>{
-    if (event.target.value.length > 2) {
-      this.setState({
-        helperText: "",
-        error: false,
-        email: event.target.value,
-    
-      });
+}
+
+onchangePassword = event => {
+    if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
+      // console.log("on click function is working", event.target.value)
+      this.setState({ password: event.target.value , helperTextpassowrd: "",
+      error: false})
     } else {
       this.setState({
-        helperText: "Invalid format",
+        helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
         error: true,
-        email: event.target.value,
-      });
+        password: event.target.value
+    })
     }
   }
-  //setState for password field
-onChangePassword=(event)=> {
-  if (event.target.value.length > 7) {
-    this.setState({
-      helperTextpassowrd: "",
-      error: false,
-      password: event.target.value
-    });
-  } else {
-    this.setState({
-      helperTextpassowrd: "Password should be 7 letters",
-      error: true,
-      password: event.target.value
-    });
-  }
-}
 //Next Button
   Next=(event)=>{
     event.preventDefault();
@@ -114,14 +139,12 @@ onChangePassword=(event)=> {
                 <div className="emaildisplay">{this.state.email}</div>
                 <div className="inputField">
                   <TextField
-                   hintText="Password"
-                   floatingLabelText="Password"
                    id="btn"
                    variant="outlined"
                    type="password"
                    label="Password"
                    helperText={this.state.helperTextpassowrd}
-                   onChange={this.onChangePassword}
+                   onChange={this.onchangePassword}
                   />
                 </div>
 
@@ -146,11 +169,11 @@ onChangePassword=(event)=> {
                 <img src={profile} id="img" />
                 <div className="inputField">
                   <TextField
-                    helperText={this.state.helperText}
+                    helperText={this.state.helperTextEmail}
                     id="btn"
                     variant="outlined"
                     label="Emails"
-                     onChange={this.onChangeEmail}
+                     onChange={this.onchangeEmail}
                   />
                 </div>
 
@@ -160,9 +183,9 @@ onChangePassword=(event)=> {
                 </Button>
                 </div>
                 <div className="belowlogin">
-                  <Button id="forgotstyle" onClick={e => this.resetpassword(e)}>
+                  {/* <Button id="forgotstyle" onClick={e => this.resetpassword(e)}>
                   Create account(RP)
-                   </Button>
+                   </Button> */}
                 </div>
               </div>
             </div>
