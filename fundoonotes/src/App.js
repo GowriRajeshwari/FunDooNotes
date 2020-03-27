@@ -9,6 +9,7 @@ import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
+import service from './components/service';
 
 
 
@@ -24,6 +25,8 @@ function App() {
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/TakeaNotes" component={TakeaNotes} />
         <Route path="/EditLabel" component={EditLabel} />
+        <Route path="/Service" component={service} />
+
 
       </Switch>
     </Router>

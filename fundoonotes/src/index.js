@@ -7,6 +7,8 @@ import './Css/Register.css'
 import './Css/ForgotPassword.css'
 import './Css/ResetPassword.css'
 import './Css/Dashboard.css'
+import './Css/service.css'
+
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config();
 
