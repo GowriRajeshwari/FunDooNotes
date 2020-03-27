@@ -190,6 +190,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
+import Edit from './EditLabel'
+
 
 
 const drawerWidth = 240;
@@ -268,6 +270,7 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -276,6 +279,14 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+ const Editlabel=(event,text)=>{
+    event.preventDefault();
+    if(text == 'Edit labels'){
+        // <Edit/>
+    }
+
+  }
 
   return (
     <div className={classes.root}>
@@ -318,7 +329,7 @@ export default function PersistentDrawerLeft() {
         <Divider />
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text}  >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -328,7 +339,7 @@ export default function PersistentDrawerLeft() {
         <div>LABELS</div>
         <List>
           {['Edit labels'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={e => this.Editlabel(e,text)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

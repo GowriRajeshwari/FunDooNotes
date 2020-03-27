@@ -8,6 +8,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard';
 import TakeaNotes from './components/TakeaNotes';
+import EditLabel from './components/EditLabel';
 
 
 
@@ -22,8 +23,7 @@ function App() {
         <Route path="/resetpassword/qjq5ohwD3lU3C21LfQCiTnKlnZHSiqFftBYoxh8QaYGg1sV2V41TOBOoJIH2w7zC" component={ResetPassword} />
         <Route path="/Dashboard" component={Dashboard} />
         <Route path="/TakeaNotes" component={TakeaNotes} />
-
-
+        <Route path="/EditLabel" component={EditLabel} />
 
       </Switch>
     </Router>
