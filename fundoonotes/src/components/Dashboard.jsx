@@ -170,9 +170,9 @@
 // export default Dashboard;
 
 
-import React from 'react';
+import React ,{Component}from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
@@ -196,7 +196,7 @@ import Edit from './EditLabel'
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
+const useStyles = theme => ({
   root: {
     display: 'flex',
   },
@@ -264,71 +264,93 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-}));
+});
 
-export default function PersistentDrawerLeft() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+ class Dashboard extends Component {
+     
+    constructor(props) {
+        super(props);
+        this.state = {
+            open : false,
+             setOpen : false,
+             choice:""
+         
+        };
+      }
+      handleDrawerOpen = () => {
+        this.setState({setOpen : true,open : true});
+      };
+    
+      handleDrawerClose = () => {
+        this.setState({setOpen : false,open:false});
+      };
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+  
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
- const Editlabel=(event,text)=>{
+  Editlabel=(event,text)=>{
     event.preventDefault();
     if(text == 'Edit labels'){
         // <Edit/>
+        this.setState({choice : 'Editlabels'})
     }
-
   }
 
+  getcomponents=()=>{
+
+      if(this.state.choice == 'Editlabels'){
+          return <Edit/>
+      }
+      else if(this.state.choice == 'Notes'){
+        return <TakeaNotes/>
+      }
+  }
+render(){
+    const {classes} = this.props;
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: this.state.open,
         })}
       >
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            onClick={handleDrawerOpen}
+            onClick={this.handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
+            className={clsx(classes.menuButton, this.state.open && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
            Keep
           </Typography>
+
+
+          
         </Toolbar>
       </AppBar>
       <Drawer
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open={open}
+        open={this.state.open}
         classes={{
           paper: classes.drawerPaper,
         }}
       >
         <div className={classes.drawerHeader1}>
-          <IconButton onClick={handleDrawerClose}>
+          <IconButton onClick={this.handleDrawerClose}>
           <MenuIcon />
           </IconButton>
         </div>
         <Divider />
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
-            <ListItem button key={text}  >
+            <ListItem button key={text} onClick={e => this.Editlabel(e,text)} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -356,15 +378,19 @@ export default function PersistentDrawerLeft() {
       </Drawer>
       <main
         className={clsx(classes.content, {
-          [classes.contentShift]: open,
+          [classes.contentShift]: this.state.open,
         })}
       >
         <div className={classes.drawerHeader} />
-        <ReactSVGPanZoom>
+        {/* <ReactSVGPanZoom> */}
         <TakeaNotes/>
-      </ReactSVGPanZoom>
+        {this.getcomponents()}
+      {/* </ReactSVGPanZoom> */}
         
       </main>
     </div>
   );
 }
+  }
+
+  export default withStyles(useStyles)(Dashboard);

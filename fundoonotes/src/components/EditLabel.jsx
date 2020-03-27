@@ -4,6 +4,8 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Modal from '@material-ui/core/Modal';
+import Typography from '@material-ui/core/Typography';
+import del from '../assets/del.png';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -22,7 +24,8 @@ class EditLabel extends Component {
     super(props);
     this.state = {
         open : false,
-         setOpen : false
+         setOpen : true,
+
      
     };
   }
@@ -33,26 +36,51 @@ class EditLabel extends Component {
   handleClose = () => {
     this.setState({setOpen : false});
   };
+  Done=()=>{
+    this.setState({setOpen : false});
+
+  }
   render() {
     // const classes = useStyles();
     return (
         <div>
-        <Button  onClick={this.handleOpen}>
+        {/* <Button  onClick={this.handleOpen}>
         Open Modal
-      </Button>
+      </Button> */}
         <div className="modelcenter">
         <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={this.state.setOpen}
         onClose={this.handleClose}
+        className="modelmiddel"
       >
         <div className="classespaper">
-          <h2 id="simple-modal-title">Text in a modal</h2>
-          <p id="simple-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </p>
-          
+                    <Typography>Edit Label</Typography>
+                    <div className="textdash">
+                    <Button >
+                    <img src={del} id="imgdash" />
+                    </Button>
+                    <TextField
+                        // error={this.state.red}
+                        helperText={this.state.helperTextEmail}
+                        id="btndash"
+                        variant="filled"
+                        label="Create"
+                        size='small'
+                        InputProps={{ disableUnderline: true }}
+                         onChange={this.onchangeEmail}
+                    />
+                    <Button >
+                    <img src={del} id="imgdash" />
+                    </Button>
+                    </div>
+                    <div className="buttondone" onClick={e => this.Done(e)}>
+                    <Button  >
+                    Done
+                    </Button>
+                    </div>
+                  
         </div>
       </Modal>
       </div>
