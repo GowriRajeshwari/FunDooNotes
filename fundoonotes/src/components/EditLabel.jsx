@@ -44,9 +44,7 @@ class EditLabel extends Component {
     // const classes = useStyles();
     return (
         <div>
-        {/* <Button  onClick={this.handleOpen}>
-        Open Modal
-      </Button> */}
+        
         <div className="modelcenter">
         <Modal
         aria-labelledby="simple-modal-title"
