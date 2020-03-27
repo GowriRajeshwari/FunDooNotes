@@ -270,7 +270,6 @@ export default function PersistentDrawerLeft() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -361,7 +360,10 @@ export default function PersistentDrawerLeft() {
         })}
       >
         <div className={classes.drawerHeader} />
+        <ReactSVGPanZoom>
         <TakeaNotes/>
+      </ReactSVGPanZoom>
+        
       </main>
     </div>
   );

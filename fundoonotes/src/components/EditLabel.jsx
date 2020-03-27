@@ -40,7 +40,7 @@ class EditLabel extends Component {
         <Button  onClick={this.handleOpen}>
         Open Modal
       </Button>
-
+        <div className="modelcenter">
         <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -55,6 +55,7 @@ class EditLabel extends Component {
           
         </div>
       </Modal>
+      </div>
       </div>
      
     );
