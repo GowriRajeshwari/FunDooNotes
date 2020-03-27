@@ -1,170 +1,357 @@
-import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import sidenavicon from '../assets/sidenavicon.png';
-import search from '../assets/search.png';
-import clear from '../assets/clear.png';
-import refresh from '../assets/refresh.png';
-import box from '../assets/box.png';
+// import React, { Component } from "react";
+// import Paper from "@material-ui/core/Paper";
+// import Button from "@material-ui/core/Button";
+// import TextField from "@material-ui/core/TextField";
+// import sidenavicon from '../assets/sidenavicon.png';
+// import search from '../assets/search.png';
+// import clear from '../assets/clear.png';
+// import refresh from '../assets/refresh.png';
+// import box from '../assets/box.png';
 
-class Dashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            helperText: "",
-            error: false,
-            username: "",
-            userdata: [],
-            show: false,
-            login: "Sign in",
-            next: false,
-            password: '',
-            helperTextpassowrd: "",
-            showtakeNotes: false,
-            snackbaropen: false,
-            snackbarmsg: '',
+// class Dashboard extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             helperText: "",
+//             error: false,
+//             username: "",
+//             userdata: [],
+//             show: false,
+//             login: "Sign in",
+//             next: false,
+//             password: '',
+//             helperTextpassowrd: "",
+//             showtakeNotes: false,
+//             snackbaropen: false,
+//             snackbarmsg: '',
 
-        };
-        this.Takeanote = this.Takeanote.bind(this);
-        // this.handleClose = this.handleClose.bind(this);
-
-
-    }
-    //take noe
-    Takeanote(event) {
-        event.preventDefault();
-        this.setState({ showtakeNotes: true })
-    }
-    //setState for password field
-    onChangePassword(event) {
-        if (event.target.value.length > 7) {
-            this.setState({
-                helperTextpassowrd: "",
-                error: false,
-                password: event.target.value
-            });
-        } else {
-            this.setState({
-                helperTextpassowrd: "Password should be 7 letters",
-                error: true,
-                password: event.target.value
-            });
-        }
-    }
-
-    render() {
-        return (
-
-            <div className="dashContainer">
-
-                <Paper className="dashsearch">
-
-                    <div>
-                        <Button onClick={e => this.arrowButton(e)}>
-                            <img src={sidenavicon} id="imgdash" />
-                        </Button>
-                    </div>
-                    <div>
-                        <div className="textremainderDash">Remainder</div>
-                    </div>
+//         };
+//         this.Takeanote = this.Takeanote.bind(this);
+//         // this.handleClose = this.handleClose.bind(this);
 
 
-                    <div className="searcheledash">
+//     }
+//     //take noe
+//     Takeanote(event) {
+//         event.preventDefault();
+//         this.setState({ showtakeNotes: true })
+//     }
+//     //setState for password field
+//     onChangePassword(event) {
+//         if (event.target.value.length > 7) {
+//             this.setState({
+//                 helperTextpassowrd: "",
+//                 error: false,
+//                 password: event.target.value
+//             });
+//         } else {
+//             this.setState({
+//                 helperTextpassowrd: "Password should be 7 letters",
+//                 error: true,
+//                 password: event.target.value
+//             });
+//         }
+//     }
 
-                        <Paper>
-                            <img src={search} id="imgdash" />
-                            <TextField
-                                hintText="Password"
-                                floatingLabelText="Password"
-                                id="inputFielddash"
-                                //    variant="outlined"
-                                //    label="Search"
-                                InputProps={{ disableUnderline: true }}
-                                style={{ width: '380px', backgroundColor: '#ff00', border: 'none', disableUnderline: true }}
-                            //    helperText={this.state.helperTextpassowrd}
-                            //    onChange={this.onChangePassword.bind(this)}
-                            />
-                            <img src={clear} id="imgdash" />
-                        </Paper>
-                    </div>
-                    <div className="icondash">
-                        <div>
-                            <img src={refresh} id="imgdash" />
-                        </div>
-                        <div className="columimg">
-                            <img src={box} id="imgdash" />
-                        </div>
-                        <div>
-                            <img src={search} id="imgdash" />
-                        </div>
+//     render() {
+//         return (
 
-                    </div>
-                    <div className="icondashlast">
+//             <div className="dashContainer">
 
-                        <div>
-                            <img src={search} id="imgdash" />
-                        </div>
-                        <div>
-                            <img src={search} id="imgdash" />
-                        </div>
-                    </div>
+//                 <Paper className="dashsearch">
 
-                </Paper>
-
-                <div className="dash2cont">
-                    {this.state.showtakeNotes ?
-                        <Paper >
-                            <div className="papar2dash">
-                                <TextField
-                                    required id="standard-required"
-                                    // label="Required" defaultValue="Hello World"
-                                    // label="Take a note"
-                                    InputProps={{ disableUnderline: true }}
-                                    style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
-                                    //    helperText={this.state.helperTextpassowrd}
-                                    onChange={this.onChangePassword.bind(this)}
-                                />
-
-                            </div>
-                        </Paper>
-                        :
-                        <Paper >
-                            <div className="papar2dash">
-                                <Button onClick={e => this.Takeanote(e)}>
-                                    <TextField
-                                        required id="standard-required"
-                                        // label="Required" defaultValue="Hello World"
-                                        // label="Take a note"
-                                        InputProps={{ disableUnderline: true }}
-                                        style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
-                                        //    helperText={this.state.helperTextpassowrd}
-                                        onChange={this.onChangePassword.bind(this)}
-                                    />
-                                </Button>
-                                <div className="icondash">
-                                    <div>
-                                        <img src={refresh} id="imgdash" />
-                                    </div>
-                                    <div className="columimg">
-                                        <img src={box} id="imgdash" />
-                                    </div>
-                                    <div>
-                                        <img src={search} id="imgdash" />
-                                    </div>
-
-                                </div>
-                            </div>
-                        </Paper>
-                    }
-                </div>
+//                     <div>
+//                         <Button onClick={e => this.arrowButton(e)}>
+//                             <img src={sidenavicon} id="imgdash" />
+//                         </Button>
+//                     </div>
+//                     <div>
+//                         <div className="textremainderDash">Remainder</div>
+//                     </div>
 
 
+//                     <div className="searcheledash">
 
-            </div>
+//                         <Paper>
+//                             <img src={search} id="imgdash" />
+//                             <TextField
+//                                 hintText="Password"
+//                                 floatingLabelText="Password"
+//                                 id="inputFielddash"
+//                                 //    variant="outlined"
+//                                 //    label="Search"
+//                                 InputProps={{ disableUnderline: true }}
+//                                 style={{ width: '380px', backgroundColor: '#ff00', border: 'none', disableUnderline: true }}
+//                             //    helperText={this.state.helperTextpassowrd}
+//                             //    onChange={this.onChangePassword.bind(this)}
+//                             />
+//                             <img src={clear} id="imgdash" />
+//                         </Paper>
+//                     </div>
+//                     <div className="icondash">
+//                         <div>
+//                             <img src={refresh} id="imgdash" />
+//                         </div>
+//                         <div className="columimg">
+//                             <img src={box} id="imgdash" />
+//                         </div>
+//                         <div>
+//                             <img src={search} id="imgdash" />
+//                         </div>
+
+//                     </div>
+//                     <div className="icondashlast">
+
+//                         <div>
+//                             <img src={search} id="imgdash" />
+//                         </div>
+//                         <div>
+//                             <img src={search} id="imgdash" />
+//                         </div>
+//                     </div>
+
+//                 </Paper>
+
+//                 <div className="dash2cont">
+//                     {this.state.showtakeNotes ?
+//                         <Paper >
+//                             <div className="papar2dash">
+//                                 <TextField
+//                                     required id="standard-required"
+//                                     // label="Required" defaultValue="Hello World"
+//                                     // label="Take a note"
+//                                     InputProps={{ disableUnderline: true }}
+//                                     style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
+//                                     //    helperText={this.state.helperTextpassowrd}
+//                                     onChange={this.onChangePassword.bind(this)}
+//                                 />
+
+//                             </div>
+//                         </Paper>
+//                         :
+//                         <Paper >
+//                             <div className="papar2dash">
+//                                 <Button onClick={e => this.Takeanote(e)}>
+//                                     <TextField
+//                                         required id="standard-required"
+//                                         // label="Required" defaultValue="Hello World"
+//                                         // label="Take a note"
+//                                         InputProps={{ disableUnderline: true }}
+//                                         style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
+//                                         //    helperText={this.state.helperTextpassowrd}
+//                                         onChange={this.onChangePassword.bind(this)}
+//                                     />
+//                                 </Button>
+//                                 <div className="icondash">
+//                                     <div>
+//                                         <img src={refresh} id="imgdash" />
+//                                     </div>
+//                                     <div className="columimg">
+//                                         <img src={box} id="imgdash" />
+//                                     </div>
+//                                     <div>
+//                                         <img src={search} id="imgdash" />
+//                                     </div>
+
+//                                 </div>
+//                             </div>
+//                         </Paper>
+//                     }
+//                 </div>
 
 
-        );
-    }
+
+//             </div>
+
+
+//         );
+//     }
+// }
+// export default Dashboard;
+
+
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
+import TakeaNotes from './TakeaNotes'
+
+
+const drawerWidth = 240;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    width: `calc(100% - ${drawerWidth}px)`,
+    marginLeft: drawerWidth,
+    transition: theme.transitions.create(['margin', 'width'], {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  drawerHeader1: {
+    display: 'flex',
+    marginTop : '10px',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    marginLeft: -drawerWidth,
+  },
+  contentShift: {
+    transition: theme.transitions.create('margin', {
+      easing: theme.transitions.easing.easeOut,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+    marginLeft: 0,
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
+  },
+}));
+
+export default function PersistentDrawerLeft() {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  return (
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, open && classes.hide)}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+           Keep
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader1}>
+          <IconButton onClick={handleDrawerClose}>
+          <MenuIcon />
+          </IconButton>
+        </div>
+        <Divider />
+        <List>
+          {['Notes', 'Remainder'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <div>LABELS</div>
+        <List>
+          {['Edit labels'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['Archive','Bin'].map((text, index) => (
+            <ListItem button key={text}>
+              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+      <main
+        className={clsx(classes.content, {
+          [classes.contentShift]: open,
+        })}
+      >
+        <div className={classes.drawerHeader} />
+        <TakeaNotes/>
+      </main>
+    </div>
+  );
 }
-export default Dashboard;

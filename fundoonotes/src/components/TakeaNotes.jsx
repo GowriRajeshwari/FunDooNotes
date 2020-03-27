@@ -1,160 +1,144 @@
-import React from 'react';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+// import React from 'react';
+// import { makeStyles } from '@material-ui/core/styles';
+// import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+// import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+// import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+// import Typography from '@material-ui/core/Typography';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+// import TextField from "@material-ui/core/TextField";
+// import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
+// import Button from '@material-ui/core/Button';
 
-const drawerWidth = 240;
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    display: 'flex',
-  },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
-  },
-  hide: {
-    display: 'none',
-  },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-  },
-  drawerPaper: {
-    width: drawerWidth,
-  },
-  drawerHeader: {
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-end',
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: -drawerWidth,
-  },
-  contentShift: {
-    transition: theme.transitions.create('margin', {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  },
-}));
+// const useStyles = makeStyles(theme => ({
+//     root: {
+//         width: '50%',
+//         height : '20%'
+//     },
+//     heading: {
+//         fontSize: theme.typography.pxToRem(15),
+//         fontWeight: theme.typography.fontWeightRegular,
+//     },
+// }));
 
-export default function PersistentDrawerLeft() {
-  const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+// export default function SimpleExpansionPanel() {
+//     const classes = useStyles();
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
+//     return (
+//         <div className={classes.root}>
+//             <ExpansionPanel>
+//                 <ExpansionPanelSummary
+//                     expandIcon={<ExpandMoreIcon />}
+//                     // aria-controls="panel1a-content"
+//                     // id="panel1a-header"
+//                 >
+//                     <Typography className={classes.heading}>Take a Notes</Typography>
+//                 </ExpansionPanelSummary>
+//                 <ExpansionPanelDetails className="panel">
+//                     <div className="NoteExpand">
+//                     <TextField
+//                         // helperText={this.state.helperTextEmail}
+//                         id="btndash"
+//                         variant="filled"
+//                         label="Title"
+//                         size="small"
+//                         InputProps={{ disableUnderline: true }}
+//                         // onChange={this.onchangeEmail}
+//                     />
+//                     <TextField
+//                         // helperText={this.state.helperTextEmail}
+//                         InputProps={{ disableUnderline: true }}
+//                         id="btndash"
+//                         variant="filled"
+//                         label="Take a Note"
+//                         size="small"
+//                         // onChange={this.onchangeEmail}
+//                     />
+//                     <ExpansionPanelActions>
+//           <Button size="small">Close</Button>
+          
+//         </ExpansionPanelActions>
+//                     </div>
+//                 </ExpansionPanelDetails>
+//             </ExpansionPanel>
+//         </div>
+//     );
+// }
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
 
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
-        })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap>
-            Persistent drawer
-          </Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-      
-      </main>
+
+import React, { Component } from "react";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import profile from '../assets/profile.png';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { login } from "../services/LoginService"
+import { Typography } from "@material-ui/core";
+require('dotenv').config();
+
+
+class TakeaNotes extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    next : true
+    };
+  }
+ 
+  takeNote=(event)=>{
+    event.preventDefault();
+    this.setState({next : false})
+  }
+  close=(event)=>{
+    event.preventDefault();
+    this.setState({next : true})
+  }
+  render() {
+    return (
+      <div >
+        <div className="containerdash">
+        {this.state.next ? 
+            <Paper className="paper">
+            
+            <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
+          
+            </Paper>
+          : 
+          <Paper className="paper2">
+             <div className="NoteExpand">
+                    <TextField
+                        // error={this.state.red}
+                        helperText={this.state.helperTextEmail}
+                        id="btndash"
+                        variant="filled"
+                        label="Title"
+                        size='small'
+                        InputProps={{ disableUnderline: true }}
+                        //  onChange={this.onchangeEmail}
+                    />
+                    <TextField
+                        // error={this.state.red}
+                        helperText={this.state.helperTextEmail}
+                        id="btndash"
+                        variant="filled"
+                        label="Take a Notes"
+                        size='small'
+                        InputProps={{ disableUnderline: true }}
+                        //  onChange={this.onchangeEmail}
+                    />
+                    <div className="button">
+                    <Button size="small" onClick={e => this.close(e)}>Close</Button>
+                    </div>
+
+                  </div>
+        </Paper>
+    }
     </div>
-  );
+       
+       
+      </div>
+    );
+  }
 }
+export default TakeaNotes;

@@ -20,7 +20,8 @@ class Login extends Component {
       login: "Sign in",
       next : false,
       password:'',
-      helperTextpassowrd:""
+      helperTextpassowrd:"",
+      red :""
     };
   }
 
@@ -52,7 +53,7 @@ class Login extends Component {
             });
         }
         else {
-            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true ,red:"error"});
 
         }
   }
@@ -140,6 +141,8 @@ onchangePassword = event => {
                 <div className="emaildisplay">{this.state.email}</div>
                 <div className="inputField">
                   <TextField
+                    // error={this.state.red}
+                    error
                    id="btn"
                    variant="outlined"
                    type="password"
@@ -170,6 +173,7 @@ onchangePassword = event => {
                 <img src={profile} id="img" />
                 <div className="inputField">
                   <TextField
+                    // error={this.state.red}
                     helperText={this.state.helperTextEmail}
                     id="btn"
                     variant="outlined"
