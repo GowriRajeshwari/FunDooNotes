@@ -328,9 +328,6 @@ render(){
           <Typography variant="h6" noWrap>
            Keep
           </Typography>
-
-
-          
         </Toolbar>
       </AppBar>
       <Drawer

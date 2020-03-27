@@ -9,8 +9,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import clsx from 'clsx';
 
-const useStyles =()=> ({
+
+const drawerWidth = 240;
+
+const useStyles =(theme)=> ({
     root: {
       minWidth: 275,
       position: 'absolute',
@@ -33,6 +39,20 @@ const useStyles =()=> ({
     root1: {
         minWidth: 275,
       },
+      appBar: {
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.sharp,
+          duration: theme.transitions.duration.leavingScreen,
+        }),
+      },
+      appBarShift: {
+        width: `calc(100% - ${drawerWidth}px)`,
+        marginLeft: drawerWidth,
+        transition: theme.transitions.create(['margin', 'width'], {
+          easing: theme.transitions.easing.easeOut,
+          duration: theme.transitions.duration.enteringScreen,
+        }),
+      },
   });
 
 class Service extends Component {
@@ -48,9 +68,44 @@ class Service extends Component {
       const {classes}=this.props;
     return (
       <div className="servicecontainer">
+         <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: this.state.open,
+        })}
+      >
+        <Toolbar>
+         
+          <Typography variant="h6" noWrap>
+           Keep
+          </Typography>
+
+
+          
+        </Toolbar>
+      </AppBar>
 
       
-      <div className="twocard">
+      <div >
+        <div className="twocard">
+                 <div className="serviceroot">
+                        <Card >
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                Word of the Day
+                                </Typography>
+                        </Card>
+                    </div>
+                    <div  className="serviceroot1">
+                        <Card>
+                            <Typography className="title1"  >
+                            Word of the Day
+                            </Typography>
+                        </Card>
+                    </div>
+                    </div>
+                </div>
+
+                <div><div className="twocard">
                 <div className="serviceroot">
                         <Card >
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -65,23 +120,7 @@ class Service extends Component {
                         </Typography>
                     </Card>
                 </div>
-                </div>
-                <div>
-                <div className="serviceroot">
-                        <Card >
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Word of the Day
-                                </Typography>
-                        </Card>
-                    </div>
-                <div  className="serviceroot1">
-                    <Card>
-                        <Typography className="title1"  >
-                        Word of the Day
-                        </Typography>
-                    </Card>
-                </div>
-                </div>
+                </div> </div>
 
       </div>
 
