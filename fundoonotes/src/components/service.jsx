@@ -70,7 +70,8 @@ class Service extends Component {
         open : false,
         setOpen : false,
         colorshow : false,
-        colorshow1 :false
+        colorshow1 :false,
+        service:""
     };
   }
   _onMouseMove=(event)=>{
@@ -85,9 +86,13 @@ class Service extends Component {
   _onMouseOut1=(event)=>{
     this.setState({colorshow1 : false})
   }
-  service=(event)=>{ 
+  serviceadvance=(event)=>{ 
     console.log("service");
-    this.setState({setOpen : true})
+    this.setState({setOpen : true,service:"service"})
+  }
+  servicebasic=(event)=>{ 
+    console.log("service");
+    this.setState({setOpen : true,service:"basic"})
   }
   handleOpen = () => {
     this.setState({setOpen : true});
@@ -152,7 +157,7 @@ class Service extends Component {
 
       
       <div className="twocard">
-        <div  onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.service(e)}>
+        <div  onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
                  <div className="serviceroot">
                         <Card >
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -171,7 +176,7 @@ class Service extends Component {
                 </div>
 
                 <div className="twocard"><div  onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
-                 onClick={e => this.service(e)}
+                 onClick={e => this.servicebasic(e)}
                  >
                 <div className="serviceroot">
                         <Card >
