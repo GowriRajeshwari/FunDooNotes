@@ -97,8 +97,6 @@ class Register extends Component {
         // when params sent via url
         if (this.props.history.location.state) {
           let params = this.props.history.location.state.service;
-        //   this.setState({ service: params });
-        //   console.log(this.state.service);
         if(params == 'advance'){
           this.setState({ service: params , showCardColor :true });
         }

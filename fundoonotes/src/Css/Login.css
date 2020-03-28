@@ -52,6 +52,9 @@
   }
   .inputField {
     padding: 16px;
+    overflow: hidden;
+    /* text-overflow: ellipsis; */
+    /* white-space: nowrap; */
   }
   .submitButton {
     padding: 1px;
@@ -66,6 +69,10 @@
     border-radius: 4px;
     background: #fff;
     cursor: pointer;
+    
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
   }
   .belowlogin {
     /* padding: 10px; */
