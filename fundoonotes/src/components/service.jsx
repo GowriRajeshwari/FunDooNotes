@@ -76,6 +76,11 @@ const useStyles =(theme)=> ({
       boldpoint:{
           height : '10px',
           listStyleType : 'circle'
+      },
+      signin:{
+          display:'flex',
+          justifyContent : 'center',
+          color : 'blue'
       }
       
   });
@@ -124,6 +129,11 @@ class Service extends Component {
   Done=()=>{
     this.setState({setOpen : false});
   }
+  signin=(event)=>{
+    this.props.history.push({
+        pathname: "/"
+      });
+  }
   processtopay=()=>{
       if(this.state.service != ""){
         this.props.history.push({
@@ -144,6 +154,7 @@ class Service extends Component {
   render() {
       const {classes}=this.props;
     return (
+        <div>
       <div className="servicecontainer">
 
          <AppBar
@@ -154,47 +165,24 @@ class Service extends Component {
       >
         <Toolbar> 
           <Typography variant="h6" noWrap>
-           Keep
+           FunDoo
           </Typography>
         </Toolbar>
       </AppBar>
       <div className="modelcenter">
-        <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={this.state.setOpen}
-        onClose={this.handleClose}
-        className="modelmiddel"
-      >
-        <div className="classespaper">
-        <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: this.state.open,
-        })}
-      >
-        <Toolbar> 
-          <Typography variant="h6" noWrap>
-           Advance Pack Details
-          </Typography>
-        </Toolbar>
-      </AppBar>
+                <Modal
+                aria-labelledby="simple-modal-title"
+                aria-describedby="simple-modal-description"
+                open={this.state.setOpen}
+                onClose={this.handleClose}
+                className="modelmiddel"
+            >
+                <div className="classespaper">
+                
                     <div className="textdash">
-                    
-                    <TextField
-                        // error={this.state.red}
-                        helperText={this.state.helperTextEmail}
-                        id="btndash"
-                        variant="filled"
-                        label="Create"
-                        size='small'
-                        InputProps={{ disableUnderline: true }}
-                         onChange={this.onchangeEmail}
-                    />
-                    
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
-                    <Button onClick={e => this.processtopay(e)}>
+                    <Button size="small" onClick={e => this.processtopay(e)}>
                     Processed to checkout
                     </Button>
                     </div>
@@ -271,6 +259,7 @@ class Service extends Component {
                 </div> 
                 
                 </div>
+                
                 <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
                     message={<span>{this.state.snackbarmsg}</span>}
                     action={[
@@ -278,6 +267,11 @@ class Service extends Component {
                             x</IconButton>
                     ]}>
                 </Snackbar>
+
+      </div>
+      <Typography  className={classes.signin} onClick={e => this.signin(e)}>
+                               Sign In Instead
+                                </Typography>
       </div>
 
     );

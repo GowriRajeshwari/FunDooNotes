@@ -21,12 +21,6 @@ const useStyles =(theme)=> ({
       margin: '0 2px',
       transform: 'scale(0.8)',
     },
-    title: {
-      fontSize: 14,
-      width : '150px',
-      height : '150px'
-
-    },
     pos: {
       marginBottom: 12,
     },
@@ -41,6 +35,27 @@ const useStyles =(theme)=> ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
       },
+      price:{
+        fontSize: 10,
+        fontWeight : 'bold'
+        },advance:{
+            color:'blue'
+        },
+        boldpoint:{
+            height : '10px',
+            listStyleType : 'circle'
+        },
+        title: {
+              fontSize: 11,
+            //   width : '250px',
+            //   height : '250px'
+        
+            },
+            widthheight:{
+                width : '130px',
+                height : '130px',
+                padding : '20px'
+            },
       
   });
 
@@ -349,16 +364,30 @@ class Register extends Component {
                  
                                    <div className="servicerootR">
                                    <Card>
-                                        <Typography className={classes.title} >
-                                       advance
-                                        </Typography>
+                                   <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
+                                </Typography>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                advance
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
                                         </Card>
                                
                                       </div>
                                     <div  className="serviceroot1R">
                                         <Card>
                                             <Typography  className="title1Radvance">
-                                            ADD TO CART
+                                            Selected
                                             </Typography>
                                             </Card>
                                     
@@ -371,9 +400,23 @@ class Register extends Component {
                  
                                  <div className="servicerootR">
                                  <Card>
-                                        <Typography className={classes.title} >
-                                        Basic
-                                        </Typography>
+                                 <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
+                                </Typography>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                basic
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
                                         </Card>
                                
                                  </div>
@@ -395,9 +438,23 @@ class Register extends Component {
                  
                                    <div className="servicerootR">
                                    <Card>
-                                        <Typography className={classes.title} >
-                                        Advance
-                                        </Typography>
+                                   <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
+                                </Typography>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                advance
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
                                         </Card>
                                
                                       </div>
@@ -417,16 +474,30 @@ class Register extends Component {
                  
                                  <div className="servicerootR">
                                  <Card>
-                                        <Typography className={classes.title} >
-                                        Basic
-                                        </Typography>
+                                 <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
+                                </Typography>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                basic
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
                                         </Card>
                                
                                  </div>
                                     <div  className="serviceroot1R">
                                         <Card>
                                             <Typography  className="title1Rbasic">
-                                            ADD TO CART
+                                            Selected
                                             </Typography>
                                             </Card>
                                     
