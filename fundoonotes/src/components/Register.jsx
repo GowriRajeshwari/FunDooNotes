@@ -36,7 +36,7 @@ const useStyles =(theme)=> ({
         padding: theme.spacing(2, 4, 3),
       },
       price:{
-        fontSize: 10,
+        fontSize: 13,
         fontWeight : 'bold'
         },advance:{
             color:'blue'
@@ -46,7 +46,7 @@ const useStyles =(theme)=> ({
             listStyleType : 'circle'
         },
         title: {
-              fontSize: 11,
+              fontSize: 13,
             //   width : '250px',
             //   height : '250px'
         
@@ -280,7 +280,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="First Name"
                                         onChange={this.onchangeFirstName}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                                 <div className="inputFieldReg">
@@ -290,7 +290,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="Last name"
                                         onChange={this.onchangeLastName}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                             </div>
@@ -303,7 +303,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="Email"
                                         onChange={this.onchangeEmail}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                             </div>
@@ -318,7 +318,7 @@ class Register extends Component {
                                         label="NewPassword"
                                         helperText={this.state.helperTextpassowrd}
                                         onChange={this.onchangePassword}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                                 <div className="inputFieldReg">
@@ -329,7 +329,7 @@ class Register extends Component {
                                         label="Confirm Password"
                                         helperText={this.state.helperTextCpassowrd}
                                         onChange={this.onchangePasswordagain}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                             </div>
@@ -345,7 +345,7 @@ class Register extends Component {
                                         // type="number"
                                         helperText={this.state.helperTextCountry}
                                         onChange={this.onchangePhone}
-                                        size="small"
+                                        // size="small"
                                     />
                                 </div>
                             </div>
