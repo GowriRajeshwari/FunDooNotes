@@ -5,6 +5,44 @@ import TextField from "@material-ui/core/TextField";
 import { register } from "../services/LoginService"
 import Snackbar from '@material-ui/core/Snackbar';
 import { IconButton } from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+
+
+const useStyles =(theme)=> ({
+    root: {
+      minWidth: 275,
+      position: 'absolute',
+      
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+      width : '150px',
+      height : '150px'
+
+    },
+    pos: {
+      marginBottom: 12,
+    },
+    root1: {
+        minWidth: 275,
+      },
+      paper: {
+        position: 'absolute',
+        width: 400,
+        backgroundColor: theme.palette.background.paper,
+        border: '2px solid #000',
+        boxShadow: theme.shadows[5],
+        padding: theme.spacing(2, 4, 3),
+      },
+      
+  });
 
 
 class Register extends Component {
@@ -31,12 +69,30 @@ class Register extends Component {
             snackbaropen: false,
             snackbarmsg: '',
             email:"",
-            id:""
+            id:"",
+            service:"",
+            showCardColor:null
         };
         this.arrowButton = this.arrowButton.bind(this);
         this.handleClose = this.handleClose.bind(this);
 
     }
+
+    componentWillMount() {
+        // when params sent via url
+        if (this.props.history.location.state) {
+          let params = this.props.history.location.state.service;
+        //   this.setState({ service: params });
+        //   console.log(this.state.service);
+        if(params == 'advance'){
+          this.setState({ service: params , showCardColor :true });
+        }
+        else{
+          this.setState({ service: params , showCardColor :false });
+        }
+        }
+      }
+
     //Register Button
     Register = (event) => {
        // const errors = this.validate(this.state)
@@ -46,7 +102,7 @@ class Register extends Component {
             firstName: this.state.firstname,
             lastName: this.state.lastname,
             email: this.state.email,
-            service: 'advance',
+            service: this.state.service,
             password: this.state.password,
             phoneNumber: this.state.phone
         };
@@ -191,6 +247,7 @@ class Register extends Component {
 
       
     render() {
+      const {classes}=this.props;
         return (
             <div className="firstcontainerReg">
 
@@ -208,6 +265,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="First Name"
                                         onChange={this.onchangeFirstName}
+                                        size="small"
                                     />
                                 </div>
                                 <div className="inputFieldReg">
@@ -217,6 +275,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="Last name"
                                         onChange={this.onchangeLastName}
+                                        size="small"
                                     />
                                 </div>
                             </div>
@@ -229,6 +288,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="Email"
                                         onChange={this.onchangeEmail}
+                                        size="small"
                                     />
                                 </div>
                             </div>
@@ -243,6 +303,7 @@ class Register extends Component {
                                         label="NewPassword"
                                         helperText={this.state.helperTextpassowrd}
                                         onChange={this.onchangePassword}
+                                        size="small"
                                     />
                                 </div>
                                 <div className="inputFieldReg">
@@ -253,6 +314,7 @@ class Register extends Component {
                                         label="Confirm Password"
                                         helperText={this.state.helperTextCpassowrd}
                                         onChange={this.onchangePasswordagain}
+                                        size="small"
                                     />
                                 </div>
                             </div>
@@ -268,6 +330,7 @@ class Register extends Component {
                                         // type="number"
                                         helperText={this.state.helperTextCountry}
                                         onChange={this.onchangePhone}
+                                        size="small"
                                     />
                                 </div>
                             </div>
@@ -276,11 +339,110 @@ class Register extends Component {
                                     Register
                                 </Button>
                             </div>
+
+
+                            
+                       {this.state.showCardColor ?
+                            <div className="rowReg">
+                            <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
+                                     >
+                 
+                                   <div className="servicerootR">
+                                   <Card>
+                                        <Typography className={classes.title} >
+                                       advance
+                                        </Typography>
+                                        </Card>
+                               
+                                      </div>
+                                    <div  className="serviceroot1R">
+                                        <Card>
+                                            <Typography  className="title1Radvance">
+                                            ADD TO CART
+                                            </Typography>
+                                            </Card>
+                                    
+                                    </div>
+                             </div> 
+                
+                              </div>
+                              <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
+                                >
+                 
+                                 <div className="servicerootR">
+                                 <Card>
+                                        <Typography className={classes.title} >
+                                        Basic
+                                        </Typography>
+                                        </Card>
+                               
+                                 </div>
+                                    <div  className="serviceroot1R">
+                                        <Card>
+                                            <Typography  className="title1R">
+                                            ADD TO CART
+                                            </Typography>
+                                            </Card>
+                                    
+                                    </div>
+                             </div> 
+                
+                              </div>
+                            </div>
+                            :     <div className="rowReg">
+                            <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
+                                     >
+                 
+                                   <div className="servicerootR">
+                                   <Card>
+                                        <Typography className={classes.title} >
+                                        Advance
+                                        </Typography>
+                                        </Card>
+                               
+                                      </div>
+                                    <div  className="serviceroot1R">
+                                        <Card>
+                                            <Typography  className="title1R">
+                                            ADD TO CART
+                                            </Typography>
+                                            </Card>
+                                    
+                                    </div>
+                             </div> 
+                
+                              </div>
+                              <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
+                                >
+                 
+                                 <div className="servicerootR">
+                                 <Card>
+                                        <Typography className={classes.title} >
+                                        Basic
+                                        </Typography>
+                                        </Card>
+                               
+                                 </div>
+                                    <div  className="serviceroot1R">
+                                        <Card>
+                                            <Typography  className="title1Rbasic">
+                                            ADD TO CART
+                                            </Typography>
+                                            </Card>
+                                    
+                                    </div>
+                             </div> 
+                
+                              </div>
+                            </div>}
+
                         </div>
 
+                 
+                   
                     </div>
 
-
+                   
                 </Paper>
                 <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
                     message={<span>{this.state.snackbarmsg}</span>}
@@ -293,4 +455,4 @@ class Register extends Component {
         );
     }
 }
-export default Register;
+export default withStyles(useStyles)(Register);

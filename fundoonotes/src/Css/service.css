@@ -13,7 +13,7 @@
 }
 .serviceroot{
     /* min-width: 275; */
-    height : 250px;
+    height : 200px;
     width : 250px;
     position: relative;
     z-index: 9;
@@ -23,21 +23,21 @@
 }
 .serviceroot1{
     /* min-width: 275; */
-    height: 250px;
+    height: 200px;
     width : 250px;
     position: relative;
     z-index: 8;
-    margin-top: -230px;
+    margin-top: -180px;
     margin-left: 40px;
     /* padding : 40px; */
 }
 .cardcontent{
-    height: 250px;
+    height: 200px;
     width : 250px;
 }
 .cardcontent1{
-    height: 250px;
-    width : 200px;
+    height: 200px;
+    width : 250px;
     display : flex;
     flex-direction: column;
     justify-content: flex-end;

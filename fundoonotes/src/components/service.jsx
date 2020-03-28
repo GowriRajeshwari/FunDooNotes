@@ -10,6 +10,8 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import clsx from 'clsx';
 import Modal from '@material-ui/core/Modal';
+import Snackbar from '@material-ui/core/Snackbar';
+import { IconButton } from "@material-ui/core";
 
 
 
@@ -71,8 +73,11 @@ class Service extends Component {
         setOpen : false,
         colorshow : false,
         colorshow1 :false,
-        service:""
+        service:"",
+        snackbaropen: false,
+        snackbarmsg: '',
     };
+    this.handleClose = this.handleClose.bind(this);
   }
   _onMouseMove=(event)=>{
     this.setState({colorshow : true})
@@ -88,7 +93,7 @@ class Service extends Component {
   }
   serviceadvance=(event)=>{ 
     console.log("service");
-    this.setState({setOpen : true,service:"service"})
+    this.setState({setOpen : true,service:"advance"})
   }
   servicebasic=(event)=>{ 
     console.log("service");
@@ -104,6 +109,23 @@ class Service extends Component {
   Done=()=>{
     this.setState({setOpen : false});
   }
+  processtopay=()=>{
+      if(this.state.service != ""){
+        this.props.history.push({
+            pathname: "/Register",
+            state: { service: this.state.service }
+          });
+      }
+      else{
+
+      }
+  
+  }
+   //close snackbar
+   handleClose(event) {
+    // event.preventDefault();
+    this.setState({ snackbaropen: false });
+}
   render() {
       const {classes}=this.props;
     return (
@@ -146,7 +168,7 @@ class Service extends Component {
                     
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
-                    <Button  >
+                    <Button onClick={e => this.processtopay(e)}>
                     Processed to Pay
                     </Button>
                     </div>
@@ -193,7 +215,13 @@ class Service extends Component {
                     </Card>
                 </div>
                 </div> </div>
-
+                <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+                    message={<span>{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+                            x</IconButton>
+                    ]}>
+                </Snackbar>
       </div>
 
     );
