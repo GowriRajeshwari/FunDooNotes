@@ -13,7 +13,7 @@
 }
 .serviceroot{
     /* min-width: 275; */
-    height : 200px;
+    height : 250px;
     width : 250px;
     position: relative;
     z-index: 9;
@@ -23,11 +23,11 @@
 }
 .serviceroot1{
     /* min-width: 275; */
-    height: 200px;
+    height: 250px;
     width : 250px;
     position: relative;
     z-index: 8;
-    margin-top: -180px;
+    margin-top: -190px;
     margin-left: 40px;
     /* padding : 40px; */
 }
@@ -51,6 +51,7 @@
       flex-direction: column;
       justify-content: flex-end;
       background-color: grey;
+    margin-right: 2px;
 
 }
 .title2{
@@ -61,10 +62,16 @@
     flex-direction: column;
     justify-content: flex-end;
     background-color: yellow;
+    margin-right: 2px;
+
 }
 .twocard{
     padding : 70px;
 }
 .centercard{
     display : flex;
+}
+.boldpoint{
+    height : 10px;
+    list-style-type : circle
 }

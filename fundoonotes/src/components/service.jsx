@@ -29,10 +29,15 @@ const useStyles =(theme)=> ({
       transform: 'scale(0.8)',
     },
     title: {
-      fontSize: 14,
-      width : '250px',
-      height : '250px'
+    //   fontSize: 14,
+    //   width : '250px',
+    //   height : '250px'
 
+    },
+    widthheight:{
+        width : '250px',
+        height : '250px',
+        padding : '20px'
     },
     pos: {
       marginBottom: 12,
@@ -62,6 +67,16 @@ const useStyles =(theme)=> ({
         boxShadow: theme.shadows[5],
         padding: theme.spacing(2, 4, 3),
       },
+      price:{
+      fontSize: 20,
+      fontWeight : 'bold'
+      },advance:{
+          color:'blue'
+      },
+      boldpoint:{
+          height : '10px',
+          listStyleType : 'circle'
+      }
       
   });
 
@@ -152,7 +167,18 @@ class Service extends Component {
         className="modelmiddel"
       >
         <div className="classespaper">
-                    <Typography>Edit Label</Typography>
+        <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: this.state.open,
+        })}
+      >
+        <Toolbar> 
+          <Typography variant="h6" noWrap>
+           Advance Pack Details
+          </Typography>
+        </Toolbar>
+      </AppBar>
                     <div className="textdash">
                     
                     <TextField
@@ -169,7 +195,7 @@ class Service extends Component {
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
                     <Button onClick={e => this.processtopay(e)}>
-                    Processed to Pay
+                    Processed to checkout
                     </Button>
                     </div>
                   
@@ -182,9 +208,23 @@ class Service extends Component {
         <div  onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
                  <div className="serviceroot">
                         <Card >
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Advance
+                            <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
                                 </Typography>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                advance
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className="boldpoint" color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
                         </Card>
                     </div>
                     <div  className="serviceroot1">
@@ -200,21 +240,37 @@ class Service extends Component {
                 <div className="twocard"><div  onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
                  onClick={e => this.servicebasic(e)}
                  >
-                <div className="serviceroot">
-                        <Card >
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                Basic
+                        <div className="serviceroot">
+                                <Card >
+                                <div className={classes.widthheight}>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                Price : $49 per
                                 </Typography>
-                        </Card>
-                    </div>
-                <div  className="serviceroot1">
-                    <Card>
-                        <Typography  className={this.state.colorshow1 ? "title2" : "title1"} >
-                        ADD TO CART
-                        </Typography>
-                    </Card>
+                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                month
+                                </Typography>
+                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                    Basic
+                                </Typography>
+                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                . $49/month
+                                </Typography>
+                                <Typography className="boldpoint" color="textSecondary" gutterBottom>
+                                . Ability to ad  only title and description
+                                </Typography>
+                                </div>
+                                </Card>
+                            </div>
+                        <div  className="serviceroot1">
+                            <Card>
+                                <Typography  className={this.state.colorshow1 ? "title2" : "title1"} >
+                                ADD TO CART
+                                </Typography>
+                            </Card>
+                        </div>
+                </div> 
+                
                 </div>
-                </div> </div>
                 <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
                     message={<span>{this.state.snackbarmsg}</span>}
                     action={[
