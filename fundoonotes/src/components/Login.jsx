@@ -39,11 +39,44 @@ class Login extends Component {
       this.setState({ snackbaropen: false });
   }
   //sign in
-  SignIn=(event)=>{
+  SignIn=async(event)=>{
     event.preventDefault();
    
     
-     if(this.state.email != ''){
+    await this.validator();
+    console.log(this.state.error )
+    if(this.state.error == false){
+      console.log("login clicked");
+      let data = {
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      console.log(data);
+        
+      login(data).then(response => {
+          console.log(response);
+         if (response.status === 200) {
+              this.setState({
+                  snackbarOpen: true,
+                  snackbarMessage: "Succefully Registered."
+                })
+              localStorage.setItem("id", response.data.id);
+              
+              this.props.history.push({
+                  pathname: "/Dashboard",
+              });
+         } else {
+             this.setState({  snackbarmsg: "Login Not Successfull,Make sure email & password is correct", snackbaropen: true });
+         }
+      });
+    }
+      
+       
+       
+  }
+  validator=()=>{
+    if(this.state.email != ''){
       if ( /\S+@\S+\.\S+/.test(this.state.email)) {
         this.setState({
             email: this.state.email, helperTextEmail: "",
@@ -82,36 +115,6 @@ class Login extends Component {
         password: this.state.password
     })
     }
-
-    if(this.state.email  && this.state.password != ''){
-      console.log("login clicked");
-      let data = {
-        email: this.state.email,
-        password: this.state.password
-      };
-
-      console.log(data);
-        
-      login(data).then(response => {
-          console.log(response);
-         if (response.status === 200) {
-              this.setState({
-                  snackbarOpen: true,
-                  snackbarMessage: "Succefully Registered."
-                })
-              localStorage.setItem("id", response.data.id);
-              
-              this.props.history.push({
-                  pathname: "/Dashboard",
-              });
-         } else {
-             this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
-         }
-      });
-    }
-      
-       
-       
   }
   resetpassword(event){
     event.preventDefault();
@@ -137,38 +140,13 @@ class Login extends Component {
   }
   onchangeEmail=(event)=>{
     this.setState({
-      email: event.target.value
-      
+      email: event.target.value  
   })
-    // console.log(event)
-    // if ( /\S+@\S+\.\S+/.test(event.target.value)) {
-    //     this.setState({
-    //         email: event.target.value, helperTextEmail: "",
-    //         error: false
-    //     })
-    // } else {
-    //     this.setState({
-    //         helperTextEmail: "Enter validate Email",
-    //         // error: true,
-    //         email: event.target.value
-    //     })
-    // }
 
 }
 
 onchangePassword = event => {
   this.setState({ password: event.target.value})
-    // if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
-    //   // console.log("on click function is working", event.target.value)
-    //   this.setState({ password: event.target.value , helperTextpassowrd: "",
-    //   error: false})
-    // } else {
-    //   this.setState({
-    //     helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
-    //     // error: true,
-    //     password: event.target.value
-    // })
-    // }
   }
 //Next Button
   Next=(event)=>{
