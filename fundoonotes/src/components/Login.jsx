@@ -7,6 +7,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { login } from "../services/LoginService";
 import Snackbar from '@material-ui/core/Snackbar';
 import { IconButton } from "@material-ui/core";
+
+
 require('dotenv').config();
 
 
@@ -20,55 +22,105 @@ class Login extends Component {
       userdata: [],
       show: false,
       login: "Sign in",
-      next: false,
-      password: '',
-      helperTextpassowrd: "",
-      red: "",
+      next : false,
+      password:'',
+      helperTextpassowrd:"",
+      red :"",
+      email : '',
+      emailse : '',
       snackbaropen: false,
       snackbarmsg: '',
-      errorText:""
     };
-    this.handleClose = this.handleClose.bind(this);
   }
 
+    //close snackbar
+    handleClose=(event)=> {
+      // event.preventDefault();
+      this.setState({ snackbaropen: false });
+  }
   //sign in
-  SignIn = (event) => {
+  SignIn=(event)=>{
     event.preventDefault();
-    console.log("login clicked");
-    let data = {
-      email: this.state.email,
-      password: this.state.password
-    };
-    console.log(data);
-    if (data.email || data.password != '') {
+   
+    
+     if(this.state.email != ''){
+      if ( /\S+@\S+\.\S+/.test(this.state.email)) {
+        this.setState({
+            email: this.state.email, helperTextEmail: "",
+            error: false
+        })
+    } else{
+      this.setState({
+        helperTextEmail: "Enter validate Email",
+        error: true,
+        email: this.state.email
+    })
+      }
+    }else if(this.state.email == ''){
+      this.setState({
+        helperTextEmail: "Enter Email",
+        error: true,
+        email: this.state.email
+    })
+    }
+
+    if(this.state.password != ''){
+      if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
+        this.setState({ password: this.state.password , helperTextpassowrd: "",
+        error: false})
+      } else{
+        this.setState({
+              helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
+              error: true,
+              password: this.state.password
+          })
+      }
+    }else if(this.state.password == ''){
+      this.setState({
+        helperTextpassowrd: "Enter the password",
+        error: true,
+        password: this.state.password
+    })
+    }
+
+    if(this.state.email  && this.state.password != ''){
+      console.log("login clicked");
+      let data = {
+        email: this.state.email,
+        password: this.state.password
+      };
+
+      console.log(data);
+        
       login(data).then(response => {
-        console.log(response.status);
-        if (response.status === 200) {
-          this.setState({ snackbarmsg: "Login Successfull", snackbaropen: true });
-          localStorage.setItem("id", response.data.id);
-
-          setTimeout(() => {
-            this.props.history.push('/Dashboard')
-          }, 2000)
-
-        } else {
-          this.setState({ snackbarmsg: "Login Not Successfull", snackbaropen: true });
-        }
+          console.log(response);
+         if (response.status === 200) {
+              this.setState({
+                  snackbarOpen: true,
+                  snackbarMessage: "Succefully Registered."
+                })
+              localStorage.setItem("id", response.data.id);
+              
+              this.props.history.push({
+                  pathname: "/Dashboard",
+              });
+         } else {
+             this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
+         }
       });
     }
-    else {
-      this.setState({ snackbarmsg: "Field are empty", snackbaropen: true, red: "error" });
-
-    }
+      
+       
+       
   }
-  resetpassword(event) {
+  resetpassword(event){
     event.preventDefault();
     this.props.history.push({
       pathname: "/Reset",
     });
   }
   //ForgotButton
-  ForgotButton(event) {
+  ForgotButton(event){
     event.preventDefault();
     this.props.history.push({
       pathname: "/Forgot",
@@ -76,58 +128,57 @@ class Login extends Component {
     localStorage.setItem("email", this.state.email);
   }
   //Register Button
-  register(event) {
+  register(event){
     event.preventDefault();
     this.props.history.push({
       pathname: "/Register",
     });
 
   }
-     //close snackbar
-     handleClose(event) {
-      this.setState({ snackbaropen: false });
-  }
-  onchangeEmail = (event) => {
+  onchangeEmail=(event)=>{
+    this.setState({
+      email: event.target.value
+      
+  })
     // console.log(event)
-    if (/\S+@\S+\.\S+/.test(event.target.value)) {
-      this.setState({
-        email: event.target.value, helperTextEmail: "",
-        error: false
-      })
-    } else {
-      this.setState({
-        helperTextEmail: "Enter validate Email",
-        error: true,
-        email: event.target.value
-      })
-    }
+    // if ( /\S+@\S+\.\S+/.test(event.target.value)) {
+    //     this.setState({
+    //         email: event.target.value, helperTextEmail: "",
+    //         error: false
+    //     })
+    // } else {
+    //     this.setState({
+    //         helperTextEmail: "Enter validate Email",
+    //         // error: true,
+    //         email: event.target.value
+    //     })
+    // }
 
-  }
+}
 
-  onchangePassword = event => {
-    if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
-      // console.log("on click function is working", event.target.value)
-      this.setState({
-        password: event.target.value, helperTextpassowrd: "",
-        error: false
-      })
-    } else {
-      this.setState({
-        helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
-        error: true,
-        password: event.target.value
-      })
-    }
+onchangePassword = event => {
+  this.setState({ password: event.target.value})
+    // if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
+    //   // console.log("on click function is working", event.target.value)
+    //   this.setState({ password: event.target.value , helperTextpassowrd: "",
+    //   error: false})
+    // } else {
+    //   this.setState({
+    //     helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
+    //     // error: true,
+    //     password: event.target.value
+    // })
+    // }
   }
-  //Next Button
-  Next = (event) => {
+//Next Button
+  Next=(event)=>{
     event.preventDefault();
-    this.setState({ next: true })
+    this.setState({next:true,emailse : this.state.email})
   }
   //ArrowButton
-  arrowButton = (event) => {
+  arrowButton=(event)=>{
     event.preventDefault();
-    this.setState({ next: false })
+    this.setState({next:false,email : this.state.emailse})
   }
   render() {
     return (
@@ -135,92 +186,77 @@ class Login extends Component {
         <span class="username"><span>F</span><span>u</span><span>n</span><span>D</span><span>o</span><span>o</span></span>
         <div className="loginstyle">{this.state.login}</div>
 
-
+       
         <Paper id="rootpaper">
-          {this.state.next ?
-            <div className="container">
+        
+          <div className="container">
 
-              <div className="border">
-                <div className="loginFrom">
-                  <div className="arrow">
-                    <Button onClick={e => this.arrowButton(e)}>
-                      <ArrowBackIcon />
-                    </Button></div>
-
-                  <img src={profile} id="img" />
-                  <div className="emaildisplay">{this.state.email}</div>
-                  <div className="inputField">
-                    <TextField
-                      // error={this.state.red}
-                      // error
-                      id="btn"
-                      variant="outlined"
-                      type="password"
-                      label="Password"
-                      helperText={this.state.helperTextpassowrd}
-                      onChange={this.onchangePassword}
-                      fullWidth
-                    />
-                  </div>
-
-                  <div className="submitButton">
-                    <Button id="subbtn" onClick={e => this.SignIn(e)}>
-                      Sign in
-                </Button>
-                  </div>
-                  <div className="belowlogin">
-                    <Button id="forgotstyle" onClick={e => this.ForgotButton(e)}>
-                      Forgot Password
-                   </Button>
-                  </div>
+            <div className="border">
+              <div className="loginFrom">
+                <img src={profile} id="img" />
+                <div className="inputField">
+                  <TextField
+                    error={this.state.helperTextEmail}
+                    helperText={this.state.helperTextEmail}
+                    id="btn"
+                    variant="outlined"
+                    label="Emails"
+                     onChange={this.onchangeEmail}
+                  />
                 </div>
+
+                <div className="inputField">
+                  <TextField
+                    // error={this.state.red}
+                    error={this.state.helperTextpassowrd }
+                   id="btn"
+                   variant="outlined"
+                   type="password"
+                   label="Password"
+                   helperText={this.state.helperTextpassowrd }
+                   onChange={this.onchangePassword}
+                  />
+                </div>
+
+                <div className="submitButton">
+                  <Button id="subbtn" onClick={e => this.SignIn(e)}>
+                    Sign in
+                </Button>
+                </div>
+                <div className="belowlogin">
+                  <Button id="forgotstyle" onClick={e => this.ForgotButton(e)}>
+                   Forgot Password
+                   </Button>
+                </div>
+
+                {/* <div className="submitButton">
+                  <Button id="subbtn" onClick={e => this.Next(e)}>
+                    NEXT
+                </Button>
+                </div> */}
+                {/* <div className="belowlogin">
+                  <Button id="forgotstyle" onClick={e => this.resetpassword(e)}>
+                  Create account(RP)
+                   </Button>
+                </div> */}
               </div>
             </div>
-            :
-            <div className="container">
-
-              <div className="border">
-                <div className="loginFrom">
-                  <img src={profile} id="img" />
-                  <div className="inputField">
-                    <TextField
-                      // error={this.state.red}
-                      helperText={this.state.helperTextEmail}
-                      id="btn"
-                      variant="outlined"
-                      label="Emails"
-                      onChange={this.onchangeEmail}
-                      fullWidth
-                    />
-                  </div>
-
-                  <div className="submitButton">
-                    <Button id="subbtn" onClick={e => this.Next(e)}>
-                      NEXT
-                </Button>
-                  </div>
-                  <div className="belowlogin">
-                    {/* <Button id="forgotstyle" onClick={e => this.resetpassword(e)}>
-                  Create account(RP)
-                   </Button> */}
-                  </div>
-                </div>
-              </div>
-            </div>}
+          </div>
         </Paper>
 
         <div className="registercontainer">
-          <Button id="register" onClick={e => this.register(e)}>
-            Create account
+        <Button id="register" onClick={e => this.register(e)}>
+              Create account
             </Button>
-        </div>
-        <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
-          message={<span>{this.state.snackbarmsg}</span>}
-          action={[
-            <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
-              x</IconButton>
-          ]}>
-        </Snackbar>
+       </div> 
+       <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+                    message={<span>{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+                            x</IconButton>
+                    ]}>
+                </Snackbar>
+       
       </div>
     );
   }
