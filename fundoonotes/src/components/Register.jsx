@@ -64,8 +64,8 @@ class Register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            firstName: "",
-            lastName: "",
+            firstname: "",
+            lastname: "",
             country: "",
             confirmpassword: "",
             helperText: "",
@@ -88,9 +88,6 @@ class Register extends Component {
             service:"",
             showCardColor:null
         };
-        this.arrowButton = this.arrowButton.bind(this);
-        this.handleClose = this.handleClose.bind(this);
-
     }
 
     componentWillMount() {
@@ -107,8 +104,8 @@ class Register extends Component {
       }
 
     //Register Button
-    Register = (event) => {
-       // const errors = this.validate(this.state)
+    Register = async(event) => {
+        await this.validator();
         event.preventDefault();
         console.log("register clicked");
         let data = {
@@ -120,7 +117,9 @@ class Register extends Component {
             phoneNumber: this.state.phone
         };
         console.log(data);
-        if (data.email || data.password != '') {
+
+
+        if(this.state.error == false){
             register(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
@@ -132,23 +131,128 @@ class Register extends Component {
                         pathname: "/",
                     });
                } else {
-                   this.setState({  snackbarmsg: "Login Not Successfull", snackbaropen: true });
+                   this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
                }
             });
         }
-        else {
-            this.setState({  snackbarmsg: "Make sure all the fields are filled", snackbaropen: true });
-
-        }
+        
     }
 
+    validator=()=>{
+        if(this.state.firstname != ''){
+            if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.firstname)) {
+                this.setState({
+                    firstname: this.state.firstname, helpTextFN: "",
+                    error: false
+                })
+            } else {
+                this.setState({
+                    helpTextFN: "Enter only alphabets",
+                    error: true,
+                    firstname: this.state.firstname
+                })
+            }
+        }else{
+            this.setState({
+                helpTextFN: "Enter only alphabets",
+                error: true,
+                firstname: this.state.firstname
+            })
+        }
+
+        if(this.state.lastname !=''){
+            if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.lastname )) {
+                this.setState({
+                    lastname: this.state.lastname , helpTextLN: "",
+                    error: false
+                })
+            } else {
+                this.setState({
+                    helpTextLN: "Enter only alphabets",
+                    error: true,
+                    lastname: this.state.lastname 
+                })
+            }
+        }else{
+            this.setState({
+                helpTextLN: "Enter only alphabets",
+                error: true,
+                lastname: this.state.lastname 
+            })
+        }
+
+        if(this.state.password != ''){
+            if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
+              this.setState({ password: this.state.password , helperTextpassowrd: "",
+              error: false})
+            } else{
+              this.setState({
+                    helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
+                    error: true,
+                    password: this.state.password
+                })
+            }
+          }else if(this.state.password == ''){
+            this.setState({
+              helperTextpassowrd: "Enter the password",
+              error: true,
+              password: this.state.password
+          })
+          }
+
+
+
+        if(this.state.email != ''){
+            if ( /\S+@\S+\.\S+/.test(this.state.email)) {
+              this.setState({
+                  email: this.state.email, helperTextEmail: "",
+                  error: false
+              })
+          } else{
+            this.setState({
+              helperTextEmail: "Enter validate Email",
+              error: true,
+              email: this.state.email
+          })
+            }
+          }else if(this.state.email == ''){
+            this.setState({
+              helperTextEmail: "Enter Email",
+              error: true,
+              email: this.state.email
+          })
+          }
+
+
+          if(this.state.phone != ''){
+            if (/^[0-9]*$/.test(this.state.phone)) {
+                this.setState({ phone: this.state.phone ,helperTextCountry: "",
+                error: false })
+              } else {
+                  this.setState({
+                      helperTextCountry: "Enter No only",
+                      error: true,
+                      phone: this.state.phone
+                  })
+              }
+          } else {
+            this.setState({
+                helperTextCountry: "Enter No",
+                error: true,
+                phone: this.state.phone
+            })
+        }
+
+
+
+    }
     //close snackbar
-    handleClose(event) {
+    handleClose=(event)=> {
         // event.preventDefault();
         this.setState({ snackbaropen: false });
     }
     //Next Button
-    Next(event) {
+    Next=(event)=> {
         event.preventDefault();
         this.setState({ next: true, password: '' })
     }
@@ -160,71 +264,23 @@ class Register extends Component {
 
 
     onchangeFirstName = (event) => {
-        if (/^[a-zA-Z].*[\s\.]*$/g.test(event.target.value)) {
-            this.setState({
-                firstname: event.target.value, helpTextFN: "",
-                error: false
-            })
-        } else {
-            this.setState({
-                helpTextFN: "Enter only alphabets",
-                error: true,
-                firstname: event.target.value
-            })
-        }
+        this.setState({ firstname: event.target.value})
     }
 
     onchangeLastName = event => {
-        if (/^[a-zA-Z].*[\s\.]*$/g.test(event.target.value)) {
-            this.setState({
-                lastname: event.target.value, helpTextLN: "",
-                error: false
-            })
-        } else {
-            this.setState({
-                helpTextLN: "Enter only alphabets",
-                error: true,
-                lastname: event.target.value
-            })
-        }
+        this.setState({
+            lastname: event.target.value
+        })
     }
 
-    validate = data => {
-        const errors = {}
-        if (!/([A-Z0-9a-z_-][^@])+?@[^$#<>?]+?\.[\w]{2,4}/.test(data.Email))
-            errors.email = 'Invalid email'
-        return errors
-    }
 
     onchangeEmail=(event)=>{
-        console.log(event)
-        if ( /\S+@\S+\.\S+/.test(event.target.value)) {
-            this.setState({
-                email: event.target.value, helperTextEmail: "",
-                error: false
-            })
-        } else {
-            this.setState({
-                helperTextEmail: "Enter validate Email",
-                error: true,
-                email: event.target.value
-            })
-        }
-
+        this.setState({
+            email: event.target.value   })
     }
 
     onchangePassword = event => {
-        if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
-          // console.log("on click function is working", event.target.value)
-          this.setState({ password: event.target.value , helperTextpassowrd: "",
-          error: false})
-        } else {
-          this.setState({
-            helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
-            error: true,
-            password: event.target.value
-        })
-        }
+          this.setState({ password: event.target.value })
       }
     
       onchangePasswordagain = async event => {
@@ -246,16 +302,7 @@ class Register extends Component {
         }
       }
       onchangePhone = event => {
-        if (/^[0-9]*$/.test(event.target.value)) {
-          this.setState({ phone: event.target.value ,helperTextCountry: "",
-          error: false })
-        } else {
-            this.setState({
-                helperTextCountry: "Enter No only",
-                error: true,
-                phone: event.target.value
-            })
-        }
+        this.setState({ phone: event.target.value})
       }
 
       
@@ -273,6 +320,7 @@ class Register extends Component {
                             <div className="rowReg">
                                 <div className="inputFieldReg">
                                     <TextField
+                                        error={this.state.helpTextFN}
                                         helperText={this.state.helpTextFN}
                                         id="btnReg"
                                         variant="outlined"
@@ -283,6 +331,7 @@ class Register extends Component {
                                 </div>
                                 <div className="inputFieldReg">
                                     <TextField
+                                        error={this.state.helpTextLN}
                                         helperText={this.state.helpTextLN}
                                         id="btnReg"
                                         variant="outlined"
@@ -296,6 +345,7 @@ class Register extends Component {
 
                                 <div className="inputFieldReg">
                                     <TextField
+                                        error={this.state.helperTextEmail}
                                         helperText={this.state.helperTextEmail}
                                         id="btnEmailReg"
                                         variant="outlined"
@@ -314,6 +364,7 @@ class Register extends Component {
                                         variant="outlined"
                                         type="password"
                                         label="NewPassword"
+                                        error={this.state.helperTextpassowrd}
                                         helperText={this.state.helperTextpassowrd}
                                         onChange={this.onchangePassword}
                                         // size="small"
@@ -325,6 +376,7 @@ class Register extends Component {
                                         variant="outlined"
                                         type="password"
                                         label="Confirm Password"
+                                        error={this.state.helperTextCpassowrd}
                                         helperText={this.state.helperTextCpassowrd}
                                         onChange={this.onchangePasswordagain}
                                         // size="small"
@@ -341,6 +393,7 @@ class Register extends Component {
                                         variant="outlined"
                                         label="Phone"
                                         // type="number"
+                                        error={this.state.helperTextCountry}
                                         helperText={this.state.helperTextCountry}
                                         onChange={this.onchangePhone}
                                         // size="small"

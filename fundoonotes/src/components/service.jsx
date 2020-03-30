@@ -81,7 +81,7 @@ const useStyles =(theme)=> ({
           display:'flex',
           justifyContent : 'center',
           color : 'blue',
-          marginTop : '100px'
+          marginTop : '200px'
       }
       
   });
@@ -170,7 +170,7 @@ class Service extends Component {
           </Typography>
         </Toolbar>
       </AppBar>
-     
+     <div className="twocardrow">
       
       <div className="twocard" >
         <div className="zoom" onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
@@ -239,6 +239,7 @@ class Service extends Component {
                 </div> 
                 
                 </div>
+                </div>
                 
                 <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
                     message={<span>{this.state.snackbarmsg}</span>}
@@ -255,7 +256,7 @@ class Service extends Component {
       <Typography  className={classes.signin} onClick={e => this.signin(e)}>
                                Sign In Instead
                                 </Typography>
-                                <div className="modelcenter">
+                                
                 <Modal
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
@@ -275,7 +276,7 @@ class Service extends Component {
                   
         </div>
       </Modal>
-      </div>
+      
 
                                 
       </div>

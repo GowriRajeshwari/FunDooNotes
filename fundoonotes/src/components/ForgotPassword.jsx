@@ -5,6 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import mail from '../assets/mail.png';
 import { forgotpassword } from "../services/LoginService"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Snackbar from '@material-ui/core/Snackbar';
+import { IconButton } from "@material-ui/core";
+
 
 class ForgotPassword extends Component {
     constructor(props) {
@@ -19,25 +22,34 @@ class ForgotPassword extends Component {
             next: false,
             password: '',
             helperTextpassowrd: "",
-            emailfrom :''
+            emailfrom :'',
+            snackbaropen: false,
+            snackbarmsg: '',
         };
-    //  this.Send =this.Send.bind(this);
     }
+    
+    //close snackbar
+    handleClose=(event)=> {
+        // event.preventDefault();
+        this.setState({ snackbaropen: false });
+    }
+
     //Send Button
-    forgotButton=(event)=>{
+    forgotButton=async(event)=>{
         event.preventDefault();
+        await this.validator();
         console.log("forgot button is clicked");
         let data = {
           email: this.state.email,
         };
         console.log(data);
-        if (data.email != '') {
+        if(this.state.error == false){
             forgotpassword(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
                     this.setState({
-                        snackbarOpen: true,
-                        snackbarMessage: "Mail is send Successfully."
+                        snackbaropen: true,
+                        snackbarmsg: "Mail is send Successfully."
                       })
                     // localStorage.setItem("username", this.state.username);
                     // this.props.history.push({
@@ -48,9 +60,30 @@ class ForgotPassword extends Component {
                }
             });
         }
-        else {
-            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+        
 
+    }
+
+    validator=()=>{
+        if(this.state.email != ''){
+          if ( /\S+@\S+\.\S+/.test(this.state.email)) {
+            this.setState({
+                email: this.state.email, helperTextEmail: "",
+                error: false
+            })
+        } else{
+          this.setState({
+            helperTextEmail: "Enter validate Email",
+            error: true,
+            email: this.state.email
+        })
+          }
+        }else if(this.state.email == ''){
+          this.setState({
+            helperTextEmail: "Enter Email",
+            error: true,
+            email: this.state.email
+        })
         }
 
     }
@@ -59,19 +92,9 @@ class ForgotPassword extends Component {
         this.setState({emailfrom : email})
     }
     onChangeEmail=(event)=>{
-        console.log(event)
-        if ( /\S+@\S+\.\S+/.test(event.target.value)) {
-            this.setState({
-                email: event.target.value, helperTextEmail: "",
-                error: false
-            })
-        } else {
-            this.setState({
-                helperTextEmail: "Enter validate Email",
-                error: true,
-                email: event.target.value
-            })
-        }
+        this.setState({
+            email: event.target.value
+        })
     
     }
    
@@ -93,6 +116,7 @@ class ForgotPassword extends Component {
                                 <div className="RecoveryForgot">Recovery email</div>
                                 <div className="inputFieldForgot">
                                     <TextField
+                                         error={this.state.helperTextEmail}
                                         helperText={this.state.helperTextEmail}
                                         id="btnForgot"
                                         variant="outlined"
@@ -110,6 +134,13 @@ class ForgotPassword extends Component {
                         </div>
                     </div>
                 </Paper>
+                <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+                    message={<span>{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+                            x</IconButton>
+                    ]}>
+                </Snackbar>
             </div>
         );
     }

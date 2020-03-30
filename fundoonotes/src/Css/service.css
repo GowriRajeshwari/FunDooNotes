@@ -1,15 +1,15 @@
 .servicecontainer{
-    /* width:100%; */
-    height:100%;
+    
+    /* height:100%; */
     font-size: 28px;
     color: rgb(228, 86, 86);
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     /* background-color: #F8F8F8; */
-    padding : 40px;
-    width: 100%;
+    /* padding : 40px; */
+    /* width: 1333px; */
     /* margin-left : 100px; */
 }
 .containeservice{
@@ -93,4 +93,12 @@
     -ms-transform: scale(1.15); /* IE 9 */
     -webkit-transform: scale(1.15); /* Safari 3-8 */
     transform: scale(1.15); 
+  }
+  .twocardrow{
+      display:flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        height: 100%;
   }

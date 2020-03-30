@@ -58,8 +58,8 @@ class Login extends Component {
           console.log(response);
          if (response.status === 200) {
               this.setState({
-                  snackbarOpen: true,
-                  snackbarMessage: "Succefully Registered."
+                snackbaropen: true,
+                  snackbarmsg: "Succefully Registered."
                 })
               localStorage.setItem("id", response.data.id);
               
