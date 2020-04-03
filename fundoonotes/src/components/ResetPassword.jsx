@@ -5,7 +5,9 @@ import TextField from "@material-ui/core/TextField";
 import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { resetPassword } from "../services/LoginService";
-const jwt = require("jsonwebtoken");
+import Snackbar from '@material-ui/core/Snackbar';
+import { IconButton } from "@material-ui/core";
+
 
 
 class ResetPassword extends Component {
@@ -22,84 +24,112 @@ class ResetPassword extends Component {
       password:'',
       helperTextpassowrd:"",
       confirmPassword:'',
-      helperTextCpassowrd:''
+      helperTextCpassowrd:'',
+      snackbaropen: false,
+      snackbarmsg: '',
+      confirmpassword:'',
+      pass:null
     };
 
   }
- Reset(event){
+ Reset=async(event)=>{
     event.preventDefault();
-        // console.log("login clicked");
-        // let formData = new FormData();
-        // console.log('formaData in registration.jsx ')
-        // console.log(formData)
-        // formData.set('newPassword', this.state.password)
-
+        await this.validator();
         let data = {
           newPassword: this.state.password,
         };
 
         const id = localStorage.getItem("id");
-        const token = jwt.sign({ id }, process.env.REACT_APP_KEY, { expiresIn: "1h" });
-        localStorage.setItem("token", token);
         console.log(data,id);
 
-        if (data.password != '') {
+        if (data.newPassword != '' ) {
+          if(this.state.pass == true){
             resetPassword(data,id).then(response => {
                 console.log(response);
-               if (response.status === 200) {
+               if (response.statusText == "No Content") {
                     this.setState({
-                        snackbarOpen: true,
-                        snackbarMessage: "Succefully changed."
+                        snackbaropen: true,
+                        snackbarmsg: "Succefully changed."
                       })
-                     localStorage.setItem("id", response.data.id);
+                    //  localStorage.setItem("id", response.data.id);
                     
                     this.props.history.push({
-                        pathname: "/Dashboard",
+                        pathname: "/",
                     });
                } else {
-                   this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
+                   this.setState({  snackbarmsg: "Password not successfull", snackbaropen: true });
                }
             });
+          }
         }
         else {
-            this.setState({  snackbarmsg: "Field are empty", snackbaropen: true });
+            this.setState({  snackbarmsg: "Make sure password and confirm is correct", snackbaropen: true });
 
         }
   }
-
-
-  onchangePassword = event => {
-    if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(event.target.value) && /[a-z]/.test(event.target.value) && /[0-9]/.test(event.target.value) && /[A-Z]/.test(event.target.value)) {
-      // console.log("on click function is working", event.target.value)
-      this.setState({ password: event.target.value , helperTextpassowrd: "",
-      error: false})
-    } else {
+  validator=()=>{
+    if(this.state.password != ''){
+      if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
+        this.setState({ password: this.state.password , helperTextpassowrd: "",
+        error: false})
+      } else{
+        this.setState({
+              helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
+              error: true,
+              password: this.state.password
+          })
+      }
+    }else if(this.state.password == ''){
       this.setState({
-        helperTextpassowrd: "Minimum eight characters, at least one letter, one number and one special character:",
+        helperTextpassowrd: "Enter the password",
         error: true,
-        password: event.target.value
+        password: this.state.password
     })
-    }
   }
-
-  onchangePasswordagain = async event => {
-
-    await this.setState({
-      confirmPassword: event.target.value
-    })
-    this.checkPassword()
-  }
-
-  checkPassword () {
-    if (this.state.password === this.state.confirmPassword) {
-      this.setState({ snackbarOpen: true, snackbarmsg: 'done' })
-    } else {
+    if(this.state.confirmpassword == ''){
       this.setState({
-        snackbarOpen: true,
-        snackbarmsg: 'enter same password'
-      })
+        helperTextCpassowrd: "Enter the confirm password",
+        error: true,
+        confirmpassword: this.state.confirmpassword
+    })
+    }else{
+      this.checkPassword();
+      
     }
+
+
+    
   }
+
+    //close snackbar
+    handleClose=(event)=> {
+      // event.preventDefault();
+      this.setState({ snackbaropen: false });
+  }
+  onchangePassword = event => {
+    this.setState({ password: event.target.value })
+}
+
+onchangePasswordagain =  event => {
+
+    this.setState({
+    confirmpassword: event.target.value
+  })
+}
+
+checkPassword=()=>{
+  if (this.state.password === this.state.confirmpassword) {
+    this.setState({ snackbaropen: true, snackbarmsg: 'Password changed',pass:true });
+    this.setState({ confirmpassword: this.state.confirmpassword , helperTextpassowrd: "",
+        error: false})
+  } else {
+    this.setState({
+      snackbaropen: true,
+      snackbarmsg: 'enter same password',
+      pass : false
+    })
+  }
+}
   render() {
     return (
       <div className="firstcontainerReset">
@@ -123,6 +153,7 @@ class ResetPassword extends Component {
                    type="password"
                    label="NewPassword"
                    helperText={this.state.helperTextpassowrd}
+                   error={this.state.helperTextpassowrd}
                    onChange={this.onchangePassword}
                   />
                 </div>
@@ -135,6 +166,7 @@ class ResetPassword extends Component {
                    type="password"
                    label="Re-enter New Password"
                    helperText={this.state.helperTextCpassowrd}
+                   error={this.state.helperTextCpassowrd}
                    onChange={this.onchangePasswordagain}
                   />
                 </div>
@@ -149,7 +181,13 @@ class ResetPassword extends Component {
             </div>
           </div>
         </Paper>
-
+        <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+                    message={<span>{this.state.snackbarmsg}</span>}
+                    action={[
+                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+                            x</IconButton>
+                    ]}>
+                </Snackbar>
        
       </div>
     );

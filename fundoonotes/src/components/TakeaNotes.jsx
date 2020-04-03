@@ -14,7 +14,8 @@ class TakeaNotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    next : true
+    next : true,
+    value : ''
     };
   }
  
@@ -26,16 +27,21 @@ class TakeaNotes extends Component {
     event.preventDefault();
     this.setState({next : true})
   }
+  onchangeText=(event)=>{
+    this.setState({value : event.target.value})
+  }
   render() {
     return (
       <div >
         <div className="containerdash">
         {this.state.next ? 
+            <div>
             <Paper className="paper">
             
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
           
             </Paper>
+            </div>
           : 
           <Paper className="paper2">
              <div className="NoteExpand">
@@ -49,16 +55,19 @@ class TakeaNotes extends Component {
                         InputProps={{ disableUnderline: true }}
                         //  onChange={this.onchangeEmail}
                     />
-                    <TextField
-                        // error={this.state.red}
-                        helperText={this.state.helperTextEmail}
-                        id="btndash"
-                        variant="filled"
-                        label="Take a Notes"
-                        size='small'
+                    
+                        <TextField
+                        id="standard-multiline-flexible"
+                        label="Take a Note"
+                        multiline
+                        rowsMax="4"
+                        size="small"
+                        value={this.state.value}
+                        onChange={this.onchangeText}
                         InputProps={{ disableUnderline: true }}
-                        //  onChange={this.onchangeEmail}
-                    />
+
+                      />
+                  
                     <div className="button">
                     <Button size="small" onClick={e => this.close(e)}>Close</Button>
                     </div>
@@ -66,6 +75,7 @@ class TakeaNotes extends Component {
                   </div>
         </Paper>
     }
+    <div>hello</div>
     </div>
        
        

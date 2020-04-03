@@ -81,7 +81,7 @@ const useStyles =(theme)=> ({
           display:'flex',
           justifyContent : 'center',
           color : 'blue',
-          marginTop : '200px'
+          marginTop : '20px'
       }
       
   });

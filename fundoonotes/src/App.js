@@ -7,11 +7,13 @@ import Register from './components/Register';
 import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import Dashboard from './components/Dashboard';
+import Dashboard1 from './components/Dashboard1';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
 import service from './components/service';
-
-
+let token =  window.location.href.split('/' )[4];
+let resetpassword="/resetpassword/"+token
+console.log(token);
 
 
 function App() {
@@ -21,8 +23,9 @@ function App() {
         <Route path="/" exact component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
-        <Route path="/resetpassword/qjq5ohwD3lU3C21LfQCiTnKlnZHSiqFftBYoxh8QaYGg1sV2V41TOBOoJIH2w7zC" component={ResetPassword} />
+        <Route path={resetpassword} component={ResetPassword} />
         <Route path="/Dashboard" component={Dashboard} />
+        <Route path="/Dashboard1" component={Dashboard1} />
         <Route path="/TakeaNotes" component={TakeaNotes} />
         <Route path="/EditLabel" component={EditLabel} />
         <Route path="/Service" component={service} />

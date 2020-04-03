@@ -174,12 +174,12 @@ display : flex;
 
 
   @media only screen 
-  and (max-width : 375px) {
+  and (max-width : 414px) {
     #rootpaperReg{
       margin-top : 70px;
       margin-bottom: 70px;
       /* padding : 40px; */
-      width:350px;
+      width:100%;
       height: 500px;
       flex-direction: column;
       align-items: center;
@@ -194,7 +194,7 @@ display : flex;
       justify-content: center;
     }
     .containerReg {
-      /* width: 320%; */
+      width: 100%;
         height: 500px;
         font-size: 28px;
         /* color: rgb(228, 86, 86); */
@@ -218,6 +218,7 @@ display : flex;
       display: flex;
       flex-direction: column;
       background-color: #FFFFFF;
+      width: 100%;
     }
     .usernameReg span {
       color: red;
@@ -275,5 +276,19 @@ display : flex;
       color: #fff;
       width: 50px;
     }
-   
+    .servicerootR{
+      /* min-width: 275; */
+      height: 150px;
+      width : 150px;
+      position: relative;
+      z-index: 9;
+      /* background-color: blue; */
+      margin-bottom: 15px;
+      /* padding : 40px; */
+  }
+  .twocardR{
+    /* padding : 10px; */
+  width : 200px;
+  height : 200px;
+}
   }

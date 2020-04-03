@@ -312,13 +312,12 @@ const useStyles = theme => ({
 render(){
     const {classes} = this.props;
   return (
+      <div>
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
         position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: this.state.open,
-        })}
+       
       >
         <Toolbar>
           <IconButton
@@ -326,7 +325,7 @@ render(){
             aria-label="open drawer"
             onClick={this.handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, this.state.open && classes.hide)}
+            // className={clsx(classes.menuButton, this.state.open && classes.hide)}
           >
             <MenuIcon />
           </IconButton>
@@ -366,61 +365,11 @@ render(){
                     </div>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={this.state.open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <div className={classes.drawerHeader1}>
-          <IconButton onClick={this.handleDrawerClose}>
-          <MenuIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {['Notes', 'Remainder'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.Editlabel(e,text)} >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <div>LABELS</div>
-        <List>
-          {['Edit labels'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.Editlabel(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['Archive','Bin'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: this.state.open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-        {/* <ReactSVGPanZoom> */}
-        <TakeaNotes/>
-        {this.getcomponents()}
-      {/* </ReactSVGPanZoom> */}
-        
-      </main>
+  
+      </div>
+      <div>
+          <TakeaNotes/>
+      </div>
     </div>
   );
 }
