@@ -196,9 +196,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
 
-
-
-
 const drawerWidth = 240;
 
 const useStyles = theme => ({

@@ -7,6 +7,8 @@ import profile from '../assets/profile.png';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { login } from "../services/LoginService"
 import { Typography } from "@material-ui/core";
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 require('dotenv').config();
 
 
@@ -15,7 +17,8 @@ class TakeaNotes extends Component {
     super(props);
     this.state = {
     next : true,
-    value : ''
+    value : '',
+    data:[]
     };
   }
  
@@ -29,6 +32,9 @@ class TakeaNotes extends Component {
   }
   onchangeText=(event)=>{
     this.setState({value : event.target.value})
+  }
+  onChangeTitle=(event)=>{
+    this.setState({data : event.target.value})
   }
   render() {
     return (
@@ -45,28 +51,33 @@ class TakeaNotes extends Component {
           : 
           <Paper className="paper2">
              <div className="NoteExpand">
+               <div>
                     <TextField
-                        // error={this.state.red}
-                        helperText={this.state.helperTextEmail}
-                        id="btndash"
-                        variant="filled"
+                        id="standard-multiline-flexible"
                         label="Title"
-                        size='small'
+                        multiline
+                        rowsMax="4"
+                        size="small"
+                        style={{width:'100%'}}
+                        // value={this.state.value}
+                        onChange={this.onChangeTitle}
                         InputProps={{ disableUnderline: true }}
-                        //  onChange={this.onchangeEmail}
-                    />
+                      />
                     
+                    </div>
+                    <div>
                         <TextField
                         id="standard-multiline-flexible"
-                        label="Take a Note"
+                        label="  Take a Note"
                         multiline
                         rowsMax="4"
                         size="small"
                         value={this.state.value}
+                        style={{width:'100%'}}
                         onChange={this.onchangeText}
                         InputProps={{ disableUnderline: true }}
-
                       />
+                      </div>
                   
                     <div className="button">
                     <Button size="small" onClick={e => this.close(e)}>Close</Button>
@@ -75,9 +86,32 @@ class TakeaNotes extends Component {
                   </div>
         </Paper>
     }
-    <div>hello</div>
+    
     </div>
-       
+    <div>
+    <div>  
+      <Card style={{width : '250px'}}>
+      <CardContent>
+        <Typography color="textSecondary" gutterBottom>
+          Word of the Day
+        </Typography>
+        <Typography variant="h5" component="h2">
+          benev
+        </Typography>
+        <Typography color="textSecondary">
+          adjective
+        </Typography>
+        <Typography variant="body2" component="p">
+          well meaning and kindly.
+          <br />
+          {'"a benevolent smile"'}
+        </Typography>
+      </CardContent>
+     
+    </Card>
+    </div>
+    </div>
+    
        
       </div>
     );

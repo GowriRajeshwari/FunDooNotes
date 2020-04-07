@@ -195,6 +195,9 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
+import refresh from '../assets/refresh.png';
+import box from '../assets/box.png';
+
 
 
 
@@ -212,12 +215,13 @@ const useStyles = theme => ({
     }),
   },
   appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
+    // width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -226,10 +230,13 @@ const useStyles = theme => ({
     display: 'none',
   },
   drawer: {
+   
     width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
+    border: 'none',
+    marginTop:'63px',
     width: drawerWidth,
   },
   drawerHeader: {
@@ -283,7 +290,12 @@ const useStyles = theme => ({
         };
       }
       handleDrawerOpen = () => {
+        if(this.state.open == false){
         this.setState({setOpen : true,open : true});
+        }
+        else{
+          this.setState({setOpen : false,open : false});
+        }
       };
     
       handleDrawerClose = () => {
@@ -326,7 +338,7 @@ render(){
             aria-label="open drawer"
             onClick={this.handleDrawerOpen}
             edge="start"
-            className={clsx(classes.menuButton, this.state.open && classes.hide)}
+            className={clsx(classes.menuButton, this.state.open)}
           >
             <MenuIcon />
           </IconButton>
@@ -364,6 +376,19 @@ render(){
                                 
                              </Paper>
                     </div>
+                    <div className="icondash">
+                         <div>
+                             <img src={refresh} id="imgdash" />
+                         </div>
+                         <div className="columimg">
+                             <img src={box} id="imgdash" />
+                         </div>
+                         <div>
+                             <img src={search} id="imgdash" />
+                         </div>
+
+                     </div>
+                     
         </Toolbar>
       </AppBar>
       <Drawer
@@ -375,11 +400,6 @@ render(){
           paper: classes.drawerPaper,
         }}
       >
-        <div className={classes.drawerHeader1}>
-          <IconButton onClick={this.handleDrawerClose}>
-          <MenuIcon />
-          </IconButton>
-        </div>
         <Divider />
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
@@ -415,10 +435,10 @@ render(){
         })}
       >
         <div className={classes.drawerHeader} />
-        {/* <ReactSVGPanZoom> */}
+       
         <TakeaNotes/>
         {this.getcomponents()}
-      {/* </ReactSVGPanZoom> */}
+     
         
       </main>
     </div>
