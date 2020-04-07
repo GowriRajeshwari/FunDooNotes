@@ -23,7 +23,7 @@ class TakeaNotes extends Component {
     this.state = {
     next : true,
     value : '',
-    show : null,
+    show : [],
     data:[]
    
     };
@@ -114,25 +114,27 @@ class TakeaNotes extends Component {
     }
     
     </div>
+    
     <div className='notescontainer'>
-    <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} style={{width : '250px',borderRadius:'10px',cursor:'pointer'}}>  
+    {this.state.data.map((data, index) => (
+    <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} style={{width : '250px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
       <Card>
       <CardContent>
         <div className='showicon'>
                       <Typography variant="h6" component="h2">
-                        benev
+                        {data.title}
                       </Typography>
-                      {this.state.show ?  <div style={{ padding :'5px'}}>
+                      {this.state.show[index] ?  <div style={{ padding :'5px'}}>
                               <img src={reminder} id="imgdashnotes" />
                       </div> : null}
                      
           </div>
         <Typography color="textSecondary" gutterBottom>
-          Word of the Day
+         {data.description}
         </Typography>
         <div  style={{ display : 'flex', flexDirection:'row',height:'60px'}}>
 
-        {this.state.show ?
+        {this.state.show[index] ?
         <div style={{ display : 'flex', flexDirection:'row'}}>          
         <div style={{ padding :'5px'}}>
           <button>
@@ -158,6 +160,7 @@ class TakeaNotes extends Component {
      
     </Card>
     </div>
+    ))}
     </div>
     
        
