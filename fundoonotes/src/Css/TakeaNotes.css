@@ -1,0 +1,18 @@
+.maincontainer{
+    width : 100%;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+}
+.notescontainer{
+    width : 80%;
+    display: flex;
+    align-items: center;
+    padding-top: 30px;
+    flex-direction: row;
+}
+.showicon{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+}

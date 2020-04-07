@@ -8,6 +8,8 @@ import './Css/ForgotPassword.css'
 import './Css/ResetPassword.css'
 import './Css/Dashboard.css'
 import './Css/service.css'
+import './Css/TakeaNotes.css'
+
 
 import * as serviceWorker from './serviceWorker';
 require('dotenv').config();

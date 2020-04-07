@@ -12,6 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import reminder from '../assets/reminder.svg'
 import refresh from '../assets/refresh.png';
 import box from '../assets/box.png';
+import {getnotes} from '../services/notesService'
 require('dotenv').config();
 
 
@@ -50,7 +51,7 @@ class TakeaNotes extends Component {
 
   render() {
     return (
-      <div style={{width : '100%',display : 'flex',alignItems:'center',flexDirection:'column'}}>
+      <div className='maincontainer'>
         <div className="containerdash">
         {this.state.next ? 
             <div>
@@ -100,11 +101,11 @@ class TakeaNotes extends Component {
     }
     
     </div>
-    <div style={{width : '80%',display : 'flex',alignItems : 'center' , paddingTop : '30px',flexDirection:'row'}}>
-    <div onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} style={{width : '250px',borderRadius:'10px'}}>  
+    <div className='notescontainer'>
+    <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} style={{width : '250px',borderRadius:'10px',cursor:'pointer'}}>  
       <Card>
       <CardContent>
-        <div style={{  display : 'flex', flexDirection:'row',justifyContent:'space-between' }}>
+        <div className='showicon'>
                       <Typography variant="h6" component="h2">
                         benev
                       </Typography>
@@ -121,7 +122,9 @@ class TakeaNotes extends Component {
         {this.state.show ?
         <div style={{ display : 'flex', flexDirection:'row'}}>          
         <div style={{ padding :'5px'}}>
+          <button>
             <img src={reminder} id="imgdashnotes" />
+            </button>
         </div>
         <div style={{ padding :'5px'}}>
             <img src={reminder} id="imgdashnotes" />

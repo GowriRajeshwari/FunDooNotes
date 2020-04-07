@@ -61,6 +61,8 @@ class Login extends Component {
                 snackbaropen: true,
                   snackbarmsg: "Succefully Registered."
                 })
+                console.log(response.data.id);
+
               localStorage.setItem("id", response.data.id);
               
               this.props.history.push({
