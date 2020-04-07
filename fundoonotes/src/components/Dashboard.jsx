@@ -306,6 +306,7 @@ const useStyles = theme => ({
 
   Editlabel=(event,text)=>{
     event.preventDefault();
+    console.log(text)
     if(text == 'Edit labels'){
         // <Edit/>
         this.setState({choice : 'Editlabels'})

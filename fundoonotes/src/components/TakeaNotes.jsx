@@ -9,6 +9,9 @@ import { login } from "../services/LoginService"
 import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import reminder from '../assets/reminder.svg'
+import refresh from '../assets/refresh.png';
+import box from '../assets/box.png';
 require('dotenv').config();
 
 
@@ -18,7 +21,8 @@ class TakeaNotes extends Component {
     this.state = {
     next : true,
     value : '',
-    data:[]
+    show : null
+   
     };
   }
  
@@ -36,9 +40,17 @@ class TakeaNotes extends Component {
   onChangeTitle=(event)=>{
     this.setState({data : event.target.value})
   }
+
+  _onMouseMove=(event)=>{
+    this.setState({show : true})
+  }
+  _onMouseOut=(event)=>{
+    this.setState({show : false})
+  }
+
   render() {
     return (
-      <div >
+      <div style={{width : '100%',display : 'flex',alignItems:'center',flexDirection:'column'}}>
         <div className="containerdash">
         {this.state.next ? 
             <div>
@@ -88,24 +100,44 @@ class TakeaNotes extends Component {
     }
     
     </div>
-    <div>
-    <div>  
-      <Card style={{width : '250px'}}>
+    <div style={{width : '80%',display : 'flex',alignItems : 'center' , paddingTop : '30px',flexDirection:'row'}}>
+    <div onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} style={{width : '250px',borderRadius:'10px'}}>  
+      <Card>
       <CardContent>
+        <div style={{  display : 'flex', flexDirection:'row',justifyContent:'space-between' }}>
+                      <Typography variant="h6" component="h2">
+                        benev
+                      </Typography>
+                      {this.state.show ?  <div style={{ padding :'5px'}}>
+                              <img src={reminder} id="imgdashnotes" />
+                      </div> : null}
+                     
+          </div>
         <Typography color="textSecondary" gutterBottom>
           Word of the Day
         </Typography>
-        <Typography variant="h5" component="h2">
-          benev
-        </Typography>
-        <Typography color="textSecondary">
-          adjective
-        </Typography>
-        <Typography variant="body2" component="p">
-          well meaning and kindly.
-          <br />
-          {'"a benevolent smile"'}
-        </Typography>
+        <div  style={{ display : 'flex', flexDirection:'row',height:'60px'}}>
+
+        {this.state.show ?
+        <div style={{ display : 'flex', flexDirection:'row'}}>          
+        <div style={{ padding :'5px'}}>
+            <img src={reminder} id="imgdashnotes" />
+        </div>
+        <div style={{ padding :'5px'}}>
+            <img src={reminder} id="imgdashnotes" />
+        </div>
+        <div style={{ padding :'5px'}}>
+            <img src={reminder} id="imgdashnotes" />
+        </div>
+        <div style={{ padding :'5px'}}>
+            <img src={reminder} id="imgdashnotes" />
+        </div>
+        <div style={{ padding :'5px'}}>
+            <img src={reminder} id="imgdashnotes" />
+        </div> </div>: 
+          null}
+
+        </div>
       </CardContent>
      
     </Card>
