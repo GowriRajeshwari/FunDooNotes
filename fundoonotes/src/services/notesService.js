@@ -1,10 +1,12 @@
 import axios from "axios";
 const access_token = localStorage.getItem("id");
-export async function resetPassword(data) {
- 
+export async function getnotes() {
+    // console.log(data,token);
+    //const localtoken = localStorage.getItem("token");
+    console.log(process.env.REACT_APP_getnotes);
   
     try {
-      const response = await axios.post(process.env.REACT_APP_getnotes , data, {params : { access_token }},
+      const response = await axios.get(process.env.REACT_APP_getnotes , {params : { access_token }},
       );
       return response;
     } catch (error) {
