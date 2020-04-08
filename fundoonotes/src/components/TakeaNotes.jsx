@@ -25,7 +25,8 @@ class TakeaNotes extends Component {
     value : '',
     show : [],
     data:[],
-    description:''
+    description:'',
+    title:''
    
     };
   }
@@ -45,15 +46,12 @@ class TakeaNotes extends Component {
     event.preventDefault();
     this.setState({next : false})
   }
-  close=(event)=>{
-    event.preventDefault();
-    this.setState({next : true})
-  }
+ 
   onchangeText=(event)=>{
     this.setState({description : event.target.value})
   }
   onChangeTitle=(event)=>{
-    this.setState({data : event.target.value})
+    this.setState({title : event.target.value})
   }
 
   _onMouseMove=(event)=>{
@@ -73,8 +71,10 @@ class TakeaNotes extends Component {
       console.log(response);
      if (response.status === 200) {
          
-        this.setState({data : response.data.data.data});
-        console.log(this.state.data.length)
+        // this.setState({data : response.data.data.data});
+       
+        this.componentDidMount();
+        this.setState({ title : '',description : '',next : true})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
@@ -120,7 +120,7 @@ class TakeaNotes extends Component {
                         multiline
                         rowsMax="4"
                         size="small"
-                        value={this.state.value}
+                        // value={this.state.value}
                         style={{width:'100%'}}
                         onChange={this.onchangeText}
                         InputProps={{ disableUnderline: true }}
@@ -136,10 +136,11 @@ class TakeaNotes extends Component {
     }
     
     </div>
-    
+
     <div className='notescontainer'>
     {this.state.data.map((data, index) => (
-    <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} style={{width : '250px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
+    <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
+    style={{width : '250px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
       <Card>
       <CardContent>
         <div className='showicon'>

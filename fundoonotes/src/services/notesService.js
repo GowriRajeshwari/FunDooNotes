@@ -12,9 +12,9 @@ export async function getNotes() {
     }
   }
 //set user notes
-export async function setNotes() {
+export async function setNotes(data) {
     try {
-      const response = await axios.post(process.env.REACT_APP_SETNOTES , {params : { access_token }},
+      const response = await axios.post(process.env.REACT_APP_SETNOTES ,data, {params : { access_token }},
       );
       return response;
     } catch (error) {
