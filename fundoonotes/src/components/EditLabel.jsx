@@ -23,12 +23,12 @@ class EditLabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        open : false,
-         setOpen : true,
-
-     
+          open : false,
+          setOpen : true,
+          query:this.props.query 
     };
   }
+ 
    handleOpen = () => {
     this.setState({setOpen : true});
   };
@@ -36,16 +36,17 @@ class EditLabel extends Component {
   handleClose = () => {
     this.setState({setOpen : false});
   };
-  Done=()=>{
-    this.setState({setOpen : false});
-
+  Done=async()=>{
+   await this.setState({setOpen : false});
+  //  this.setState({setOpen : true});
+    
   }
   render() {
     // const classes = useStyles();
     return (
         <div>
-        
         <div className="modelcenter">
+          {this.state.query ? 
         <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
@@ -77,10 +78,11 @@ class EditLabel extends Component {
                     <Button  >
                     Done
                     </Button>
+                    
                     </div>
                   
         </div>
-      </Modal>
+      </Modal> : null}
       </div>
       </div>
      

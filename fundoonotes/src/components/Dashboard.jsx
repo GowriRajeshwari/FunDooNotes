@@ -304,12 +304,14 @@ const useStyles = theme => ({
 
   
 
-  Editlabel=(event,text)=>{
+    choice=(event,text)=>{
     event.preventDefault();
     console.log(text)
     if(text == 'Edit labels'){
-        // <Edit/>
         this.setState({choice : 'Editlabels'})
+    }
+    else if(text == 'Notes'){
+      this.setState({choice : 'Notes'})
     }
   }
 
@@ -404,7 +406,7 @@ render(){
         <Divider />
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.Editlabel(e,text)} >
+            <ListItem button key={text} onClick={e => this.choice(e,text)} >
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -414,7 +416,7 @@ render(){
         <div>LABELS</div>
         <List>
           {['Edit labels'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.Editlabel(e,text)}>
+            <ListItem button key={text} onClick={e => this.choice(e,text)}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
@@ -438,7 +440,8 @@ render(){
         <div className={classes.drawerHeader} />
        
         <TakeaNotes/>
-        {this.getcomponents()}
+        {this.state.choice == 'Notes' ? <TakeaNotes/> : 
+        this.state.choice == 'Editlabels' ? <Edit query='true'/> : <TakeaNotes/>}
      
         
       </main>
