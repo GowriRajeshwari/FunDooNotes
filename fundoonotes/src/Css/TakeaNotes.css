@@ -17,3 +17,25 @@
         flex-direction: row;
         justify-content: space-between;
 }
+/* .Card:hover {
+        background-color: #fff000;
+ } */
+ .butt {
+    display: none;
+  }
+  Card:hover + .butt {
+    display: inline-block;
+  }
+  .mydivouter{
+    position:relative;
+    margin: 0 auto;
+    }
+  
+    .mybuttonoverlap{
+    /* position: absolute; */
+    display: none;
+    height:60px
+    }
+    .mydivouter:hover .mybuttonoverlap{ 
+    display:block;
+    }

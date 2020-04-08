@@ -136,28 +136,31 @@ class TakeaNotes extends Component {
     }
     
     </div>
-
+    <div className="mydivouter">	
+	<input type="button" className="mybuttonoverlap" value="Read More"/>
+</div>
     <div className='notescontainer'>
     {this.state.data.map((data, index) => (
     <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{width : '250px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
-      <Card>
+      <Card  className="mydivouter">
       <CardContent>
         <div className='showicon'>
                       <Typography variant="h6" component="h2">
                         {data.title}
                       </Typography>
-                      {this.state.show[index] ?  <div style={{ padding :'5px'}}>
+                        <div className="mybuttonoverlap" style={{ padding :'5px'}}>
                               <img src={reminder} id="imgdashnotes" />
-                      </div> : null}
+                      </div> 
                      
           </div>
         <Typography color="textSecondary" gutterBottom>
          {data.description}
         </Typography>
-        <div  style={{ display : 'flex', flexDirection:'row',height:'60px'}}>
+        <div  className="mybuttonoverlap" style={{height:'60px'}}>
 
-        {this.state.show[index] ?
+
+
         <div style={{ display : 'flex', flexDirection:'row'}}>          
         <div style={{ padding :'5px'}}>
           <button>
@@ -175,8 +178,8 @@ class TakeaNotes extends Component {
         </div>
         <div style={{ padding :'5px'}}>
             <img src={reminder} id="imgdashnotes" />
-        </div> </div>: 
-          null}
+        </div> </div>
+        
 
         </div>
       </CardContent>
