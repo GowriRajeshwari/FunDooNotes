@@ -10,9 +10,15 @@ import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import reminder from '../assets/reminder.svg'
-import refresh from '../assets/refresh.png';
-import box from '../assets/box.png';
+import personAdd from '../assets/person_add.png'
+import color from '../assets/color.png'
+import download from '../assets/download.png'
+import galary from '../assets/galary.png'
+import pin from '../assets/pin.svg'
+
+
 import { getNotes,setNotes } from '../services/notesService'
+
 
 require('dotenv').config();
 
@@ -81,7 +87,7 @@ class TakeaNotes extends Component {
   });
   }else
   {
-    this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+    this.setState({ title : '',description : '',next : true})
   }
 
   }
@@ -100,7 +106,7 @@ class TakeaNotes extends Component {
           : 
           <Paper className="paper2">
              <div className="NoteExpand">
-               <div>
+               <div className='showicon'>
                     <TextField
                         id="standard-multiline-flexible"
                         label="Title"
@@ -111,6 +117,9 @@ class TakeaNotes extends Component {
                         onChange={this.onChangeTitle}
                         InputProps={{ disableUnderline: true }}
                       />
+                      <div style={{ padding :'5px'}}>
+                              <img src={pin} id="imgdashnotes" />
+                      </div>
                     
                     </div>
                     <div>
@@ -126,7 +135,33 @@ class TakeaNotes extends Component {
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                  
+                      <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
+                    <div style={{ padding :'5px'}}>
+                      <button className='iconbtn'>
+                        <img src={reminder} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={personAdd} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={color} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={galary} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={download} id="imgdashnotes" />
+                        </button>
+                    </div> </div>
+                              
                     <div className="button">
                     <Button size="small" onClick={e => this.close(e)}>Close</Button>
                     </div>
@@ -142,7 +177,7 @@ class TakeaNotes extends Component {
     <div className='notescontainer'>
     {this.state.data.map((data, index) => (
     <div onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
-    style={{width : '250px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
+    style={{width : '350px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
       <Card  className="mydivouter">
       <CardContent>
         <div className='showicon'>
@@ -150,7 +185,7 @@ class TakeaNotes extends Component {
                         {data.title}
                       </Typography>
                         <div className="mybuttonoverlap" style={{ padding :'5px'}}>
-                              <img src={reminder} id="imgdashnotes" />
+                              <img src={pin} id="imgdashnotes" />
                       </div> 
                      
           </div>
@@ -161,23 +196,31 @@ class TakeaNotes extends Component {
 
 
 
-        <div style={{ display : 'flex', flexDirection:'row'}}>          
-        <div style={{ padding :'5px'}}>
-          <button>
+        <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
+        <div style={{ padding :'5px',display:'flex'}}>
+          <button className='iconbtn'>
             <img src={reminder} id="imgdashnotes" />
             </button>
         </div>
         <div style={{ padding :'5px'}}>
-            <img src={reminder} id="imgdashnotes" />
+        <button className='iconbtn'>
+            <img src={personAdd} id="imgdashnotes" />
+            </button>
         </div>
         <div style={{ padding :'5px'}}>
-            <img src={reminder} id="imgdashnotes" />
+        <button className='iconbtn'>
+            <img src={color} id="imgdashnotes" />
+            </button>
         </div>
         <div style={{ padding :'5px'}}>
-            <img src={reminder} id="imgdashnotes" />
+        <button className='iconbtn'>
+            <img src={galary} id="imgdashnotes" />
+            </button>
         </div>
         <div style={{ padding :'5px'}}>
-            <img src={reminder} id="imgdashnotes" />
+        <button className='iconbtn'>
+            <img src={download} id="imgdashnotes" />
+            </button>
         </div> </div>
         
 

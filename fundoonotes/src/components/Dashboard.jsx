@@ -439,7 +439,7 @@ render(){
       >
         <div className={classes.drawerHeader} />
        
-        <TakeaNotes/>
+      
         {this.state.choice == 'Notes' ? <TakeaNotes/> : 
         this.state.choice == 'Editlabels' ? <Edit query='true'/> : null}
      
