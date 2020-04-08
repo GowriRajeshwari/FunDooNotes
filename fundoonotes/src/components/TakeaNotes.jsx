@@ -12,7 +12,7 @@ import CardContent from '@material-ui/core/CardContent';
 import reminder from '../assets/reminder.svg'
 import refresh from '../assets/refresh.png';
 import box from '../assets/box.png';
-import { getnotes } from '../services/notesService'
+import { getNotes,setNotes } from '../services/notesService'
 
 require('dotenv').config();
 
@@ -24,12 +24,13 @@ class TakeaNotes extends Component {
     next : true,
     value : '',
     show : [],
-    data:[]
+    data:[],
+    description:''
    
     };
   }
   componentDidMount=()=>{
-    getnotes().then(response => {
+    getNotes().then(response => {
       console.log(response.data.data.data);
      if (response.status === 200) {
          
@@ -49,7 +50,7 @@ class TakeaNotes extends Component {
     this.setState({next : true})
   }
   onchangeText=(event)=>{
-    this.setState({value : event.target.value})
+    this.setState({description : event.target.value})
   }
   onChangeTitle=(event)=>{
     this.setState({data : event.target.value})
@@ -61,7 +62,29 @@ class TakeaNotes extends Component {
   _onMouseOut=(event)=>{
     this.setState({show : false})
   }
+  close=(event)=>{
+    event.preventDefault();
+    if(this.state.title !='' ){
+      let data = {
+        title : this.state.title,
+        description	: this.state.description
+      }
+    setNotes(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+         
+        this.setState({data : response.data.data.data});
+        console.log(this.state.data.length)
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }else
+  {
+    this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+  }
 
+  }
   render() {
     return (
       <div className='maincontainer'>
@@ -85,7 +108,6 @@ class TakeaNotes extends Component {
                         rowsMax="4"
                         size="small"
                         style={{width:'100%'}}
-                        // value={this.state.value}
                         onChange={this.onChangeTitle}
                         InputProps={{ disableUnderline: true }}
                       />
