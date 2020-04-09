@@ -285,7 +285,7 @@ const useStyles = theme => ({
         this.state = {
             open : false,
              setOpen : false,
-             choice:""
+             choice:"Notes"
          
         };
       }
@@ -439,10 +439,10 @@ render(){
       >
         <div className={classes.drawerHeader} />
        
-      
-        {this.state.choice == 'Notes' ? <TakeaNotes/> : 
+        {this.getcomponents()}
+        {/* {this.state.choice == 'Notes' ? <TakeaNotes/> : 
         this.state.choice == 'Editlabels' ? <Edit query='true'/> : null}
-     
+      */}
         
       </main>
     </div>

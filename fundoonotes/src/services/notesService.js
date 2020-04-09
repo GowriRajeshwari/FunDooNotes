@@ -22,3 +22,14 @@ export async function setNotes(data) {
       return error;
     }
   }
+
+  export async function searchUserList(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_SEARCHURLLIST,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
