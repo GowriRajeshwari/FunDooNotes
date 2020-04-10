@@ -1,181 +1,10 @@
-// import React, { Component } from "react";
-// import Paper from "@material-ui/core/Paper";
-// import Button from "@material-ui/core/Button";
-// import TextField from "@material-ui/core/TextField";
-// import sidenavicon from '../assets/sidenavicon.png';
-// import search from '../assets/search.png';
-// import clear from '../assets/clear.png';
-// import refresh from '../assets/refresh.png';
-// import box from '../assets/box.png';
-
-// class Dashboard extends Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             helperText: "",
-//             error: false,
-//             username: "",
-//             userdata: [],
-//             show: false,
-//             login: "Sign in",
-//             next: false,
-//             password: '',
-//             helperTextpassowrd: "",
-//             showtakeNotes: false,
-//             snackbaropen: false,
-//             snackbarmsg: '',
-
-//         };
-//         this.Takeanote = this.Takeanote.bind(this);
-//         // this.handleClose = this.handleClose.bind(this);
-
-
-//     }
-//     //take noe
-//     Takeanote(event) {
-//         event.preventDefault();
-//         this.setState({ showtakeNotes: true })
-//     }
-//     //setState for password field
-//     onChangePassword(event) {
-//         if (event.target.value.length > 7) {
-//             this.setState({
-//                 helperTextpassowrd: "",
-//                 error: false,
-//                 password: event.target.value
-//             });
-//         } else {
-//             this.setState({
-//                 helperTextpassowrd: "Password should be 7 letters",
-//                 error: true,
-//                 password: event.target.value
-//             });
-//         }
-//     }
-
-//     render() {
-//         return (
-
-//             <div className="dashContainer">
-
-//                 <Paper className="dashsearch">
-
-//                     <div>
-//                         <Button onClick={e => this.arrowButton(e)}>
-//                             <img src={sidenavicon} id="imgdash" />
-//                         </Button>
-//                     </div>
-//                     <div>
-//                         <div className="textremainderDash">Remainder</div>
-//                     </div>
-
-
-//                     <div className="searcheledash">
-
-//                         <Paper>
-//                             <img src={search} id="imgdash" />
-//                             <TextField
-//                                 hintText="Password"
-//                                 floatingLabelText="Password"
-//                                 id="inputFielddash"
-//                                 //    variant="outlined"
-//                                 //    label="Search"
-//                                 InputProps={{ disableUnderline: true }}
-//                                 style={{ width: '380px', backgroundColor: '#ff00', border: 'none', disableUnderline: true }}
-//                             //    helperText={this.state.helperTextpassowrd}
-//                             //    onChange={this.onChangePassword.bind(this)}
-//                             />
-//                             <img src={clear} id="imgdash" />
-//                         </Paper>
-//                     </div>
-//                     <div className="icondash">
-//                         <div>
-//                             <img src={refresh} id="imgdash" />
-//                         </div>
-//                         <div className="columimg">
-//                             <img src={box} id="imgdash" />
-//                         </div>
-//                         <div>
-//                             <img src={search} id="imgdash" />
-//                         </div>
-
-//                     </div>
-//                     <div className="icondashlast">
-
-//                         <div>
-//                             <img src={search} id="imgdash" />
-//                         </div>
-//                         <div>
-//                             <img src={search} id="imgdash" />
-//                         </div>
-//                     </div>
-
-//                 </Paper>
-
-//                 <div className="dash2cont">
-//                     {this.state.showtakeNotes ?
-//                         <Paper >
-//                             <div className="papar2dash">
-//                                 <TextField
-//                                     required id="standard-required"
-//                                     // label="Required" defaultValue="Hello World"
-//                                     // label="Take a note"
-//                                     InputProps={{ disableUnderline: true }}
-//                                     style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
-//                                     //    helperText={this.state.helperTextpassowrd}
-//                                     onChange={this.onChangePassword.bind(this)}
-//                                 />
-
-//                             </div>
-//                         </Paper>
-//                         :
-//                         <Paper >
-//                             <div className="papar2dash">
-//                                 <Button onClick={e => this.Takeanote(e)}>
-//                                     <TextField
-//                                         required id="standard-required"
-//                                         // label="Required" defaultValue="Hello World"
-//                                         // label="Take a note"
-//                                         InputProps={{ disableUnderline: true }}
-//                                         style={{ width: '380px', backgroundColor: '#ff00', border: 'none', }}
-//                                         //    helperText={this.state.helperTextpassowrd}
-//                                         onChange={this.onChangePassword.bind(this)}
-//                                     />
-//                                 </Button>
-//                                 <div className="icondash">
-//                                     <div>
-//                                         <img src={refresh} id="imgdash" />
-//                                     </div>
-//                                     <div className="columimg">
-//                                         <img src={box} id="imgdash" />
-//                                     </div>
-//                                     <div>
-//                                         <img src={search} id="imgdash" />
-//                                     </div>
-
-//                                 </div>
-//                             </div>
-//                         </Paper>
-//                     }
-//                 </div>
-
-
-
-//             </div>
-
-
-//         );
-//     }
-// }
-// export default Dashboard;
-
-
 import React ,{Component}from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
 import TextField from "@material-ui/core/TextField";
 import search from '../assets/search.png';
+import search_black from '../assets/search_black.png';
 import clear from '../assets/clear.png';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -197,6 +26,13 @@ import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
 import refresh from '../assets/refresh.png';
 import box from '../assets/box.png';
+import keepBulb from "../assets/keepBulb.png";
+import list from "../assets/list.png";
+import shopping_cart from "../assets/shopping_cart.png";
+import PersonIcon from '@material-ui/icons/Person';
+import Avatar from '@material-ui/core/Avatar';
+
+
 
 
 
@@ -209,6 +45,8 @@ const useStyles = theme => ({
     display: 'flex',
   },
   appBar: {
+    height : '70px',
+    backgroundColor:'white',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -224,7 +62,8 @@ const useStyles = theme => ({
     
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+   
+    marginRight: theme.spacing(1),
   },
   hide: {
     display: 'none',
@@ -276,6 +115,30 @@ const useStyles = theme => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
+  funnDooName:{
+    color : 'black',
+    marginRight : theme.spacing(19)
+  },
+  bulbImg:{
+    display : 'flex',
+    justifyContent : 'center',
+    marginRight : theme.spacing(1)
+  },
+  searchDiv:{
+      height: '50px',
+     width: '800px',
+     maxWidth :'720px',
+     // marginLeft: '200px',
+     backgroundColor:'#ffffff',
+     flexDirection: 'row',
+     display: 'flex',
+     alignItems: 'center',
+     borderRadius: '3px',
+     justifyContent: 'center',
+     backgroundColor :'#f1f3f4',
+     borderRadius : '8px',
+     position: 'relative'
+  }
 });
 
  class Dashboard extends Component {
@@ -336,63 +199,83 @@ render(){
         })}
       >
         <Toolbar>
+        <div style={{ display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',justifyContent:'space-around',width :'100%'}}>
+          <div style={{ display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
           <IconButton
-            color="inherit"
+            size="medium"
+            color="black"
             aria-label="open drawer"
             onClick={this.handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, this.state.open)}
           >
-            <MenuIcon />
+            <MenuIcon style={{ width:  '30px',
+              height : '30px',}} />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <div className={classes.bulbImg}  >
+             <img src={keepBulb} style={{ height : '45px',width : '45px'}} />
+          </div>
+
+          <Typography variant="h6" noWrap className={classes.funnDooName} >
            FunDoo
           </Typography>
-          <div style={
-                               { height: '60px',
-                                width: '700px',
-                                marginLeft: '200px',
-                                backgroundColor:'#ffffff',
-                                flexDirection: 'row',
-                                display: 'flex',
-                                alignItems: 'center',
-                                borderRadius: '3px',
-                                justifyContent: 'center'
-                            }
- 
-                                }>
-                              <Paper>
-                                  <div style={{ display : 'flex',justifyContent : 'center',height : '60px',width : '700px',alignItems:'center'}}>
-                                  <img src={search} />
-                                <TextField
-                                    // label="Search"
-                                    hintText="Password"
-                                    // floatingLabelText="Password"
-                                    id="inputFielddash"
+
+          </div>
+          <div className={classes.searchDiv}>
+                              {/* <Paper> */}
+                                  <div style={{ padding : '5px',display : 'flex',justifyContent : 'center',height : '46px',maxWidth : '720px',alignItems:'center'}}>
+                                  <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} />
+                                <input
+                                   placeholder="Search"
                                     InputProps={{ disableUnderline: true }}
-                                    style={{ backgroundColor: '#ff00',
+                                    style={{ backgroundColor: '#ff00',height : '46px',outline:'none',fontSize:'18px',
                                      border: 'none', disableUnderline: true,width:'600px' }}
                                      onChange={this.queryfunction}
                                 />
                                 <img src={clear} id="imgdash" />
                                   </div>
                                 
-                             </Paper>
+                             {/* </Paper> */}
                     </div>
                     <div className="icondash">
-                         <div>
-                             <img src={refresh} id="imgdash" />
-                         </div>
-                         <div className="columimg">
-                             <img src={box} id="imgdash" />
-                         </div>
-                         <div>
-                             <img src={search} id="imgdash" />
-                         </div>
+                    <IconButton
+                          size="medium"
+                          color="black"
+                          aria-label="open drawer"
+                          onClick={this.handleDrawerOpen}
+                          edge="start"
+                          className={clsx(classes.menuButton, this.state.open)}
+                        >
+                             <img src={shopping_cart} id="imgdash" />
+                         </IconButton>
+                         <IconButton
+                          size="medium"
+                          color="black"
+                          aria-label="open drawer"
+                          onClick={this.handleDrawerOpen}
+                          edge="start"
+                          className={clsx(classes.menuButton, this.state.open)}
+                        >
+                             <img src={list} id="imgdash" />
+                         </IconButton>
+                         <IconButton
+                          size="medium"
+                          color="black"
+                          aria-label="open drawer"
+                          onClick={this.handleDrawerOpen}
+                          edge="start"
+                          className={clsx(classes.menuButton, this.state.open)}
+                        >
+                          <Avatar>
+                          
+                            </Avatar>
+                        </IconButton>
 
                      </div>
-                     
+                    
+                     </div>   
         </Toolbar>
+
       </AppBar>
       <Drawer
         className={classes.drawer}

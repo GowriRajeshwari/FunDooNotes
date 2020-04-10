@@ -1,4 +1,3 @@
-
 import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
@@ -27,7 +26,6 @@ import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
 import { getNotes,setNotes } from '../services/notesService'
-
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -38,6 +36,7 @@ import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import { blue } from '@material-ui/core/colors';
+import setting from '../assets/setting.png'
 require('dotenv').config();
 
 
@@ -64,7 +63,10 @@ class TakeaNotes extends Component {
     collabatorArray:[],
     collabatorValue :'',
     originalArray : [],
-    tomorrow : ''
+    tomorrow : '',
+    pined : false,
+    color : '',
+    archived : false
    
     };
   }
@@ -75,10 +77,10 @@ class TakeaNotes extends Component {
    
    var d = this.state.date;
    d.setDate(new Date().getDate()+1)
-    console.log(d)
-    this.setState({ tomorrow : d})
+    console.log(d.getTime())
+    this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
     getNotes().then(response => {
-      // console.log(response.data.data.data);
+      console.log(response.data.data.data);
      if (response.status === 200) {
          
         this.setState({data : response.data.data.data});
@@ -109,12 +111,22 @@ class TakeaNotes extends Component {
   close=(event)=>{
     event.preventDefault();
     if(this.state.title !='' ){
+      const datetostring = this.state.date.toString();
       let data = {
         title : this.state.title,
-        description	: this.state.description
+        description	: this.state.description,
+        isPined : this.state.pined,
+        color : this.state.color,
+        isArchived : this.state.archived,
+        labelIdList :[],
+        remainder : datetostring,
+        collaberator : this.state.originalArray
       }
+      console.log(this.state.date)
+      console.log(data)
+
     setNotes(data).then(response => {
-      // console.log(response);
+      console.log(response);
      if (response.status === 200) {
          
         // this.setState({data : response.data.data.data});
@@ -196,6 +208,14 @@ this.state.collabatorArray.push(dat)
 collabsave=()=>{
   this.setState({collabshow : true,originalArray : this.state.collabatorArray})
 }
+time=()=>{
+  this.setState({ timeShow : true})
+}
+
+
+
+
+
 
   render() {
     
@@ -244,14 +264,15 @@ collabsave=()=>{
                       </div>
                       {this.state.date_timeshow ? <div>{this.state.date.toDateString()}</div> : null}
                       <List>
-                    {this.state.collabatorArray.map((collabatorArray, index) => (
+                    {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
                         <ListItemAvatar>
                           <Avatar >
                             <PersonIcon />
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={collabatorArray} />
+                        <ListItemText primary={originalArray} />
+                        
                       </ListItem>
                     ))}
                     </List>
@@ -292,8 +313,34 @@ collabsave=()=>{
                                 }}
                               /></Grid></MuiPickersUtilsProvider>
                                <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                                 <div>hello</div>
+                                <Typography
+                                 id="btn"
+                                 value={this.state.time}
+                              onClick={e => this.time(e)}>{this.state.time}</Typography>
+                               {/* {this.state.timeShow ? 
+                                   <Popover 
+                                   anchorOrigin={{
+                                     vertical: 'bottom',
+                                     horizontal: 'center',
+                                   }}
+                                   transformOrigin={{
+                                     vertical: 'top',
+                                     horizontal: 'center',
+                                   }}
+                                 open={this.state.open}
+                                 anchorEl={this.state.anchorEl}
+                                 onClose={this.handleClick}>
+                                    <div>Morning   8 : 00</div>
+                                    <div>AfterNoon 1 : 00</div>
+                                    <div>Evening   5 : 00</div>
+                                    <div>Night     8 : 00</div>
+                                 </Popover>
+ 
+                                  : null} */}
                                </MuiPickersUtilsProvider>
+                                 
+                              
+
                                <div onClick={this.datesave}>save</div></div>
                               </div>
                               :
@@ -324,7 +371,13 @@ collabsave=()=>{
                     <button className='iconbtn'>
                         <img src={download} id="imgdashnotes" />
                         </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={setting} id="imgdashnotes" />
+                        </button>
                     </div> </div>
+
                               
                     <div className="button">
                     <Button size="small" onClick={e => this.close(e)}>Close</Button>
@@ -360,11 +413,29 @@ collabsave=()=>{
                           </Avatar>
                         </ListItemAvatar>
                         <ListItemText primary={details.firstName} />
+                        <ListItemText primary={details.email} />
+
                       </ListItem>
                     ))}
                     </List>
 
                         </Popover>
+
+
+                        <List>
+                    {this.state.collabatorArray.map((collabatorArray, index) => (
+                      <ListItem key={index}>
+                        <ListItemAvatar>
+                          <Avatar >
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={collabatorArray} />
+                      </ListItem>
+                    ))}
+                    </List>
+
+
                     <input
                     id="btn"
                     variant="outlined"
@@ -433,7 +504,13 @@ collabsave=()=>{
         <button className='iconbtn'>
             <img src={download} id="imgdashnotes" />
             </button>
-        </div> </div>
+        </div> 
+        <div style={{ padding :'5px'}}>
+        <button className='iconbtn' onClick={this.setting}>
+            <img src={setting} id="imgdashnotes" />
+            </button>
+        </div>
+        </div>
         
 
         </div>
