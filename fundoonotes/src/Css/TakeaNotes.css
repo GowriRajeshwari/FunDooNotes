@@ -3,6 +3,7 @@
     display:flex;
     align-items: center;
     flex-direction: column;
+    position: absolute;
 }
 .notescontainer{
     width : 80%;
@@ -11,6 +12,7 @@
     padding: 30px;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: center;
 }
 .showicon{
         display: flex;
@@ -19,17 +21,23 @@
 }
 
   .mydivouter{
+      width: 260px;
     position:relative;
     margin: 0 auto;
     }
   
     .mybuttonoverlap{
     /* position: absolute; */
-    display: none;
-    height:60px
+    /* display: none; */
+    height:80px;
+    margin: 0 auto; 
+    visibility: hidden;
+    
     }
     .mydivouter:hover .mybuttonoverlap{ 
     display:block;
+    visibility: visible;
+    
     }
 .iconbtn{
     border: none;

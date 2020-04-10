@@ -31,14 +31,12 @@ import list from "../assets/list.png";
 import shopping_cart from "../assets/shopping_cart.png";
 import PersonIcon from '@material-ui/icons/Person';
 import Avatar from '@material-ui/core/Avatar';
+import lightbulb_black from "../assets/lightbulb_black.png";
+import reminder from '../assets/reminder.svg'
+import delete_black from '../assets/delete_black.png'
+import download from '../assets/download.png'
 
-
-
-
-
-
-
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = theme => ({
   root: {
@@ -75,7 +73,7 @@ const useStyles = theme => ({
   },
   drawerPaper: {
     border: 'none',
-    marginTop:'63px',
+    marginTop:'70px',
     width: drawerWidth,
   },
   drawerHeader: {
@@ -290,13 +288,14 @@ render(){
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)} >
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <img src={lightbulb_black} id="imgdash"/> :
+               <img src={reminder} id="imgdash"/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
         <Divider />
-        <div>LABELS</div>
+        <div style={{ padding :'15px'}}>LABELS</div>
         <List>
           {['Edit labels'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
@@ -305,11 +304,12 @@ render(){
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
+        <Divider/>
+        
+        <List >
           {['Archive','Bin'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ?<img src={download} id="imgdash"/> :<img src={delete_black} id="imgdash"/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

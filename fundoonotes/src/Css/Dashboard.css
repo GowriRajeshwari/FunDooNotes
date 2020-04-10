@@ -126,24 +126,27 @@
     height: 150px;
 }
 .paper{
-    width : 500px;
+    width : 700px;
     height: 50px;
     display: flex;
     align-items: center;
-
+    border-radius: 8px;
     background-color: #ffffff;
 }
 .paper2{
-    width : 500px;
+    width : 700px;
     /* height: 140px; */
+    border-radius: 8px;
     background-color: #ffffff;
 }
 .Typo{
-    padding : 5px;
+    padding : 15px;
     display: flex;
     /* justify-content: center; */
     align-items: center;
     width : 500px;
+    color : grey;
+    font-weight: bold;
 }
 .button{
     display: flex;

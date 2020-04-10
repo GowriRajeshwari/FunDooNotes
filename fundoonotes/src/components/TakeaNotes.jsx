@@ -237,7 +237,7 @@ time=()=>{
                <div className='showicon'>
                     <TextField
                         id="standard-multiline-flexible"
-                        label="Title"
+                        placeholder="Title"
                         multiline
                         rowsMax="4"
                         size="small"
@@ -253,7 +253,7 @@ time=()=>{
                     <div>
                         <TextField
                         id="standard-multiline-flexible"
-                        label="  Take a Note"
+                        placeholder="Take a Note"
                         multiline
                         rowsMax="4"
                         size="small"
@@ -262,7 +262,7 @@ time=()=>{
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? <div>{this.state.date.toDateString()}</div> : null}
+                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date.toDateString()}</div> : null}
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
@@ -344,10 +344,10 @@ time=()=>{
                                <div onClick={this.datesave}>save</div></div>
                               </div>
                               :
-                          <div>
-                            <div onClick={this.todaydate}>Today</div>
-                            <div  onClick={this.tomorrowdate}>Tommorow</div>
-                            <div onClick={this.dateshow}>pick date & time</div>
+                          <div style={{width : '170px',height : '170px',padding : '15px'}}>
+                            <Typography style={{padding:'10px'}} onClick={this.todaydate}>Today</Typography>
+                            <Typography style={{padding:'10px'}} onClick={this.tomorrowdate}>Tommorow</Typography>
+                            <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
                           </div>}
                         
                         </Popover>
@@ -452,12 +452,11 @@ time=()=>{
     
     </div>
     <div className="mydivouter">	
-	<input type="button" className="mybuttonoverlap" value="Read More"/>
-</div>
+      </div>
     <div className='notescontainer'>
     {this.state.data.map((data, index) => (
     <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
-    style={{width : '350px',borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
+    style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
       <Card  className="mydivouter">
       <CardContent>
         <div className='showicon'>
