@@ -66,7 +66,9 @@ class TakeaNotes extends Component {
     tomorrow : '',
     pined : false,
     color : '',
-    archived : false
+    archived : false,
+    timeTodayTommorow : '08:00:00',
+    timepicker :'',
    
     };
   }
@@ -119,7 +121,7 @@ class TakeaNotes extends Component {
         color : this.state.color,
         isArchived : this.state.archived,
         labelIdList :[],
-        remainder : datetostring,
+        reminder : datetostring,
         collaberator : this.state.originalArray
       }
       console.log(this.state.date)
@@ -128,9 +130,6 @@ class TakeaNotes extends Component {
     setNotes(data).then(response => {
       console.log(response);
      if (response.status === 200) {
-         
-        // this.setState({data : response.data.data.data});
-       
         this.componentDidMount();
         this.setState({ title : '',description : '',next : true})
      } else {
@@ -141,6 +140,10 @@ class TakeaNotes extends Component {
   {
     this.setState({ title : '',description : '',next : true})
   }
+
+  }
+  timepicker=(event) =>{
+    this.setState({timepicker : event.target.value})
 
   }
 
@@ -159,18 +162,18 @@ class TakeaNotes extends Component {
     this.setState({dateshow : false})
   }
   todaydate=()=>{
-    this.setState({date : new Date(),date_timeshow : true});
+    this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true});
   }
   tomorrowdate=()=>{
-    this.setState({date : this.state.tomorrow,date_timeshow : true});
+    this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true});
   }
   datesave=()=>{
-    this.setState({date : this.state.startdate ,date_timeshow : true});
+    this.setState({date : this.state.startdate+" " + this.state.timepicker,date_timeshow : true});
   }
   
   handleDateChange = (date) => {
     this.setState({
-      startdate: date
+      startdate: date.toDateString()
     });
   };
   collabshow=()=>{
@@ -211,7 +214,38 @@ collabsave=()=>{
 time=()=>{
   this.setState({ timeShow : true})
 }
+archivebutton=async(event)=>{
+  await this.setState({ archived : true })
+  event.preventDefault();
+  if(this.state.title !='' ){
+    const datetostring = this.state.date.toString();
+    let data = {
+      title : this.state.title,
+      description	: this.state.description,
+      isPined : this.state.pined,
+      color : this.state.color,
+      isArchived : this.state.archived,
+      labelIdList :[],
+      reminder : datetostring,
+      collaberator : this.state.originalArray
+    }
+    console.log(this.state.date)
+    console.log(data)
 
+  setNotes(data).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       
+      this.setState({ title : '',description : '',next : true})
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+}else
+{
+  this.setState({ title : '',description : '',next : true})
+}
+}
 
 
 
@@ -234,6 +268,7 @@ time=()=>{
              this.state.collabshow ?
           <Paper className="paper2">
              <div className="NoteExpand">
+
                <div className='showicon'>
                     <TextField
                         id="standard-multiline-flexible"
@@ -262,7 +297,7 @@ time=()=>{
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date.toDateString()}</div> : null}
+                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date}</div> : null}
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
@@ -313,34 +348,21 @@ time=()=>{
                                 }}
                               /></Grid></MuiPickersUtilsProvider>
                                <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                                <Typography
-                                 id="btn"
-                                 value={this.state.time}
-                              onClick={e => this.time(e)}>{this.state.time}</Typography>
-                               {/* {this.state.timeShow ? 
-                                   <Popover 
-                                   anchorOrigin={{
-                                     vertical: 'bottom',
-                                     horizontal: 'center',
-                                   }}
-                                   transformOrigin={{
-                                     vertical: 'top',
-                                     horizontal: 'center',
-                                   }}
-                                 open={this.state.open}
-                                 anchorEl={this.state.anchorEl}
-                                 onClose={this.handleClick}>
-                                    <div>Morning   8 : 00</div>
-                                    <div>AfterNoon 1 : 00</div>
-                                    <div>Evening   5 : 00</div>
-                                    <div>Night     8 : 00</div>
-                                 </Popover>
- 
-                                  : null} */}
+                               <TextField
+                                  id="time"
+                                  label="Alarm clock"
+                                  type="time"
+                                  defaultValue="07:30"
+                                   className="timepicker"
+                                  InputLabelProps={{
+                                    shrink: true,
+                                  }}
+                                  inputProps={{
+                                    step: 300, // 5 min
+                                  }}
+                                  onChange={this.timepicker}
+                                  />
                                </MuiPickersUtilsProvider>
-                                 
-                              
-
                                <div onClick={this.datesave}>save</div></div>
                               </div>
                               :
@@ -368,12 +390,12 @@ time=()=>{
                         </button>
                     </div>
                     <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
+                    <button className='iconbtn' onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
                         </button>
                     </div>
                     <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
+                    <button className='iconbtn' >
                         <img src={setting} id="imgdashnotes" />
                         </button>
                     </div> </div>

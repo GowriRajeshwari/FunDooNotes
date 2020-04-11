@@ -33,3 +33,14 @@ export async function setNotes(data) {
       return error;
     }
   }
+
+  export async function archiveNoteList() {
+    try {
+      const response = await axios.get(process.env.REACT_APP_ARCHIVENOTELIST, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }

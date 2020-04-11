@@ -24,6 +24,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
+import Archived from './Archived'
 import refresh from '../assets/refresh.png';
 import box from '../assets/box.png';
 import keepBulb from "../assets/keepBulb.png";
@@ -174,6 +175,9 @@ const useStyles = theme => ({
     else if(text == 'Notes'){
       this.setState({choice : 'Notes'})
     }
+    else if(text == 'Archive'){
+      this.setState({choice : 'Archive'})
+    }
   }
 
   getcomponents=()=>{
@@ -183,6 +187,9 @@ const useStyles = theme => ({
       }
       else if(this.state.choice == 'Notes'){
         return <TakeaNotes/>
+      }
+      else if(this.state.choice == 'Archive'){
+        return <Archived/>
       }
   }
 render(){
@@ -308,7 +315,7 @@ render(){
         
         <List >
           {['Archive','Bin'].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem button key={text} onClick={e => this.choice(e,text)}>
               <ListItemIcon>{index % 2 === 0 ?<img src={download} id="imgdash"/> :<img src={delete_black} id="imgdash"/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

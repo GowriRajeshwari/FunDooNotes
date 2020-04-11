@@ -11,6 +11,8 @@ import Dashboard1 from './components/Dashboard1';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
 import service from './components/service';
+import Archived from './components/Archived';
+
 let token =  window.location.href.split('/' )[4];
 let resetpassword="/resetpassword/"+token
 console.log(token);
@@ -29,6 +31,8 @@ function App() {
         <Route path="/TakeaNotes" component={TakeaNotes} />
         <Route path="/EditLabel" component={EditLabel} />
         <Route path="/Service" component={service} />
+        <Route path="/Archived" component={Archived} />
+
 
 
       </Switch>
