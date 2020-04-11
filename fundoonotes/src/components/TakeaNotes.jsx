@@ -37,6 +37,7 @@ import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
 import { blue } from '@material-ui/core/colors';
 import setting from '../assets/setting.png'
+import Color from './Color'
 require('dotenv').config();
 
 
@@ -69,8 +70,14 @@ class TakeaNotes extends Component {
     archived : false,
     timeTodayTommorow : '08:00:00',
     timepicker :'',
+    dialogBoxOpen:false
    
     };
+  }
+  handelNoteDialogBox = () => {
+    this.setState({
+      dialogBoxOpen: !this.state.dialogBoxOpen
+    })
   }
    handleDateChange = (date) => {
     this.setState({date : date})
@@ -247,8 +254,17 @@ archivebutton=async(event)=>{
 }
 }
 
-
-
+colorboxbutton=()=>{
+//  return <Color/>
+}
+getData=(val)=>{
+  console.log(val)
+  this.setState({color : val})
+  document.getElementById("NoteExpand").style.background= val;
+}
+dialogboxOpen=()=>{
+  
+}
 
 
   render() {
@@ -257,17 +273,17 @@ archivebutton=async(event)=>{
       <div className='maincontainer'>
         <div className="containerdash">
         {this.state.next ? 
+            <div >
+            <Paper className="paper" >
             <div>
-            <Paper className="paper">
-            
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
-          
+            </div>
             </Paper>
             </div>
           : 
              this.state.collabshow ?
           <Paper className="paper2">
-             <div className="NoteExpand">
+             <div id="NoteExpand">
 
                <div className='showicon'>
                     <TextField
@@ -380,9 +396,10 @@ archivebutton=async(event)=>{
                      </button>
                     </div>
                     <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
+                    {/* <button className='iconbtn' onClick={this.colorboxbutton}>
                         <img src={color} id="imgdashnotes" />
-                        </button>
+                        </button> */}
+                        <Color sendColor={this.getData}/>
                     </div>
                     <div style={{ padding :'5px'}}>
                     <button className='iconbtn'>
@@ -490,9 +507,10 @@ archivebutton=async(event)=>{
                       </div> 
                      
           </div>
-        <Typography color="textSecondary" gutterBottom>
+        <Typography color="textSecondary" gutterBottom onClick={this.handelNoteDialogBox}>
          {data.description}
         </Typography>
+
         <div  className="mybuttonoverlap" style={{height:'60px'}}>
 
 
@@ -535,13 +553,83 @@ archivebutton=async(event)=>{
         
 
         </div>
+        <Dialog
+            open={this.state.dialogBoxOpen}
+            onClose={this.handelNoteDialogBox}
+            >
+              <div  
+                style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
+                  <Card  >
+                  <CardContent>
+                    <div className='showicon'>
+                                  <Typography variant="h6" component="h2">
+                                    {data[0].title}
+                                  </Typography>
+                                    <div  style={{ padding :'5px'}}>
+                                          <img src={pin} id="imgdashnotes" />
+                                  </div> 
+                                
+                      </div>
+                    <Typography color="textSecondary" gutterBottom onClick={this.handelNoteDialogBox}>
+                    {data[0].description}
+                    </Typography>
+
+                    <div   style={{height:'60px'}}>
+
+
+
+                    <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
+                    <div style={{ padding :'5px',display:'flex'}}>
+                      <button className='iconbtn' >
+                        <img src={reminder} id="imgdashnotes" />
+                        </button>
+                    
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                        <button className='iconbtn' >
+                        <img src={personAdd} id="imgdashnotes" />
+                        </button>
+                      
+                    </div>
+                  
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={color} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={galary} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn'>
+                        <img src={download} id="imgdashnotes" />
+                        </button>
+                    </div> 
+                    <div style={{ padding :'5px'}}>
+                    <button className='iconbtn' onClick={this.setting}>
+                        <img src={setting} id="imgdashnotes" />
+                        </button>
+                    </div>
+                    </div>
+                    
+
+                    </div>
+                  </CardContent>
+                
+                </Card>
+                </div>
+              </Dialog>
       </CardContent>
      
     </Card>
-    </div>
-    ))}
+
     </div>
     
+    ))}
+    </div>
+   
        
       </div>
     );

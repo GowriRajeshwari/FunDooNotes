@@ -23,7 +23,8 @@
   .mydivouter{
       width: 260px;
     position:relative;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    /* background-color: greenyellow; */
     }
   
     .mybuttonoverlap{
@@ -46,4 +47,7 @@
 .timepicker{
         width: 200px;
    
+}
+#colorchange{
+    background-color: greenyellow;
 }

@@ -12,6 +12,8 @@ import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
 import service from './components/service';
 import Archived from './components/Archived';
+import Color from './components/Color';
+
 
 let token =  window.location.href.split('/' )[4];
 let resetpassword="/resetpassword/"+token
@@ -32,6 +34,8 @@ function App() {
         <Route path="/EditLabel" component={EditLabel} />
         <Route path="/Service" component={service} />
         <Route path="/Archived" component={Archived} />
+        <Route path="/color" component={Color} />
+
 
 
 
