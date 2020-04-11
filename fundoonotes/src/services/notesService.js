@@ -44,3 +44,14 @@ export async function setNotes(data) {
       return error;
     }
   }
+
+  export async function archiveNote(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_ARCHIVENOTES,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }

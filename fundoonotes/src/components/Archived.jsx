@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {archiveNoteList } from '../services/notesService'
+import {archiveNoteList ,archiveNote} from '../services/notesService'
 import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -10,6 +10,9 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import setting from '../assets/setting.png'
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+
 
 
 
@@ -17,7 +20,8 @@ class Archived extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data : []
+      data : [],
+      noteIdList : []
     
     };
   }
@@ -30,17 +34,38 @@ class Archived extends Component {
       if (response.status === 200) {
           
         this.setState({data : response.data.data.data});
+        console.log(this.state.data[0].id)
         
       } else {
           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
    });
    }
+
+   archiveddata=async(dat)=>{
+        await this.state.noteIdList.push(dat.toString())
+        console.log(this.state.noteIdList);
+       let data1 = {
+           isArchived : false,
+           noteIdList : this.state.noteIdList
+       }
+       archiveNote(data1).then(response => {
+        console.log(response);
+       if (response.status === 200) {
+           
+         this.componentDidMount();
+         
+       } else {
+           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+       }
+    });
+   }
   render() {
     return (
         <div className='notescontainer'>
         {this.state.data.map((data, index) => (
-        <div key={index} 
+            <List key={index} >
+        <div 
         style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
           <Card  className="mydivouter">
           <CardContent>
@@ -85,7 +110,7 @@ class Archived extends Component {
                 </button>
             </div>
             <div style={{ padding :'5px'}}>
-            <button className='iconbtn'>
+            <button className='iconbtn' onClick={() => this.archiveddata(data.id)}  key={index}>
                 <img src={download} id="imgdashnotes" />
                 </button>
             </div> 
@@ -102,6 +127,8 @@ class Archived extends Component {
          
         </Card>
         </div>
+        </List>
+
         ))}
         </div>
         
