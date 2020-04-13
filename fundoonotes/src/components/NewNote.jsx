@@ -56,7 +56,7 @@ class NewNote extends Component {
     anchorEl:null,
     setAnchorEl: null,
     date : new Date(),
-    datashow : false,
+    dateshow : false,
     date_timeshow:false,
     startdate:new Date(),
     collabshow : true,
@@ -158,11 +158,11 @@ class NewNote extends Component {
   });
   };
   dateshow=()=>{
-    this.setState({dateshow : !this.state.datashow})
+    this.setState({dateshow : !this.state.dateshow})
   }
   back=()=>{
     console.log("back");
-    this.setState({dateshow : false})
+    // this.setState({dateshow : false})
   }
   todaydate=()=>{
     this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true});
@@ -171,7 +171,7 @@ class NewNote extends Component {
     this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true});
   }
   datesave=()=>{
-    this.setState({date : this.state.startdate+" " + this.state.timepicker,date_timeshow : true});
+    this.setState({date : this.state.startdate+" " + this.state.timepicker,date_timeshow : true,dateshow : false});
   }
   
   handleDateChange = (date) => {
@@ -198,19 +198,19 @@ class NewNote extends Component {
    }
 });
 }
-showingCollabator=(event)=>{
-    this.setState({
-        anchorEl: event.currentTarget,
-        open: true
-    });
-}
-collabatorClick=(dat)=>{
-  this.setState({
-    open : false,collabatorValue: dat
-})
-this.state.collabatorArray.push(dat)
+// showingCollabator=(event)=>{
+//     this.setState({
+//         anchorEl: event.currentTarget,
+//         open: true
+//     });
+// }
+// collabatorClick=(dat)=>{
+//   this.setState({
+//     open : false,collabatorValue: dat
+// })
+// this.state.collabatorArray.push(dat)
 
-}
+// }
 collabsave=()=>{
   this.setState({collabshow : true,originalArray : this.state.collabatorArray})
 }
@@ -333,9 +333,9 @@ getData=(val)=>{
                         open={this.state.open}
                         anchorEl={this.state.anchorEl}
                         onClose={this.handleClick}>
-                          {this.state.dateshow ? 
+                          { this.state.dateshow ? 
                           <div>
-                           <div onClick={this.back}>X</div>
+                           {/* <div onClick={this.back}>X</div> */}
                             <div>
                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
                             <Grid container justify="space-around">
@@ -375,7 +375,8 @@ getData=(val)=>{
                             <Typography style={{padding:'10px'}} onClick={this.todaydate}>Today</Typography>
                             <Typography style={{padding:'10px'}} onClick={this.tomorrowdate}>Tommorow</Typography>
                             <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
-                          </div>}
+                          </div>
+                          }
                         
                         </Popover>
                     </div>
@@ -387,9 +388,7 @@ getData=(val)=>{
                         <Color sendColor={this.getData}/>
                     </div>
                     <div style={{ padding :'5px'}}>
-                    {/* <button className='iconbtn'> */}
                         <img src={galary} id="imgdashnotes" />
-                        {/* </button> */}
                     </div>
                     <div style={{ padding :'5px'}} onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />

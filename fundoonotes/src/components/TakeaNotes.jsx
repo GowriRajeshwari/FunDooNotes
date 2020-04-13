@@ -283,7 +283,13 @@ getdataupdate=()=>{
 sendNewData=()=>{
   this.componentDidMount();
 }
-
+deletebutton=(id)=>{
+  // {"isDeleted":true,"noteIdList":["5e917458ad53b700227c5c56"]}
+  let data={
+    isDeleted : true,
+    noteIdList : id
+  }
+}
   render() {
     
     return (
@@ -294,7 +300,7 @@ sendNewData=()=>{
     {this.state.data.map((data, index) => (
     <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}} >  
-      <Card  className="mydivouter" style={{backgroundColor : 'red' }}>
+      <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
       <CardContent>
         <div className='showicon'>
                       <Typography variant="h6" component="h1" className="typoText">
@@ -321,7 +327,7 @@ sendNewData=()=>{
 
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                         <img src={reminder} id="imgdashnotes" />
-                        <Popover 
+                        {/* <Popover 
                           anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
@@ -377,7 +383,7 @@ sendNewData=()=>{
                             <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
                           </div>}
                         
-                        </Popover>
+                        </Popover> */}
                     </div>
                     <div style={{ padding :'5px'}} onClick={this.collabshow}>
                         <img src={personAdd} id="imgdashnotes" />
@@ -392,8 +398,24 @@ sendNewData=()=>{
                     <div style={{ padding :'5px'}} onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}}>
+                    <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                         <img src={setting} id="imgdashnotes" />
+                        <Popover 
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        open={this.state.open}
+                        anchorEl={this.state.anchorEl}
+                        onClose={this.handleClick}>
+                            <div style={{width : '200px',height:"20px"}} onClick={()=>this.deletebutton(data.id)}>
+                              DELETE</div>
+                        
+                        </Popover>
                     </div> 
                     
                     </div>
