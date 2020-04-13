@@ -39,11 +39,10 @@ import { blue } from '@material-ui/core/colors';
 import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
-import NewNote from './NewNote'
 require('dotenv').config();
 
 
-class TakeaNotes extends Component {
+class NewNote extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -76,8 +75,7 @@ class TakeaNotes extends Component {
    
     };
   }
- 
-   handleDateChange = (date) => {
+  handleDateChange = (date) => {
     this.setState({date : date})
   };
   componentDidMount=()=>{
@@ -92,7 +90,6 @@ class TakeaNotes extends Component {
          
         this.setState({data : response.data.data.data});
         console.log(this.state.data[0].title)
-      
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
@@ -136,7 +133,7 @@ class TakeaNotes extends Component {
     setNotes(data).then(response => {
       console.log(response);
      if (response.status === 200) {
-        this.componentDidMount();
+        this.props.sendNewData();
         this.setState({ title : '',description : '',next : true})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -241,7 +238,7 @@ archivebutton=async(event)=>{
   setNotes(data).then(response => {
     console.log(response);
    if (response.status === 200) {
-       
+       this.props.sendNewData();
       this.setState({ title : '',description : '',next : true})
    } else {
        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -253,73 +250,76 @@ archivebutton=async(event)=>{
 }
 }
 
-colorboxbutton=()=>{
-//  return <Color/>
-}
-getData=(val,index)=>{
-  console.log(val,index)
+
+getData=(val)=>{
+  console.log(val)
   this.setState({color : val})
-  document.getElementsByClassName("mydivouter")[index].style.backgroundColor= val;
-}
-dialogboxOpen=(title,description,id)=>{
-  console.log(id);
-  this.setState({
-    dialogBoxOpen: !this.state.dialogBoxOpen,
-    title : title,
-    description : description,
-    id : id
-  })
-
-}
-handelNoteDialogBox = () => {
-  this.setState({
-    dialogBoxOpen: !this.state.dialogBoxOpen
-  }) 
-}
-getdataupdate=()=>{
-  this.handelNoteDialogBox();
-  this.componentDidMount();
-}
-sendNewData=()=>{
-  this.componentDidMount();
+  document.getElementById("NoteExpand").style.background= val;
 }
 
-  render() {
-    
-    return (
-      <div className='maincontainer'>
-          <NewNote sendNewData={this.sendNewData}/>
-    
-    <div className='notescontainer'>
-    {this.state.data.map((data, index) => (
-    <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
-    style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}} >  
-      <Card  className="mydivouter" style={{backgroundColor : 'red' }}>
-      <CardContent>
-        <div className='showicon'>
-                      <Typography variant="h6" component="h1" className="typoText">
-                        {data.title}
-                      </Typography>
-                        <div className="mybuttonoverlap" style={{ padding :'5px'}}>
+
+
+ render(){
+     return(
+        <div className="containerdash">
+        {this.state.next ? 
+            <div >
+            <Paper className="paper" >
+            <div>
+            <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
+            </div>
+            </Paper>
+
+            </div>
+          : 
+             this.state.collabshow ?
+          <Paper className="paper2">
+             <div id="NoteExpand">
+
+               <div className='showicon'>
+                    <TextField
+                        id="standard-multiline-flexible"
+                        placeholder="Title"
+                        multiline
+                        rowsMax="4"
+                        size="small"
+                        style={{width:'100%'}}
+                        onChange={this.onChangeTitle}
+                        InputProps={{ disableUnderline: true }}
+                      />
+                      <div style={{ padding :'5px'}}>
                               <img src={pin} id="imgdashnotes" />
-                      </div> 
-                     
-          </div>
-        <Typography color="textSecondary"  
-        onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
-         {data.description}
-        </Typography>
-        <Typography color="textSecondary">
-         {data.reminder}
-        </Typography>
-
-        <div  className="mybuttonoverlap" style={{height:'60px'}}>
-
-
-
-        <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
-
-         <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
+                      </div>
+                    
+                    </div>
+                    <div>
+                        <TextField
+                        id="standard-multiline-flexible"
+                        placeholder="Take a Note"
+                        multiline
+                        rowsMax="4"
+                        size="small"
+                        style={{width:'100%'}}
+                        onChange={this.onchangeText}
+                        InputProps={{ disableUnderline: true }}
+                      />
+                      </div>
+                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date}</div> : null}
+                      <List>
+                    {this.state.originalArray.map((originalArray, index) => (
+                      <ListItem key={index}>
+                        <ListItemAvatar>
+                          <Avatar >
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={originalArray} />
+                        
+                      </ListItem>
+                    ))}
+                    </List>
+                      <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
+                    <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                         <img src={reminder} id="imgdashnotes" />
                         <Popover 
                           anchorOrigin={{
@@ -384,10 +384,12 @@ sendNewData=()=>{
                     </div>
                     <div style={{ padding :'5px'}}>
                     
-                        <Color index={index} sendColor={this.getData}/>
+                        <Color sendColor={this.getData}/>
                     </div>
                     <div style={{ padding :'5px'}}>
+                    {/* <button className='iconbtn'> */}
                         <img src={galary} id="imgdashnotes" />
+                        {/* </button> */}
                     </div>
                     <div style={{ padding :'5px'}} onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
@@ -398,27 +400,79 @@ sendNewData=()=>{
                     
                     </div>
 
-        
+                              
+                    <div className="button">
+                    <Button size="small" onClick={e => this.close(e)}>Close</Button>
+                    </div>
 
-        </div>
-        
-      </CardContent>
-     
-    </Card>
+                  </div>
+        </Paper>
+          :
 
+        <Paper className="paper2">
+          <div onClick={this.collabsave}>collabatore</div>
+          <Divider/>
+          <div></div>
+          <div></div>
+                       <Popover 
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        open={this.state.open}
+                        anchorEl={this.state.anchorEl}
+                        onClose={this.handleClick}>
+                           <List>
+                    {this.state.details.map((details, index) => (
+                      <ListItem button onClick={() => this.collabatorClick(details.firstName)} key={index}>
+                        <ListItemAvatar>
+                          <Avatar >
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={details.firstName} />
+                        <ListItemText primary={details.email} />
+
+                      </ListItem>
+                    ))}
+                    </List>
+
+                        </Popover>
+
+
+                        <List>
+                    {this.state.collabatorArray.map((collabatorArray, index) => (
+                      <ListItem key={index}>
+                        <ListItemAvatar>
+                          <Avatar >
+                            <PersonIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary={collabatorArray} />
+                      </ListItem>
+                    ))}
+                    </List>
+
+
+                    <input
+                    id="btn"
+                    variant="outlined"
+                    label="Emails"
+                    value={this.state.collabatorName}
+                     onChange={this.onchangecollabator}
+                     onClick={e => this.showingCollabator(e)}
+                  />
+          <div onClick={this.collabsave}>save</div>
+
+        </Paper>
+         
+    }
     </div>
-    
-    ))}
-    </div>
-            <Dialog
-            open={this.state.dialogBoxOpen}
-            onClose={this.handelNoteDialogBox}
-            >
-                <EditNotes title={this.state.title} description={this.state.description} id={this.state.id}
-                sendupdate={this.getdataupdate}/>
-              </Dialog>
-              </div>
-    );
-  }
-}
-export default TakeaNotes;
+)}
+ }
+
+ export default NewNote;

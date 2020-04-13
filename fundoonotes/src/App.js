@@ -14,6 +14,7 @@ import EditNotes from './components/EditNotes';
 import service from './components/service';
 import Archived from './components/Archived';
 import Color from './components/Color';
+import NewNote from './components/NewNote';
 
 
 let token =  window.location.href.split('/' )[4];
@@ -37,6 +38,8 @@ function App() {
         <Route path="/Archived" component={Archived} />
         <Route path="/color" component={Color} />
         <Route path="/EditNotes" component={EditNotes} />
+        <Route path="/NewNote" component={NewNote} />
+
 
 
 

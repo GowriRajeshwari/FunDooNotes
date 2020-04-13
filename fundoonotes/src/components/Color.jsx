@@ -12,7 +12,8 @@ import color from '../assets/color.png'
     this.state={
         anchorEl:null,
         open:false,
-        changeColor:this.props.changeColor
+        changeColor:this.props.changeColor,
+        index:this.props.index
     }
   }
   handleClick = event => {
@@ -23,19 +24,19 @@ import color from '../assets/color.png'
   }
   changeColor=async(color)=>{
    await this.setState({ changeColor : color })
-    this.props.sendColor(this.state.changeColor)
+    this.props.sendColor(this.state.changeColor,this.state.index)
   }
   render() {
     return (
-      <div   >
-            <button
+      <div style={{ padding :'5px'}}  onClick={this.handleClick}>
+            {/* <button
             className='iconbtn'
             //  aria-describedby={id}
             //  variant="contained"
             //  color="grey"
-             onClick={this.handleClick}>
+             onClick={this.handleClick}> */}
                    <img src={color} id="imgdashnotes" />
-            </button>
+            {/* </button> */}
             <Popover 
                           anchorOrigin={{
                             vertical: 'bottom',

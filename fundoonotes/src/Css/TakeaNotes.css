@@ -18,9 +18,10 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        height: 24px;
 }
 
-  .mydivouter{
+  #mydivouter{
       width: 260px;
     position:relative;
     /* margin: 0 auto; */
@@ -50,4 +51,13 @@
 }
 #colorchange{
     background-color: greenyellow;
+}
+.typoText{
+    padding-bottom: 10px;
+    width: 200px;
+}
+.carddiv{
+    border-radius:'10px';
+    cursor:pointer;
+    padding:20px;
 }

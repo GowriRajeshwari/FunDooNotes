@@ -97,8 +97,6 @@ class EditNotes extends Component {
       console.log(response);
      if (response.status === 200) {
         this.props.sendupdate();
-        // this.componentDidMount();
-        // this.setState({ title : '',description : '',next : true})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
