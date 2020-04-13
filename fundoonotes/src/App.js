@@ -10,6 +10,7 @@ import Dashboard from './components/Dashboard';
 import Dashboard1 from './components/Dashboard1';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
+import EditNotes from './components/EditNotes';
 import service from './components/service';
 import Archived from './components/Archived';
 import Color from './components/Color';
@@ -35,6 +36,8 @@ function App() {
         <Route path="/Service" component={service} />
         <Route path="/Archived" component={Archived} />
         <Route path="/color" component={Color} />
+        <Route path="/EditNotes" component={EditNotes} />
+
 
 
 

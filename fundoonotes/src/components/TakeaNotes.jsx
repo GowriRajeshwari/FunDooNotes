@@ -38,6 +38,7 @@ import AddIcon from '@material-ui/icons/Add';
 import { blue } from '@material-ui/core/colors';
 import setting from '../assets/setting.png'
 import Color from './Color'
+import EditNotes from './EditNotes'
 require('dotenv').config();
 
 
@@ -74,11 +75,7 @@ class TakeaNotes extends Component {
    
     };
   }
-  handelNoteDialogBox = () => {
-    this.setState({
-      dialogBoxOpen: !this.state.dialogBoxOpen
-    })
-  }
+ 
    handleDateChange = (date) => {
     this.setState({date : date})
   };
@@ -89,11 +86,11 @@ class TakeaNotes extends Component {
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
     getNotes().then(response => {
-      console.log(response.data.data.data);
+      console.log(response.data.data.data[0].title);
      if (response.status === 200) {
          
         this.setState({data : response.data.data.data});
-        // console.log(this.state.data.length)
+        console.log(this.state.data[0].title)
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
@@ -262,10 +259,25 @@ getData=(val)=>{
   this.setState({color : val})
   document.getElementById("NoteExpand").style.background= val;
 }
-dialogboxOpen=()=>{
-  
-}
+dialogboxOpen=(title,description,id)=>{
+  console.log(id);
+  this.setState({
+    dialogBoxOpen: !this.state.dialogBoxOpen,
+    title : title,
+    description : description,
+    id : id
+  })
 
+}
+handelNoteDialogBox = () => {
+  this.setState({
+    dialogBoxOpen: !this.state.dialogBoxOpen
+  })
+}
+getdataupdate=()=>{
+  this.handelNoteDialogBox();
+  this.componentDidMount();
+}
 
   render() {
     
@@ -279,6 +291,7 @@ dialogboxOpen=()=>{
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
             </div>
             </Paper>
+
             </div>
           : 
              this.state.collabshow ?
@@ -507,7 +520,8 @@ dialogboxOpen=()=>{
                       </div> 
                      
           </div>
-        <Typography color="textSecondary" gutterBottom onClick={this.handelNoteDialogBox}>
+        <Typography color="textSecondary" gutterBottom 
+        onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
          {data.description}
         </Typography>
 
@@ -553,74 +567,7 @@ dialogboxOpen=()=>{
         
 
         </div>
-        <Dialog
-            open={this.state.dialogBoxOpen}
-            onClose={this.handelNoteDialogBox}
-            >
-              <div  
-                style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
-                  <Card  >
-                  <CardContent>
-                    <div className='showicon'>
-                                  <Typography variant="h6" component="h2">
-                                    {data[0].title}
-                                  </Typography>
-                                    <div  style={{ padding :'5px'}}>
-                                          <img src={pin} id="imgdashnotes" />
-                                  </div> 
-                                
-                      </div>
-                    <Typography color="textSecondary" gutterBottom onClick={this.handelNoteDialogBox}>
-                    {data[0].description}
-                    </Typography>
-
-                    <div   style={{height:'60px'}}>
-
-
-
-                    <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
-                    <div style={{ padding :'5px',display:'flex'}}>
-                      <button className='iconbtn' >
-                        <img src={reminder} id="imgdashnotes" />
-                        </button>
-                    
-                    </div>
-                    <div style={{ padding :'5px'}}>
-                        <button className='iconbtn' >
-                        <img src={personAdd} id="imgdashnotes" />
-                        </button>
-                      
-                    </div>
-                  
-                    <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
-                        <img src={color} id="imgdashnotes" />
-                        </button>
-                    </div>
-                    <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
-                        <img src={galary} id="imgdashnotes" />
-                        </button>
-                    </div>
-                    <div style={{ padding :'5px'}}>
-                    <button className='iconbtn'>
-                        <img src={download} id="imgdashnotes" />
-                        </button>
-                    </div> 
-                    <div style={{ padding :'5px'}}>
-                    <button className='iconbtn' onClick={this.setting}>
-                        <img src={setting} id="imgdashnotes" />
-                        </button>
-                    </div>
-                    </div>
-                    
-
-                    </div>
-                  </CardContent>
-                
-                </Card>
-                </div>
-              </Dialog>
+        
       </CardContent>
      
     </Card>
@@ -629,9 +576,14 @@ dialogboxOpen=()=>{
     
     ))}
     </div>
-   
-       
-      </div>
+            <Dialog
+            open={this.state.dialogBoxOpen}
+            onClose={this.handelNoteDialogBox}
+            >
+                <EditNotes title={this.state.title} description={this.state.description} id={this.state.id}
+                sendupdate={this.getdataupdate}/>
+              </Dialog>
+              </div>
     );
   }
 }
