@@ -131,7 +131,7 @@
     height: 50px;
     display: flex;
     align-items: center;
-    border-radius: 8px;
+    /* border-radius: 15px; */
     background-color: hotpink;
     
     
@@ -139,7 +139,7 @@
 .paper2{
     width : 700px;
     /* height: 140px; */
-    border-radius: 8px;
+    /* border-radius: 15px; */
     background-color: greenyellow;
 }
 .Typo{

@@ -25,7 +25,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes } from '../services/notesService'
+import { getNotes,setNotes,deleteNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -40,6 +40,8 @@ import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
 import NewNote from './NewNote'
+import DateTimePicker from './DateTimePicker'
+
 require('dotenv').config();
 
 
@@ -72,7 +74,8 @@ class TakeaNotes extends Component {
     archived : false,
     timeTodayTommorow : '08:00:00',
     timepicker :'',
-    dialogBoxOpen:false
+    dialogBoxOpen:false,
+    noteIdList :[]
    
     };
   }
@@ -283,13 +286,30 @@ getdataupdate=()=>{
 sendNewData=()=>{
   this.componentDidMount();
 }
-deletebutton=(id)=>{
+deletebutton=async(id)=>{
   // {"isDeleted":true,"noteIdList":["5e917458ad53b700227c5c56"]}
+  console.log(id)
+  await this.state.noteIdList.push(id.toString());
   let data={
     isDeleted : true,
-    noteIdList : id
+    noteIdList : this.state.noteIdList
   }
+  console.log(data)
+  deleteNotes(data).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       this.componentDidMount();
+       this.setState({noteIdList : []})
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+
 }
+sendtimeDate=(date)=>{
+  this.setState({date : date,date_timeshow : true,dateshow : false});
+}
+
   render() {
     
     return (
@@ -303,87 +323,30 @@ deletebutton=(id)=>{
       <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
       <CardContent>
         <div className='showicon'>
-                      <Typography variant="h6" component="h1" className="typoText">
+                      <div  className="typoText">
                         {data.title}
-                      </Typography>
+                      </div>
                         <div className="mybuttonoverlap" style={{ padding :'5px'}}>
                               <img src={pin} id="imgdashnotes" />
                       </div> 
                      
           </div>
-        <Typography color="textSecondary"  
+        <div  className="typoText"
         onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
          {data.description}
-        </Typography>
-        <Typography color="textSecondary">
+        </div>
+        <div  className="typoText">
          {data.reminder}
-        </Typography>
+        </div>
 
-        <div  className="mybuttonoverlap" style={{height:'60px'}}>
+        <div  className="mybuttonoverlap" >
 
 
 
-        <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
+        <div style={{ display : 'flex', flexDirection:'row',paddingTop : '5px',justifyContent:'space-around'}}>          
 
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
-                        <img src={reminder} id="imgdashnotes" />
-                        {/* <Popover 
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                          }}
-                        open={this.state.open}
-                        anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}>
-                          {this.state.dateshow ? 
-                          <div>
-                           <div onClick={this.back}>X</div>
-                            <div>
-                              <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                            <Grid container justify="space-around">
-                              <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date picker inline"
-                                value={this.state.startdate}
-                                onChange={date =>this.handleDateChange(date)}
-                                KeyboardButtonProps={{
-                                  'aria-label': 'change date',
-                                }}
-                              /></Grid></MuiPickersUtilsProvider>
-                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                               <TextField
-                                  id="time"
-                                  label="Alarm clock"
-                                  type="time"
-                                  defaultValue="07:30"
-                                   className="timepicker"
-                                  InputLabelProps={{
-                                    shrink: true,
-                                  }}
-                                  inputProps={{
-                                    step: 300, // 5 min
-                                  }}
-                                  onChange={this.timepicker}
-                                  />
-                               </MuiPickersUtilsProvider>
-                               <div onClick={this.datesave}>save</div></div>
-                              </div>
-                              :
-                          <div style={{width : '170px',height : '170px',padding : '15px'}}>
-                            <Typography style={{padding:'10px'}} onClick={this.todaydate}>Today</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.tomorrowdate}>Tommorow</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
-                          </div>}
-                        
-                        </Popover> */}
+                     <DateTimePicker sendtimeDate={this.sendtimeDate}/>
                     </div>
                     <div style={{ padding :'5px'}} onClick={this.collabshow}>
                         <img src={personAdd} id="imgdashnotes" />
@@ -400,7 +363,7 @@ deletebutton=(id)=>{
                     </div>
                     <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                         <img src={setting} id="imgdashnotes" />
-                        <Popover 
+                        {/* <Popover 
                           anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
@@ -415,7 +378,7 @@ deletebutton=(id)=>{
                             <div style={{width : '200px',height:"20px"}} onClick={()=>this.deletebutton(data.id)}>
                               DELETE</div>
                         
-                        </Popover>
+                        </Popover> */}
                     </div> 
                     
                     </div>

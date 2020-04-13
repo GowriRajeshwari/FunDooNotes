@@ -39,6 +39,8 @@ import { blue } from '@material-ui/core/colors';
 import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
+import DateTimePicker from './DateTimePicker'
+
 require('dotenv').config();
 
 
@@ -256,14 +258,16 @@ getData=(val)=>{
   this.setState({color : val})
   document.getElementById("NoteExpand").style.background= val;
 }
-
+sendtimeDate=(date)=>{
+  this.setState({date : date,date_timeshow : true,dateshow : false});
+}
 
 
  render(){
      return(
         <div className="containerdash">
         {this.state.next ? 
-            <div >
+            <div>
             <Paper className="paper" >
             <div>
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
@@ -272,11 +276,13 @@ getData=(val)=>{
 
             </div>
           : 
+          
              this.state.collabshow ?
+             <div>
           <Paper className="paper2">
              <div id="NoteExpand">
 
-               <div className='showicon'>
+               <div className='showicon' style={{paddingTop : '10px'}}>
                     <TextField
                         id="standard-multiline-flexible"
                         placeholder="Title"
@@ -292,7 +298,7 @@ getData=(val)=>{
                       </div>
                     
                     </div>
-                    <div>
+                    <div style={{paddingTop : '20px'}}>
                         <TextField
                         id="standard-multiline-flexible"
                         placeholder="Take a Note"
@@ -319,157 +325,38 @@ getData=(val)=>{
                     ))}
                     </List>
                       <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
-                    <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
-                        <img src={reminder} id="imgdashnotes" />
-                        <Popover 
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                          }}
-                        open={this.state.open}
-                        anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}>
-                          { this.state.dateshow ? 
-                          <div>
-                           {/* <div onClick={this.back}>X</div> */}
-                            <div>
-                              <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                            <Grid container justify="space-around">
-                              <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date picker inline"
-                                value={this.state.startdate}
-                                onChange={date =>this.handleDateChange(date)}
-                                KeyboardButtonProps={{
-                                  'aria-label': 'change date',
-                                }}
-                              /></Grid></MuiPickersUtilsProvider>
-                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                               <TextField
-                                  id="time"
-                                  label="Alarm clock"
-                                  type="time"
-                                  defaultValue="07:30"
-                                   className="timepicker"
-                                  InputLabelProps={{
-                                    shrink: true,
-                                  }}
-                                  inputProps={{
-                                    step: 300, // 5 min
-                                  }}
-                                  onChange={this.timepicker}
-                                  />
-                               </MuiPickersUtilsProvider>
-                               <div onClick={this.datesave}>save</div></div>
-                              </div>
-                              :
-                          <div style={{width : '170px',height : '170px',padding : '15px'}}>
-                            <Typography style={{padding:'10px'}} onClick={this.todaydate}>Today</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.tomorrowdate}>Tommorow</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
-                          </div>
-                          }
-                        
-                        </Popover>
-                    </div>
-                    <div style={{ padding :'5px'}} onClick={this.collabshow}>
+                    <DateTimePicker sendtimeDate={this.sendtimeDate}/>
+                    <div  onClick={this.collabshow}>
                         <img src={personAdd} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}}>
+                    <div >
                     
                         <Color sendColor={this.getData}/>
                     </div>
-                    <div style={{ padding :'5px'}}>
+                    <div>
                         <img src={galary} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}} onClick={this.archivebutton}>
+                    <div  onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}}>
+                    <div >
                         <img src={setting} id="imgdashnotes" />
                     </div> 
-                    
+                    <div style={{display : 'flex',justifyContent :'center'}}>
+                    <Button size="small"  onClick={e => this.close(e)}>Close</Button>
+                    </div>
                     </div>
 
                               
-                    <div className="button">
-                    <Button size="small" onClick={e => this.close(e)}>Close</Button>
-                    </div>
+                    
 
                   </div>
         </Paper>
+        </div>
           :
-
-        <Paper className="paper2">
-          <div onClick={this.collabsave}>collabatore</div>
-          <Divider/>
-          <div></div>
-          <div></div>
-                       <Popover 
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                          }}
-                        open={this.state.open}
-                        anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}>
-                           <List>
-                    {this.state.details.map((details, index) => (
-                      <ListItem button onClick={() => this.collabatorClick(details.firstName)} key={index}>
-                        <ListItemAvatar>
-                          <Avatar >
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={details.firstName} />
-                        <ListItemText primary={details.email} />
-
-                      </ListItem>
-                    ))}
-                    </List>
-
-                        </Popover>
-
-
-                        <List>
-                    {this.state.collabatorArray.map((collabatorArray, index) => (
-                      <ListItem key={index}>
-                        <ListItemAvatar>
-                          <Avatar >
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={collabatorArray} />
-                      </ListItem>
-                    ))}
-                    </List>
-
-
-                    <input
-                    id="btn"
-                    variant="outlined"
-                    label="Emails"
-                    value={this.state.collabatorName}
-                     onChange={this.onchangecollabator}
-                     onClick={e => this.showingCollabator(e)}
-                  />
-          <div onClick={this.collabsave}>save</div>
-
-        </Paper>
-         
+      null
     }
+    
     </div>
 )}
  }

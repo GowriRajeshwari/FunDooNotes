@@ -66,7 +66,7 @@ class Login extends Component {
               localStorage.setItem("id", response.data.id);
               
               this.props.history.push({
-                  pathname: "/Dashboard",
+                  pathname: "/dashboard",
               });
          } else {
              this.setState({  snackbarmsg: "Login Not Successfull,Make sure email & password is correct", snackbaropen: true });

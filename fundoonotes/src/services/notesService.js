@@ -67,3 +67,14 @@ export async function setNotes(data) {
       return error;
     }
   }
+  
+  export async function deleteNotes(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_DELETENOTES,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }

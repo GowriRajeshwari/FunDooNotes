@@ -28,7 +28,7 @@ import color from '../assets/color.png'
   }
   render() {
     return (
-      <div style={{ padding :'5px'}}  onClick={this.handleClick}>
+      <div   onClick={this.handleClick}>
             {/* <button
             className='iconbtn'
             //  aria-describedby={id}

@@ -18,7 +18,8 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        height: 24px;
+        min-height: 20px;
+        /* max-width: 300px; */
 }
 
   #mydivouter{
@@ -31,7 +32,7 @@
     .mybuttonoverlap{
     /* position: absolute; */
     /* display: none; */
-    height:80px;
+    /* height:80px; */
     margin: 0 auto; 
     visibility: hidden;
     
@@ -53,8 +54,15 @@
     background-color: greenyellow;
 }
 .typoText{
-    padding-bottom: 10px;
+    /* height: 100%; */
+    /* padding-bottom: 10px; */
     width: 200px;
+    /* background-color: tomato; */
+    /* flex-wrap: wrap; */
+    /* text-overflow: ellipsis; */
+    /* overflow: initial; */
+    /* white-space: pre-wrap; */
+    word-wrap: break-word;
 }
 .carddiv{
     border-radius:'10px';
