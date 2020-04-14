@@ -40,6 +40,8 @@ import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
 import DateTimePicker from './DateTimePicker'
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 
 require('dotenv').config();
 
@@ -232,7 +234,7 @@ archivebutton=async(event)=>{
     console.log(response);
    if (response.status === 200) {
        this.props.sendNewData();
-      this.setState({ title : '',description : '',next : true})
+      this.setState({ title : '',description : '',next : true,color : ''})
    } else {
        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
    }
@@ -253,7 +255,10 @@ sendtimeDate=(date)=>{
   this.setState({date : date,date_timeshow : true,dateshow : false});
 }
 
-
+handleDelete = () => {
+  this.setState({date : '',date_timeshow : false})
+  console.info('You clicked the delete icon.');
+};
  render(){
      return(
         <div className="containerdash">
@@ -269,7 +274,7 @@ sendtimeDate=(date)=>{
           : 
           
              this.state.collabshow ?
-             <div>
+             
           <Paper className="paper2">
              <div id="NoteExpand">
 
@@ -301,7 +306,17 @@ sendtimeDate=(date)=>{
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date}</div> : null}
+                      {this.state.date_timeshow ? 
+                      <Chip
+                      style={{width : '300px'}}
+                      icon={<FaceIcon />}
+                      label={this.state.date}
+                      onDelete={this.handleDelete}
+                      color="white"
+                      value={this.state.date}
+                    />
+                      // <div style={{paddingTop : '10px'}}>{this.state.date}</div>
+                       : null}
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
@@ -343,7 +358,7 @@ sendtimeDate=(date)=>{
 
                   </div>
         </Paper>
-        </div>
+        
           :
       null
     }

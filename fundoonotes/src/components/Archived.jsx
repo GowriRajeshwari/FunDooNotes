@@ -12,6 +12,10 @@ import pin from '../assets/pin.svg'
 import setting from '../assets/setting.png'
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
+import DeleteIcon from './DeleteIcon'
+import DateTimePicker from './DateTimePicker'
+import Color from './Color'
+
 
 
 
@@ -20,7 +24,32 @@ class Archived extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data : [],
+      next : true,
+      value : '',
+      show : [],
+      data:[],
+      description:'',
+      title:'',
+      open:false,
+      anchorEl:null,
+      setAnchorEl: null,
+      date : new Date(),
+      datashow : false,
+      date_timeshow:false,
+      startdate:new Date(),
+      collabshow : true,
+      collabatorName : '',
+      details : [],
+      collabatorArray:[],
+      collabatorValue :'',
+      originalArray : [],
+      tomorrow : '',
+      pined : false,
+      color : '',
+      archived : false,
+      timeTodayTommorow : '08:00:00',
+      timepicker :'',
+      dialogBoxOpen:false,
       noteIdList : []
     
     };
@@ -60,77 +89,84 @@ class Archived extends Component {
        }
     });
    }
+   getData=(val,index)=>{
+    console.log(val,index)
+    this.setState({color : val})
+    document.getElementsByClassName("mydivouter")[index].style.backgroundColor= val;
+  }
+  sendtimeDate=(date)=>{
+    this.setState({date : date,date_timeshow : true,dateshow : false});
+  }
+  sendtrash=(val)=>{
+    this.componentDidMount();
+  }
+  dateshow=()=>{
+    this.setState({dateshow : !this.state.datashow})
+  }
   render() {
     return (
         <div className='notescontainer'>
-        {this.state.data.map((data, index) => (
-            <List key={index} >
-        <div 
-        style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}}>  
-          <Card  className="mydivouter">
-          <CardContent>
-            <div className='showicon'>
-                          <Typography variant="h6" component="h2">
-                            {data.title}
-                          </Typography>
-                            <div className="mybuttonoverlap" style={{ padding :'5px'}}>
-                                  <img src={pin} id="imgdashnotes" />
-                          </div> 
-                         
-              </div>
-            <Typography color="textSecondary" gutterBottom>
-             {data.description}
-            </Typography>
-            <div  className="mybuttonoverlap" style={{height:'60px'}}>
-    
-    
-    
-            <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px'}}>          
-            <div style={{ padding :'5px',display:'flex'}}>
-              <button className='iconbtn' >
-                <img src={reminder} id="imgdashnotes" />
-                </button>
-             
-            </div>
-            <div style={{ padding :'5px'}}>
-                <button className='iconbtn' >
-                <img src={personAdd} id="imgdashnotes" />
-                </button>
-               
-            </div>
-           
-            <div style={{ padding :'5px'}}>
-            <button className='iconbtn'>
-                <img src={color} id="imgdashnotes" />
-                </button>
-            </div>
-            <div style={{ padding :'5px'}}>
-            <button className='iconbtn'>
-                <img src={galary} id="imgdashnotes" />
-                </button>
-            </div>
-            <div style={{ padding :'5px'}}>
-            <button className='iconbtn' onClick={() => this.archiveddata(data.id)}  key={index}>
-                <img src={download} id="imgdashnotes" />
-                </button>
-            </div> 
-            <div style={{ padding :'5px'}}>
-            <button className='iconbtn' onClick={this.setting}>
-                <img src={setting} id="imgdashnotes" />
-                </button>
-            </div>
-            </div>
-            
-    
-            </div>
-          </CardContent>
-         
-        </Card>
+        {this.state.data.map((data, index) => {
+      if(data.isDeleted != true)
+    return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
+    style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
+      <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
+      <CardContent>
+        <div className='showicon'>
+                      <div  className="typoText">
+                        {data.title}
+                      </div>
+                        <div className="mybuttonoverlap" style={{ padding :'5px'}}>
+                              <img src={pin} id="imgdashnotes" />
+                      </div> 
+                     
+          </div>
+        <div  className="typoText"
+        onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
+         {data.description}
         </div>
-        </List>
+        <div  className="typoText">
+         {data.reminder}
+        </div>
 
-        ))}
+        <div  className="mybuttonoverlap" >
+
+
+
+        <div style={{ display : 'flex', flexDirection:'row',paddingTop : '5px',justifyContent:'space-around'}}>          
+
+         <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
+                     <DateTimePicker sendtimeDate={this.sendtimeDate}/>
+                    </div>
+                    <div style={{ padding :'5px'}} onClick={this.collabshow}>
+                        <img src={personAdd} id="imgdashnotes" />
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                    
+                        <Color index={index} sendColor={this.getData}/>
+                    </div>
+                    <div style={{ padding :'5px'}}>
+                        <img src={galary} id="imgdashnotes" />
+                    </div>
+                    <div style={{ padding :'5px'}} onClick={() => this.archiveddata(data.id)}  key={index}>
+                        <img src={download} id="imgdashnotes" />
+                    </div>
+                    <DeleteIcon id={data.id} sendtrash={this.sendtrash}/>
+                    
+                    </div>
+
+        
+
         </div>
+        
+      </CardContent>
+     
+    </Card>
+
+    </div>
+    
+    })}
+    </div>
         
     );
   }

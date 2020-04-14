@@ -92,12 +92,18 @@ class TakeaNotes extends Component {
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
     getNotes().then(response => {
-      console.log(response.data.data.data[0].isDeleted);
+      console.log(response.data.data.data);
      if (response.status === 200) {
         
-        this.setState({data : response.data.data.data});
-        
-        console.log(this.state.data[0].title)
+        // this.setState({data : response.data.data.data});
+        for(let i=0;i<response.data.data.data.length;i++){
+          if(response.data.data.data[i].isDeleted != true &&
+             response.data.data.data[i].isArchived != true){
+            this.state.data.push(response.data.data.data[i]);
+          }
+        }
+        this.setState({data : this.state.data})
+        console.log(this.state.data);
       
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -304,7 +310,7 @@ sendtrash=(val)=>{
     
     <div className='notescontainer'>
     {this.state.data.map((data, index) => {
-      if(data.isDeleted != true)
+      // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
       <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>

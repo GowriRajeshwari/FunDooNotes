@@ -1,9 +1,6 @@
 import React ,{Component}from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import search from '../assets/search.png';
 import search_black from '../assets/search_black.png';
 import clear from '../assets/clear.png';
 import Drawer from '@material-ui/core/Drawer';
@@ -15,8 +12,6 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -24,13 +19,11 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
+import Trash from './Trash'
 import Archived from './Archived'
-import refresh from '../assets/refresh.png';
-import box from '../assets/box.png';
 import keepBulb from "../assets/keepBulb.png";
 import list from "../assets/list.png";
 import shopping_cart from "../assets/shopping_cart.png";
-import PersonIcon from '@material-ui/icons/Person';
 import Avatar from '@material-ui/core/Avatar';
 import lightbulb_black from "../assets/lightbulb_black.png";
 import reminder from '../assets/reminder.svg'
@@ -179,6 +172,9 @@ const useStyles = theme => ({
     else if(text == 'Archive'){
       this.setState({choice : 'Archive'})
     }
+    else if(text == 'Trash'){
+      this.setState({choice : 'Trash'})
+    }
   }
 
   getcomponents=()=>{
@@ -191,6 +187,9 @@ const useStyles = theme => ({
       }
       else if(this.state.choice == 'Archive'){
         return <Archived/>
+      }
+      else if(this.state.choice == 'Trash'){
+        return <Trash/>
       }
   }
 render(){
@@ -315,7 +314,7 @@ render(){
         <Divider/>
         
         <List >
-          {['Archive','Bin'].map((text, index) => (
+          {['Archive','Trash'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
               <ListItemIcon>{index % 2 === 0 ?<img src={download} id="imgdash"/> :<img src={delete_black} id="imgdash"/>}</ListItemIcon>
               <ListItemText primary={text} />

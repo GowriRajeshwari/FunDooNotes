@@ -17,7 +17,7 @@ import NewNote from './components/NewNote';
 import DateTimePicker from './components/DateTimePicker';
 import Collaborator from './components/Collaborator'
 import DeleteIcon from './components/DeleteIcon'
-
+import Trash from './components/Trash'
 
 
 let token =  window.location.href.split('/' )[4];
@@ -44,6 +44,8 @@ function App() {
         <Route path="/DateTimePicker" component={DateTimePicker} />
         <Route path="/Collaborator" component={Collaborator} />
         <Route path="/DeleteIcon" component={DeleteIcon} />
+        <Route path="/Trash" component={Trash} />
+
 
 
       </Switch>

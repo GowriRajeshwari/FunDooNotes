@@ -12,6 +12,14 @@
     display: flex;
 
 }
+.maincontainer1{
+    width : 80%;
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+
+}
 .notescontainer{
     /* width : 80%;
     display: flex;
