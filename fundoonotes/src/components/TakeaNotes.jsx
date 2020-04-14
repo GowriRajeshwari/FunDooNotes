@@ -40,6 +40,7 @@ import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
 import NewNote from './NewNote'
+import DeleteIcon from './DeleteIcon'
 import DateTimePicker from './DateTimePicker'
 
 require('dotenv').config();
@@ -75,7 +76,8 @@ class TakeaNotes extends Component {
     timeTodayTommorow : '08:00:00',
     timepicker :'',
     dialogBoxOpen:false,
-    noteIdList :[]
+    noteIdList :[],
+    nonDeleteData:[]
    
     };
   }
@@ -90,10 +92,11 @@ class TakeaNotes extends Component {
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
     getNotes().then(response => {
-      console.log(response.data.data.data);
+      console.log(response.data.data.data[0].isDeleted);
      if (response.status === 200) {
-         
+        
         this.setState({data : response.data.data.data});
+        
         console.log(this.state.data[0].title)
       
      } else {
@@ -286,30 +289,13 @@ getdataupdate=()=>{
 sendNewData=()=>{
   this.componentDidMount();
 }
-deletebutton=async(id)=>{
-  // {"isDeleted":true,"noteIdList":["5e917458ad53b700227c5c56"]}
-  console.log(id)
-  await this.state.noteIdList.push(id.toString());
-  let data={
-    isDeleted : true,
-    noteIdList : this.state.noteIdList
-  }
-  console.log(data)
-  deleteNotes(data).then(response => {
-    console.log(response);
-   if (response.status === 200) {
-       this.componentDidMount();
-       this.setState({noteIdList : []})
-   } else {
-       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-   }
-});
 
-}
 sendtimeDate=(date)=>{
   this.setState({date : date,date_timeshow : true,dateshow : false});
 }
-
+sendtrash=(val)=>{
+  this.componentDidMount();
+}
   render() {
     
     return (
@@ -317,9 +303,10 @@ sendtimeDate=(date)=>{
           <NewNote sendNewData={this.sendNewData}/>
     
     <div className='notescontainer'>
-    {this.state.data.map((data, index) => (
-    <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
-    style={{borderRadius:'10px',cursor:'pointer',padding:'20px'}} >  
+    {this.state.data.map((data, index) => {
+      if(data.isDeleted != true)
+    return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
+    style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
       <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
       <CardContent>
         <div className='showicon'>
@@ -361,25 +348,7 @@ sendtimeDate=(date)=>{
                     <div style={{ padding :'5px'}} onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
-                        <img src={setting} id="imgdashnotes" />
-                        {/* <Popover 
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                          }}
-                        open={this.state.open}
-                        anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}>
-                            <div style={{width : '200px',height:"20px"}} onClick={()=>this.deletebutton(data.id)}>
-                              DELETE</div>
-                        
-                        </Popover> */}
-                    </div> 
+                    <DeleteIcon id={data.id} sendtrash={this.sendtrash}/>
                     
                     </div>
 
@@ -393,7 +362,7 @@ sendtimeDate=(date)=>{
 
     </div>
     
-    ))}
+    })}
     </div>
             <Dialog
             open={this.state.dialogBoxOpen}

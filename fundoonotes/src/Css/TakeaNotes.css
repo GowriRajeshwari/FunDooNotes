@@ -1,29 +1,50 @@
 .maincontainer{
-    width : 100%;
+    /* width : 100%;
     display:flex;
     align-items: center;
     flex-direction: column;
-    position: absolute;
+    position: absolute; */
+    align-content: stretch;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    display: flex;
+
 }
 .notescontainer{
-    width : 80%;
+    /* width : 80%;
     display: flex;
     align-items: center;
     padding: 30px;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center; */
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 750px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+ 
 }
 .showicon{
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        min-height: 20px;
+        /* min-height: 20px; */
         /* max-width: 300px; */
 }
 
   #mydivouter{
-      width: 260px;
+      width: 190px;
     position:relative;
     /* margin: 0 auto; */
     /* background-color: greenyellow; */

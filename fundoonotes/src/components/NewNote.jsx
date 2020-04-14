@@ -86,16 +86,7 @@ class NewNote extends Component {
    d.setDate(new Date().getDate()+1)
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-    getNotes().then(response => {
-      console.log(response.data.data.data);
-     if (response.status === 200) {
-         
-        this.setState({data : response.data.data.data});
-        console.log(this.state.data[0].title)
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
+ 
   }
   takeNote=(event)=>{
     event.preventDefault();

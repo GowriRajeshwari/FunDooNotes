@@ -44,6 +44,7 @@ const useStyles = theme => ({
     display: 'flex',
   },
   appBar: {
+    // position : 'fixed',
     height : '70px',
     backgroundColor:'white',
     transition: theme.transitions.create(['margin', 'width'], {

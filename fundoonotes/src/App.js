@@ -16,6 +16,7 @@ import Color from './components/Color';
 import NewNote from './components/NewNote';
 import DateTimePicker from './components/DateTimePicker';
 import Collaborator from './components/Collaborator'
+import DeleteIcon from './components/DeleteIcon'
 
 
 
@@ -42,6 +43,8 @@ function App() {
         <Route path="/NewNote" component={NewNote} />
         <Route path="/DateTimePicker" component={DateTimePicker} />
         <Route path="/Collaborator" component={Collaborator} />
+        <Route path="/DeleteIcon" component={DeleteIcon} />
+
 
       </Switch>
     </Router>
