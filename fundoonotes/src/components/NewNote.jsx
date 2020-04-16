@@ -129,6 +129,7 @@ class NewNote extends Component {
       console.log(response);
      if (response.status === 200) {
         this.props.sendNewData();
+        document.getElementById("NoteExpand").style.background= 'white';
         this.setState({ title : '',description : '',next : true,color :''})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -137,7 +138,7 @@ class NewNote extends Component {
   }else
   {
     this.setState({ title : '',description : '',next : true,color:''})
-  document.getElementById("NoteExpand").style.background= 'white';
+    document.getElementById("NoteExpand").style.background= 'white';
 
   }
 
@@ -159,7 +160,6 @@ class NewNote extends Component {
   }
   back=()=>{
     console.log("back");
-    // this.setState({dateshow : false})
   }
   todaydate=()=>{
     this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true});
@@ -259,7 +259,6 @@ sendtimeDate=(date)=>{
 
 handleDelete = () => {
   this.setState({date : '',date_timeshow : false})
-  console.info('You clicked the delete icon.');
 };
  render(){
      return(
@@ -317,7 +316,6 @@ handleDelete = () => {
                       color="white"
                       value={this.state.date}
                     />
-                      // <div style={{paddingTop : '10px'}}>{this.state.date}</div>
                        : null}
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (

@@ -29,14 +29,7 @@ import color from '../assets/color.png'
   render() {
     return (
       <div   onClick={this.handleClick}>
-            {/* <button
-            className='iconbtn'
-            //  aria-describedby={id}
-            //  variant="contained"
-            //  color="grey"
-             onClick={this.handleClick}> */}
                    <img src={color} id="imgdashnotes" />
-            {/* </button> */}
             <Popover 
                           anchorOrigin={{
                             vertical: 'bottom',

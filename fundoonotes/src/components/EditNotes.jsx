@@ -2,44 +2,25 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import profile from '../assets/profile.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { login } from "../services/LoginService"
-import { Typography } from "@material-ui/core";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Divider from '@material-ui/core/Divider';
-import Popper from '@material-ui/core/Popper';
-import Popover from '@material-ui/core/Popover';
-import reminder from '../assets/reminder.svg'
 import personAdd from '../assets/person_add.png'
-import color from '../assets/color.png'
 import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
-import {searchUserList} from '../services/notesService'
 import { getNotes,updateNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import { blue } from '@material-ui/core/colors';
 import setting from '../assets/setting.png'
 import Color from './Color'
-import DeleteIcon from './DeleteIcon'
 import DateTimePicker from './DateTimePicker'
+import { changeColor , updateReminderNotes} from '../services/notesService'
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+
+
 require('dotenv').config();
 
 
@@ -51,14 +32,13 @@ class EditNotes extends Component {
     value : '',
     show : [],
     data:[],
-    description:this.props.description,
-    title:this.props.title,
+    description:this.props.data.description,
     open:false,
     anchorEl:null,
     setAnchorEl: null,
     date : new Date(),
     datashow : false,
-    date_timeshow:false,
+    date_timeshow:true,
     startdate:new Date(),
     collabshow : true,
     collabatorName : '',
@@ -73,8 +53,9 @@ class EditNotes extends Component {
     timeTodayTommorow : '08:00:00',
     timepicker :'',
     dialogBoxOpen:false,
-    noteId:this.props.id
-   
+    noteId:'',
+    data:this.props.data,
+    title:this.props.data.title
     };
   }
   onchangeText=(event)=>{
@@ -85,10 +66,10 @@ class EditNotes extends Component {
   }
   close=(event)=>{
     event.preventDefault();
-    if(this.state.title !='' ){
+    // if(this.state.title !='' ){
       const datetostring = this.state.date.toString();
       let data = {
-        noteId : this.state.noteId,
+        noteId : this.state.data.id,
         title : this.state.title,
         description	: this.state.description,
   
@@ -103,18 +84,61 @@ class EditNotes extends Component {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
-  }else
-  {
-    this.setState({ title : '',description : '',next : true})
   }
+  getData=(val)=>{
+    console.log(val)
+    this.setState({color : val})
+    document.getElementById("NoteExpand").style.background= val;
+
+    let data={
+      color : val,
+      noteIdList : [this.state.data.id]
+     }
+     console.log(data)
+     changeColor(data).then(response => {
+       console.log(response);
+      if (response.status === 200) {
+  
+      } else {
+          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+   });
 
   }
+  sendtimeDate=(date)=>{
+    this.setState({date : date,date_timeshow : true,dateshow : false});
+  }
+
+  handleDelete = () => {
+    this.setState({date : '',date_timeshow : false})
+  };
+
+  sendtimeDate=(date,id)=>{
+  this.setState({date : date});
+    console.log(date)
+    let data={
+      reminder : date ,
+      noteIdList: [id]
+    }
+    console.log(data)
+  
+    updateReminderNotes(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+         
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  
+  }
+
+  
   render(){
       return(
-        <div>
-          <Paper className="paper3">
-             <div id="NoteExpand">
-
+        
+          <div className="paper3">
+             <div id="NoteExpand" style={{backgroundColor :  this.state.data.color }}>
                <div className='showicon' style={{paddingTop : '10px'}}>
                     <TextField
                         id="standard-multiline-flexible"
@@ -145,7 +169,16 @@ class EditNotes extends Component {
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? <div style={{paddingTop : '10px'}}>{this.state.date}</div> : null}
+                      {this.state.date_timeshow ? 
+                      <Chip
+                      style={{width : '450px'}}
+                      icon={<FaceIcon />}
+                      label={this.state.data.reminder}
+                      onDelete={this.handleDelete}
+                      color="white"
+                      value={this.state.date}
+                    />
+                       : null}
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
@@ -160,13 +193,12 @@ class EditNotes extends Component {
                     ))}
                     </List>
                       <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
-                    <DateTimePicker sendtimeDate={this.sendtimeDate}/>
+                      <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,this.state.data.id)}/>
                     <div  onClick={this.collabshow}>
                         <img src={personAdd} id="imgdashnotes" />
                     </div>
                     <div >
-                    
-                        <Color sendColor={this.getData}/>
+                    <Color sendColor={this.getData}/>
                     </div>
                     <div>
                         <img src={galary} id="imgdashnotes" />
@@ -186,8 +218,8 @@ class EditNotes extends Component {
                     
 
                   </div>
-        </Paper>
         </div>
+       
       )
   }
 }

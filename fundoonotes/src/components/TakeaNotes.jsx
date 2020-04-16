@@ -1,24 +1,7 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import profile from '../assets/profile.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { login } from "../services/LoginService"
-import { Typography } from "@material-ui/core";
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
-import Divider from '@material-ui/core/Divider';
-import Popper from '@material-ui/core/Popper';
-import Popover from '@material-ui/core/Popover';
-import reminder from '../assets/reminder.svg'
 import personAdd from '../assets/person_add.png'
 import color from '../assets/color.png'
 import download from '../assets/download.png'
@@ -26,12 +9,6 @@ import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
 import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor } from '../services/notesService'
-import Avatar from '@material-ui/core/Avatar';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -84,7 +61,8 @@ class TakeaNotes extends Component {
     dialogBoxOpen:false,
     noteIdList :[],
     nonDeleteData:[],
-    query : this.props.query
+    query : this.props.query,
+    editdata : []
    
     };
   }
@@ -298,13 +276,11 @@ getData=(val,index,id)=>{
 });
 
 }
-dialogboxOpen=(title,description,id)=>{
-  console.log(title,description,id);
+dialogboxOpen=(data)=>{
+  console.log(data);
   this.setState({
     dialogBoxOpen: !this.state.dialogBoxOpen,
-    title : title,
-    description : description,
-    id : id
+   editdata:data
   })
 
 }
@@ -408,7 +384,7 @@ sendtimeDate=(date,id)=>{
                      
           </div>
         <div  className="typoText"
-        onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
+        onClick={()=>this.dialogboxOpen(data)}>
          {data.description}
         </div> 
         {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
@@ -456,7 +432,7 @@ sendtimeDate=(date,id)=>{
             open={this.state.dialogBoxOpen}
             onClose={this.handelNoteDialogBox}
             >
-                <EditNotes title={this.state.title} description={this.state.description} id={this.state.id}
+                <EditNotes data={this.state.editdata}
                 sendupdate={this.getdataupdate}/>
               </Dialog>
               </div>

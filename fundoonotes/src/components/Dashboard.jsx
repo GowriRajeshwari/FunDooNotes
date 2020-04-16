@@ -300,9 +300,9 @@ render(){
         <List>
           {['Notes', 'Remainder'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)} >
-              <ListItemIcon>{index % 2 === 0 ? <img src={lightbulb_black} id="imgdash"/> :
-              <div style={{padding : '5px'}}>
-               <img src={reminder} id="imgdash"/> </div>}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <div><img src={lightbulb_black} id="imgdash1"/></div> :
+              <div>
+               <img src={reminder} id="imgdash1"/> </div>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -312,7 +312,7 @@ render(){
         <List>
           {['Edit labels'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <div><img src={download} id="imgdash1"/></div> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -322,7 +322,8 @@ render(){
         <List >
           {['Archive','Trash'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ?<img src={download} id="imgdash"/> :<img src={delete_black} id="imgdash"/>}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <div><img src={download} id="imgdash1"/></div> :
+              <div><img src={delete_black} id="imgdash1"/></div>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

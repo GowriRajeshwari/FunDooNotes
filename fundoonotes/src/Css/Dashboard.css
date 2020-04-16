@@ -20,6 +20,14 @@
     justify-content: space-around;
     padding:3px;
 }
+#imgdash1{
+    width: 25px;
+    height: 25px;
+    color:white;
+    /* align-items: center; */
+    justify-content: space-around;
+    padding:3px;
+}
 #imgdashnotes{
     width: 25px;
     height: 25px;
@@ -154,7 +162,8 @@
 .paper3{
     width : 600px;
     /* height: 140px; */
-    /* border-radius: 15px; */
+    border-radius: 8px;
+    border: 0.1px solid grey;
     /* background-color: greenyellow; */
 }
 .Typo{
