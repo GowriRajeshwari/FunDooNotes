@@ -141,7 +141,8 @@ const useStyles = theme => ({
         this.state = {
             open : false,
              setOpen : false,
-             choice:"Notes"
+             choice:"Notes",
+             query:''
          
         };
       }
@@ -183,15 +184,19 @@ const useStyles = theme => ({
           return <Edit/>
       }
       else if(this.state.choice == 'Notes'){
-        return <TakeaNotes/>
+        return <TakeaNotes query={this.state.query}/>
       }
       else if(this.state.choice == 'Archive'){
-        return <Archived/>
+        return <Archived query={this.state.query}/>
       }
       else if(this.state.choice == 'Trash'){
-        return <Trash/>
+        return <Trash query={this.state.query}/>
       }
   }
+  queryfunction=async(event)=>{
+    await this.setState({query : event.target.value});
+   //  <Tableadmin query={this.state.query}/>
+ }
 render(){
     const {classes} = this.props;
   return (

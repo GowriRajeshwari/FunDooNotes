@@ -19,7 +19,11 @@ import Color from './Color'
 
 
 
-
+function searchigFor(query){
+  return function(x){
+    return x.title.toLowerCase().includes(query.toLowerCase())||x.description.toLowerCase().includes(query.toLowerCase())||!query;
+  }
+}
 class Archived extends Component {
   constructor(props) {
     super(props);
@@ -50,7 +54,9 @@ class Archived extends Component {
       timeTodayTommorow : '08:00:00',
       timepicker :'',
       dialogBoxOpen:false,
-      noteIdList : []
+      noteIdList : [],
+      query : this.props.query
+
     
     };
   }
@@ -106,7 +112,7 @@ class Archived extends Component {
   render() {
     return (
         <div className='notescontainer'>
-        {this.state.data.map((data, index) => {
+        {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       if(data.isDeleted != true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  

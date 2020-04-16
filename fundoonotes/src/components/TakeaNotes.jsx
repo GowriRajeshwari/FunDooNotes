@@ -47,7 +47,11 @@ import FaceIcon from '@material-ui/icons/Face';
 
 require('dotenv').config();
 
-
+function searchigFor(query){
+  return function(x){
+    return x.title.toLowerCase().includes(query.toLowerCase())||x.description.toLowerCase().includes(query.toLowerCase())||!query;
+  }
+}
 class TakeaNotes extends Component {
   constructor(props) {
     super(props);
@@ -79,7 +83,8 @@ class TakeaNotes extends Component {
     timepicker :'',
     dialogBoxOpen:false,
     noteIdList :[],
-    nonDeleteData:[]
+    nonDeleteData:[],
+    query : this.props.query
    
     };
   }
@@ -333,7 +338,7 @@ reminder = (reminder) =>{
           <NewNote sendNewData={this.sendNewData}/>
     
     <div className='notescontainer'>
-    {this.state.data.map((data, index) => {
+    {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'20px',cursor:'pointer',padding:'20px'}} >  
