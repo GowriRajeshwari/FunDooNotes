@@ -110,7 +110,8 @@
     width: 100%;
     padding : 8px;
     background-color: white;
-
+    border-radius: 8px;
+    border : 0.1px solid grey;
 }
 #btndash{
     /* min-width: 270px; */
@@ -133,6 +134,10 @@
     align-items: center;
     /* border-radius: 15px; */
     /* background-color: hotpink; */
+    /* border: solid; */
+    border-radius: 8px;
+    border : 0.1px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
     
 }
@@ -140,13 +145,17 @@
     width : 700px;
     /* height: 140px; */
     /* border-radius: 15px; */
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+    border : 0.1px solid grey;
+
 }
 .paper3{
     width : 600px;
     /* height: 140px; */
     /* border-radius: 15px; */
-    background-color: greenyellow;
+    /* background-color: greenyellow; */
 }
 .Typo{
     padding : 15px;

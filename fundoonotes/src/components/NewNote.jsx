@@ -263,19 +263,19 @@ handleDelete = () => {
      return(
         <div className="containerdash">
         {this.state.next ? 
-            <div>
-            <Paper className="paper" >
+            
+            <div className="paper" >
             <div>
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
             </div>
-            </Paper>
-
             </div>
+
+            
           : 
           
              this.state.collabshow ?
              
-          <Paper className="paper2">
+          <div className="paper2">
              <div id="NoteExpand">
 
                <div className='showicon' style={{paddingTop : '10px'}}>
@@ -357,7 +357,7 @@ handleDelete = () => {
                     
 
                   </div>
-        </Paper>
+        </div>
         
           :
       null

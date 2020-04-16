@@ -52,8 +52,11 @@
 }
 
   #mydivouter{
+      padding : 10px;
       width: 190px;
     position:relative;
+    border-radius:20px;
+    border: 0.1px solid grey;
     /* margin: 0 auto; */
     /* background-color: greenyellow; */
     }

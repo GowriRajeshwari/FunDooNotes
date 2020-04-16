@@ -42,6 +42,8 @@ import EditNotes from './EditNotes'
 import NewNote from './NewNote'
 import DeleteIcon from './DeleteIcon'
 import DateTimePicker from './DateTimePicker'
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
 
 require('dotenv').config();
 
@@ -302,6 +304,28 @@ sendtimeDate=(date)=>{
 sendtrash=(val)=>{
   this.componentDidMount();
 }
+handleDelete = () => {
+  this.setState({date : '',date_timeshow : false})
+  console.info('You clicked the delete icon.');
+};
+reminder = (reminder) =>{
+  // console.log(reminder.length)
+  if(reminder != 0 ){
+  return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
+   <Chip
+    style={{width : '240px'}}
+    icon={<FaceIcon />}
+    label={reminder}
+    onDelete={this.handleDelete}
+    color="white"
+    value={this.state.date}
+  />
+  </div>
+  }
+  else{
+    return null;
+  }
+}
   render() {
     
     return (
@@ -312,9 +336,9 @@ sendtrash=(val)=>{
     {this.state.data.map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
-    style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
+    style={{borderRadius:'20px',cursor:'pointer',padding:'20px'}} >  
       <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
-      <CardContent>
+      <div style={{padding : '10px'}}>
         <div className='showicon'>
                       <div  className="typoText">
                         {data.title}
@@ -328,9 +352,10 @@ sendtrash=(val)=>{
         onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
          {data.description}
         </div>
-        <div  className="typoText">
-         {data.reminder}
-        </div>
+     
+     
+         
+          {this.reminder(data.reminder)}
 
         <div  className="mybuttonoverlap" >
 
@@ -362,7 +387,7 @@ sendtrash=(val)=>{
 
         </div>
         
-      </CardContent>
+      </div>
      
     </Card>
 
