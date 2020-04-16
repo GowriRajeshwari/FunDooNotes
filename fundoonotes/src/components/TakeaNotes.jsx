@@ -25,7 +25,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes } from '../services/notesService'
+import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -67,7 +67,7 @@ class TakeaNotes extends Component {
     setAnchorEl: null,
     date : new Date(),
     datashow : false,
-    date_timeshow:false,
+    date_timeshow:true,
     startdate:new Date(),
     collabshow : true,
     collabatorName : '',
@@ -101,12 +101,14 @@ class TakeaNotes extends Component {
     getNotes().then(response => {
       console.log(response.data.data.data);
      if (response.status === 200) {
+          this.setState({data : []})
         
         // this.setState({data : response.data.data.data});
         for(let i=0;i<response.data.data.data.length;i++){
-          if(response.data.data.data[i].isDeleted != true &&
-             response.data.data.data[i].isArchived != true){
+          if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
             this.state.data.push(response.data.data.data[i]);
+          }else{
+            continue;
           }
         }
         this.setState({data : this.state.data})
@@ -275,13 +277,29 @@ archivebutton=async(event)=>{
 colorboxbutton=()=>{
 //  return <Color/>
 }
-getData=(val,index)=>{
-  console.log(val,index)
+getData=(val,index,id)=>{
+  console.log(val,index,id)
   this.setState({color : val})
   document.getElementsByClassName("mydivouter")[index].style.backgroundColor= val;
+
+  let data={
+   color : val,
+   noteIdList : [id]
+  }
+  console.log(data)
+  changeColor(data).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       
+      this.componentDidMount();
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+
 }
 dialogboxOpen=(title,description,id)=>{
-  console.log(id);
+  console.log(title,description,id);
   this.setState({
     dialogBoxOpen: !this.state.dialogBoxOpen,
     title : title,
@@ -307,21 +325,35 @@ sendtimeDate=(date)=>{
   this.setState({date : date,date_timeshow : true,dateshow : false});
 }
 sendtrash=(val)=>{
+  if(val == true){
   this.componentDidMount();
+
+  }
 }
-handleDelete = () => {
-  this.setState({date : '',date_timeshow : false})
-  console.info('You clicked the delete icon.');
+handleDelete = (id) => {
+  this.setState({date : '',date_timeshow : true})
+  let data={
+    noteIdList : [id]
+  }
+  console.log(data)
+  removeRemainderNotes(data).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       
+      this.componentDidMount();
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
 };
-reminder = (reminder) =>{
-  // console.log(reminder.length)
+reminder = (reminder,id) =>{
   if(reminder != 0 ){
   return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
    <Chip
     style={{width : '240px'}}
     icon={<FaceIcon />}
     label={reminder}
-    onDelete={this.handleDelete}
+    onDelete={()=>this.handleDelete(id)}
     color="white"
     value={this.state.date}
   />
@@ -331,6 +363,28 @@ reminder = (reminder) =>{
     return null;
   }
 }
+
+sendtimeDate=(date,id)=>{
+  console.log(date)
+  let data={
+    reminder : date ,
+    noteIdList: [id]
+  }
+  console.log(data)
+
+  updateReminderNotes(data).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       
+      this.componentDidMount();
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+
+}
+
+
   render() {
     
     return (
@@ -356,11 +410,9 @@ reminder = (reminder) =>{
         <div  className="typoText"
         onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
          {data.description}
-        </div>
-     
-     
+        </div> 
+        {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
          
-          {this.reminder(data.reminder)}
 
         <div  className="mybuttonoverlap" >
 
@@ -369,14 +421,14 @@ reminder = (reminder) =>{
         <div style={{ display : 'flex', flexDirection:'row',paddingTop : '5px',justifyContent:'space-around'}}>          
 
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
-                     <DateTimePicker sendtimeDate={this.sendtimeDate}/>
+                     <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,data.id)}/>
                     </div>
                     <div style={{ padding :'5px'}} onClick={this.collabshow}>
                         <img src={personAdd} id="imgdashnotes" />
                     </div>
                     <div style={{ padding :'5px'}}>
                     
-                        <Color index={index} sendColor={this.getData}/>
+                        <Color index={index} sendColor={(val,index)=>this.getData(val,index,data.id)}/>
                     </div>
                     <div style={{ padding :'5px'}}>
                         <img src={galary} id="imgdashnotes" />

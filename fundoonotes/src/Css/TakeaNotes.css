@@ -95,6 +95,9 @@
     /* overflow: initial; */
     /* white-space: pre-wrap; */
     word-wrap: break-word;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: lato;
 }
 .carddiv{
     border-radius:'10px';

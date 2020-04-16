@@ -301,7 +301,8 @@ render(){
           {['Notes', 'Remainder'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)} >
               <ListItemIcon>{index % 2 === 0 ? <img src={lightbulb_black} id="imgdash"/> :
-               <img src={reminder} id="imgdash"/>}</ListItemIcon>
+              <div style={{padding : '5px'}}>
+               <img src={reminder} id="imgdash"/> </div>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

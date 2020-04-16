@@ -129,14 +129,16 @@ class NewNote extends Component {
       console.log(response);
      if (response.status === 200) {
         this.props.sendNewData();
-        this.setState({ title : '',description : '',next : true})
+        this.setState({ title : '',description : '',next : true,color :''})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
   }else
   {
-    this.setState({ title : '',description : '',next : true})
+    this.setState({ title : '',description : '',next : true,color:''})
+  document.getElementById("NoteExpand").style.background= 'white';
+
   }
 
   }
@@ -265,7 +267,7 @@ handleDelete = () => {
         {this.state.next ? 
             
             <div className="paper" >
-            <div>
+            <div className="paper">
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
             </div>
             </div>

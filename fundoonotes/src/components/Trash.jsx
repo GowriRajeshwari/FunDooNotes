@@ -12,6 +12,12 @@ import DeleteIcon from './DeleteIcon'
 require('dotenv').config();
 
 
+function searchigFor(query){
+  return function(x){
+    return x.title.toLowerCase().includes(query.toLowerCase())||x.description.toLowerCase().includes(query.toLowerCase())||!query;
+  }
+}
+
 class Trash extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +49,9 @@ class Trash extends Component {
     timepicker :'',
     dialogBoxOpen:false,
     noteIdList :[],
-    nonDeleteData:[]
+    nonDeleteData:[],
+    query : this.props.query
+
    
     };
   }
@@ -268,7 +276,7 @@ sendtrash=(val)=>{
       
     
     <div className='notescontainer'>
-    {this.state.data.map((data, index) => {
+    {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       if(data.isDeleted === true)
     return <div key={index}  
     style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  

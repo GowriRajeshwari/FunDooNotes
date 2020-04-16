@@ -97,7 +97,7 @@ class DeleteIcon extends Component {
         open={this.state.open}
         anchorEl={this.state.anchorEl}
         onClose={this.handleClick}>
-            <div style={{width : '200px',height:"20px"}} onClick={()=>this.deletebutton(this.state.id)}>
+            <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold'}} onClick={()=>this.deletebutton(this.state.id)}>
               DELETE</div>
         
         </Popover>
