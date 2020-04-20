@@ -55,6 +55,8 @@ class EditLabel extends Component {
       dialogBoxOpen: !this.state.dialogBoxOpen
     }) 
     this.componentDidMount();
+    this.props.labeldata();
+
   
   }
    handleOpen = () => {
@@ -65,9 +67,9 @@ class EditLabel extends Component {
     this.setState({setOpen : false});
   };
   Done=()=>{
-    this.handelNoteDialogBox();
-    this.setState({setOpen : false});
-    // this.props.labeldata();
+    // this.handelNoteDialogBox();
+    // this.setState({setOpen : false});
+    this.props.labeldata();
 
   }
   addlabel=()=>{
@@ -107,9 +109,7 @@ class EditLabel extends Component {
   render() {
     // const classes = useStyles();
     return (
-        <div>
         
-        <div className="modelcenter">
         <Dialog
             open={this.state.dialogBoxOpen}
             onClose={this.handelNoteDialogBox}
@@ -167,8 +167,7 @@ class EditLabel extends Component {
                   
         </div>
       </Dialog>
-      </div>
-      </div>
+    
      
     );
   }

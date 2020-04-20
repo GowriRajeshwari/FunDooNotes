@@ -152,7 +152,7 @@ const useStyles = theme => ({
         };
       }
       componentDidMount=()=>{
-    
+        console.log("fffffffffff")
         getNoteLabelList().then(response => {
           console.log(response.data.data.details);
          if (response.status === 200) {
@@ -199,15 +199,14 @@ const useStyles = theme => ({
       this.setState({choice : 'Remainder'})
     }
   }
-  // labeldata=()=>{
-  //   this.componentDidMount();
-  // }
+  labeldata=()=>{
+    this.componentDidMount();
+    this.setState({choice : ''})
+  }
   getcomponents=()=>{
 
       if(this.state.choice == 'Editlabels'){
-
-        // this.setState({choice : ''})
-        return <Edit dialogBoxOpen="true" />
+        return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
 
       }
       else if(this.state.choice == 'Notes'){

@@ -52,15 +52,15 @@ import color from '../assets/color.png'
               </div>
               </div>
               <div style={{padding : '5px'}}>
-              <div style={{backgroundColor:'#fd823b',width:'35px',height:'35px',borderRadius : '50px'}} color='#fd823b' onClick={()=>this.changeColor('#fd823b')}>
+              <div style={{backgroundColor:'#FFD700',width:'35px',height:'35px',borderRadius : '50px'}} color='#FFD700' onClick={()=>this.changeColor('#FFD700')}>
               </div>
               </div>
               <div style={{padding : '5px'}}>
-              <div style={{backgroundColor:'#ffff64',width:'35px',height:'35px',borderRadius : '50px'}} color='#ffff64' onClick={()=>this.changeColor('#ffff64')}>
+              <div style={{backgroundColor:'#FFFF66',width:'35px',height:'35px',borderRadius : '50px'}} color='#FFFF66' onClick={()=>this.changeColor('#FFFF66')}>
               </div>
               </div>
               <div style={{padding : '5px'}}>
-              <div style={{backgroundColor:'#66ff66',width:'35px',height:'35px',borderRadius : '50px'}} color='#66ff66' onClick={()=>this.changeColor('#66ff66')}>
+              <div style={{backgroundColor:'#ADFF2F',width:'35px',height:'35px',borderRadius : '50px'}} color='#ADFF2F' onClick={()=>this.changeColor('#ADFF2F')}>
               </div>
               </div>
               <div style={{padding : '5px'}}>

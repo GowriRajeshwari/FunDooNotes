@@ -431,6 +431,7 @@ archived=()=>{
                 <EditNotes data={this.state.editdata}
                 sendupdate={this.getdataupdate} />
               </Dialog>
+              {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
               </div>
     );
   }
