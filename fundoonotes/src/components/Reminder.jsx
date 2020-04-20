@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote } from '../services/notesService'
+import { getReminderNoteList,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -21,8 +21,6 @@ import DeleteIcon from './DeleteIcon'
 import DateTimePicker from './DateTimePicker'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
-import schedule from '../assets/schedule.png'
-
 
 require('dotenv').config();
 
@@ -31,7 +29,7 @@ function searchigFor(query){
     return x.title.toLowerCase().includes(query.toLowerCase())||x.description.toLowerCase().includes(query.toLowerCase())||!query;
   }
 }
-class TakeaNotes extends Component {
+class Reminder extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -44,7 +42,7 @@ class TakeaNotes extends Component {
     open:false,
     anchorEl:null,
     setAnchorEl: null,
-    date : new Date(),
+    date : '',
     datashow : false,
     date_timeshow:true,
     startdate:new Date(),
@@ -78,8 +76,8 @@ class TakeaNotes extends Component {
    d.setDate(new Date().getDate()+1)
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-    getNotes().then(response => {
-      console.log(response.data.data.data);
+    getReminderNoteList().then(response => {
+      console.log(response);
      if (response.status === 200) {
           this.setState({data : []})
         
@@ -138,14 +136,16 @@ class TakeaNotes extends Component {
       console.log(response);
      if (response.status === 200) {
         this.componentDidMount();
-        this.setState({ title : '',description : '',next : true})
+        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
      } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+
      }
   });
   }else
   {
-    this.setState({ title : '',description : '',next : true})
+    this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+
   }
 
   }
@@ -234,8 +234,11 @@ archivebutton=(data)=>{
     console.log(response);
    if (response.status === 200) {
        this.componentDidMount();
+       this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+
    } else {
-       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+    this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+
    }
 });
 }else
@@ -321,7 +324,7 @@ reminder = (reminder,id) =>{
   return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
    <Chip
     style={{width : '240px'}}
-    icon={ <img src={schedule} />}
+    icon={<FaceIcon />}
     label={reminder}
     onDelete={()=>this.handleDelete(id)}
     color="white"
@@ -353,9 +356,7 @@ sendtimeDate=(date,id)=>{
 });
 
 }
-archived=()=>{
-  this.componentDidMount();
-}
+
 
   render() {
     
@@ -429,10 +430,10 @@ archived=()=>{
             onClose={this.handelNoteDialogBox}
             >
                 <EditNotes data={this.state.editdata}
-                sendupdate={this.getdataupdate} />
+                sendupdate={this.getdataupdate}/>
               </Dialog>
               </div>
     );
   }
 }
-export default TakeaNotes;
+export default Reminder;

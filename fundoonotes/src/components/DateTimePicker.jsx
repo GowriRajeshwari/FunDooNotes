@@ -81,16 +81,16 @@ handleDateChange = (date) => {
   }
   datesave=async()=>{
     await this.setState({date : this.state.startdate.toDateString()+" " + this.state.timepicker,date_timeshow : true,dateshow : false});
-    this.props.sendtimeDate(this.state.date);
+    this.props.sendtimeDate(this.state.date.toString());
     
   }
   todaydate=async()=>{
    await this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true});
-    this.props.sendtimeDate(this.state.date);
+    this.props.sendtimeDate(this.state.date.toString());
   }
   tomorrowdate=async()=>{
     await this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true});
-    this.props.sendtimeDate(this.state.date);
+    this.props.sendtimeDate(this.state.date.toString());
 
   }
   dateshow=()=>{
@@ -98,7 +98,7 @@ handleDateChange = (date) => {
   }
  render(){
      return(
-     <div>
+     <div style={{ cursor: 'pointer'}}>
                         <img src={reminder} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
                         <Popover 
                           anchorOrigin={{
@@ -111,10 +111,11 @@ handleDateChange = (date) => {
                           }}
                         open={this.state.open}
                         anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}>
+                        onClose={this.handleClick}
+                        style={{ cursor: 'pointer'}}>
                           { this.state.dateshow ? 
                           <div>
-                            <div>
+                            <div style={{padding : '10px'}}>
                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
                             <Grid container justify="space-around">
                               <KeyboardDatePicker
@@ -144,9 +145,12 @@ handleDateChange = (date) => {
                                     step: 300, // 5 min
                                   }}
                                   onChange={this.timepicker}
+                                  style={{width : '100%'}}
                                   />
                                </MuiPickersUtilsProvider>
-                               <div onClick={this.datesave}>save</div></div>
+                               <div onClick={this.datesave}  style={{height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer',display:'flex',justifyContent:"flex-end"}}>
+                                 <div>save</div>
+                                 </div></div>
                               </div>
                               :
                           <div style={{width : '170px',height : '170px',padding : '15px'}}>

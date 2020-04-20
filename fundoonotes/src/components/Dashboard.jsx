@@ -29,6 +29,10 @@ import lightbulb_black from "../assets/lightbulb_black.png";
 import reminder from '../assets/reminder.svg'
 import delete_black from '../assets/delete_black.png'
 import download from '../assets/download.png'
+import label from '../assets/label.png'
+import Reminder from './Reminder'
+import { getNoteLabelList,addLabels } from '../services/notesService'
+
 
 const drawerWidth = 300;
 
@@ -142,9 +146,24 @@ const useStyles = theme => ({
             open : false,
              setOpen : false,
              choice:"Notes",
-             query:''
+             query:'',
+             labelData :[]
          
         };
+      }
+      componentDidMount=()=>{
+    
+        getNoteLabelList().then(response => {
+          console.log(response.data.data.details);
+         if (response.status === 200) {
+            
+            this.setState({labelData : response.data.data.details});
+           
+          
+         } else {
+             this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+         }
+      });
       }
       handleDrawerOpen = () => {
         if(this.state.open == false){
@@ -176,12 +195,20 @@ const useStyles = theme => ({
     else if(text == 'Trash'){
       this.setState({choice : 'Trash'})
     }
+    else if(text == 'Remainder'){
+      this.setState({choice : 'Remainder'})
+    }
   }
-
+  // labeldata=()=>{
+  //   this.componentDidMount();
+  // }
   getcomponents=()=>{
 
       if(this.state.choice == 'Editlabels'){
-          return <Edit/>
+
+        // this.setState({choice : ''})
+        return <Edit dialogBoxOpen="true" />
+
       }
       else if(this.state.choice == 'Notes'){
         return <TakeaNotes query={this.state.query}/>
@@ -191,6 +218,9 @@ const useStyles = theme => ({
       }
       else if(this.state.choice == 'Trash'){
         return <Trash query={this.state.query}/>
+      }
+      else if(this.state.choice == 'Remainder'){
+        return <Reminder query={this.state.query}/>
       }
   }
   queryfunction=async(event)=>{
@@ -310,6 +340,14 @@ render(){
         <Divider />
         <div style={{ padding :'15px'}}>LABELS</div>
         <List>
+          {this.state.labelData.map((text, index) => (
+            <ListItem button key={text} onClick={e => this.choice(e,text)}>
+              <ListItemIcon>{<div><img src={label} id="imgdash1"/></div>}</ListItemIcon>
+              <ListItemText primary={text.label} />
+            </ListItem>
+          ))}
+        </List>
+        <List>
           {['Edit labels'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
               <ListItemIcon>{index % 2 === 0 ? <div><img src={download} id="imgdash1"/></div> : <MailIcon />}</ListItemIcon>
@@ -337,9 +375,7 @@ render(){
         <div className={classes.drawerHeader} />
        
         {this.getcomponents()}
-        {/* {this.state.choice == 'Notes' ? <TakeaNotes/> : 
-        this.state.choice == 'Editlabels' ? <Edit query='true'/> : null}
-      */}
+       
         
       </main>
     </div>

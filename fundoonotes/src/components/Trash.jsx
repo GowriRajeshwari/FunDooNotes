@@ -8,6 +8,9 @@ import Dialog from '@material-ui/core/Dialog';
 import EditNotes from './EditNotes'
 import NewNote from './NewNote'
 import DeleteIcon from './DeleteIcon'
+import Chip from '@material-ui/core/Chip';
+import schedule from '../assets/schedule.png'
+
 
 require('dotenv').config();
 
@@ -33,7 +36,7 @@ class Trash extends Component {
     setAnchorEl: null,
     date : new Date(),
     datashow : false,
-    date_timeshow:false,
+    date_timeshow:true,
     startdate:new Date(),
     collabshow : true,
     collabatorName : '',
@@ -270,11 +273,28 @@ sendtimeDate=(date)=>{
 sendtrash=(val)=>{
   this.componentDidMount();
 }
+reminder = (reminder,id) =>{
+  if(reminder != 0 ){
+  return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
+   <Chip
+    style={{width : '240px'}}
+    icon={ <img src={schedule} />}
+    label={reminder}
+    onDelete={()=>this.handleDelete(id)}
+    color="white"
+    value={this.state.date}
+  />
+  </div>
+  }
+  else{
+    return null;
+  }
+}
   render() {
     
     return (
       
-    
+      <div className='maincontainer'>
     <div className='notescontainer'>
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       if(data.isDeleted === true)
@@ -295,9 +315,7 @@ sendtrash=(val)=>{
         onClick={()=>this.dialogboxOpen(data.title,data.description,data.id)}>
          {data.description}
         </div>
-        <div  className="typoText">
-         {data.reminder}
-        </div>
+        {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
 
         <div  className="mybuttonoverlap" >
 
@@ -323,6 +341,7 @@ sendtrash=(val)=>{
     </div>
     
     })}
+    </div>
     </div>
     );
   }

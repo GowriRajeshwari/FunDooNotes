@@ -18,6 +18,8 @@ import DateTimePicker from './components/DateTimePicker';
 import Collaborator from './components/Collaborator'
 import DeleteIcon from './components/DeleteIcon'
 import Trash from './components/Trash'
+import Reminder from './components/Reminder';
+import ListItemchecklist from './components/ListItemchecklist';
 
 
 let token =  window.location.href.split('/' )[4];
@@ -45,6 +47,10 @@ function App() {
         <Route path="/Collaborator" component={Collaborator} />
         <Route path="/DeleteIcon" component={DeleteIcon} />
         <Route path="/Trash" component={Trash} />
+        <Route path="/reminder" component={Reminder} />
+        <Route path="/ListItemchecklist" component={ListItemchecklist} />
+
+
 
 
 

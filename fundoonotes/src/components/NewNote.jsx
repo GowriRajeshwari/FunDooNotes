@@ -42,6 +42,8 @@ import EditNotes from './EditNotes'
 import DateTimePicker from './DateTimePicker'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
+import list_black from '../assets/list_black.png'
+import ListItemchecklist from './ListItemchecklist'
 
 require('dotenv').config();
 
@@ -59,7 +61,7 @@ class NewNote extends Component {
     open:false,
     anchorEl:null,
     setAnchorEl: null,
-    date : new Date(),
+    date : '',
     dateshow : false,
     date_timeshow:false,
     startdate:new Date(),
@@ -75,7 +77,8 @@ class NewNote extends Component {
     archived : false,
     timeTodayTommorow : '08:00:00',
     timepicker :'',
-    dialogBoxOpen:false
+    dialogBoxOpen:false,
+    listitem :true
    
     };
   }
@@ -92,7 +95,7 @@ class NewNote extends Component {
   }
   takeNote=(event)=>{
     event.preventDefault();
-    this.setState({next : false})
+    this.setState({next : false,listitem : true})
   }
  
   onchangeText=(event)=>{
@@ -130,14 +133,14 @@ class NewNote extends Component {
      if (response.status === 200) {
         this.props.sendNewData();
         document.getElementById("NoteExpand").style.background= 'white';
-        this.setState({ title : '',description : '',next : true,color :''})
+        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
   }else
   {
-    this.setState({ title : '',description : '',next : true,color:''})
+    this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:''})
     document.getElementById("NoteExpand").style.background= 'white';
 
   }
@@ -260,6 +263,13 @@ sendtimeDate=(date)=>{
 handleDelete = () => {
   this.setState({date : '',date_timeshow : false})
 };
+listitem=()=>{
+  this.setState({listitem : false,next : false})
+}
+sendlist=()=>{
+  this.setState({next:true})
+  this.componentDidMount()
+}
  render(){
      return(
         <div className="containerdash">
@@ -268,13 +278,16 @@ handleDelete = () => {
             <div className="paper" >
             <div className="paper">
             <Typography onClick={e => this.takeNote(e)} className="Typo">Take a Notes</Typography>
+            <div style={{ padding :'5px',display:'flex',justifyContent:'center'}} onClick={this.listitem}>
+                              <img src={list_black}  style={{width : '40px',height : '40px'}}/>
+            </div>
             </div>
             </div>
 
             
           : 
           
-             this.state.collabshow ?
+             this.state.listitem ?
              
           <div className="paper2">
              <div id="NoteExpand">
@@ -360,7 +373,9 @@ handleDelete = () => {
         </div>
         
           :
-      null
+          <div>
+                      <ListItemchecklist sendlist={this.sendlist}/>
+                      </div>
     }
     
     </div>

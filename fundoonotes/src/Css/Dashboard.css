@@ -36,6 +36,14 @@
     justify-content: space-around;
     padding:3px;
 }
+#imgdashdelete{
+    width: 20px;
+    height: 20px;
+    color:white;
+    /* align-items: center; */
+    justify-content: space-around;
+    padding:3px;
+}
 .textremainderDash{
     font-size: 20px;
     color: black;
@@ -171,7 +179,7 @@
     display: flex;
     /* justify-content: center; */
     align-items: center;
-    width : 500px;
+    width : 600px;
     color : grey;
     font-weight: bold;
 
@@ -188,13 +196,14 @@
     flex-direction: column;
 }
 .classespaper{
-    position: 'absolute';
+    /* position: 'absolute'; */
     width: 400px;
     background-color: white;
     border: '2px solid #000';
     /* boxShadow: theme.shadows[5], */
     /* padding: theme.spacing(2, 4, 3), */
     padding : 5px;
+   
    
 }
 .modelcenter{

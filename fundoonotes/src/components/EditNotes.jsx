@@ -6,7 +6,7 @@ import personAdd from '../assets/person_add.png'
 import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
-import { getNotes,updateNotes } from '../services/notesService'
+import { getNotes,updateNotes,setNotes,archiveNote } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -31,12 +31,11 @@ class EditNotes extends Component {
     next : true,
     value : '',
     show : [],
-    data:[],
     description:this.props.data.description,
     open:false,
     anchorEl:null,
     setAnchorEl: null,
-    date : new Date(),
+    date : this.props.data.reminder,
     datashow : false,
     date_timeshow:true,
     startdate:new Date(),
@@ -48,7 +47,7 @@ class EditNotes extends Component {
     originalArray : [],
     tomorrow : '',
     pined : false,
-    color : '',
+    color : this.props.data.color,
     archived : false,
     timeTodayTommorow : '08:00:00',
     timepicker :'',
@@ -98,7 +97,7 @@ class EditNotes extends Component {
      changeColor(data).then(response => {
        console.log(response);
       if (response.status === 200) {
-  
+        // this.props.sendupdate();
       } else {
           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -113,8 +112,8 @@ class EditNotes extends Component {
     this.setState({date : '',date_timeshow : false})
   };
 
-  sendtimeDate=(date,id)=>{
-  this.setState({date : date});
+  sendtimeDate=async(date,id)=>{
+  await this.setState({date : date.toString()});
     console.log(date)
     let data={
       reminder : date ,
@@ -133,12 +132,86 @@ class EditNotes extends Component {
   
   }
 
+  reminder = (reminder,id) =>{
+    if(this.state.date != 0 ){
+    return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
+     <Chip
+      style={{width : '240px'}}
+      icon={<FaceIcon />}
+      label={this.state.date}
+      onDelete={()=>this.handleDelete(id)}
+      color="white"
+      value={this.state.date}
+    />
+    </div>
+    }
+    else{
+      return null;
+    }
+  }
+
+  archivebutton=async(event)=>{
+    await this.setState({ archived : true })
+    event.preventDefault();
+    if(this.state.title !='' ){
+      const datetostring = this.state.date.toString();
+      let data = {
+        title : this.state.title,
+        description	: this.state.description,
+        isPined : this.state.pined,
+        color : this.state.color,
+        isArchived : this.state.archived,
+        labelIdList :[],
+        reminder : datetostring,
+        collaberator : this.state.originalArray
+      }
+      console.log(this.state.date)
+      console.log(data)
+  
+    setNotes(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+         this.props.sendNewData();
+        this.setState({ title : '',description : '',next : true,color : ''})
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }else
+  {
+    this.setState({ title : '',description : '',next : true})
+  }
+  }
+  archivebutton=(data)=>{
+    console.log(data.title)
+    if(data.title !='' ){
+      // {"isArchived":true,"noteIdList":["5e981759ad53b700227c5cb5"]}
+      let data1={
+        isArchived : true,
+        noteIdList : [data.id]
+      }
+      console.log(data1)
+    archiveNote(data1).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+        //  this.componentDidMount();
+        this.props.sendupdate();
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }else
+  {
+    this.setState({ title : '',description : '',next : true})
+  }
+  }
+  
   
   render(){
       return(
         
           <div className="paper3">
-             <div id="NoteExpand" style={{backgroundColor :  this.state.data.color }}>
+             <div id="NoteExpand" style={{backgroundColor :  this.state.color }}>
                <div className='showicon' style={{paddingTop : '10px'}}>
                     <TextField
                         id="standard-multiline-flexible"
@@ -169,16 +242,7 @@ class EditNotes extends Component {
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? 
-                      <Chip
-                      style={{width : '450px'}}
-                      icon={<FaceIcon />}
-                      label={this.state.data.reminder}
-                      onDelete={this.handleDelete}
-                      color="white"
-                      value={this.state.date}
-                    />
-                       : null}
+                      {this.state.date_timeshow ? this.reminder(this.state.date,this.state.data.id) : null }
                       <List>
                     {this.state.originalArray.map((originalArray, index) => (
                       <ListItem key={index}>
@@ -203,7 +267,7 @@ class EditNotes extends Component {
                     <div>
                         <img src={galary} id="imgdashnotes" />
                     </div>
-                    <div  onClick={this.archivebutton}>
+                    <div onClick={()=>this.archivebutton(this.state.data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
                     <div >
