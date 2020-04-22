@@ -23,8 +23,10 @@ import FaceIcon from '@material-ui/icons/Face';
 import list_black from '../assets/list_black.png'
 import delete1 from '../assets/delete.png';
 import add from '../assets/add.png';
+import clear from '../assets/clear.png';
 import checkboxoutline from '../assets/checkboxoutline.png';
 import checkboxtick from '../assets/checkboxtick.png';
+import LabelNotes from './LabelNotes'
 
 require('dotenv').config();
 
@@ -63,7 +65,9 @@ class ListItemchecklist extends Component {
     itemsArray:[],
     listallitems : false,
     tickboxArray:[],
-    tickbox:false
+    tickbox:false,
+    labelIdList :[],
+    labelNotes:[]
    
     };
   }
@@ -96,18 +100,42 @@ class ListItemchecklist extends Component {
   _onMouseOut=(event)=>{
     this.setState({show : false})
   }
-  close=(event)=>{
+  close=async(event)=>{
     event.preventDefault();
-    const combineArray =this.state.itemsArray.concat(this.state.tickboxArray)
+    for(let i=0;i< this.state.labelNotes.length;i++){
+      this.state.labelIdList.push( this.state.labelNotes[i].id)
+      console.log( this.state.labelNotes[i].id)
+      }
+      await this.setState({labelIdList : this.state.labelIdList})
+    const combineArray =this.state.itemsArray.concat(this.state.tickboxArray);
+    const datetostring = this.state.date.toString();
     console.log(combineArray)
     if(this.state.title !='' ){
+      const form_data = new FormData();
+      form_data.append("title", this.state.title);
+      form_data.append("description", this.state.description);
+      form_data.append("reminder", datetostring);
+      form_data.append("isPined", this.state.pined);
+      form_data.append("isArchived", this.state.archived);
+      form_data.append("color", this.state.color);
+      form_data.append("labelIdList", JSON.stringify(this.state.labelIdList));
+      form_data.append("collaberators", JSON.stringify(this.state.originalArray));
+      form_data.append("checklist", JSON.stringify(combineArray));
+
       let data = {
         title : this.state.title,
+        isPined : this.state.pined,
+        color : this.state.color,
+        isArchived : this.state.archived,
+        labelIdList :this.state.labelIdList,
+        reminder : datetostring,
+        collaberator : this.state.originalArray,
         checklist : combineArray
+
       }
       console.log(data)
   
-    setNotes(data).then(response => {
+    setNotes(form_data).then(response => {
       console.log(response);
      if (response.status === 200) {
         this.props.sendlist();
@@ -241,8 +269,12 @@ handleDelete = () => {
   this.setState({date : '',date_timeshow : false})
 };
 additem=async()=>{
+
+   let listData = { itemName: this.state.items, status: "open" };
+
+   this.state.itemsArray.push(listData)
   this.setState({listallitems : true,items:''})
-   this.state.itemsArray.push(this.state.items)
+
 
 
 }
@@ -250,12 +282,30 @@ onchangelistItem=(event)=>{
   this.setState({items : event.target.value})
 }
 checkboxoutline=async(arrayvalue)=>{
-    await this.state.tickboxArray.push(arrayvalue);
-    const index= this.state.itemsArray.indexOf(arrayvalue);
+  console.log(arrayvalue)
+    let listData = { itemName: arrayvalue, status: "open" };
+     this.state.tickboxArray.push(listData);
+     await this.setState({tickboxArray : this.state.tickboxArray })
+    const index = this.state.itemsArray.findIndex(itemsArray => itemsArray.itemName === arrayvalue);
+    // const index= this.state.itemsArray.indexOf(listData.itemName);
+    console.log(index)
     if(index > -1){
       this.state.itemsArray.splice(index,1)
     }
     this.setState({tickbox : true})
+}
+clear=()=>{
+  this.setState({items : ''})
+}
+labelNotes=(value)=>{
+  console.log(value)
+  this.setState({labelNotes : value })
+}
+handleDeletelabel=(id,index)=>{
+  if(index > -1){
+    this.state.labelNotes.splice(index,1)
+  }
+  this.setState({labelNotes : this.state.labelNotes})
 }
  render(){
      return(
@@ -286,10 +336,10 @@ checkboxoutline=async(arrayvalue)=>{
                  <div className="textdash">
 
                     <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
-                    onClick={()=>this.checkboxoutline(itemsArray)} >
+                    onClick={()=>this.checkboxoutline(itemsArray.itemName)} >
                     <img src={checkboxoutline} id="imgdashnotes" />
                     </div>
-                   <Typography onClick={e => this.takeNote(e)} className="Typo">{itemsArray}</Typography>
+                   <Typography style={{width : '100%'}}>{itemsArray.itemName}</Typography>
                     <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}>
                     <img src={delete1} id="imgdashnotes" />
                     </div>
@@ -322,36 +372,48 @@ checkboxoutline=async(arrayvalue)=>{
                       rowsMax="4"
                       size="small"
                       style={{width:'100%'}}
-                        // style={{display : 'flex',justifyContent:'center',width :'100%'}}
+                      value={this.state.items}
                         InputProps={{ disableUnderline: true }}
                          onChange={this.onchangelistItem}
                     />
                    
-                    <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}>
-                    <img src={delete1} id="imgdashnotes" />
+                    <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}
+                    onClick={this.clear}>
+                    <img src={clear} id="imgdashnotes" />
                     </div>
                     </div>
                  <Divider/>
                  
                  {this.state.tickbox ? 
-                    this.state.tickboxArray.map((tickboxArray, index) => (
-                      <List>
+                    this.state.tickboxArray.map((tickboxArray, index) => {
+                      
+                     return <List>
                  <div className="textdash">
 
                     <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}  >
                     <img src={checkboxtick} id="imgdashnotes" />
                     </div>
-                   <Typography onClick={e => this.takeNote(e)} className="Typo" style={{textDecoration : 'line-through'}}>{tickboxArray}</Typography>
+                   <Typography  style={{width : '100%',textDecoration : 'line-through'}}>{tickboxArray.itemName}</Typography>
                     <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}>
                     <img src={delete1} id="imgdashnotes" />
                     </div>
                     </div>
 
                     </List>
-                    ))
+                    })
 
                     : null}
-
+                    {this.state.labelNotes.map((labelNotes, index) => (
+                        
+                        <Chip key={index}
+                        style={{width : '240px'}}
+                        label={labelNotes.label}
+                        onDelete={()=>this.handleDeletelabel(labelNotes.id,index)}
+                        color="white"
+                        value={this.state.date}
+                      />
+                      
+                      ))}
                    <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
                  <DateTimePicker sendtimeDate={this.sendtimeDate}/>
                  <div  onClick={this.collabshow}>
@@ -367,9 +429,8 @@ checkboxoutline=async(arrayvalue)=>{
                  <div  onClick={this.archivebutton}>
                      <img src={download} id="imgdashnotes" />
                  </div>
-                 <div >
-                     <img src={setting} id="imgdashnotes" />
-                 </div> 
+                 <LabelNotes labelNotes={this.labelNotes}/>
+ 
                  <div style={{display : 'flex',justifyContent :'center'}}>
                  <Button size="small"  onClick={e => this.close(e)}>Close</Button>
                  </div>

@@ -44,6 +44,7 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import list_black from '../assets/list_black.png'
 import ListItemchecklist from './ListItemchecklist'
+import LabelNotes from './LabelNotes'
 
 require('dotenv').config();
 
@@ -78,7 +79,9 @@ class NewNote extends Component {
     timeTodayTommorow : '08:00:00',
     timepicker :'',
     dialogBoxOpen:false,
-    listitem :true
+    listitem :true,
+    labelIdList :[],
+    labelNotes:[]
    
     };
   }
@@ -111,37 +114,43 @@ class NewNote extends Component {
   _onMouseOut=(event)=>{
     this.setState({show : false})
   }
-  close=(event)=>{
+  close=async(event)=>{
     event.preventDefault();
+    for(let i=0;i< this.state.labelNotes.length;i++){
+      this.state.labelIdList.push( this.state.labelNotes[i].id)
+      console.log( this.state.labelNotes[i].id)
+      }
+       this.setState({labelIdList : this.state.labelIdList})
     if(this.state.title !='' ){
       const datetostring = this.state.date.toString();
-      let data = {
-        title : this.state.title,
-        description	: this.state.description,
-        isPined : this.state.pined,
-        color : this.state.color,
-        isArchived : this.state.archived,
-        labelIdList :[],
-        reminder : datetostring,
-        collaberator : this.state.originalArray
-      }
-      console.log(this.state.date)
-      console.log(data)
+      const form_data = new FormData();
+      form_data.append("title", this.state.title);
+      form_data.append("description", this.state.description);
+      form_data.append("reminder", datetostring);
+      form_data.append("isPined", this.state.pined);
+      form_data.append("isArchived", this.state.archived);
+      form_data.append("color", this.state.color);
+      form_data.append("labelIdList", JSON.stringify(this.state.labelIdList));
+      form_data.append("collaberators", JSON.stringify(this.state.originalArray));
+     
+      console.log(form_data)
 
-    setNotes(data).then(response => {
+    setNotes(form_data).then(response => {
       console.log(response);
      if (response.status === 200) {
         this.props.sendNewData();
         document.getElementById("NoteExpand").style.background= 'white';
-        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: '',labelNotes : [],labelIdList:[]})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
+  // this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:'',labelIdList:[]})
+
   }else
   {
-    this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:''})
     document.getElementById("NoteExpand").style.background= 'white';
+    this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:'',labelIdList:[],labelNotes:[]})
 
   }
 
@@ -228,7 +237,7 @@ archivebutton=async(event)=>{
       isPined : this.state.pined,
       color : this.state.color,
       isArchived : this.state.archived,
-      labelIdList :[],
+      labelIdList :this.state.labelIdList,
       reminder : datetostring,
       collaberator : this.state.originalArray
     }
@@ -263,12 +272,23 @@ sendtimeDate=(date)=>{
 handleDelete = () => {
   this.setState({date : '',date_timeshow : false})
 };
+
 listitem=()=>{
   this.setState({listitem : false,next : false})
 }
 sendlist=()=>{
   this.setState({next:true})
-  this.componentDidMount()
+  this.props.sendNewData();
+}
+labelNotes=(value)=>{
+  console.log(value)
+  this.setState({labelNotes : value })
+}
+handleDeletelabel=(id,index)=>{
+  if(index > -1){
+    this.state.labelNotes.splice(index,1)
+  }
+  this.setState({labelNotes : this.state.labelNotes})
 }
  render(){
      return(
@@ -343,6 +363,20 @@ sendlist=()=>{
                       </ListItem>
                     ))}
                     </List>
+                    <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'100%',padding : '5px'}}>
+                      {this.state.labelNotes.map((labelNotes, index) => (
+                        <div style={{padding : '5px'}}>
+                      <Chip key={index}
+                      style={{width : 'auto'}}
+                      label={labelNotes.label}
+                      onDelete={()=>this.handleDeletelabel(labelNotes.id,index)}
+                      color="white"
+                      value={this.state.date}
+                    />
+                    </div>
+                    
+                    ))}
+                    </div>
                       <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
                     <DateTimePicker sendtimeDate={this.sendtimeDate}/>
                     <div  onClick={this.collabshow}>
@@ -358,9 +392,7 @@ sendlist=()=>{
                     <div  onClick={this.archivebutton}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <div >
-                        <img src={setting} id="imgdashnotes" />
-                    </div> 
+                    <LabelNotes labelNotes={this.labelNotes}/>
                     <div style={{display : 'flex',justifyContent :'center'}}>
                     <Button size="small"  onClick={e => this.close(e)}>Close</Button>
                     </div>

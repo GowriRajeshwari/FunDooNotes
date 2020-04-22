@@ -46,7 +46,7 @@ import checkboxtick from '../assets/checkboxtick.png';
 require('dotenv').config();
 
 
-class DeleteIcon extends Component {
+class LabelNotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,17 +58,26 @@ class DeleteIcon extends Component {
         data : [],
         checked:false,
         setChecked : true,
-        activeCheckboxes: [],
-        noteLabel : this.props.noteLabel
+        labelNotes:[],
+        activeCheckboxes :[]
 
 
     };
   }
 
   componentDidMount=()=>{
-
     
-  
+    getNoteLabelList().then(response => {
+      // console.log(response.data.data.details);
+     if (response.status === 200) {
+        
+        this.setState({data : response.data.data.details});
+       
+      
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
   }
 
   handleClick = (event) => {
@@ -97,20 +106,7 @@ class DeleteIcon extends Component {
   });
   
   }
-  addLabelButton=async()=>{
-    console.log(this.state.noteLabel)
-    for(let i=0;i<this.state.noteLabel.length;i++){
-        this.state.activeCheckboxes.push(this.state.noteLabel[i].id)
-        this.setState({activeCheckboxes : this.state.activeCheckboxes})
-    }
-  
-   await getNoteLabelList().then(response => {
-     if (response.status === 200) {
-        this.setState({data : response.data.data.details});
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
+  addLabelButton=()=>{
     this.setState({addlabel : true })
  
   }
@@ -122,53 +118,35 @@ class DeleteIcon extends Component {
     this.setState({checked : !this.state.checked})
     // this.state.setChecked(event.target.this.state.checked);
   }
-  checkboxoutline=(id,labelId)=>{
-    // this.setState({checked : !this.state.checked})
-   console.log(this.state.checked)
-  //   addlabelNotes(id,labelId).then(response => {
-  //     console.log(response);
-  //    if (response.status === 200) {
-  //        this.props.sendtrash(true);
-  //    } else {
-  //        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-  //    }
-  // });
-
+  checkboxoutline=(data,index)=>{
+    this.state.labelNotes.push(data);
+    this.props.labelNotes(this.state.labelNotes);
   }
-  handleCheck=(labelId,id)=> {
+  handleCheck=(data,labelId)=> {
     let found = this.state.activeCheckboxes.includes(labelId)
     if (found) {
       this.setState({ 
         activeCheckboxes: this.state.activeCheckboxes.filter(x => x !== labelId)
       })
-      deletelabelNotes(id,labelId).then(response => {
-        console.log(response);
-       if (response.status === 200) {
-           this.props.sendtrash(true);
-       } else {
-           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-       }
-    });
+      const index = this.state.labelNotes.findIndex(labelNotes => labelNotes.id === labelId);
+    console.log(index,labelId)
+    if(index > -1){
+      this.state.labelNotes.splice(index,1)
+    }
+    this.setState({labelNotes : this.state.labelNotes})
+      this.props.labelNotes(this.state.labelNotes);
 
     } else {
       this.setState({ 
         activeCheckboxes: [ ...this.state.activeCheckboxes, labelId ]
       })
-
-      addlabelNotes(id,labelId).then(response => {
-        console.log(response);
-       if (response.status === 200) {
-           this.props.sendtrash(true);
-       } else {
-           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-       }
-    });
+      this.state.labelNotes.push(data);
+      this.props.labelNotes(this.state.labelNotes);
     }
   }
-
  render(){
      return(
-        <div style={{ padding :'5px'}}  >
+        <div >
         <img src={setting} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
         <Popover 
           anchorOrigin={{
@@ -190,16 +168,39 @@ class DeleteIcon extends Component {
                             <div style={{padding : '10px'}}>
                                <MuiPickersUtilsProvider utils={DateFnsUtils} >
                                  <Typography onClick={()=>this.backbutton()}>Label Note</Typography>
-                                 { this.state.data.map((data, index) => (
+                                 {/* { this.state.data.map((data, index) => (
+                                    <List>
+                                  <div className="textdash" key={index}>
+
+                                  {this.state.checked ? <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}  >
+                                <img src={checkboxtick} id="imgdashnotes" />
+                                </div> : 
+                                <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
+                               >
+                               {/* <Checkbox
+                                 checked={this.state.checked}
+                                 onChange={this.handleChange}
+                                 inputProps={{ 'aria-label': 'primary checkbox' }}
+                               /> */}
+                 
+                               {/* <img src={checkboxoutline} id="imgdashnotes" /> */}
+                               {/* </div> */}
+                                {/* }  */}
+                                { this.state.data.map((data, index) => (
                                     <List>
                                   <div className="textdash">
                                 <Checkbox
                                   label={data.label}
-                                  onChange={() => this.handleCheck(data.id,this.state.id)}
+                                  onChange={() => this.handleCheck(data,data.id)}
                                   checked={this.state.activeCheckboxes.includes(data.id)}
                                 />
                                 }
-                                  <Typography style={{width : '100%'}}>{data.label}</Typography>
+
+                                  
+
+                                  <Typography style={{width : '100%'}}  
+                                  onClick={()=>this.checkboxoutline(data)}>{data.label}</Typography>
+                                  
                                   </div>
 
                                   </List>
@@ -210,9 +211,7 @@ class DeleteIcon extends Component {
                               </div>
                               :
                               <div>
-                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
-                              onClick={()=>this.deletebutton(this.state.id)}>
-                              DELETE</div>
+                             
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
                                onClick={()=>this.addLabelButton()}>
                               ADD LABEL</div>
@@ -224,4 +223,4 @@ class DeleteIcon extends Component {
     </div> 
      )}}
 
-     export default DeleteIcon;
+     export default LabelNotes;

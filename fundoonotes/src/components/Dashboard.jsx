@@ -30,6 +30,7 @@ import reminder from '../assets/reminder.svg'
 import delete_black from '../assets/delete_black.png'
 import download from '../assets/download.png'
 import label from '../assets/label.png'
+import listview from '../assets/listview.png'
 import Reminder from './Reminder'
 import { getNoteLabelList,addLabels } from '../services/notesService'
 
@@ -147,7 +148,8 @@ const useStyles = theme => ({
              setOpen : false,
              choice:"Notes",
              query:'',
-             labelData :[]
+             labelData :[],
+             gridView : false
          
         };
       }
@@ -207,10 +209,11 @@ const useStyles = theme => ({
 
       if(this.state.choice == 'Editlabels'){
         return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
+        // this.props.dialogbox();
 
       }
       else if(this.state.choice == 'Notes'){
-        return <TakeaNotes query={this.state.query}/>
+        return <TakeaNotes query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
         return <Archived query={this.state.query}/>
@@ -225,6 +228,11 @@ const useStyles = theme => ({
   queryfunction=async(event)=>{
     await this.setState({query : event.target.value});
    //  <Tableadmin query={this.state.query}/>
+ }
+ gridview=async()=>{
+  await this.setState({gridView : !this.state.gridView})
+  // console.log(this.state.gridView)
+  // alert(this.state.gridView)
  }
 render(){
     const {classes} = this.props;
@@ -291,11 +299,11 @@ render(){
                           size="medium"
                           color="black"
                           aria-label="open drawer"
-                          onClick={this.handleDrawerOpen}
+                          onClick={this.gridview}
                           edge="start"
                           className={clsx(classes.menuButton, this.state.open)}
                         >
-                             <img src={list} id="imgdash" />
+                             {this.state.gridView ? <img src={list} id="imgdash" /> : <img src={listview} id="imgdash" />}
                          </IconButton>
                          <IconButton
                           size="medium"

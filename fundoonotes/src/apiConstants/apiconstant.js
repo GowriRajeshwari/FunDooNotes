@@ -17,4 +17,8 @@ module.exports = {
     REACT_APP_GETNOTELABELLIST : "/noteLabels/getNoteLabelList",
     REACT_APP_NOTELABELS : "/noteLabels",
     REACT_APP_DELETENOTELABEL : "/deleteNoteLabel",
+    REACT_APP_ADDLABELNOTES : "/addLabelToNotes",
+    REACT_APP_ADDONLY : "/add",
+    REACT_APP_SERVICE : "/user/service"
+
 }

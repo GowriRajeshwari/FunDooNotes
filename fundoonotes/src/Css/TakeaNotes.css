@@ -29,7 +29,7 @@
     flex-wrap: wrap;
     justify-content: center; */
     align-content: stretch;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: stretch;
     flex-direction: row;
     box-sizing: border-box;
@@ -51,9 +51,18 @@
         /* max-width: 300px; */
 }
 
-  #mydivouter{
-      padding : 10px;
-      width: 190px;
+  .mydivouter{
+      /* padding : 10px; */
+      width: 255px;
+    position:relative;
+    border-radius:20px;
+    border: 0.1px solid grey;
+    /* margin: 0 auto; */
+    /* background-color: greenyellow; */
+    }
+    .mydivoutergrid{
+      /* padding : 10px; */
+      width: 550px;
     position:relative;
     border-radius:20px;
     border: 0.1px solid grey;
@@ -74,6 +83,11 @@
     visibility: visible;
     
     }
+    .mydivoutergrid:hover .mybuttonoverlap{ 
+        display:block;
+        visibility: visible;
+        
+        }
 .iconbtn{
     border: none;
     background-color: white;

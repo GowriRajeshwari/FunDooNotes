@@ -20,6 +20,7 @@ import DeleteIcon from './components/DeleteIcon'
 import Trash from './components/Trash'
 import Reminder from './components/Reminder';
 import ListItemchecklist from './components/ListItemchecklist';
+import LabelNotes from './components/LabelNotes';
 
 
 let token =  window.location.href.split('/' )[4];
@@ -31,14 +32,14 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={Login} />
+        <Route path="/Service" exact component={service} />
+        <Route path="/"  component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
         <Route path={resetpassword} component={ResetPassword} />
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/TakeaNotes" component={TakeaNotes} />
         <Route path="/EditLabel" component={EditLabel} />
-        <Route path="/Service" component={service} />
         <Route path="/Archived" component={Archived} />
         <Route path="/color" component={Color} />
         <Route path="/EditNotes" component={EditNotes} />
@@ -48,6 +49,7 @@ function App() {
         <Route path="/DeleteIcon" component={DeleteIcon} />
         <Route path="/Trash" component={Trash} />
         <Route path="/reminder" component={Reminder} />
+        <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
 
 

@@ -4,7 +4,8 @@ const access_token = localStorage.getItem("id");
 //get user notes
 export async function getNotes() {
     try {
-      const response = await axios.get(process.env.REACT_APP_BASEURL + apiconstant.REACT_APP_GETNOTES , {params : { access_token }},
+      const response = await axios.get(process.env.REACT_APP_BASEURL + apiconstant.REACT_APP_GETNOTES , 
+        {params : { access_token }},
       );
       return response;
     } catch (error) {
@@ -155,5 +156,37 @@ export async function setNotes(data) {
       return error;
     }
   }
-
-  
+  export async function addlabelNotes(id,labelID) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+"/notes/"+
+        id+apiconstant.REACT_APP_ADDLABELNOTES + "/" + labelID +"/add?access_token="+ access_token ,
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+  export async function deletelabelNotes(id,labelID) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+"/notes/"+
+        id+apiconstant.REACT_APP_ADDLABELNOTES + "/" + labelID +"/remove?access_token="+ access_token ,
+      );
+      console.log(response);
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+  export async function service() {
+    try {
+      const response = await axios.get(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_SERVICE, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }

@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote } from '../services/notesService'
+import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -22,6 +22,8 @@ import DateTimePicker from './DateTimePicker'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import schedule from '../assets/schedule.png'
+import { Typography } from "@material-ui/core";
+import List from '@material-ui/core/List';
 
 
 require('dotenv').config();
@@ -64,16 +66,24 @@ class TakeaNotes extends Component {
     noteIdList :[],
     nonDeleteData:[],
     query : this.props.query,
-    editdata : []
-   
+    editdata : [],
+    noteLabels:[]
+      
     };
   }
+
+  // componentWillReceiveProps(nextProps){
+  //   const {gridView} = this.props
+  //   if(nextProps.gridView !== gridView){
+  //     this.setState({ gridView })
+  //   }
+  // }
  
    handleDateChange = (date) => {
     this.setState({date : date})
   };
   componentDidMount=()=>{
-   
+  //  this.setState({gridView : this.props.gridView})
    var d =new Date();
    d.setDate(new Date().getDate()+1)
     console.log(d.getTime())
@@ -93,6 +103,11 @@ class TakeaNotes extends Component {
         }
         this.setState({data : this.state.data})
         console.log(this.state.data);
+        // for(let i=0;i<response.data.data.data.length;i++){
+        //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
+        // }
+        // this.setState({noteLabels : this.state.noteLabels})
+        // console.log(this.state.noteLabels);
       
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -356,7 +371,17 @@ sendtimeDate=(date,id)=>{
 archived=()=>{
   this.componentDidMount();
 }
-
+handleDeletelabel=(labelId,id)=>{
+  console.log(labelId,id)
+  deletelabelNotes(id,labelId).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+      this.componentDidMount()
+  } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+}
   render() {
     
     return (
@@ -368,7 +393,7 @@ archived=()=>{
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'20px',cursor:'pointer',padding:'20px'}} >  
-      <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
+      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color }}>
       <div style={{padding : '10px'}}>
         <div className='showicon'>
                       <div  className="typoText">
@@ -384,7 +409,36 @@ archived=()=>{
          {data.description}
         </div> 
         {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
-         
+         { data.noteCheckLists.map((notelist, index) => (
+          //  console.log(noteCheckLists)
+                      <List>
+                 <div className="textdash">
+
+                   <Typography style={{width : '100%'}}>{notelist.itemName}</Typography>
+                   
+                    </div>
+
+                    </List>
+                    ))
+
+                   } 
+                 <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'190px',padding : '5px'}}>
+
+                   { data.noteLabels.map((labelNotes, index) => (
+                      
+                    <div style={{padding : '5px'}}>
+                    <Chip key={index}
+                      style={{width : 'auto'}}
+                      label={labelNotes.label}
+                      onDelete={()=>this.handleDeletelabel(labelNotes.id,data.id)}
+                      color="white"
+                      value={this.state.date}
+                    />
+                    </div>
+                    ))
+                   } 
+
+                   </div>
 
         <div  className="mybuttonoverlap" >
 
@@ -408,7 +462,7 @@ archived=()=>{
                     <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <DeleteIcon id={data.id} sendtrash={this.sendtrash}/>
+                    <DeleteIcon id={data.id} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
 
