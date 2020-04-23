@@ -65,12 +65,6 @@ class DeleteIcon extends Component {
     };
   }
 
-  componentDidMount=()=>{
-
-    
-  
-  }
-
   handleClick = (event) => {
     this.setState({
       anchorEl: event.currentTarget,

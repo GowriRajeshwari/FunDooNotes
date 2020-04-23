@@ -283,7 +283,7 @@ onchangelistItem=(event)=>{
 }
 checkboxoutline=async(arrayvalue)=>{
   console.log(arrayvalue)
-    let listData = { itemName: arrayvalue, status: "open" };
+    let listData = { itemName: arrayvalue, status: "close" };
      this.state.tickboxArray.push(listData);
      await this.setState({tickboxArray : this.state.tickboxArray })
     const index = this.state.itemsArray.findIndex(itemsArray => itemsArray.itemName === arrayvalue);

@@ -32,6 +32,7 @@ import download from '../assets/download.png'
 import label from '../assets/label.png'
 import listview from '../assets/listview.png'
 import Reminder from './Reminder'
+import Logout from './Logout'
 import { getNoteLabelList,addLabels } from '../services/notesService'
 
 
@@ -149,7 +150,8 @@ const useStyles = theme => ({
              choice:"Notes",
              query:'',
              labelData :[],
-             gridView : false
+             gridView : false,
+             profile:false
          
         };
       }
@@ -234,6 +236,9 @@ const useStyles = theme => ({
   // console.log(this.state.gridView)
   // alert(this.state.gridView)
  }
+ profile=()=>{
+      this.setState({profile : !this.state.profile})
+ }
 render(){
     const {classes} = this.props;
   return (
@@ -305,18 +310,9 @@ render(){
                         >
                              {this.state.gridView ? <img src={list} id="imgdash" /> : <img src={listview} id="imgdash" />}
                          </IconButton>
-                         <IconButton
-                          size="medium"
-                          color="black"
-                          aria-label="open drawer"
-                          onClick={this.handleDrawerOpen}
-                          edge="start"
-                          className={clsx(classes.menuButton, this.state.open)}
-                        >
-                          <Avatar>
-                          
-                            </Avatar>
-                        </IconButton>
+
+                       
+                      <Logout/>
 
                      </div>
                     

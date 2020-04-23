@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import service from './components/service';
 import history from "./history";
 import Login from './components/Login';
 import Register from './components/Register';
@@ -10,7 +11,6 @@ import Dashboard from './components/Dashboard';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
 import EditNotes from './components/EditNotes';
-import service from './components/service';
 import Archived from './components/Archived';
 import Color from './components/Color';
 import NewNote from './components/NewNote';
@@ -21,6 +21,7 @@ import Trash from './components/Trash'
 import Reminder from './components/Reminder';
 import ListItemchecklist from './components/ListItemchecklist';
 import LabelNotes from './components/LabelNotes';
+import Logout from './components/Logout';
 
 
 let token =  window.location.href.split('/' )[4];
@@ -32,8 +33,8 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/Service" exact component={service} />
-        <Route path="/"  component={Login} />
+        <Route path="/" exact component={service} />
+        <Route path="/login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
         <Route path={resetpassword} component={ResetPassword} />
@@ -48,6 +49,7 @@ function App() {
         <Route path="/Collaborator" component={Collaborator} />
         <Route path="/DeleteIcon" component={DeleteIcon} />
         <Route path="/Trash" component={Trash} />
+        <Route path="/logout" component={Logout} />
         <Route path="/reminder" component={Reminder} />
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />

@@ -54,7 +54,7 @@ class ResetPassword extends Component {
                     //  localStorage.setItem("id", response.data.id);
                     
                     this.props.history.push({
-                        pathname: "/",
+                        pathname: "/login",
                     });
                } else {
                    this.setState({  snackbarmsg: "Password not successfull", snackbaropen: true });

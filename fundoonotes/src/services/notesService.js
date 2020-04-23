@@ -190,3 +190,14 @@ export async function setNotes(data) {
       return error;
     }
   }
+  export async function logout(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_LOGOUT,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+  
