@@ -200,4 +200,35 @@ export async function setNotes(data) {
       return error;
     }
   }
+   export async function fileUpload(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_UPLOADPROFILEIMAGE,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  export async function AddcollaboratorsNotes(data,id) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL +"/notes/"+ id +"/"+ apiconstant.REACT_APP_AddcollaboratorsNotes,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
   
+  export async function removeCollaboratorsNotes(noteId,mailId) {
+    try {
+      const response = await axios.delete(process.env.REACT_APP_BASEURL +"/notes/"+ noteId +"/"+ apiconstant.REACT_APP_removeCollaboratorsNotes +"/"+mailId, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }

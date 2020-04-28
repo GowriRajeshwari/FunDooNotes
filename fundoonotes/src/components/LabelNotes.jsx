@@ -191,6 +191,7 @@ class LabelNotes extends Component {
                                   <div className="textdash">
                                 <Checkbox
                                   label={data.label}
+                                  inputProps={{ 'aria-label': 'checkbox with default color' }}
                                   onChange={() => this.handleCheck(data,data.id)}
                                   checked={this.state.activeCheckboxes.includes(data.id)}
                                 />

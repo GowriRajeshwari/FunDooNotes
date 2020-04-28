@@ -19,6 +19,10 @@ import DateTimePicker from './DateTimePicker'
 import { changeColor , updateReminderNotes} from '../services/notesService'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
+import { Typography } from "@material-ui/core";
+import Divider from '@material-ui/core/Divider';
+import Popover from '@material-ui/core/Popover';
+import {searchUserList,AddcollaboratorsNotes,removeCollaboratorsNotes} from '../services/notesService'
 
 
 require('dotenv').config();
@@ -42,7 +46,7 @@ class EditNotes extends Component {
     collabshow : true,
     collabatorName : '',
     details : [],
-    collabatorArray:[],
+    collabatorArray:this.props.data.collaborators,
     collabatorValue :'',
     originalArray : [],
     tomorrow : '',
@@ -54,7 +58,18 @@ class EditNotes extends Component {
     dialogBoxOpen:false,
     noteId:'',
     data:this.props.data,
-    title:this.props.data.title
+    title:this.props.data.title,
+    choice : this.props.choice,
+    data1:[],
+    collabatorName1 :'',
+    details1:[],
+    anchorEl1:false,
+    open1:false,
+    profileImage1 :'',
+    email1 : '',
+    firstName1 : '',
+    capitalInitial1 :'',
+    fullDetails1 :this.props.data.collaborators
     };
   }
   onchangeText=(event)=>{
@@ -206,84 +221,269 @@ class EditNotes extends Component {
   }
   }
   
+
+
+  componentDidMount=()=>{
+    const profileImage1 = localStorage.getItem("userProfile");
+    const email =  localStorage.getItem("email");
+    const firstName = localStorage.getItem("firstName");
+    this.setState({email1 : email,firstName1 : firstName,profileImageFromRes1 : profileImage1 })
+  
+  }
+  onchangecollabator=async(event)=>{
+    // event.preventDefault()
+    event.persist()
+    await this.setState({
+       collabatorName1: event.target.value  
+   })
+   let data = {
+     searchWord : this.state.collabatorName1
+   }
+   const form_data = new FormData();
+   form_data.append("searchWord", this.state.collabatorName1);
+
+   console.log(form_data)
+   searchUserList(data).then(response => {
+     console.log(response);
+    if (response.status === 200) {
+      this.setState({
+        anchorEl1: event.currentTarget,
+        open1: true
+    });
+       this.setState({ details1 : response.data.data.details})
+      
+    
+    } else {
+    }
+  });
+  }
+  collabatorClick=(dat,fullDetails,id)=>{
+    console.log(dat,fullDetails)
+    const res = dat.charAt(0).toUpperCase();
+      this.setState({
+        open1 : false,collabatorValue1: dat,capitalInitial1 : res
+    })
+    // this.state.collabatorArray1.push(dat)
+    this.state.fullDetails1.push(fullDetails)
+  //   let data={
+
+  //   }
+    AddcollaboratorsNotes(fullDetails,id).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+        // this.componentDidMount()
+    } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+
+  }
+  showingCollabator=(event)=>{
+      this.setState({
+          anchorEl1: event.currentTarget,
+          open1: true
+      });
+  }
+  handleClick = (event) => {
+    // console.log("entered")
+    this.setState({
+      anchorEl1: event.currentTarget,
+      open1: !this.state.open
+  });
+  }
+  collabsave=()=>{
+    this.setState({collabshow1 : false,originalArray1 : this.state.collabatorArray1})
+    this.props.sendupdate();
+  }
+  deleteCollabator=(data,fullData,id)=>{
+    // console.log(id,fullData.userId)
+    const index = this.state.fullDetails1.findIndex(fullDetails1 => fullDetails1.firstName === data);
+      // console.log(index)
+      if(index > -1){
+        this.state.fullDetails1.splice(index,1)
+      }
+      this.setState({fullDetails1 : this.state.fullDetails1})
+
+      removeCollaboratorsNotes(id,fullData.userId).then(response => {
+        console.log(response);
+       if (response.status === 200) {
+          // this.componentDidMount()
+      } else {
+           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+       }
+    });
+  }
   
   render(){
       return(
-        
+        <div>
+        {this.state.choice == 'editNotes' ?
           <div className="paper3">
-             <div id="NoteExpand" style={{backgroundColor :  this.state.color }}>
-               <div className='showicon' style={{paddingTop : '10px'}}>
+          <div id="NoteExpand" style={{backgroundColor :  this.state.color }}>
+            <div className='showicon' style={{paddingTop : '10px'}}>
+                 <TextField
+                     id="standard-multiline-flexible"
+                     placeholder="Title"
+                     multiline
+                     rowsMax="4"
+                     size="small"
+                     style={{width:'100%'}}
+                     value={this.state.title}
+                     onChange={this.onChangeTitle}
+                     InputProps={{ disableUnderline: true }}
+                   />
+                   <div style={{ padding :'5px'}}>
+                           <img src={pin} id="imgdashnotes" />
+                   </div>
+                 
+                 </div>
+                 <div style={{paddingTop : '20px'}}>
+                     <TextField
+                     id="standard-multiline-flexible"
+                     placeholder="Take a Note"
+                     multiline
+                     rowsMax="4"
+                     size="small"
+                     style={{width:'100%'}}
+                     value={this.state.description}
+                     onChange={this.onchangeText}
+                     InputProps={{ disableUnderline: true }}
+                   />
+                   </div>
+                   {this.state.date_timeshow ? this.reminder(this.state.date,this.state.data.id) : null }
+                   <List>
+                 {this.state.originalArray.map((originalArray, index) => (
+                   <ListItem key={index}>
+                     <ListItemAvatar>
+                       <Avatar >
+                         <PersonIcon />
+                       </Avatar>
+                     </ListItemAvatar>
+                     <ListItemText primary={originalArray} />
+                     
+                   </ListItem>
+                 ))}
+                 </List>
+                   <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
+                   <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,this.state.data.id)}/>
+                 <div  onClick={this.collabshow}>
+                     <img src={personAdd} id="imgdashnotes" />
+                 </div>
+                 <div >
+                 <Color sendColor={this.getData}/>
+                 </div>
+                 <div>
+                     <img src={galary} id="imgdashnotes" />
+                 </div>
+                 <div onClick={()=>this.archivebutton(this.state.data)}>
+                     <img src={download} id="imgdashnotes" />
+                 </div>
+                 <div >
+                     <img src={setting} id="imgdashnotes" />
+                 </div> 
+                 <div style={{display : 'flex',justifyContent :'center'}}>
+                 <Button size="small"  onClick={e => this.close(e)}>Close</Button>
+                 </div>
+                 </div>
+
+                           
+                 
+
+               </div>
+     </div>
+    : 
+    <div>
+        <Paper className="paper4">
+          <div style={{padding : '10px'}}>Collaborators</div>
+          <Divider/>
+          <div style={{padding : '5px'}}>
+          <form style={{display : 'flex',flexDirection : 'row',padding : '10px'}} >
+            
+               <img 
+               src={this.state.profileImageFromRes1  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes1 }
+                style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px'}}/>
+               
+                        <div style={{display : 'flex',flexDirection : 'column',justifyContent : 'center',marginLeft : '15px'}}>
+                        <Typography>{this.state.email1}</Typography>
+                        <Typography>{this.state.firstName1}</Typography>
+
+                        </div>
+                        </form>
+           </div>
+                        <div >
+                        <List>
+                    {this.state.fullDetails1.map((fullDetails, index) => (
+                      <ListItem key={index}>
+                        <ListItemAvatar>
+                  <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                  justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                  boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                    <div>{fullDetails.firstName.charAt(0).toUpperCase()}</div>
+                    </div>
+                
+                        </ListItemAvatar>
+                        <ListItemText primary={fullDetails.firstName} />
+                        <div onClick={() => this.deleteCollabator(fullDetails.firstName,fullDetails,this.state.data.id)}>X</div>
+                      </ListItem>
+                    ))}
+                    </List>
+                    <div style={{display : 'flex',flexDirection : 'row',justifyContent:'center',alignItems : 'center',padding : '15px'}}>
+                    <Avatar >
+                            <PersonIcon />
+                          </Avatar>
                     <TextField
                         id="standard-multiline-flexible"
-                        placeholder="Title"
+                        placeholder="Emails"
                         multiline
                         rowsMax="4"
                         size="small"
-                        style={{width:'100%'}}
-                        value={this.state.title}
-                        onChange={this.onChangeTitle}
-                        InputProps={{ disableUnderline: true }}
-                      />
-                      <div style={{ padding :'5px'}}>
-                              <img src={pin} id="imgdashnotes" />
-                      </div>
-                    
-                    </div>
-                    <div style={{paddingTop : '20px'}}>
-                        <TextField
-                        id="standard-multiline-flexible"
-                        placeholder="Take a Note"
-                        multiline
-                        rowsMax="4"
-                        size="small"
-                        style={{width:'100%'}}
-                        value={this.state.description}
-                        onChange={this.onchangeText}
+                        style={{width:'100%',paddingLeft : '15px'}}
+                        value={this.state.collabatorName1}
+                        onChange={this.onchangecollabator}
+                        // onClick={e => this.showingCollabator(e)}
                         InputProps={{ disableUnderline: true }}
                       />
                       </div>
-                      {this.state.date_timeshow ? this.reminder(this.state.date,this.state.data.id) : null }
-                      <List>
-                    {this.state.originalArray.map((originalArray, index) => (
-                      <ListItem key={index}>
+                       <div onClick={()=>this.collabsave(this.state.data.id)} style={{padding : '10px'}}>save</div>
+                      </div>
+                  
+         
+
+        </Paper>
+        <Popover 
+                          anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'center',
+                          }}
+                          transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'center',
+                          }}
+                        open={this.state.open1}
+                        anchorEl={this.state.anchorEl1}
+                        onClose={this.handleClick}>
+                          
+                    {this.state.details1.map((details, index) => (
+                       <List key={index}>
+                      <ListItem button onClick={() => this.collabatorClick(details.firstName,details,this.state.data.id)} >
                         <ListItemAvatar>
                           <Avatar >
                             <PersonIcon />
                           </Avatar>
                         </ListItemAvatar>
-                        <ListItemText primary={originalArray} />
-                        
+                        <ListItemText primary={details.firstName} />
+                        <ListItemText primary={details.email} />
+
                       </ListItem>
+                      </List>
                     ))}
-                    </List>
-                      <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
-                      <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,this.state.data.id)}/>
-                    <div  onClick={this.collabshow}>
-                        <img src={personAdd} id="imgdashnotes" />
-                    </div>
-                    <div >
-                    <Color sendColor={this.getData}/>
-                    </div>
-                    <div>
-                        <img src={galary} id="imgdashnotes" />
-                    </div>
-                    <div onClick={()=>this.archivebutton(this.state.data)}>
-                        <img src={download} id="imgdashnotes" />
-                    </div>
-                    <div >
-                        <img src={setting} id="imgdashnotes" />
-                    </div> 
-                    <div style={{display : 'flex',justifyContent :'center'}}>
-                    <Button size="small"  onClick={e => this.close(e)}>Close</Button>
-                    </div>
-                    </div>
+                   
 
-                              
-                    
-
-                  </div>
+                        </Popover>
         </div>
-       
+         }
+          
+          </div>
       )
   }
 }

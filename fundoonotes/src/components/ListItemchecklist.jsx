@@ -27,6 +27,10 @@ import clear from '../assets/clear.png';
 import checkboxoutline from '../assets/checkboxoutline.png';
 import checkboxtick from '../assets/checkboxtick.png';
 import LabelNotes from './LabelNotes'
+import Collaborator from './Collaborator'
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import ListItemText from '@material-ui/core/ListItemText';
+
 
 require('dotenv').config();
 
@@ -48,7 +52,7 @@ class ListItemchecklist extends Component {
     dateshow : false,
     date_timeshow:false,
     startdate:new Date(),
-    collabshow : true,
+    collabshow : false,
     collabatorName : '',
     details : [],
     collabatorArray:[],
@@ -307,11 +311,23 @@ handleDeletelabel=(id,index)=>{
   }
   this.setState({labelNotes : this.state.labelNotes})
 }
+collaboratorsave=(value,capitialInitial)=>{
+  console.log(value)
+  this.setState({originalArray : value,collabshow : false,capitialInitial : capitialInitial })
+}
+collabsave=()=>{
+  this.setState({collabshow : false,originalArray : this.state.collabatorArray})
+}
+collabshow=()=>{
+  this.setState({collabshow : !this.state.collabshow,})
+}
  render(){
      return(
      
 
           <div className="paper2">
+            {this.state.collabshow ? 
+                 <Collaborator collbasave={this.collaboratorsave}/>:
           <div id="NoteExpand">
 
             <div className='showicon' style={{paddingTop : '10px'}}>
@@ -330,7 +346,8 @@ handleDeletelabel=(id,index)=>{
                    </div>
                 
                  </div>
-                 {this.state.listallitems ? 
+                 {
+                 this.state.listallitems ? 
                     this.state.itemsArray.map((itemsArray, index) => (
                       <List>
                  <div className="textdash">
@@ -403,17 +420,40 @@ handleDeletelabel=(id,index)=>{
                     })
 
                     : null}
+                 <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'100%',padding : '5px'}}>
+
                     {this.state.labelNotes.map((labelNotes, index) => (
-                        
+                        <div style={{padding : '5px'}}>
                         <Chip key={index}
-                        style={{width : '240px'}}
+                        style={{width : 'auto'}}
                         label={labelNotes.label}
                         onDelete={()=>this.handleDeletelabel(labelNotes.id,index)}
                         color="white"
                         value={this.state.date}
                       />
+                      </div>
                       
                       ))}
+                      </div>
+                      <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'100%',padding : '5px'}}>
+                      
+                      {this.state.originalArray.map((originalArray, index) => (
+                         <div style={{padding : '5px'}}>
+                        <ListItem key={index}>
+                          <ListItemAvatar>
+                          <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                            justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                            boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                      <div>{this.state.capitialInitial}</div>
+                      </div>
+                          </ListItemAvatar>
+                          <ListItemText primary={originalArray.firstName} />
+                          
+                        </ListItem>
+                        </div>
+                      ))}
+                     
+                      </div>
                    <div style={{ display : 'flex', flexDirection:'row',paddingTop : '10px',justifyContent:'space-around'}}>          
                  <DateTimePicker sendtimeDate={this.sendtimeDate}/>
                  <div  onClick={this.collabshow}>
@@ -439,7 +479,7 @@ handleDeletelabel=(id,index)=>{
                            
                  
 
-               </div>
+                    </div> }
      </div>
 
      )

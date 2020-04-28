@@ -1,5 +1,7 @@
 import React ,{Component}from 'react';
 import clsx from 'clsx';
+import axios, { post } from 'axios';
+import Dialog from '@material-ui/core/Dialog';
 import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
 import search_black from '../assets/search_black.png';
 import clear from '../assets/clear.png';
@@ -32,8 +34,10 @@ import download from '../assets/download.png'
 import label from '../assets/label.png'
 import listview from '../assets/listview.png'
 import Reminder from './Reminder'
+import Collaborator from './Collaborator'
 import Logout from './Logout'
-import { getNoteLabelList,addLabels } from '../services/notesService'
+import Popover from '@material-ui/core/Popover';
+import { getNoteLabelList,addLabels,logout,fileUpload } from '../services/notesService'
 
 
 const drawerWidth = 300;
@@ -151,14 +155,27 @@ const useStyles = theme => ({
              query:'',
              labelData :[],
              gridView : false,
-             profile:false
-         
+             profile:false,
+             anchorEl :false,
+             open1:false,
+             email : '',
+             firstName : '',
+             file : '',
+             open12 : true,
+             imageFromUrl : '',
+             profileImage :'',
+             profileImageFromRes : '',
+             
+
         };
       }
       componentDidMount=()=>{
-        console.log("fffffffffff")
+        const profileImage = localStorage.getItem("userProfile");
+        const email =  localStorage.getItem("email");
+        const firstName = localStorage.getItem("firstName");
+        this.setState({email : email,firstName : firstName,profileImageFromRes : profileImage })
         getNoteLabelList().then(response => {
-          console.log(response.data.data.details);
+          // console.log(response.data.data.details);
          if (response.status === 200) {
             
             this.setState({labelData : response.data.data.details});
@@ -239,6 +256,55 @@ const useStyles = theme => ({
  profile=()=>{
       this.setState({profile : !this.state.profile})
  }
+ handleClick = (event) => {
+  this.setState({
+    anchorEl: event.currentTarget,
+    open1: !this.state.open1
+});
+}
+logout=()=>{
+  let data={}
+  logout(data).then(response => {
+      // console.log(response.data.data.details[0]);
+     if (response.status === 204) {
+      localStorage.setItem("email","");
+      localStorage.setItem("firstName","")
+      this.props.history.push({
+          pathname: "/",
+      });
+     } else {
+     }
+  });
+}
+profileImagePick=()=>{}
+
+onFormSubmit=(e)=>{
+  console.log("onformatsubmit")
+  e.preventDefault() // Stop form submit
+  let form_data = new FormData()
+  form_data.append('file',this.state.file)
+  fileUpload(form_data).then(response => {
+    this.setState({profileImageFromRes:response.data.status.imageUrl,open12 : true,fileshow :false,profileImage:'',file:''})
+    localStorage.setItem('userProfile',response.data.status.imageUrl)
+  })
+
+}
+onChange=async(e)=> {
+  console.log(e.target.files[0].name,this.state.open12)
+  // await this.setState({open12:true})
+
+  await this.setState({file:e.target.files[0],
+    fileshow : true,profileImage : URL.createObjectURL(e.target.files[0]),open12:true})
+}
+
+handleClick12=(event)=>{
+  this.setState({
+    // anchorEl: event.currentTarget,
+    open12: !this.state.open12,file:''
+});
+// this.setState({fileshow :false,profileImage:'',file:''})
+
+}
 render(){
     const {classes} = this.props;
   return (
@@ -312,7 +378,70 @@ render(){
                          </IconButton>
 
                        
-                      <Logout/>
+                         <IconButton
+                          size="medium"
+                          color="black"
+                          aria-label="open drawer"
+                          onClick={this.handleClick}
+                          edge="start"
+                          className={clsx(classes.menuButton, this.state.open)}
+                        >
+                          <Avatar>
+               <img src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
+                          
+                            </Avatar>
+                        </IconButton>
+        <Popover 
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+        open={this.state.open1}
+        anchorEl={this.state.anchorEl}
+        onClose={this.handleClick}
+        style={{ cursor: 'pointer'}}>
+           
+           <div style={{width : '300px',height:'120px'}}>
+               <form style={{display : 'flex',flexDirection : 'row',padding : '10px'}} >
+               <label for="file-input">
+               <img 
+               src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
+               </label>
+              <input type="file" onChange={this.onChange} id="file-input" style={{ display: 'none'}}/>
+                       
+                        <div style={{display : 'flex',flexDirection : 'column',justifyContent : 'center',marginLeft : '5px'}}>
+                        <Typography>{this.state.email}</Typography>
+                        <Typography>{this.state.firstName}</Typography>
+
+                        </div>
+                        {this.state.fileshow ? 
+                        <div style={{width : '250px',height : '250px',display:'none'}}>
+                       <Dialog
+                       open={this.state.open12}
+                       onClose={this.handleClick12}
+                       >
+                        <div style={{width : '250px',height : '200px',display:'flex',flexDirection :'column',justifyContent:'center',alignItems:'center'}}>
+
+                      <img src={this.state.profileImage} style={{width : '150px',height : '150px',borderRadius : '50px',justifyContent:'center'}}/>
+                        <div style={{paddingTop : '10px'}}>
+                        <button type="submit"  onClick={this.onFormSubmit}>Upload</button>
+                        </div></div></Dialog></div> : null }
+                        
+                        </form>   
+
+                        <Divider/>
+                        <div onClick={this.logout}
+                        style={{display : 'flex',justifyContent : 'flex-end',padding : '10px',border : '1px'}}>
+                            LOGOUT
+                        </div>
+                        
+           </div>
+    
+        </Popover>
 
                      </div>
                     

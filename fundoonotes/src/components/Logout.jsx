@@ -74,7 +74,7 @@ logout=()=>{
         // console.log(response.data.data.details[0]);
        if (response.status === 204) {
         this.props.history.push({
-            pathname: "/",
+            pathname: "/login",
         });
        } else {
        }
@@ -111,7 +111,7 @@ logout=()=>{
         style={{ cursor: 'pointer'}}>
            
            <div style={{width : '300px',height:'150px'}}>
-               <div style={{display : 'flex',flexDirection : 'row',padding : '10px'}}>
+               <form style={{display : 'flex',flexDirection : 'row',padding : '10px'}}>
                        <IconButton
                         //   size="medium"
                           color="black"
@@ -129,8 +129,10 @@ logout=()=>{
                         <Typography>{this.state.firstName}</Typography>
 
                         </div>
+                        <input type="file" onChange={this.onChange} id="file-input" style={{ display: 'none'}}/>
                        
-                        </div>   
+                        </form>   
+
                         <Divider/>
                         <div onClick={this.logout}
                         style={{display : 'flex',justifyContent : 'flex-end',padding : '10px',border : '1px'}}>

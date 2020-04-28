@@ -22,12 +22,17 @@ import Reminder from './components/Reminder';
 import ListItemchecklist from './components/ListItemchecklist';
 import LabelNotes from './components/LabelNotes';
 import Logout from './components/Logout';
+import AskQuestion from './components/AskQuestion';
 
 
 let token =  window.location.href.split('/' )[4];
 let resetpassword="/resetpassword/"+token
 console.log(token);
-
+// if('serviceWorker' in navigator){
+//   navigator.serviceWorker.register('./serviceWorker.js',{scope : './'})
+//     .then(reg => console.log('service worker registered',reg))
+//     .catch(err => console.log('service worker not registered',err));
+// }
 
 function App() {
   return (
@@ -50,6 +55,7 @@ function App() {
         <Route path="/DeleteIcon" component={DeleteIcon} />
         <Route path="/Trash" component={Trash} />
         <Route path="/logout" component={Logout} />
+        <Route path="/askQuestion" component={AskQuestion} />
         <Route path="/reminder" component={Reminder} />
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />

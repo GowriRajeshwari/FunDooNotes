@@ -20,6 +20,9 @@ module.exports = {
     REACT_APP_ADDLABELNOTES : "/addLabelToNotes",
     REACT_APP_ADDONLY : "/add",
     REACT_APP_SERVICE : "/user/service",
-    REACT_APP_LOGOUT : "/user/logout"
+    REACT_APP_LOGOUT : "/user/logout",
+    REACT_APP_UPLOADPROFILEIMAGE : "/user/uploadProfileImage",
+    REACT_APP_AddcollaboratorsNotes : "AddcollaboratorsNotes",
+    REACT_APP_removeCollaboratorsNotes : "removeCollaboratorsNotes"
 
 }

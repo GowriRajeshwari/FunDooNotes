@@ -29,7 +29,7 @@
     flex-wrap: wrap;
     justify-content: center; */
     align-content: stretch;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: stretch;
     flex-direction: row;
     box-sizing: border-box;
@@ -57,6 +57,8 @@
     position:relative;
     border-radius:20px;
     border: 0.1px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
     /* margin: 0 auto; */
     /* background-color: greenyellow; */
     }
@@ -66,6 +68,7 @@
     position:relative;
     border-radius:20px;
     border: 0.1px solid grey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* margin: 0 auto; */
     /* background-color: greenyellow; */
     }

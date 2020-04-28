@@ -24,6 +24,9 @@ import FaceIcon from '@material-ui/icons/Face';
 import schedule from '../assets/schedule.png'
 import { Typography } from "@material-ui/core";
 import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+
 
 
 require('dotenv').config();
@@ -67,17 +70,11 @@ class TakeaNotes extends Component {
     nonDeleteData:[],
     query : this.props.query,
     editdata : [],
-    noteLabels:[]
+    noteLabels:[],
+    choice :''
       
     };
   }
-
-  // componentWillReceiveProps(nextProps){
-  //   const {gridView} = this.props
-  //   if(nextProps.gridView !== gridView){
-  //     this.setState({ gridView })
-  //   }
-  // }
  
    handleDateChange = (date) => {
     this.setState({date : date})
@@ -283,11 +280,12 @@ getData=(val,index,id)=>{
 });
 
 }
-dialogboxOpen=(data)=>{
+dialogboxOpen=(data,choice)=>{
   console.log(data);
   this.setState({
     dialogBoxOpen: !this.state.dialogBoxOpen,
-   editdata:data
+   editdata:data,
+   choice : choice
   })
 
 }
@@ -382,6 +380,7 @@ handleDeletelabel=(labelId,id)=>{
    }
 });
 }
+
   render() {
     
     return (
@@ -405,7 +404,7 @@ handleDeletelabel=(labelId,id)=>{
                      
           </div>
         <div  className="typoText"
-        onClick={()=>this.dialogboxOpen(data)}>
+        onClick={()=>this.dialogboxOpen(data,"editNotes")}>
          {data.description}
         </div> 
         {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
@@ -422,11 +421,11 @@ handleDeletelabel=(labelId,id)=>{
                     ))
 
                    } 
-                 <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'190px',padding : '5px'}}>
+                 <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'240px',paddingTop : '5px'}}>
 
                    { data.noteLabels.map((labelNotes, index) => (
                       
-                    <div style={{padding : '5px'}}>
+                    <div style={{padding : '3px'}}>
                     <Chip key={index}
                       style={{width : 'auto'}}
                       label={labelNotes.label}
@@ -437,7 +436,21 @@ handleDeletelabel=(labelId,id)=>{
                     </div>
                     ))
                    } 
+                   <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'200px',paddingTop : '5px'}}>
+                    {data.collaborators.map((collabatorArray, index) => (
+                      
+                        <div style={{padding :'5px'}}>
+                  <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                  justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                  boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                    <div>{collabatorArray.firstName.charAt(0).toUpperCase()}</div>
+                    </div>
+                
+                        </div>
+                      
+                    ))}
 
+                   </div>
                    </div>
 
         <div  className="mybuttonoverlap" >
@@ -449,7 +462,7 @@ handleDeletelabel=(labelId,id)=>{
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                      <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,data.id)}/>
                     </div>
-                    <div style={{ padding :'5px'}} onClick={this.collabshow}>
+                    <div style={{ padding :'5px'}} onClick={()=>this.dialogboxOpen(data,"editcollaborator")}>
                         <img src={personAdd} id="imgdashnotes" />
                     </div>
                     <div style={{ padding :'5px'}}>
@@ -482,8 +495,8 @@ handleDeletelabel=(labelId,id)=>{
             open={this.state.dialogBoxOpen}
             onClose={this.handelNoteDialogBox}
             >
-                <EditNotes data={this.state.editdata}
-                sendupdate={this.getdataupdate} />
+                <EditNotes data={this.state.editdata} choice={this.state.choice}
+                sendupdate={this.getdataupdate}/>
               </Dialog>
               {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
               </div>

@@ -40,6 +40,7 @@ import setting from '../assets/setting.png'
 import Color from './Color'
 import EditNotes from './EditNotes'
 import DateTimePicker from './DateTimePicker'
+import Collaborator from './Collaborator'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import list_black from '../assets/list_black.png'
@@ -66,7 +67,7 @@ class NewNote extends Component {
     dateshow : false,
     date_timeshow:false,
     startdate:new Date(),
-    collabshow : true,
+    collabshow : false,
     collabatorName : '',
     details : [],
     collabatorArray:[],
@@ -81,7 +82,8 @@ class NewNote extends Component {
     dialogBoxOpen:false,
     listitem :true,
     labelIdList :[],
-    labelNotes:[]
+    labelNotes:[],
+    capitialInitial :''
    
     };
   }
@@ -140,7 +142,7 @@ class NewNote extends Component {
      if (response.status === 200) {
         this.props.sendNewData();
         document.getElementById("NoteExpand").style.background= 'white';
-        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: '',labelNotes : [],labelIdList:[]})
+        this.setState({originalArray :[], title : '',description : '',next : true,color :'',date_timeshow : false,date: '',labelNotes : [],labelIdList:[]})
      } else {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
@@ -150,7 +152,7 @@ class NewNote extends Component {
   }else
   {
     document.getElementById("NoteExpand").style.background= 'white';
-    this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:'',labelIdList:[],labelNotes:[]})
+    this.setState({ originalArray :[],title : '',description : '',next : true,color:'',date_timeshow : false,date:'',labelIdList:[],labelNotes:[]})
 
   }
 
@@ -189,7 +191,7 @@ class NewNote extends Component {
     });
   };
   collabshow=()=>{
-    this.setState({collabshow : false})
+    this.setState({collabshow : true})
   }
  
   onchangecollabator=async(event)=>{
@@ -207,21 +209,9 @@ class NewNote extends Component {
    }
 });
 }
-// showingCollabator=(event)=>{
-//     this.setState({
-//         anchorEl: event.currentTarget,
-//         open: true
-//     });
-// }
-// collabatorClick=(dat)=>{
-//   this.setState({
-//     open : false,collabatorValue: dat
-// })
-// this.state.collabatorArray.push(dat)
 
-// }
 collabsave=()=>{
-  this.setState({collabshow : true,originalArray : this.state.collabatorArray})
+  this.setState({collabshow : false,originalArray : this.state.collabatorArray})
 }
 time=()=>{
   this.setState({ timeShow : true})
@@ -290,6 +280,10 @@ handleDeletelabel=(id,index)=>{
   }
   this.setState({labelNotes : this.state.labelNotes})
 }
+collaboratorsave=(value,capitialInitial)=>{
+  console.log(value)
+  this.setState({originalArray : value,collabshow : false,capitialInitial : capitialInitial })
+}
  render(){
      return(
         <div className="containerdash">
@@ -306,7 +300,8 @@ handleDeletelabel=(id,index)=>{
 
             
           : 
-          
+            this.state.collabshow ? 
+            <Collaborator collbasave={this.collaboratorsave}/>:
              this.state.listitem ?
              
           <div className="paper2">
@@ -350,19 +345,25 @@ handleDeletelabel=(id,index)=>{
                       value={this.state.date}
                     />
                        : null}
-                      <List>
+                       <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'100%',padding : '5px'}}>
+                      
                     {this.state.originalArray.map((originalArray, index) => (
+                       <div style={{padding : '5px'}}>
                       <ListItem key={index}>
                         <ListItemAvatar>
-                          <Avatar >
-                            <PersonIcon />
-                          </Avatar>
+                        <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                          justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                          boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                    <div>{this.state.capitialInitial}</div>
+                    </div>
                         </ListItemAvatar>
-                        <ListItemText primary={originalArray} />
+                        <ListItemText primary={originalArray.firstName} />
                         
                       </ListItem>
+                      </div>
                     ))}
-                    </List>
+                   
+                    </div>
                     <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'100%',padding : '5px'}}>
                       {this.state.labelNotes.map((labelNotes, index) => (
                         <div style={{padding : '5px'}}>
@@ -405,7 +406,7 @@ handleDeletelabel=(id,index)=>{
         </div>
         
           :
-          <div>
+                      <div>
                       <ListItemchecklist sendlist={this.sendlist}/>
                       </div>
     }

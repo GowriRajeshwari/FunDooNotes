@@ -1,67 +1,159 @@
 import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import profile from '../assets/profile.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import { login } from "../services/LoginService"
 import { Typography } from "@material-ui/core";
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
 import Divider from '@material-ui/core/Divider';
-import Popper from '@material-ui/core/Popper';
 import Popover from '@material-ui/core/Popover';
-import reminder from '../assets/reminder.svg'
-import personAdd from '../assets/person_add.png'
-import color from '../assets/color.png'
-import download from '../assets/download.png'
-import galary from '../assets/galary.png'
-import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
-import AddIcon from '@material-ui/icons/Add';
-import { blue } from '@material-ui/core/colors';
-import setting from '../assets/setting.png'
-import Color from './Color'
-import EditNotes from './EditNotes'
-require('dotenv').config();
 
 
 class Collaborator extends Component {
   constructor(props) {
     super(props);
     this.state = {
-     
-
+     data:[],
+     collabatorName :'',
+     collabatorArray :[],
+     details:[],
+     anchorEl:false,
+     open:false,
+     profileImage :'',
+     email : '',
+     firstName : '',
+     capitalInitial :'',
+     fullDetails :[]
 
     };
   }
+componentDidMount=()=>{
+  const profileImage = localStorage.getItem("userProfile");
+  const email =  localStorage.getItem("email");
+  const firstName = localStorage.getItem("firstName");
+  this.setState({email : email,firstName : firstName,profileImageFromRes : profileImage })
 
+}
+onchangecollabator=async(event)=>{
+  await this.setState({
+     collabatorName: event.target.value  
+ })
+ let data = {
+   searchWord : this.state.collabatorName
+ }
+ searchUserList(data).then(response => {
+   console.log(response.data.data.details);
+  if (response.status === 200) {
+     this.setState({ details : response.data.data.details})
+     this.setState({
+      anchorEl: event.currentTarget,
+      open: true
+  });
+  
+  } else {
+  }
+});
+}
+collabatorClick=(dat,fullDetails)=>{
+  const res = dat.charAt(0).toUpperCase();
+    this.setState({
+      open : false,collabatorValue: dat,capitalInitial : res
+  })
+  this.state.collabatorArray.push(dat)
+  this.state.fullDetails.push(fullDetails)
+}
+showingCollabator=(event)=>{
+    this.setState({
+        anchorEl: event.currentTarget,
+        open: true
+    });
+}
+handleClick = (event) => {
+  // console.log("entered")
+  this.setState({
+    anchorEl: event.currentTarget,
+    open: !this.state.open
+});
+}
+collabsave=()=>{
+  this.setState({collabshow : false,originalArray : this.state.collabatorArray})
+  this.props.collbasave(this.state.fullDetails,this.state.capitalInitial)
+}
+deleteCollabator=(data)=>{
+  const index = this.state.fullDetails.findIndex(fullDetails => fullDetails.firstName === data);
+    console.log(index)
+    if(index > -1){
+      this.state.fullDetails.splice(index,1)
+    }
+    this.setState({fullDetails : this.state.fullDetails})
+}
  render(){
      return(
+ 
          
         <div>
         <Paper className="paper2">
-          <div onClick={this.collabsave}>collabatore</div>
+          <div style={{padding : '10px'}}>Collaborators</div>
           <Divider/>
-          <div></div>
-          <div></div>
-                       <Popover 
+          <div style={{padding : '5px'}}>
+          <form style={{display : 'flex',flexDirection : 'row',padding : '10px'}} >
+            
+               <img 
+               src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes }
+                style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px'}}/>
+               
+                        <div style={{display : 'flex',flexDirection : 'column',justifyContent : 'center',marginLeft : '15px'}}>
+                        <Typography>{this.state.email}</Typography>
+                        <Typography>{this.state.firstName}</Typography>
+
+                        </div>
+                        </form>
+           </div>
+                        <div >
+                        <List>
+                    {this.state.fullDetails.map((fullDetails, index) => (
+                      <ListItem key={index}>
+                        <ListItemAvatar>
+                  <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                  justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                  boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                    <div>{this.state.capitalInitial}</div>
+                    </div>
+                
+                        </ListItemAvatar>
+                        <ListItemText primary={fullDetails.firstName} />
+                        <div onClick={() => this.deleteCollabator(fullDetails.firstName)}>X</div>
+                      </ListItem>
+                    ))}
+                    </List>
+                    <div style={{display : 'flex',flexDirection : 'row',justifyContent:'center',alignItems : 'center',padding : '15px'}}>
+                    <Avatar >
+                            <PersonIcon />
+                          </Avatar>
+                    <TextField
+                        id="standard-multiline-flexible"
+                        placeholder="Emails"
+                        multiline
+                        rowsMax="4"
+                        size="small"
+                        style={{width:'100%',paddingLeft : '15px'}}
+                        value={this.state.collabatorName}
+                        onChange={this.onchangecollabator}
+                        // onClick={e => this.showingCollabator(e)}
+                        InputProps={{ disableUnderline: true }}
+                      />
+                      </div>
+                       <div onClick={this.collabsave} style={{padding : '10px'}}>save</div>
+                      </div>
+                  
+         
+
+        </Paper>
+        <Popover 
                           anchorOrigin={{
                             vertical: 'bottom',
                             horizontal: 'center',
@@ -73,9 +165,10 @@ class Collaborator extends Component {
                         open={this.state.open}
                         anchorEl={this.state.anchorEl}
                         onClose={this.handleClick}>
-                           <List>
+                          
                     {this.state.details.map((details, index) => (
-                      <ListItem button onClick={() => this.collabatorClick(details.firstName)} key={index}>
+                       <List key={index}>
+                      <ListItem button onClick={() => this.collabatorClick(details.firstName,details)} >
                         <ListItemAvatar>
                           <Avatar >
                             <PersonIcon />
@@ -85,38 +178,13 @@ class Collaborator extends Component {
                         <ListItemText primary={details.email} />
 
                       </ListItem>
+                      </List>
                     ))}
-                    </List>
+                   
 
                         </Popover>
-
-
-                        <List>
-                    {this.state.collabatorArray.map((collabatorArray, index) => (
-                      <ListItem key={index}>
-                        <ListItemAvatar>
-                          <Avatar >
-                            <PersonIcon />
-                          </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText primary={collabatorArray} />
-                      </ListItem>
-                    ))}
-                    </List>
-
-
-                    <input
-                    id="btn"
-                    variant="outlined"
-                    label="Emails"
-                    value={this.state.collabatorName}
-                     onChange={this.onchangecollabator}
-                     onClick={e => this.showingCollabator(e)}
-                  />
-          <div onClick={this.collabsave}>save</div>
-
-        </Paper>
         </div>
+        
      )}}
 
      export default Collaborator;
