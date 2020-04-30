@@ -23,6 +23,7 @@ import ListItemchecklist from './components/ListItemchecklist';
 import LabelNotes from './components/LabelNotes';
 import Logout from './components/Logout';
 import AskQuestion from './components/AskQuestion';
+import RatingStart from './components/Rating';
 
 
 let token =  window.location.href.split('/' )[4];
@@ -58,6 +59,7 @@ function App() {
         <Route path="/askQuestion" component={AskQuestion} />
         <Route path="/reminder" component={Reminder} />
         <Route path="/LabelNotes" component={LabelNotes} />
+        <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
 
 

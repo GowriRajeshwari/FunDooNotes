@@ -61,12 +61,21 @@ class DeleteIcon extends Component {
         setChecked : true,
         activeCheckboxes: [],
         noteLabel : this.props.noteLabel,
-        askQuestion : false
+        askQuestion : false,
+        ashshowlength : this.props.ashshow,
+        ashshow :''
 
 
     };
   }
+  componentDidMount=()=>{
+    if(this.state.askshowlength > 0){
+    this.setState({ ashshow : "SHOW QUESTION"})
 
+    }
+    else{
+    this.setState({ ashshow : "ASK A QUESTION"})}
+  }
   handleClick = (event) => {
     this.setState({
       anchorEl: event.currentTarget,
@@ -222,7 +231,7 @@ class DeleteIcon extends Component {
                               ADD LABEL</div>
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
                                onClick={()=>this.askQuestion()}>
-                              ASK A QUESTION</div>
+                              {this.state.ashshow}</div>
                               </div>
                               
                           }

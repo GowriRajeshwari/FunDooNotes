@@ -27,6 +27,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import AskQuestion from './AskQuestion'
+import Divider from '@material-ui/core/Divider';
+
 
 
 require('dotenv').config();
@@ -73,7 +75,8 @@ class TakeaNotes extends Component {
     noteLabels:[],
     choice :'',
     askQuestion : false,
-    questionId : ''
+    questionId : '',
+    showQuestion : false
       
     };
   }
@@ -390,13 +393,15 @@ close=(val)=>{
  this.setState({ askQuestion : false}) 
   }
 }
+
+
   render() {
     
     return (
       <div>
       { this.state.askQuestion ? 
         
-        <AskQuestion close={this.close} questionId={this.state.questionId}/>
+        <AskQuestion close={this.close}  questionId={this.state.questionId}/>
         : 
       <div className='maincontainer'>
        
@@ -490,15 +495,24 @@ close=(val)=>{
                     <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <DeleteIcon id={data.id} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
+                    <DeleteIcon id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
 
         
 
         </div>
-        
+        {data.questionAndAnswerNotes.length > 0 ? 
+       <div>
+        <Divider/>
+
+          <div  className="typoText">
+              Question Asked</div>
+              <div  className="typoText">{data.questionAndAnswerNotes[0].message}</div>
+       </div> : null}
       </div>
+      
+     
      
     </Card>
 
