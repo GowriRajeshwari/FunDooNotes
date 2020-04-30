@@ -23,6 +23,9 @@ module.exports = {
     REACT_APP_LOGOUT : "/user/logout",
     REACT_APP_UPLOADPROFILEIMAGE : "/user/uploadProfileImage",
     REACT_APP_AddcollaboratorsNotes : "AddcollaboratorsNotes",
-    REACT_APP_removeCollaboratorsNotes : "removeCollaboratorsNotes"
+    REACT_APP_removeCollaboratorsNotes : "removeCollaboratorsNotes",
+    REACT_APP_getNotesDetail : "/notes/getNotesDetail/",
+    REACT_APP_addQuestionAndAnswer : "addQuestionAndAnswer",
+    REACT_APP_questionAndAnswerNotes :"/questionAndAnswerNotes/"
 
 }

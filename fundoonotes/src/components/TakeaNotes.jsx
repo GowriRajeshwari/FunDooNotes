@@ -26,7 +26,7 @@ import { Typography } from "@material-ui/core";
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-
+import AskQuestion from './AskQuestion'
 
 
 require('dotenv').config();
@@ -71,7 +71,9 @@ class TakeaNotes extends Component {
     query : this.props.query,
     editdata : [],
     noteLabels:[],
-    choice :''
+    choice :'',
+    askQuestion : false,
+    questionId : ''
       
     };
   }
@@ -307,10 +309,13 @@ sendNewData=()=>{
 sendtimeDate=(date)=>{
   this.setState({date : date,date_timeshow : true,dateshow : false});
 }
-sendtrash=(val)=>{
+sendtrash=(val,id)=>{
   if(val == true){
   this.componentDidMount();
 
+  }
+  else{
+    this.setState({ askQuestion : true ,questionId : id })
   }
 }
 handleDelete = (id) => {
@@ -380,11 +385,21 @@ handleDeletelabel=(labelId,id)=>{
    }
 });
 }
-
+close=(val)=>{
+  if(val == true){
+ this.setState({ askQuestion : false}) 
+  }
+}
   render() {
     
     return (
+      <div>
+      { this.state.askQuestion ? 
+        
+        <AskQuestion close={this.close} questionId={this.state.questionId}/>
+        : 
       <div className='maincontainer'>
+       
           <NewNote sendNewData={this.sendNewData}/>
     
     <div className='notescontainer'>
@@ -496,10 +511,13 @@ handleDeletelabel=(labelId,id)=>{
             onClose={this.handelNoteDialogBox}
             >
                 <EditNotes data={this.state.editdata} choice={this.state.choice}
-                sendupdate={this.getdataupdate}/>
+                sendupdate={this.getdataupdate} />
               </Dialog>
               {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
+  
               </div>
+  }
+  </div>
     );
   }
 }

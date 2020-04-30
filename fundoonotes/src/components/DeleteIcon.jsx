@@ -42,6 +42,7 @@ import Color from './Color'
 import EditNotes from './EditNotes'
 import checkboxoutline from '../assets/checkboxoutline.png';
 import checkboxtick from '../assets/checkboxtick.png';
+import AskQuestion from './AskQuestion'
 
 require('dotenv').config();
 
@@ -59,7 +60,8 @@ class DeleteIcon extends Component {
         checked:false,
         setChecked : true,
         activeCheckboxes: [],
-        noteLabel : this.props.noteLabel
+        noteLabel : this.props.noteLabel,
+        askQuestion : false
 
 
     };
@@ -159,11 +161,19 @@ class DeleteIcon extends Component {
     });
     }
   }
-
+  askQuestion=()=>{
+    // this.setState({askQuestion : true})
+    this.props.sendtrash(false,this.state.id);
+  }
  render(){
      return(
         <div style={{ padding :'5px'}}  >
         <img src={setting} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
+        
+        {/* { this.state.askQuestion ? 
+        
+        <AskQuestion/>
+        : */}
         <Popover 
           anchorOrigin={{
             vertical: 'bottom',
@@ -179,7 +189,7 @@ class DeleteIcon extends Component {
         style={{ cursor: 'pointer'}}>
            
         
-      { this.state.addlabel ? 
+      {  this.state.addlabel ? 
                           <div>
                             <div style={{padding : '10px'}}>
                                <MuiPickersUtilsProvider utils={DateFnsUtils} >
@@ -210,10 +220,14 @@ class DeleteIcon extends Component {
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
                                onClick={()=>this.addLabelButton()}>
                               ADD LABEL</div>
+                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
+                               onClick={()=>this.askQuestion()}>
+                              ASK A QUESTION</div>
                               </div>
+                              
                           }
         </Popover>
-       
+ 
         
     </div> 
      )}}

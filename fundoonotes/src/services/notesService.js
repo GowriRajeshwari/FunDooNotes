@@ -232,3 +232,61 @@ export async function setNotes(data) {
       return error;
     }
   }
+
+  export async function questionAndAnswerNotes(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_questionAndAnswerNotes + 
+        apiconstant.REACT_APP_addQuestionAndAnswer ,data , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  export async function getNotesDetail(id) {
+    try {
+      const response = await axios.get(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_getNotesDetail + id , {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  export async function like(data,id) {
+    console.log(id)
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_questionAndAnswerNotes+"like/"+id ,data, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  export async function reply(data,id) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_questionAndAnswerNotes+"reply/"+id ,data, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+  export async function rate(data,id) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_questionAndAnswerNotes+"rate/"+id ,data, {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+
+  // http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/rate/5eaa763fad53b700227c5eb3

@@ -199,7 +199,10 @@ class ListItemchecklist extends Component {
   let data = {
     searchWord : this.state.collabatorName
   }
-  searchUserList(data).then(response => {
+  const form_data = new FormData();
+   form_data.append("searchWord", this.state.collabatorName);
+
+  searchUserList(form_data).then(response => {
     // console.log(response.data.data.details[0]);
    if (response.status === 200) {
       this.setState({ details : response.data.data.details})
