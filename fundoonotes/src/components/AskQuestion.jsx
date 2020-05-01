@@ -10,6 +10,7 @@ import Dialog from '@material-ui/core/Dialog';
 import Divider from '@material-ui/core/Divider';
 import reply_black from '../assets/reply_black.png';
 import thumb_up from '../assets/thumb_up.png';
+import thumb_down from '../assets/thumb_down.png';
 import StarRatingComponent from 'react-star-rating-component';
 import Rating from'./Rating'
 
@@ -32,7 +33,8 @@ class AskQuestion extends Component {
         count : 0,
         showReply : false,
         qustId:'',
-        rating: 0
+        rating: 0,
+         msg :""
 
     };
   }
@@ -48,7 +50,8 @@ class AskQuestion extends Component {
         this.setState({ data : response.data.data.data[0],
           questionAndAnswerNotes : response.data.data.data[0].questionAndAnswerNotes})
         if(this.state.data.questionAndAnswerNotes.length > 0){
-          this.setState({ showQust : false})
+          this.setState({ showQust : false,
+            msg : response.data.data.data[0].questionAndAnswerNotes[0].message.replace(/<[^>]*>/g , "") })
         }
         else{
           this.setState({ showQust : true})
@@ -186,7 +189,7 @@ class AskQuestion extends Component {
            <Divider/>
            <List>
                 <Typography>Question Asked</Typography>
-                <Typography>{this.state.message}</Typography>
+                <Typography>{this.state.msg}</Typography>
           </List>
           <Divider/>
            </div>
@@ -270,12 +273,12 @@ class AskQuestion extends Component {
                  { qustans.like.length > 0 && qustans.like[0].like === true ? 
                  <div>
                  <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_up} onClick={()=>this.dislikeButton(this.state.questionAndAnswerNotes[index].id)}
-                 style={{width : '20px',height : '20px',backgroundColor : "blue"}}/> <Typography>1 Likes</Typography></div>
+                 style={{width : '20px',height : '20px'}}/> <Typography>1 Likes</Typography></div>
                  
                  </div>
                   :
                   <div>
-                 <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_up} onClick={()=>this.likeButton(this.state.questionAndAnswerNotes[index].id)}
+                 <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_down} onClick={()=>this.likeButton(this.state.questionAndAnswerNotes[index].id)}
                  style={{width : '20px',height : '20px'}}/> <Typography>0 Likes</Typography></div>
                 </div>}
                 {qustans.rate.length > 0 && qustans.rate[0].rate > 0 ? 

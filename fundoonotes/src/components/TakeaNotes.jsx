@@ -76,7 +76,8 @@ class TakeaNotes extends Component {
     choice :'',
     askQuestion : false,
     questionId : '',
-    showQuestion : false
+    showQuestion : false,
+    nmsg : ''
       
     };
   }
@@ -395,7 +396,16 @@ close=(val)=>{
 }
 removetag=(message)=>{
   var content = message.replace( /<[^>]*>/g , "");
+  // this.setState({ msg : content })
   return content;
+}
+msg=(content)=>{
+  if(content.length > 0){
+   
+  this.setState({ msg :  content[0].message })
+
+  }
+  // this.setState({ msg : content })
 }
 
   render() {
@@ -404,7 +414,7 @@ removetag=(message)=>{
       <div>
       { this.state.askQuestion ? 
         
-        <AskQuestion close={this.close}  questionId={this.state.questionId}/>
+        <AskQuestion close={this.close}  questionId={this.state.questionId} msg={this.state.msg}/>
         : 
       <div className='maincontainer'>
        
@@ -498,7 +508,7 @@ removetag=(message)=>{
                     <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <DeleteIcon id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
+                    <DeleteIcon msg={()=>this.msg(data.questionAndAnswerNotes)} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
 
