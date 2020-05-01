@@ -393,7 +393,10 @@ close=(val)=>{
  this.setState({ askQuestion : false}) 
   }
 }
-
+removetag=(message)=>{
+  var content = message.replace( /<[^>]*>/g , "");
+  return content;
+}
 
   render() {
     
@@ -508,7 +511,7 @@ close=(val)=>{
 
           <div  className="typoText">
               Question Asked</div>
-              <div  className="typoText">{data.questionAndAnswerNotes[0].message}</div>
+              <div  className="typoText">{this.removetag(data.questionAndAnswerNotes[0].message)}</div>
        </div> : null}
       </div>
       

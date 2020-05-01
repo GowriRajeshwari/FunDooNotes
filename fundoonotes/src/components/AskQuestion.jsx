@@ -89,7 +89,7 @@ class AskQuestion extends Component {
   }
   AskQuestion=()=>{
     let data={
-      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"<p>",
+      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"</>",
       notesId : this.state.id
     }
     console.log(data)
@@ -162,6 +162,10 @@ class AskQuestion extends Component {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
+  }
+  message=(message)=>{
+    var content = message.replace( /<[^>]*>/g , "");
+    return content;
   }
  render(){
      return(
@@ -253,7 +257,9 @@ class AskQuestion extends Component {
                       
                        <div style={{display : 'flex',flexDirection : 'column',justifyContent : 'center',marginLeft : '5px'}}>
                        <Typography>{this.state.data.user.firstName} {this.state.data.user.lastName}</Typography>
-                       <Typography>{qustans.message}</Typography>
+                       <Typography>
+                        { this.message(qustans.message)}
+                         </Typography>
 
                        <Typography></Typography>
 

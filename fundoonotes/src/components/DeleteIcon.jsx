@@ -69,7 +69,8 @@ class DeleteIcon extends Component {
     };
   }
   componentDidMount=()=>{
-    if(this.state.askshowlength > 0){
+    console.log(this.state.askshowlength)
+    if(this.props.ashshow> 0){
     this.setState({ ashshow : "SHOW QUESTION"})
 
     }
