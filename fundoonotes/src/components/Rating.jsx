@@ -28,7 +28,9 @@ export default class RatingStart extends React.Component {
           value={this.state.rating}
           onStarClick={this.onStarClick.bind(this)}
         />
-        <h5> {this.state.rating}</h5>
+        <div>
+        <div> {this.state.rating}</div>
+        </div>
       </div>
     );
   }

@@ -257,11 +257,11 @@ class EditNotes extends Component {
     }
   });
   }
-  collabatorClick=(dat,fullDetails,id)=>{
+  collabatorClick=(dat,fullDetails,id,event)=>{
     console.log(dat,fullDetails)
     const res = dat.charAt(0).toUpperCase();
       this.setState({
-        open1 : false,collabatorValue1: dat,capitalInitial1 : res
+        open1 : false,collabatorValue1: dat,capitalInitial1 : res,anchorEl1: event.currentTarget,
     })
     // this.state.collabatorArray1.push(dat)
     this.state.fullDetails1.push(fullDetails)
@@ -465,7 +465,7 @@ class EditNotes extends Component {
                           
                     {this.state.details1.map((details, index) => (
                        <List key={index}>
-                      <ListItem button onClick={() => this.collabatorClick(details.firstName,details,this.state.data.id)} >
+                      <ListItem button onClick={(event) => this.collabatorClick(details.firstName,details,this.state.data.id,event)} >
                         <ListItemAvatar>
                           <Avatar >
                             <PersonIcon />

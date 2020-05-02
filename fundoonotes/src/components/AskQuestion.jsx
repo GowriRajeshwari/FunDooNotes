@@ -252,9 +252,10 @@ class AskQuestion extends Component {
            {this.state.questionAndAnswerNotes.map((qustans,index)=>(
             <div style={{display:"flex",justifyContent:"center"}}>
               <div style={{display : 'flex',flexDirection : 'row',padding : '10px',width:"80%"}} >
-              <label for="file-input">
+              <label for="file-input" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
               <img 
-              src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
+              src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } 
+              style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
               </label>
              <input type="file" onChange={this.onChange} id="file-input" style={{ display: 'none'}}/>
                       
@@ -267,26 +268,27 @@ class AskQuestion extends Component {
                        <Typography></Typography>
 
                        </div>
-                       <div style={{display : 'flex',flexDirection : 'row',justifyContent : 'center',marginLeft : '5px'}}>
+                       <div style={{padding:"10px",display : 'flex',flexDirection : 'row',justifyContent : 'center',marginLeft : '5px',alignItems:"center"}}>
                        <div><img src={reply_black} onClick={()=>this.replyButton(this.state.questionAndAnswerNotes[index].id)}
                  style={{width : '20px',height : '20px'}}/></div>
                  { qustans.like.length > 0 && qustans.like[0].like === true ? 
-                 <div>
+                 <div style={{paddingLeft:"5px"}}>
                  <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_up} onClick={()=>this.dislikeButton(this.state.questionAndAnswerNotes[index].id)}
                  style={{width : '20px',height : '20px'}}/> <Typography>1 Likes</Typography></div>
                  
                  </div>
                   :
-                  <div>
+                  <div style={{paddingLeft:"5px"}}>
                  <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_down} onClick={()=>this.likeButton(this.state.questionAndAnswerNotes[index].id)}
                  style={{width : '20px',height : '20px'}}/> <Typography>0 Likes</Typography></div>
                 </div>}
+                <div style={{padding :"5px"}}>
                 {qustans.rate.length > 0 && qustans.rate[0].rate > 0 ? 
                 <Rating rating={qustans.rate[0].rate} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)}/>
                : 
                <Rating rating={this.state.count} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)} />
                 }
-                
+                </div>
 
                        </div>
                        </div>

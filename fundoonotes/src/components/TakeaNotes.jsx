@@ -402,7 +402,10 @@ removetag=(message)=>{
 msg=(content)=>{
   if(content.length > 0){
    
-  this.setState({ msg :  content[0].message })
+  this.setState({ msg :  "SHOW QUESTION" })
+
+  }else{
+  this.setState({ msg :  "ASK A QUESTION" })
 
   }
   // this.setState({ msg : content })
