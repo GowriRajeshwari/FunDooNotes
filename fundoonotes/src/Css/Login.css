@@ -71,7 +71,22 @@
 
     /* width: 294px; */
   }
-  #btn {
+  #btnEmail {
+    /* width: 90%; */
+    min-width: 270px;
+    color: #565656;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    resize: none;
+    overflow: hidden;
+    /* overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; */
+  }
+  #btnPassword {
     /* width: 90%; */
     min-width: 270px;
     color: #565656;
