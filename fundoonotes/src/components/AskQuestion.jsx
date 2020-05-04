@@ -34,7 +34,8 @@ class AskQuestion extends Component {
         showReply : false,
         qustId:'',
         rating: 0,
-         msg :""
+         msg :"",
+         countratevalue:0
 
     };
   }
@@ -298,7 +299,7 @@ class AskQuestion extends Component {
                 {qustans.rate.length > 0 && qustans.rate[0].rate > 0 ? 
                 <Rating rating={qustans.rate[0].rate} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)}/>
                : 
-               <Rating rating={this.state.count} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)} />
+               <Rating rating={this.state.countratevalue} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)} />
                 }
                 </div>
 

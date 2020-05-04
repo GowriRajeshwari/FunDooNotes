@@ -78,7 +78,8 @@ class TakeaNotes extends Component {
     questionId : '',
     showQuestion : false,
     nmsg : '',
-    labelNoteShow : this.props.labelNoteShow
+    labelNoteShow : '',
+    label:''
       
     };
   }
@@ -86,59 +87,74 @@ class TakeaNotes extends Component {
    handleDateChange = (date) => {
     this.setState({date : date})
   };
+  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+    if(nextProps.labelNoteShow){
+      await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
+    }
+    console.log(nextProps.labelNoteShow)
+    this.getCalled(nextProps.labelNoteShow,nextProps.label);
+  }
+  // componentWillMount=()=>{
+  //   this.setState({ labelNoteShow : this.props.labelNoteShow})
+  // }
   componentDidMount=()=>{
-  //  this.setState({gridView : this.props.gridView})
-   var d =new Date();
-   d.setDate(new Date().getDate()+1)
-    console.log(d.getTime())
-    this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-    if(this.props.labelNoteShow === true){
-        getNotesListByLabel(this.state.choice).then(response => {
-          console.log(response)
-         if (response.status === 200) {
-          this.setState({data : []})
-        
-          for(let i=0;i<response.data.data.data.length;i++){
-            if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
-              this.state.data.push(response.data.data.data[i]);
-            }else{
-              continue;
-            }
-          }
-          this.setState({data : this.state.data})
-          console.log(this.state.data);
+    this.getCalled(this.state.labelNoteShow,this.state.label);
+  }
+  getCalled=(labelNoteShow,label)=>{
+        //  this.setState({ labelNoteShow : this.props.labelNoteShow})
+        console.log("show",labelNoteShow)
+        //  this.setState({gridView : this.props.gridView})
+         var d =new Date();
+         d.setDate(new Date().getDate()+1)
+          console.log(d.getTime())
+          this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
+          if(labelNoteShow === "true"){
+              getNotesListByLabel(label).then(response => {
+                console.log(response)
+               if (response.status === 200) {
+                this.setState({data : []})
+              
+                for(let i=0;i<response.data.data.data.length;i++){
+                  if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+                    this.state.data.push(response.data.data.data[i]);
+                  }else{
+                    continue;
+                  }
+                }
+                this.setState({data : this.state.data})
+                console.log(this.state.data);
+                  
+               } else {
+                   this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+               }
+            });
+          }else if(labelNoteShow === "false"){
+            console.log("labelNoet")
+          getNotes().then(response => {
+           
+           if (response.status === 200) {
+                this.setState({data : []})
+              
+              for(let i=0;i<response.data.data.data.length;i++){
+                if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+                  this.state.data.push(response.data.data.data[i]);
+                }else{
+                  continue;
+                }
+              }
+              this.setState({data : this.state.data})
+              console.log(this.state.data);
+              // for(let i=0;i<response.data.data.data.length;i++){
+              //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
+              // }
+              // this.setState({noteLabels : this.state.noteLabels})
+              // console.log(this.state.noteLabels);
             
-         } else {
-             this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-         }
-      });
-    }else{
-    getNotes().then(response => {
-     
-     if (response.status === 200) {
-          this.setState({data : []})
-        
-        for(let i=0;i<response.data.data.data.length;i++){
-          if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
-            this.state.data.push(response.data.data.data[i]);
-          }else{
-            continue;
-          }
-        }
-        this.setState({data : this.state.data})
-        console.log(this.state.data);
-        // for(let i=0;i<response.data.data.data.length;i++){
-        //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
-        // }
-        // this.setState({noteLabels : this.state.noteLabels})
-        // console.log(this.state.noteLabels);
-      
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
-}
-
+           } else {
+               this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+           }
+        });
+      }
   }
   takeNote=(event)=>{
     event.preventDefault();
@@ -415,6 +431,7 @@ handleDeletelabel=(labelId,id)=>{
 close=(val)=>{
   if(val == true){
  this.setState({ askQuestion : false}) 
+ this.componentDidMount()
   }
 }
 removetag=(message)=>{

@@ -216,8 +216,8 @@ const useStyles = theme => ({
     else if(text == 'Trash'){
       this.setState({choice : 'Trash'})
     }
-    else if(text == 'Remainder'){
-      this.setState({choice : 'Remainder'})
+    else if(text == 'Reminder'){
+      this.setState({choice : 'Reminder'})
     }
     else{
       this.setState({choice : text.label})
@@ -235,7 +235,8 @@ const useStyles = theme => ({
 
       }
       else if(this.state.choice == 'Notes'){
-        return <TakeaNotes labelNoteShow="false" query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+        return <TakeaNotes labelNoteShow="false" query={this.state.query} 
+        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
         return <Archived query={this.state.query}/>
@@ -243,20 +244,12 @@ const useStyles = theme => ({
       else if(this.state.choice == 'Trash'){
         return <Trash query={this.state.query}/>
       }
-      else if(this.state.choice == 'Remainder'){
+      else if(this.state.choice == 'Reminder'){
         return <Reminder query={this.state.query}/>
       }
       else{
-      //   getNotesListByLabel(this.state.choice).then(response => {
-      //     console.log(response)
-      //    if (response.status === 200) {
-      //       // this.setState({labelData : response.data.data.details});
-      //       return <TakeaNotes query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
-      //    } else {
-      //        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-      //    }
-      // });
-      return <TakeaNotes labelNoteShow="true" query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+      return <TakeaNotes labelNoteShow="true" query={this.state.query} label={this.state.choice}
+      gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
 
       }
   }
@@ -476,7 +469,7 @@ render(){
       >
         <Divider />
         <List>
-          {['Notes', 'Remainder'].map((text, index) => (
+          {['Notes', 'Reminder'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)} >
               <ListItemIcon>{index % 2 === 0 ? <div><img src={lightbulb_black} id="imgdash1"/></div> :
               <div>
