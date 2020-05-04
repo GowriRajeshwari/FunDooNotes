@@ -39,8 +39,8 @@ class Login extends Component {
       this.setState({ snackbaropen: false });
   }
   //sign in
-  SignIn=async(event)=>{
-    event.preventDefault();
+  SignIn=async()=>{
+    // event.preventDefault();
    
     
     await this.validator();
@@ -52,7 +52,7 @@ class Login extends Component {
         password: this.state.password
       };
 
-      console.log(data);
+      // console.log(data);
         
       login(data).then(response => {
           console.log(response);
@@ -202,12 +202,12 @@ onchangePassword = event => {
                 </div>
 
                 <div className="submitButton">
-                  <Button id="subbtn" onClick={e => this.SignIn(e)}>
+                  <Button id="subbtn" className="SignIn" onClick={e => this.SignIn(e)}>
                     Sign in
                 </Button>
                 </div>
                 <div className="belowlogin">
-                  <Button id="forgotstyle" onClick={e => this.ForgotButton(e)}>
+                  <Button id="forgotstyle" className="ForgotButton" onClick={e => this.ForgotButton(e)}>
                    Forgot Password
                    </Button>
                 </div>
@@ -228,7 +228,7 @@ onchangePassword = event => {
         </Paper>
 
         <div className="registercontainer">
-        <Button id="register" onClick={e => this.register(e)}>
+        <Button id="register" className="register" onClick={e => this.register(e)}>
               Create account
             </Button>
        </div> 
