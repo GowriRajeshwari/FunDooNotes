@@ -28,7 +28,7 @@ import RatingStart from './components/Rating';
 
 let token =  window.location.href.split('/' )[4];
 let resetpassword="/resetpassword/"+token
-console.log(token);
+// console.log(token);
 // if('serviceWorker' in navigator){
 //   navigator.serviceWorker.register('./serviceWorker.js',{scope : './'})
 //     .then(reg => console.log('service worker registered',reg))

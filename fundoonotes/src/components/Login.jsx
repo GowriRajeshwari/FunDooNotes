@@ -181,7 +181,7 @@ onchangePassword = event => {
                   <TextField
                     error={this.state.helperTextEmail}
                     helperText={this.state.helperTextEmail}
-                    id="btn"
+                    // id="btn"
                     variant="outlined"
                     label="Emails"
                      onChange={this.onchangeEmail}
@@ -192,7 +192,7 @@ onchangePassword = event => {
                   <TextField
                     // error={this.state.red}
                     error={this.state.helperTextpassowrd }
-                   id="btn"
+                  //  id="btn"
                    variant="outlined"
                    type="password"
                    label="Password"
