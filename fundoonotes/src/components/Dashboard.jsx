@@ -37,7 +37,7 @@ import Reminder from './Reminder'
 import Collaborator from './Collaborator'
 import Logout from './Logout'
 import Popover from '@material-ui/core/Popover';
-import { getNoteLabelList,addLabels,logout,fileUpload } from '../services/notesService'
+import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
 
 
 const drawerWidth = 300;
@@ -219,20 +219,23 @@ const useStyles = theme => ({
     else if(text == 'Remainder'){
       this.setState({choice : 'Remainder'})
     }
+    else{
+      this.setState({choice : text.label})
+    }
   }
   labeldata=()=>{
     this.componentDidMount();
     this.setState({choice : ''})
   }
   getcomponents=()=>{
-
+      console.log(this.state.choice)
       if(this.state.choice == 'Editlabels'){
         return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
         // this.props.dialogbox();
 
       }
       else if(this.state.choice == 'Notes'){
-        return <TakeaNotes query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+        return <TakeaNotes labelNoteShow="false" query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
         return <Archived query={this.state.query}/>
@@ -242,6 +245,19 @@ const useStyles = theme => ({
       }
       else if(this.state.choice == 'Remainder'){
         return <Reminder query={this.state.query}/>
+      }
+      else{
+      //   getNotesListByLabel(this.state.choice).then(response => {
+      //     console.log(response)
+      //    if (response.status === 200) {
+      //       // this.setState({labelData : response.data.data.details});
+      //       return <TakeaNotes query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+      //    } else {
+      //        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      //    }
+      // });
+      return <TakeaNotes labelNoteShow="true" query={this.state.query} gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+
       }
   }
   queryfunction=async(event)=>{

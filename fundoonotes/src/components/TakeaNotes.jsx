@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
+import {getNotesListByLabel, getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -77,7 +77,8 @@ class TakeaNotes extends Component {
     askQuestion : false,
     questionId : '',
     showQuestion : false,
-    nmsg : ''
+    nmsg : '',
+    labelNoteShow : this.props.labelNoteShow
       
     };
   }
@@ -91,12 +92,32 @@ class TakeaNotes extends Component {
    d.setDate(new Date().getDate()+1)
     console.log(d.getTime())
     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
+    if(this.props.labelNoteShow === true){
+        getNotesListByLabel(this.state.choice).then(response => {
+          console.log(response)
+         if (response.status === 200) {
+          this.setState({data : []})
+        
+          for(let i=0;i<response.data.data.data.length;i++){
+            if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+              this.state.data.push(response.data.data.data[i]);
+            }else{
+              continue;
+            }
+          }
+          this.setState({data : this.state.data})
+          console.log(this.state.data);
+            
+         } else {
+             this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+         }
+      });
+    }else{
     getNotes().then(response => {
-      // console.log(response.data.data.data);
+     
      if (response.status === 200) {
           this.setState({data : []})
         
-        // this.setState({data : response.data.data.data});
         for(let i=0;i<response.data.data.data.length;i++){
           if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
             this.state.data.push(response.data.data.data[i]);
@@ -116,6 +137,8 @@ class TakeaNotes extends Component {
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
+}
+
   }
   takeNote=(event)=>{
     event.preventDefault();
@@ -511,7 +534,7 @@ msg=(content)=>{
                     <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <DeleteIcon msg={()=>this.msg(data.questionAndAnswerNotes)} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
+                    <DeleteIcon msg={()=>this.msg(data.questionAndAnswerNotes)} message={this.state.msg} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
 

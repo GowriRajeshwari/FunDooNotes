@@ -268,20 +268,32 @@ class AskQuestion extends Component {
                        <Typography></Typography>
 
                        </div>
-                       <div style={{padding:"10px",display : 'flex',flexDirection : 'row',justifyContent : 'center',marginLeft : '5px',alignItems:"center"}}>
-                       <div><img src={reply_black} onClick={()=>this.replyButton(this.state.questionAndAnswerNotes[index].id)}
+                       <div style={{padding:"10px",display : 'flex',flexDirection : 'row'
+                       ,marginLeft : '5px'}}>
+                       <div style={{display:"flex",justifyContent :"center",flexDirection:"column"}}> 
+                         <img src={reply_black} onClick={()=>this.replyButton(this.state.questionAndAnswerNotes[index].id)}
                  style={{width : '20px',height : '20px'}}/></div>
+                    
                  { qustans.like.length > 0 && qustans.like[0].like === true ? 
-                 <div style={{paddingLeft:"5px"}}>
-                 <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_up} onClick={()=>this.dislikeButton(this.state.questionAndAnswerNotes[index].id)}
-                 style={{width : '20px',height : '20px'}}/> <Typography>1 Likes</Typography></div>
+
+                 <div style={{paddingLeft:"5px",display:"flex",justifyContent : "flex-end",flexDirection :"row"}}>
+                 <div style={{display:"flex",justifyContent :"center",flexDirection:"column"}}>
+                   <img src={thumb_up} onClick={()=>this.dislikeButton(this.state.questionAndAnswerNotes[index].id)}
+                   
+                 style={{display:"flex",width : '20px',height : '20px'}}/> </div>
+                 <div style={{display:"flex",justifyContent :"center",flexDirection:"column",paddingLeft:"5px"}}>
+                   <div>1 Likes</div></div>
                  
                  </div>
                   :
-                  <div style={{paddingLeft:"5px"}}>
-                 <div style={{display:"flex",flexDirection :"row"}}><img src={thumb_down} onClick={()=>this.likeButton(this.state.questionAndAnswerNotes[index].id)}
-                 style={{width : '20px',height : '20px'}}/> <Typography>0 Likes</Typography></div>
+                  <div style={{paddingLeft:"5px",display:"flex",justifyContent : "flex-end",flexDirection :"row"}}>
+                 <div style={{display:"flex",justifyContent :"center",flexDirection:"column"}}>
+                   <img src={thumb_down} onClick={()=>this.likeButton(this.state.questionAndAnswerNotes[index].id)}
+                 style={{display:"flex",width : '20px',height : '20px'}}/> </div>
+                 <div style={{display:"flex",justifyContent :"center",flexDirection:"column",paddingLeft:"5px"}}>
+                   <div>0 Likes</div></div>
                 </div>}
+
                 <div style={{padding :"5px"}}>
                 {qustans.rate.length > 0 && qustans.rate[0].rate > 0 ? 
                 <Rating rating={qustans.rate[0].rate} rate={(rating)=>this.onStarClick(rating,this.state.questionAndAnswerNotes[index].id)}/>

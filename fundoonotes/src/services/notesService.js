@@ -288,5 +288,16 @@ export async function setNotes(data) {
       return error;
     }
   }
+  export async function getNotesListByLabel(label) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_getNotesListByLabel+label,{},
+         {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
-  // http://fundoonotes.incubation.bridgelabz.com/api/questionAndAnswerNotes/rate/5eaa763fad53b700227c5eb3
+  // http://fundoonotes.incubation.bridgelabz.com/api/notes/getNotesListByLabel/cccc

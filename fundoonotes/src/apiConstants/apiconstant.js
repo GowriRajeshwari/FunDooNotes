@@ -26,6 +26,7 @@ module.exports = {
     REACT_APP_removeCollaboratorsNotes : "removeCollaboratorsNotes",
     REACT_APP_getNotesDetail : "/notes/getNotesDetail/",
     REACT_APP_addQuestionAndAnswer : "addQuestionAndAnswer",
-    REACT_APP_questionAndAnswerNotes :"/questionAndAnswerNotes/"
+    REACT_APP_questionAndAnswerNotes :"/questionAndAnswerNotes/",
+    REACT_APP_getNotesListByLabel : "/notes/getNotesListByLabel/"
 
 }
