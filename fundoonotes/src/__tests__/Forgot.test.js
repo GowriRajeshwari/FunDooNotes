@@ -15,36 +15,20 @@ configure({adapter: new Adapter()});
 describe('Test case for testing login component', () => {
 
   it('Email Textfield',()=>{
-      expect(shallow(<Login/>).find("#btnEmail").length).toEqual(1)
+      expect(shallow(<Forgot/>).find("#btnForgot").length).toEqual(1)
   })
-  it('Password Textfield',()=>{
-    expect(shallow(<Login/>).find("#btnPassword").length).toEqual(1)
-})
+
 
 describe('username check',()=>{
     it('input of email',()=>{
-        const wrapper = shallow(<Login/>);
-        wrapper.find("#btnEmail").simulate('change',{target : { name:'Emails', value : 'gowripanda35@gmail.com'}
+        const wrapper = shallow(<Forgot />);
+        wrapper.find("#btnForgot").simulate('change',{target : { name:'Emails', value : 'gowripanda35@gmail.com'}
         });
         expect(wrapper.state('email')).toEqual('gowripanda35@gmail.com')
     })
 })
-describe('Password Check',()=>{
-    it('input of password',()=>{
-        const wrapper = shallow(<Login/>);
-        wrapper.find("#btnPassword").simulate('change',{target : { name:'Password', value : 'Gowri@35'}
-        });
-        expect(wrapper.state('password')).toEqual('Gowri@35')
-    })
-})
-describe('SignIn Button Check',()=>{
-  it('SignIn Button', () => {
-    const wrapper = shallow(<Login />);
-    const decrementBtn = wrapper.find('.SignIn').at(0);
-    decrementBtn.simulate('click');
-    expect(true).toBe(true)
-  });
-})
+
+
 describe('Register Button Check',()=>{
     it('Register Button', () => {
       const wrapper = shallow(<Forgot />);

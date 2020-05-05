@@ -32,8 +32,8 @@ class ResetPassword extends Component {
     };
 
   }
- Reset=async(event)=>{
-    event.preventDefault();
+ Reset=async()=>{
+    // event.preventDefault();
         await this.validator();
         let data = {
           newPassword: this.state.password,
@@ -43,6 +43,7 @@ class ResetPassword extends Component {
         console.log(data,id);
 
         if (data.newPassword != '' ) {
+        
           if(this.state.pass == true){
             resetPassword(data,id).then(response => {
                 console.log(response);
@@ -161,7 +162,7 @@ checkPassword=()=>{
                 <TextField
                    hintText="Password"
                    floatingLabelText="Password"
-                   id="btnReset"
+                   id="ConfirmPassword"
                    variant="outlined"
                    type="password"
                    label="Re-enter New Password"
@@ -172,7 +173,7 @@ checkPassword=()=>{
                 </div>
 
                 <div className="submitButtonReset">
-                  <Button id="subbtnReset" onClick={e => this.Reset(e)}>
+                  <Button id="subbtnReset" className="Reset" onClick={e => this.Reset(e)}>
                     Change Password
                 </Button>
                 </div>

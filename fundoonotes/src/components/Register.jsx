@@ -104,9 +104,9 @@ class Register extends Component {
       }
 
     //Register Button
-    Register = async(event) => {
+    Register = async() => {
         await this.validator();
-        event.preventDefault();
+        // event.preventDefault();
         console.log("register clicked");
         let data = {
             firstName: this.state.firstname,
@@ -322,7 +322,7 @@ class Register extends Component {
                                     <TextField
                                         error={this.state.helpTextFN}
                                         helperText={this.state.helpTextFN}
-                                        id="btnReg"
+                                        id="FirstName"
                                         variant="outlined"
                                         label="First Name"
                                         onChange={this.onchangeFirstName}
@@ -401,7 +401,7 @@ class Register extends Component {
                                 </div>
                             </div>
                             <div className="submitButtonReg">
-                                <Button id="subbtnReg" onClick={e => this.Register(e)}>
+                                <Button id="subbtnReg" className="Registerbtn" onClick={e => this.Register(e)}>
                                     Register
                                 </Button>
                             </div>

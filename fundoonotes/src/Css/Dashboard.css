@@ -27,6 +27,8 @@
     /* align-items: center; */
     justify-content: space-around;
     padding:3px;
+    opacity: .9;
+    /* filter: brightness(50%); */
 }
 #imgdashnotes{
     width: 25px;

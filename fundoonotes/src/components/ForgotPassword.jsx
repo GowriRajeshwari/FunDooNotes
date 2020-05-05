@@ -25,6 +25,7 @@ class ForgotPassword extends Component {
             emailfrom :'',
             snackbaropen: false,
             snackbarmsg: '',
+            email : ''
         };
     }
     
@@ -35,15 +36,16 @@ class ForgotPassword extends Component {
     }
 
     //Send Button
-    forgotButton=async(event)=>{
-        event.preventDefault();
+    forgotButton=async()=>{
+        // event.preventDefault();
         await this.validator();
         console.log("forgot button is clicked");
-        let data = {
-          email: this.state.email,
-        };
-        console.log(data);
+        
         if(this.state.error == false){
+            let data = {
+                email: this.state.email,
+              };
+              console.log(data);
             forgotpassword(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
@@ -120,13 +122,14 @@ class ForgotPassword extends Component {
                                         helperText={this.state.helperTextEmail}
                                         id="btnForgot"
                                         variant="outlined"
-                                        label="Enter full Email address"
+                                        label="Emails"
+                                        name='Emails'
                                         onChange={this.onChangeEmail}
                                     />
                                 </div>
 
                                 <div className="submitButtonForgot">
-                                <Button id="subbtnForgot" onClick={e => this.forgotButton(e)}>
+                                <Button id="subbtnForgot" className="forgotButton" onClick={e => this.forgotButton(e)}>
                                         Send
                                       </Button>
                                 </div>

@@ -71,6 +71,50 @@
     cursor: pointer;
     height: 20px;
   }
+  #FirstName{
+    width: 190px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  #btnRegLastName{
+    width: 190px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  #btnRegconfirmPassword{
+    width: 190px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  #btnRegPhone{
+    width: 190px;
+    /* min-width: 265px; */
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
   .inputFieldReg {
     padding: 1px;
     margin-right: 10px;
