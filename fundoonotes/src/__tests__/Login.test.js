@@ -35,12 +35,12 @@ describe('Password Check',()=>{
         expect(wrapper.state('password')).toEqual('Gowri@35')
     })
 })
-// describe('SignIn Button Check',()=>{
-//   it('SignIn Button', () => {
-//     const wrapper = shallow(<Login />);
-//     const decrementBtn = wrapper.find('.SignIn').at(0);
-//     decrementBtn.simulate('click');
-//     expect(true).toBe(true)
-//   });
-// })
+describe('SignIn Button Check',()=>{
+  it('SignIn Button', () => {
+    const wrapper = shallow(<Login />);
+    const decrementBtn = wrapper.find('.SignIn').at(0);
+    decrementBtn.simulate('click');
+    expect(true).toBe(true)
+  });
+})
 });
