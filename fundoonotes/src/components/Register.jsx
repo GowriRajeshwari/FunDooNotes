@@ -90,36 +90,34 @@ class Register extends Component {
         };
     }
 
-    componentWillMount() {
-        // when params sent via url
-        if (this.props.history.location.state) {
-          let params = this.props.history.location.state.service;
-        if(params == 'advance'){
-          this.setState({ service: params , showCardColor :true });
-        }
-        else{
-          this.setState({ service: params , showCardColor :false });
-        }
-        }
-      }
+    // componentWillMount() {
+    //     // when params sent via url
+    //     if (this.props.history.location.state) {
+    //       let params = this.props.history.location.state.service;
+    //     if(params == 'advance'){
+    //       this.setState({ service: params , showCardColor :true });
+    //     }
+    //     else{
+    //       this.setState({ service: params , showCardColor :false });
+    //     }
+    //     }
+    //   }
 
     //Register Button
     Register = async() => {
         await this.validator();
         // event.preventDefault();
-        console.log("register clicked");
-        let data = {
-            firstName: this.state.firstname,
-            lastName: this.state.lastname,
-            email: this.state.email,
-            service: this.state.service,
-            password: this.state.password,
-            phoneNumber: this.state.phone
-        };
-        console.log(data);
-
-
         if(this.state.error == false){
+            console.log("register clicked");
+            let data = {
+                firstName: this.state.firstname,
+                lastName: this.state.lastname,
+                email: this.state.email,
+                service: this.state.service,
+                password: this.state.password,
+                phoneNumber: this.state.phone
+            };
+            console.log(data);
             register(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
@@ -415,20 +413,20 @@ class Register extends Component {
                  
                                    <div className="servicerootR">
                                    <Card>
-                                   <div className={classes.widthheight}>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                   <div className="widthheight">
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 Price : $49 per
                                 </Typography>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 month
                                 </Typography>
-                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                <Typography className="advance" color="textSecondary" gutterBottom>
                                 advance
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . $49/month
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . Ability to ad  only title and description
                                 </Typography>
                                 </div>
@@ -451,20 +449,20 @@ class Register extends Component {
                  
                                  <div className="servicerootR">
                                  <Card>
-                                 <div className={classes.widthheight}>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                 <div className="widthheight">
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 Price : $49 per
                                 </Typography>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 month
                                 </Typography>
-                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                <Typography className="advance" color="textSecondary" gutterBottom>
                                 basic
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . $49/month
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . Ability to ad  only title and description
                                 </Typography>
                                 </div>
@@ -489,20 +487,20 @@ class Register extends Component {
                  
                                    <div className="servicerootR">
                                    <Card>
-                                   <div className={classes.widthheight}>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                   <div className="widthheight">
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 Price : $49 per
                                 </Typography>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 month
                                 </Typography>
-                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                <Typography className="advance" color="textSecondary" gutterBottom>
                                 advance
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . $49/month
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . Ability to ad  only title and description
                                 </Typography>
                                 </div>
@@ -525,20 +523,20 @@ class Register extends Component {
                  
                                  <div className="servicerootR">
                                  <Card>
-                                 <div className={classes.widthheight}>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                 <div className="widthheight">
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 Price : $49 per
                                 </Typography>
-                                <Typography className={classes.price} color="textSecondary" gutterBottom>
+                                <Typography className="price" color="textSecondary" gutterBottom>
                                 month
                                 </Typography>
-                                <Typography className={classes.advance} color="textSecondary" gutterBottom>
+                                <Typography className="advance" color="textSecondary" gutterBottom>
                                 basic
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . $49/month
                                 </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                <Typography className="title" color="textSecondary" gutterBottom>
                                 . Ability to ad  only title and description
                                 </Typography>
                                 </div>
@@ -577,4 +575,4 @@ class Register extends Component {
         );
     }
 }
-export default withStyles(useStyles)(Register);
+export default Register;

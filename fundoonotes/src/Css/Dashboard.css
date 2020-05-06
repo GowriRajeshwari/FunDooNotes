@@ -500,8 +500,8 @@
         margin-right: 1px;
     }
 
-}
-@media only screen and (min-width : 1024px){
+ }
+@media  (width : 1024px){
     .ToolbarContainer1{
         display:flex;
         flex-direction:row;
@@ -565,4 +565,4 @@
         margin-right: 1px;
     }
 
-}
+} 
