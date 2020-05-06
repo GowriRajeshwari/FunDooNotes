@@ -66,7 +66,7 @@ const useStyles = theme => ({
   },
   menuButton: {
    
-    marginRight: theme.spacing(1),
+    // marginRight: theme.spacing(1),
   },
   hide: {
     display: 'none',
@@ -320,14 +320,14 @@ render(){
     <div className={classes.root}>
       <CssBaseline />
       <AppBar
-        position="fixed"
+        // position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: this.state.open,
         })}
       >
         <Toolbar>
-        <div style={{ display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center',justifyContent:'space-around',width :'100%'}}>
-          <div style={{ display:'flex',flexDirection:'row',justifyContent:'center',alignItems:'center'}}>
+        <div className="ToolbarContainer1">
+          <div className="ToolbarContainer2">
           <IconButton
             size="medium"
             color="black"
@@ -339,24 +339,24 @@ render(){
             <MenuIcon style={{ width:  '30px',
               height : '30px',}} />
           </IconButton>
-          <div className={classes.bulbImg}  >
+          <div className={classes.bulbImg} className="bulbicon"  >
              <img src={keepBulb} style={{ height : '45px',width : '45px'}} />
           </div>
 
-          <Typography variant="h6" noWrap className={classes.funnDooName} >
+          <Typography variant="h6" noWrap className="funnDooName" >
            FunDoo
           </Typography>
 
           </div>
-          <div className={classes.searchDiv}>
+          <div className="searchDiv">
                               {/* <Paper> */}
-                                  <div style={{ padding : '5px',display : 'flex',justifyContent : 'center',height : '46px',maxWidth : '720px',alignItems:'center'}}>
+                                  <div className="searchdiv1">
                                   <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} />
                                 <input
                                    placeholder="Search"
                                     InputProps={{ disableUnderline: true }}
-                                    style={{ backgroundColor: '#ff00',height : '46px',outline:'none',fontSize:'18px',
-                                     border: 'none', disableUnderline: true,width:'600px' }}
+                                    className="inputsearch"
+                                    style={{disableUnderline : true,outline:'none',border: 'none'}}
                                      onChange={this.queryfunction}
                                 />
                                 <img src={clear} id="imgdash" />
@@ -371,7 +371,7 @@ render(){
                           aria-label="open drawer"
                           onClick={this.handleDrawerOpen}
                           edge="start"
-                          className={clsx(classes.menuButton, this.state.open)}
+                          className="bulbicon"
                         >
                              <img src={shopping_cart} id="imgdash" />
                          </IconButton>
@@ -381,7 +381,7 @@ render(){
                           aria-label="open drawer"
                           onClick={this.gridview}
                           edge="start"
-                          className={clsx(classes.menuButton, this.state.open)}
+                          className="bulbicon"
                         >
                              {this.state.gridView ? <img src={list} id="imgdash" /> : <img src={listview} id="imgdash" />}
                          </IconButton>
@@ -393,7 +393,7 @@ render(){
                           aria-label="open drawer"
                           onClick={this.handleClick}
                           edge="start"
-                          className={clsx(classes.menuButton, this.state.open)}
+                          className="bulbicon"
                         >
                           <Avatar>
                <img src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>

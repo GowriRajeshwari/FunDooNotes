@@ -459,10 +459,13 @@ msg=(content)=>{
         
         <AskQuestion close={this.close}  questionId={this.state.questionId} msg={this.state.msg}/>
         : 
+
+        <div>
       <div className='maincontainer'>
        
           <NewNote sendNewData={this.sendNewData}/>
-    
+          </div>
+          <div className='maincontainer'>
     <div className='notescontainer'>
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)
@@ -576,6 +579,7 @@ msg=(content)=>{
     
     })}
     </div>
+    </div>
             <Dialog
             open={this.state.dialogBoxOpen}
             onClose={this.handelNoteDialogBox}
@@ -585,6 +589,7 @@ msg=(content)=>{
               </Dialog>
               {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
   
+              
               </div>
   }
   </div>

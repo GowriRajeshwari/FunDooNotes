@@ -16,7 +16,9 @@ describe('Test case for testing login component', () => {
 describe('Register Button Check',()=>{
     it('Register Button', () => {
       const wrapper = shallow(<Register />);
-      const decrementBtn = wrapper.find('.Registerbtn').exists();
+      const decrementBtn = wrapper.find('.Registerbtn');
+      expect(decrementBtn).to.have.length(1);
+      
       decrementBtn.simulate('click');
       expect(true).toBe(true)
     });
