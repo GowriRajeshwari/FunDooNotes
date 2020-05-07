@@ -255,13 +255,16 @@ class Register extends Component {
       
     render() {
       const {classes}=this.props;
+      if (this.props.history.location === undefined) {
+          console.log("undefined")
+      }
         return (
             <div className="firstcontainerReg">
 
                 <Paper id="rootpaperReg" elevation={3} >
 
                     <div className="containerReg">
-                        <div className="container2Reg">
+                        {/* <div className="container2Reg"> */}
                             <span class="usernameReg"><span>F</span><span>u</span><span>n</span><span>D</span><span>o</span><span>o</span></span>
                             <div className="loginstyleReg">{this.state.login}</div>
                             <div className="rowReg">
@@ -288,7 +291,7 @@ class Register extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="rowReg">
+                            <div className="rowReg1">
 
                                 <div className="inputFieldReg">
                                     <TextField
@@ -319,7 +322,7 @@ class Register extends Component {
                                 </div>
                                 <div className="inputFieldReg">
                                     <TextField
-                                        id="btnRegConfirm"
+                                        id="btnReg"
                                         variant="outlined"
                                         type="password"
                                         label="Confirm Password"
@@ -331,7 +334,7 @@ class Register extends Component {
                                 </div>
                             </div>
 
-                            <div className="rowReg">
+                            <div className="rowReg2">
 
                                 
                                 <div className="inputFieldReg">
@@ -357,8 +360,9 @@ class Register extends Component {
                             
                        {this.state.showCardColor ?
                             <div className="rowReg">
-                            <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
-                                     >
+                            <div >
+                                <div className="twocardR">
+                                     
                  
                                    <div className="servicerootR">
                                    <Card>
@@ -372,10 +376,10 @@ class Register extends Component {
                                 <Typography className="advance" >
                                 advance
                                 </Typography>
-                                <Typography className="title" >
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . $49/month
                                 </Typography>
-                                <Typography className="title" >
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . Ability to add only title and description
                                 </Typography>
                                 </div>
@@ -383,7 +387,7 @@ class Register extends Component {
                                
                                       </div>
                                     <div  className="serviceroot1R">
-                                        <Card>
+                                        <Card >
                                             <Typography  className="title1Radvance">
                                             Selected
                                             </Typography>
@@ -408,10 +412,10 @@ class Register extends Component {
                                 <Typography className="advance" >
                                 basic
                                 </Typography>
-                                <Typography className="title">
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . $49/month
                                 </Typography>
-                                <Typography className="title" >
+                                <Typography className="title" style={{fontSize : "14px"}} >
                                 . Ability to add only title and description
                                 </Typography>
                                 </div>
@@ -446,10 +450,10 @@ class Register extends Component {
                                 <Typography className="advance" >
                                 advance
                                 </Typography>
-                                <Typography className="title">
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . $49/month
                                 </Typography>
-                                <Typography className="title">
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . Ability to ad  only title and description
                                 </Typography>
                                 </div>
@@ -482,10 +486,10 @@ class Register extends Component {
                                 <Typography className="advance" >
                                 basic
                                 </Typography>
-                                <Typography className="title" >
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . $49/month
                                 </Typography>
-                                <Typography className="title" >
+                                <Typography className="title" style={{fontSize : "14px"}}>
                                 . Ability to add only title and description
                                 </Typography>
                                 </div>
@@ -509,7 +513,7 @@ class Register extends Component {
 
                  
                    
-                    </div>
+                    {/* </div> */}
 
                    
                 </Paper>

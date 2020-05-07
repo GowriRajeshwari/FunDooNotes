@@ -72,7 +72,7 @@ describe('FirstName check',()=>{
 // describe('Password Check',()=>{
 //     it('input of password',()=>{
 //         const wrapper = shallow(<Register/>);
-//         wrapper.find("#btnPassword").simulate('change',{target : { name:'Password', value : 'Gowri@35'}
+//         wrapper.find("#btnReg").simulate('change',{target : { name:'Password', value : 'Gowri@35'}
 //         });
 //         expect(wrapper.state('password')).toEqual('Gowri@35')
 //     })
