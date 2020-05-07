@@ -253,7 +253,7 @@ class Service extends Component {
 
       
 
-      <Typography  className={classes.signin} onClick={e => this.signin(e)}>
+      <Typography style={{cursor:"pointer"}} className={classes.signin} onClick={e => this.signin(e)}>
                                Sign In Instead
                                 </Typography>
                                 
@@ -269,7 +269,7 @@ class Service extends Component {
                     <div className="textdash">
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
-                    <Button size="small" onClick={e => this.processtopay(e)}>
+                    <Button  size="small" onClick={e => this.processtopay(e)}>
                     Processed to checkout
                     </Button>
                     </div>

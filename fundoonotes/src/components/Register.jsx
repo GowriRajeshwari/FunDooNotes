@@ -40,15 +40,14 @@ class Register extends Component {
     }
 
    
-    componentWillMount() { 
-        // when params sent via url
+    UNSAFE_componentWillMount=async()=>{  // when params sent via url
         if (this.props.history.location.state) {
           let params = this.props.history.location.state.service;
         if(params == 'advance'){
-          this.setState({ service: params , showCardColor :true });
+        await  this.setState({ service: params , showCardColor :true });
         }
         else{
-          this.setState({ service: params , showCardColor :false });
+            await this.setState({ service: params , showCardColor :false });
         }
         }
       }
@@ -487,7 +486,7 @@ class Register extends Component {
                                 . $49/month
                                 </Typography>
                                 <Typography className="title" >
-                                . Ability to ad  only title and description
+                                . Ability to add only title and description
                                 </Typography>
                                 </div>
                                         </Card>
