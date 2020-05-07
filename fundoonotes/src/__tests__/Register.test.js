@@ -49,12 +49,12 @@ describe('Test case for testing Register component', () => {
     expect(shallow(<Register/>).find("#btnEmailReg").length).toEqual(1)
 })
 
-it('Password Textfield',()=>{
-    expect(shallow(<Register/>).find("#btnReg").length).toEqual(1)
-})
-it('ConfirmPassword Textfield',()=>{
-  expect(shallow(<Register/>).find("#btnRegConfirm").length).toEqual(1)
-})
+// it('Password Textfield',()=>{
+//     expect(shallow(<Register/>).find("#btnReg").length).toEqual(1)
+// })
+// it('ConfirmPassword Textfield',()=>{
+//   expect(shallow(<Register/>).find("#btnRegConfirm").length).toEqual(1)
+// })
 
 it('Phone Textfield',()=>{
     expect(shallow(<Register/>).find("#btnRegPhone").length).toEqual(1)

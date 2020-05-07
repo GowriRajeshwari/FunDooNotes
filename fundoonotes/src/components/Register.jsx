@@ -9,6 +9,15 @@ import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
+// const UndefinedCheck = data =>{
+//     if(data === unefined){
+//         return 1
+//     }
+//     else{
+//         return data
+//     }
+// }
+
 class Register extends Component {
     constructor(props) {
         super(props);
@@ -40,9 +49,10 @@ class Register extends Component {
     }
 
    
-    UNSAFE_componentWillMount=async()=>{  // when params sent via url
-        if (this.props.history.location.state) {
-          let params = this.props.history.location.state.service;
+        params=async(classes)=>{  // when params sent via url
+            console.log(classes)
+        if (classes != "undefined") {
+          let params = classes;
         if(params == 'advance'){
         await  this.setState({ service: params , showCardColor :true });
         }
@@ -255,8 +265,10 @@ class Register extends Component {
       
     render() {
       const {classes}=this.props;
-      if (this.props.history.location === undefined) {
+      if (classes === "undefined") {
           console.log("undefined")
+      }else{
+        this.params(classes);
       }
         return (
             <div className="firstcontainerReg">
