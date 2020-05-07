@@ -304,6 +304,10 @@
 
 
 
+
+
+
+
 @media only screen and (max-width : 375px){
     .ToolbarContainer1{
         display:flex;
@@ -313,6 +317,7 @@
         justify-content:space-around;
         /* width :100% */
         /* padding-left: 30px; */
+        
        }
        .ToolbarContainer2{
         display:flex;
