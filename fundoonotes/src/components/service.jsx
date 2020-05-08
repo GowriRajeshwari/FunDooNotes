@@ -81,7 +81,7 @@ const useStyles =(theme)=> ({
           display:'flex',
           justifyContent : 'center',
           color : 'blue',
-          marginTop : '20px'
+          // marginTop : '10px'
       }
       
   });
@@ -174,20 +174,20 @@ class Service extends Component {
       
       <div className="twocard" >
         <div className="zoom" onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
-                 <div className="serviceroot">
-                        <Card >
+                 <div>
+                        <Card  className="serviceroot">
                             <div className={classes.widthheight}>
                                 <Typography className={classes.price} color="textSecondary" gutterBottom>
-                                Price : $49 per
+                                Price : $99 per
                                 </Typography>
                                 <Typography className={classes.price} color="textSecondary" gutterBottom>
                                 month
                                 </Typography>
                                 <Typography className={classes.advance} color="textSecondary" gutterBottom>
-                                advance
+                                Advance
                                 </Typography>
                                 <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                . $49/month
+                                . $99/month
                                 </Typography>
                                 <Typography className="boldpoint" color="textSecondary" gutterBottom>
                                 . Ability to ad  only title and description
@@ -195,8 +195,8 @@ class Service extends Component {
                                 </div>
                         </Card>
                     </div>
-                    <div  className="serviceroot1">
-                        <Card>
+                    <div >
+                        <Card  className="serviceroot1">
                             <Typography className={this.state.colorshow ? "title2" : "title1"} >
                             ADD TO CART
                             </Typography>
@@ -208,8 +208,8 @@ class Service extends Component {
                 <div className="twocard"  ><div className="zoom" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
                  onClick={e => this.servicebasic(e)}
                  >
-                        <div className="serviceroot">
-                                <Card >
+                        <div >
+                                <Card className="serviceroot">
                                 <div className={classes.widthheight}>
                                 <Typography className={classes.price} color="textSecondary" gutterBottom>
                                 Price : $49 per
@@ -224,13 +224,13 @@ class Service extends Component {
                                 . $49/month
                                 </Typography>
                                 <Typography className="boldpoint" color="textSecondary" gutterBottom>
-                                . Ability to ad  only title and description
+                                . Ability to add only title and description
                                 </Typography>
                                 </div>
                                 </Card>
                             </div>
-                        <div  className="serviceroot1">
-                            <Card>
+                        <div  >
+                            <Card className="serviceroot1">
                                 <Typography  className={this.state.colorshow1 ? "title2" : "title1"} >
                                 ADD TO CART
                                 </Typography>
@@ -258,6 +258,7 @@ class Service extends Component {
                                 </Typography>
                                 
                 <Modal
+                
                 aria-labelledby="simple-modal-title"
                 aria-describedby="simple-modal-description"
                 open={this.state.setOpen}
@@ -267,6 +268,7 @@ class Service extends Component {
                 <div className="classespaper">
                 
                     <div className="textdash">
+                      Hello
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
                     <Button  size="small" onClick={e => this.processtopay(e)}>

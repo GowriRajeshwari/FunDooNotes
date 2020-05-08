@@ -49,10 +49,10 @@ class Register extends Component {
     }
 
    
-        params=async(classes)=>{  // when params sent via url
-            console.log(classes)
-        if (classes != "undefined") {
-          let params = classes;
+        componentWillMount=async()=>{  // when params sent via url
+            // console.log(classes)
+        if (this.props.history.location.state.service) {
+          let params = this.props.history.location.state.service;
         if(params == 'advance'){
         await  this.setState({ service: params , showCardColor :true });
         }
@@ -265,11 +265,11 @@ class Register extends Component {
       
     render() {
       const {classes}=this.props;
-      if (classes === "undefined") {
-          console.log("undefined")
-      }else{
-        this.params(classes);
-      }
+    //   if (classes === "undefined") {
+    //       console.log("undefined")
+    //   }else{
+    //     this.params(this.props.history.location.state.service);
+    //   }
         return (
             <div className="firstcontainerReg">
 

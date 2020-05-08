@@ -31,7 +31,7 @@
     width : 250px;
     position: relative;
     z-index: 8;
-    margin-top: -190px;
+    margin-top: -230px;
     margin-left: 40px;
     /* padding : 40px; */
 }
@@ -100,4 +100,13 @@
         justify-content: center;
         width:100%;
         height: 500px;
+  }
+  .textdash{
+      width : 100%;
+      background-color: violet;
+      height: 40px;
+  }
+  .classespaper{
+      width: 600px;
+      height: 100px;
   }
