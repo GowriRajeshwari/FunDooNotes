@@ -24,6 +24,8 @@ import LabelNotes from './components/LabelNotes';
 import Logout from './components/Logout';
 import AskQuestion from './components/AskQuestion';
 import RatingStart from './components/Rating';
+import AddCart from './components/AddCart';
+
 
 
 let token =  window.location.href.split('/' )[4];
@@ -39,7 +41,8 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-        <Route path="/" exact component={service} />
+      <Route path="/Addcart" exact component={AddCart} />
+        <Route path="/"  component={service} />
         <Route path="/login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
@@ -61,6 +64,7 @@ function App() {
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
+        
 
 
 
