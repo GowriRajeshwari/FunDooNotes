@@ -25,6 +25,7 @@ import Logout from './components/Logout';
 import AskQuestion from './components/AskQuestion';
 import RatingStart from './components/Rating';
 import AddCart from './components/AddCart';
+import Cart from './components/Cart';
 
 
 
@@ -41,8 +42,8 @@ function App() {
   return (
     <Router history={history}>
       <Switch>
-      <Route path="/Addcart" exact component={AddCart} />
-        <Route path="/"  component={service} />
+    
+        <Route path="/" exact component={service} />
         <Route path="/login" component={Login} />
         <Route path="/Register" component={Register} />
         <Route path="/Forgot" component={ForgotPassword} />
@@ -64,7 +65,8 @@ function App() {
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
-        
+        <Route path="/Addcart"  component={AddCart} />
+        <Route path="/cart"  component={Cart} />        
 
 
 

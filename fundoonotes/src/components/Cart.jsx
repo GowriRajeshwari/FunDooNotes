@@ -42,12 +42,10 @@ import Color from './Color'
 import EditNotes from './EditNotes'
 import checkboxoutline from '../assets/checkboxoutline.png';
 import checkboxtick from '../assets/checkboxtick.png';
-import AskQuestion from './AskQuestion'
-
-require('dotenv').config();
+import AddCart from './AddCart'
 
 
-class DeleteIcon extends Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -62,11 +60,38 @@ class DeleteIcon extends Component {
   }
  render(){
      return(
-        <div>
+        <div style={{display:"flex",justifyContent:"center"}}>
+            <div style={{marginTop:"30px",width : "80%",display:"flex",flexDirection:"column"}}>
+                {/* <div>
             <Button onClick={this.placeOrder}>
                 placeorder
             </Button>
+            </div> */}
+            <div> 
+                <AddCart cartStepper={this.state.cartStepper}/>
+            </div>
+            <div style={{display :"flex",justifyContent:"flex-start",paddingBottom:"10px"}}>
+            <span>ShoppingCart</span>
+            </div>
+            <Divider/>
+            <div style={{height : "120px",alignItems:"center",display:"flex"}}>
+
+                <div style={{width:"90px",flexWrap:"wrap",backgroundColor:"grey",borderRadius:"8px"}}>
+                    <div style={{ color : "white",display:"flex",justifyContent:"center"}}>
+                    $99 per month advance
+                    </div>
+
+                </div>
+                <div style={{display:"flex",flexDirection:"column",marginLeft:"10px"}}>
+                <div style={{ color:"blue",fontSize:"12px"}}>advance Pack Details</div>
+                <div>Ability to add title, description, images, labels, checklist and colors</div>
+                </div>
+            </div>
+            <Divider/>
+
+            </div>
+
         </div>
      )}}
 
-     export default DeleteIcon;
+     export default Cart;

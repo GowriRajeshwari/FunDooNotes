@@ -37,6 +37,7 @@ import Reminder from './Reminder'
 import Collaborator from './Collaborator'
 import Logout from './Logout'
 import Popover from '@material-ui/core/Popover';
+import Cart from './Cart'
 import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
 
 
@@ -219,6 +220,9 @@ const useStyles = theme => ({
     else if(text == 'Reminder'){
       this.setState({choice : 'Reminder'})
     }
+    else if(text == 'shopping_cart'){
+      this.setState({ choice :'shopping_cart'})
+    }
     else{
       this.setState({choice : text.label})
     }
@@ -246,6 +250,9 @@ const useStyles = theme => ({
       }
       else if(this.state.choice == 'Reminder'){
         return <Reminder query={this.state.query}/>
+      }
+      else if(this.state.choice == 'shopping_cart'){
+        return <Cart/>
       }
       else{
       return <TakeaNotes labelNoteShow="true" query={this.state.query} label={this.state.choice}
@@ -314,6 +321,9 @@ handleClick12=(event)=>{
 // this.setState({fileshow :false,profileImage:'',file:''})
 
 }
+shopping_cart=()=>{
+
+}
 render(){
     const {classes} = this.props;
   return (
@@ -369,7 +379,7 @@ render(){
                           size="medium"
                           color="black"
                           aria-label="open drawer"
-                          onClick={this.handleDrawerOpen}
+                          onClick={(event)=>this.choice(event,"shopping_cart")}
                           edge="start"
                           className="bulbicon"
                         >
