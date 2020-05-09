@@ -310,5 +310,17 @@ export async function setNotes(data) {
       return error;
     }
   }
+  export async function myCart() {
+    try {
+      const response = await axios.get(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_myCart,
+         {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
-  // http://fundoonotes.incubation.bridgelabz.com/api/productcarts/placeOrder
+
+  // http://fundoonotes.incubation.bridgelabz.com/api/productcarts/myCart
