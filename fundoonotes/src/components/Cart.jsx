@@ -25,7 +25,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,getNoteLabelList,addlabelNotes,deletelabelNotes } from '../services/notesService'
+import { placeOrder} from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -51,10 +51,11 @@ class Cart extends Component {
     this.state = {
         cartStepper:0,
         showCOD : true,
-        address : ''
+        address : '',
+        cartId:''
     };
   }
-  placeOrder=()=>{
+  checkout=()=>{
     this.cartChange();
    this.setState({ showCOD : false})
   }
@@ -65,7 +66,22 @@ class Cart extends Component {
     event.preventDefault();
     this.setState({ address : event.target.value})
   }
+  placeOrder=()=>{
+    let data={
+      cartId : this.state.cartId,
+      address : this.state.address
+    }
+    placeOrder(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+    this.setState({cartStepper: this.state.cartStepper + 1})
+         
+     } else {
+         this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
+     }
+  });
 
+  }
  render(){
      return(
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
@@ -107,7 +123,7 @@ class Cart extends Component {
                     Subtotal(1 item) : $99
                     </div>
                       {this.state.showCOD ? <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
-            <div style={{padding:"2px",color:"black",cursor:"pointer"}} onClick={this.placeOrder}>
+            <div style={{padding:"2px",color:"black",cursor:"pointer"}} onClick={this.checkout}>
                 Processed to checkout
             </div> </div> : 
             <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
@@ -128,9 +144,9 @@ class Cart extends Component {
 
               </textarea>
               </div>
-              <div style={{display:"flex",flexDirection:"column",width:"100px",flexWrap:"wrap"}}>
-                <div style={{ color:"black",fontSize:"14px",fontWeight:"bold"}}>Payment method</div>
-                <div style={{ color:"blue",fontSize:"17px"}}>Cash On Delivery</div>
+              <div style={{display:"flex",flexDirection:"column",width:"250px",flexWrap:"wrap",marginLeft : " 30px"}}>
+                <div style={{ color:"black",fontSize:"12px",fontWeight:"bold"}}>Payment method</div>
+                <div style={{ color:"blue",fontSize:"14px"}}>Cash On Delivery</div>
                 </div>
               </div>
              }
