@@ -55,6 +55,9 @@ const useStyles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
+    ['@media (max-width:780px)']:{
+      transition :"0.5s"
+    }
   },
   appBarShift: {
     // width: `calc(100% - ${drawerWidth}px)`,
@@ -63,6 +66,10 @@ const useStyles = theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    
+    ['@media (max-width:780px)']:{
+      transition : '0.5s'
+    }
     
   },
   menuButton: {
