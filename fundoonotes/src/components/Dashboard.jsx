@@ -68,7 +68,7 @@ const useStyles = theme => ({
     }),
     
     ['@media (max-width:780px)']:{
-      transition : '0.5s'
+      transition : "transform "
     }
     
   },
@@ -88,6 +88,7 @@ const useStyles = theme => ({
     border: 'none',
     marginTop:'70px',
     width: drawerWidth,
+    height : "90%"
   },
   drawerHeader: {
     display: 'flex',
