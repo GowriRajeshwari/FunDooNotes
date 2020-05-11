@@ -51,7 +51,7 @@ class ResetPassword extends Component {
                     this.setState({
                         snackbaropen: true,
                         snackbarmsg: "Succefully changed."
-                      },100)
+                      })
                     //  localStorage.setItem("id", response.data.id);
                     
                     this.props.history.push({
