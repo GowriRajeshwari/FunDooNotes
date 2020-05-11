@@ -75,7 +75,7 @@ class Cart extends Component {
     this.setState({ address : event.target.value})
   }
   placeOrder=async()=>{
-    await this.setState({cartStepper: this.state.cartStepper + 1})
+    // await this.setState({cartStepper: this.state.cartStepper + 1})
     let data={
       cartId : this.state.cartId,
       address : this.state.address

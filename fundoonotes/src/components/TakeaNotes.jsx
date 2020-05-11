@@ -471,7 +471,8 @@ msg=(content)=>{
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'20px',cursor:'pointer',padding:'20px'}} >  
-      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color }}>
+      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color
+      ,boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
       <div style={{padding : '10px'}}>
         <div className='showicon'>
                       <div  className="typoText">
