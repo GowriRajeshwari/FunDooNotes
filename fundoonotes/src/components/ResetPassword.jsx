@@ -15,7 +15,7 @@ class ResetPassword extends Component {
     super(props);
     this.state = {
       helperText: "",
-      error: false,
+      error: null,
       username: "",
       userdata: [],
       show: false,
@@ -51,7 +51,7 @@ class ResetPassword extends Component {
                     this.setState({
                         snackbaropen: true,
                         snackbarmsg: "Succefully changed."
-                      })
+                      },100)
                     //  localStorage.setItem("id", response.data.id);
                     
                     this.props.history.push({
@@ -72,7 +72,8 @@ class ResetPassword extends Component {
     if(this.state.password != ''){
       if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
         this.setState({ password: this.state.password , helperTextpassowrd: "",
-        error: false})
+        // error: false
+      })
       } else{
         this.setState({
               helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",

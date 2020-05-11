@@ -28,7 +28,7 @@ class Register extends Component {
             confirmpassword: "",
             helperText: "",
             phone: "",
-            error: false,
+            error: null,
             show: false,
             login: "Create your FunDoo Account",
             next: false,
@@ -66,7 +66,7 @@ class Register extends Component {
     Register = async() => {
         await this.validator();
         // event.preventDefault();
-        if(this.state.error == false){
+        if(this.state.error != true){
             console.log("register clicked");
             let data = {
                 firstName: this.state.firstname,
@@ -100,7 +100,7 @@ class Register extends Component {
             if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.firstname)) {
                 this.setState({
                     firstname: this.state.firstname, helpTextFN: "",
-                    error: false
+                    // error: false
                 })
             } else {
                 this.setState({
@@ -121,7 +121,7 @@ class Register extends Component {
             if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.lastname )) {
                 this.setState({
                     lastname: this.state.lastname , helpTextLN: "",
-                    error: false
+                    // error: false
                 })
             } else {
                 this.setState({
@@ -141,7 +141,8 @@ class Register extends Component {
         if(this.state.password != ''){
             if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
               this.setState({ password: this.state.password , helperTextpassowrd: "",
-              error: false})
+            //   error: false
+            })
             } else{
               this.setState({
                     helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
@@ -157,13 +158,32 @@ class Register extends Component {
           })
           }
 
+          if(this.state.confirmpassword != ''){
+            if (this.state.password === this.state.confirmpassword) {
+                // this.setState({ snackbarOpen: true, snackbarmsg: 'done' })
+                this.setState({ confirmpassword: this.state.confirmpassword , helperTextCpassowrd: "",})
+              } else {
+                this.setState({
+                    helperTextCpassowrd: "Password should be equal",
+                    error: true,
+                    confirmpassword: this.state.confirmpassword
+                })
+              }
+          }else if(this.state.confirmpassword == ''){
+            this.setState({
+              helperTextCpassowrd: "Password should be equal",
+              error: true,
+              confirmpassword: this.state.confirmpassword
+          })
+          }
+
 
 
         if(this.state.email != ''){
             if ( /\S+@\S+\.\S+/.test(this.state.email)) {
               this.setState({
                   email: this.state.email, helperTextEmail: "",
-                  error: false
+                //   error: false
               })
           } else{
             this.setState({
@@ -184,7 +204,8 @@ class Register extends Component {
           if(this.state.phone != ''){
             if (/^[0-9]*$/.test(this.state.phone)) {
                 this.setState({ phone: this.state.phone ,helperTextCountry: "",
-                error: false })
+                // error: false
+             })
               } else {
                   this.setState({
                       helperTextCountry: "Enter No only",
@@ -199,6 +220,8 @@ class Register extends Component {
                 phone: this.state.phone
             })
         }
+
+
 
 
 

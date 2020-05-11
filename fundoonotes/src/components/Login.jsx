@@ -17,7 +17,7 @@ class Login extends Component {
     super(props);
     this.state = {
       helperText: "",
-      error: false,
+      error: null,
       username: "",
       userdata: [],
       show: false,
@@ -45,7 +45,7 @@ class Login extends Component {
     
     await this.validator();
     console.log(this.state.error )
-    if(this.state.error == false){
+    if(this.state.error != true){
       console.log("login clicked");
       let data = {
         email: this.state.email,
@@ -85,7 +85,7 @@ class Login extends Component {
       if ( /\S+@\S+\.\S+/.test(this.state.email)) {
         this.setState({
             email: this.state.email, helperTextEmail: "",
-            error: false
+            // error: false
         })
     } else{
       this.setState({
@@ -105,7 +105,8 @@ class Login extends Component {
     if(this.state.password != ''){
       if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
         this.setState({ password: this.state.password , helperTextpassowrd: "",
-        error: false})
+        // error: false
+      })
       } else{
         this.setState({
               helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",

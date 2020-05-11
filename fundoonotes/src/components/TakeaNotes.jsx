@@ -491,7 +491,7 @@ msg=(content)=>{
          { data.noteCheckLists.map((notelist, index) => (
           //  console.log(noteCheckLists)
                       <List>
-                 <div className="textdash">
+                 <div className="textdash1">
 
                    <Typography style={{width : '100%'}}>{notelist.itemName}</Typography>
                    
