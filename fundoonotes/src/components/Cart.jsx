@@ -94,49 +94,50 @@ class Cart extends Component {
  render(){
      return(
         <div style={{display:"flex",justifyContent:"center",flexWrap:"wrap"}}>
-            <div style={{marginTop:"30px",width : "80%",display:"flex",flexDirection:"column"}}>
+            <div style={{marginTop:"30px",width : "70%",display:"flex",flexDirection:"column"}}>
               
             <div> 
                 <AddCart cartStepper={this.state.cartStepper}/>
             </div>
-            <div style={{display :"flex",justifyContent:"flex-start",paddingBottom:"10px"}}>
-            <span>ShoppingCart</span>
+            <div style={{display :"flex",justifyContent:"flex-start",paddingBottom:"10px",fontFamily:"lato",fontSize:"14px",fontWeight:"bold"}}>
+            <span style={{fontFamily:"lato",fontSize:"18px"}} >ShoppingCart</span>
             </div>
             <Divider/>
             <div style={{minHeight : "120px",alignItems:"center",display:"flex",flexWrap:"wrap"}}>
 
                 <div style={{width:"90px",flexWrap:"wrap",backgroundColor:"grey",
                 borderRadius:"8px",justifyContent:"center",display:"flex",alignItems:"center",paddingLeft:"20px"}}>
-                    <div style={{ color : "white"}}>
+                    <div style={{ color : "white",fontFamily:"lato",fontSize:"16px"}}>
                     ${this.state.service.price} per month {this.state.service.name}
                     </div>
 
                 </div>
                 <div style={{display:"flex",flexDirection:"column",marginLeft:"30px",width:"250px",flexWrap:"wrap"}}>
-                <div style={{ color:"blue",fontSize:"14px"}}>advance Pack Details</div>
-                <div style={{fontSize:"14px"}}>Ability to add title, description, images, labels, checklist and colors</div>
+                <div style={{ color:"blue",fontSize:"16px",fontFamily:"lato"}}>advance Pack Details</div>
+                <div style={{fontSize:"16px",fontFamily:"lato"}}>Ability to add title, description, images, labels, checklist and colors</div>
                 </div>
 
                 <div style={{display:"flex",flexDirection:"column",marginLeft:"30px",width:"100px",flexWrap:"wrap"}}>
-                <div style={{ color:"black",fontSize:"14px",fontWeight:"bold"}}>price</div>
-                <div style={{ color:"blue",fontSize:"14px"}}>${this.state.service.price}</div>
+                <div style={{ fontFamily:"lato",color:"black",fontSize:"16px",fontWeight:"bold"}}>price</div>
+                <div style={{ fontFamily:"lato",color:"blue",fontSize:"16px"}}>${this.state.service.price}</div>
                 </div>
 
                 <div style={{display:"flex",flexDirection:"column",width:"100px",flexWrap:"wrap"}}>
-                <div style={{ color:"black",fontSize:"14px",fontWeight:"bold"}}>validity</div>
-                <div style={{ color:"blue",fontSize:"14px"}}>per month</div>
+                <div style={{ fontFamily:"lato",color:"black",fontSize:"16px",fontWeight:"bold"}}>validity</div>
+                <div style={{ fontFamily:"lato",color:"blue",fontSize:"16px"}}>per month</div>
                 </div>
 
                 <div style={{justifyContent:"center",alignItems:"center", border: '1px solid grey',width:"200px",height:"100px",display:"flex",flexDirection:"column"}}>
-                    <div>
+                    <div style={{ fontSize:"16px",fontFamily:"lato"}}>
                     Subtotal(1 item) : ${this.state.service.price}
                     </div>
-                      {this.state.showCOD ? <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
-            <div style={{padding:"2px",color:"black",cursor:"pointer"}} onClick={this.checkout}>
+                      {this.state.showCOD ? 
+            <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
+            <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.checkout}>
                 Processed to checkout
             </div> </div> : 
-            <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
-            <div style={{padding:"2px",color:"black",cursor:"pointer"}} onClick={this.placeOrder}>
+            <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
+            <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.placeOrder}>
                 Place Your Order
             </div> </div> }
             
@@ -145,17 +146,17 @@ class Cart extends Component {
             </div>
             <Divider/>
             {this.state.showCOD ? 
-            <span style={{color:"blue"}}>Subtotal ( 1 item ): $99</span> :
+            <span style={{color:"blue", fontFamily:"lato",fontSize:"16px",marginTop:"10px"}}>Subtotal ( 1 item ): $99</span> :
 
             <div style={{display:"flex",flexDirection:"row",marginTop : " 10px"}}>
               <div>
-              <textarea rows="5" onChange={this.changeTextArea} value={this.state.address}>
+              <textarea style={{resize :"none"}} cols="25" rows="5" onChange={this.changeTextArea} value={this.state.address}>
 
               </textarea>
               </div>
               <div style={{display:"flex",flexDirection:"column",width:"250px",flexWrap:"wrap",marginLeft : " 30px"}}>
-                <div style={{ color:"black",fontSize:"12px",fontWeight:"bold"}}>Payment method</div>
-                <div style={{ color:"blue",fontSize:"14px"}}>Cash On Delivery</div>
+                <div style={{ fontFamily:"lato",color:"black",fontSize:"14px",fontWeight:"bold"}}>Payment method</div>
+                <div style={{ fontFamily:"lato",color:"blue",fontSize:"16px"}}>Cash On Delivery</div>
                 </div>
               </div>
              }
