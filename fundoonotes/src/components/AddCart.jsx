@@ -119,11 +119,15 @@ export default function AddCart(props) {
   
   return (
     <div style={{display:"flex",flexDirection:"row",alignItems:"center"}}>
-      <div>FundooNotes</div>
-      <Stepper activeStep={props.cartStepper} >
+      <div style={{borderRadius:"8px",backgroundColor:"#fb0"}}>
+        <div style={{padding:"5px",color:"white"}}>
+        FundooNotes
+          </div></div>
+      <Stepper activeStep={props.cartStepper} style={{backgroundColor:"white"}}>
         {steps.map((label,index) => (
           <Step key={label}>
             <StepLabel>
+                <div>{props.cartStepper === index?<ShoppingCartIcon fontSize='large' color='primary'/>:null}</div>
                 <div>{label}</div>
             </StepLabel>
           </Step>

@@ -490,6 +490,7 @@ msg=(content)=>{
         {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
          { data.noteCheckLists.map((notelist, index) => (
           //  console.log(noteCheckLists)
+          
                       <List>
                  <div className="textdash1">
 

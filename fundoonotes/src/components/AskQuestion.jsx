@@ -93,7 +93,7 @@ class AskQuestion extends Component {
   }
   AskQuestion=()=>{
     let data={
-      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"</>",
+      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"</p>",
       notesId : this.state.id
     }
     console.log(data)
@@ -152,7 +152,7 @@ class AskQuestion extends Component {
   }
   replyBack=()=>{
     let data={
-      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"<p>"
+      message : "<p>"+this.state.editorState.getCurrentContent().getPlainText('\u0001')+"</p>"
 
     }
     console.log(data)
@@ -250,8 +250,10 @@ class AskQuestion extends Component {
                   </div>:
             <div>
          
-           {this.state.questionAndAnswerNotes.map((qustans,index)=>(
-            <div style={{display:"flex",justifyContent:"center"}}>
+           {this.state.questionAndAnswerNotes.map((qustans,index)=>{
+             if(qustans.isApproved === true)
+
+            return <div style={{display:"flex",justifyContent:"center"}}>
               <div style={{display : 'flex',flexDirection : 'row',padding : '10px',width:"80%"}} >
               <label for="file-input" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>
               <img 
@@ -306,7 +308,7 @@ class AskQuestion extends Component {
                        </div>
                        </div>
                        </div>   
-           ))}
+ })}
        </div>
         
                       
