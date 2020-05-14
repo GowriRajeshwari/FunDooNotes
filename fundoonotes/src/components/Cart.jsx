@@ -75,6 +75,8 @@ class Cart extends Component {
     this.setState({ address : event.target.value})
   }
   placeOrder=async()=>{
+    this.setState({cartStepper: this.state.cartStepper + 1})
+
     // await this.setState({cartStepper: this.state.cartStepper + 1})
     let data={
       cartId : this.state.cartId,
@@ -83,7 +85,7 @@ class Cart extends Component {
     placeOrder(data).then(response => {
       console.log(response);
      if (response.status === 200) {
-    this.setState({cartStepper: this.state.cartStepper + 1})
+    this.setState({cartStepper: this.state.cartStepper + 1,showCOD:true})
          
      } else {
          this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
@@ -103,7 +105,7 @@ class Cart extends Component {
             <span style={{fontFamily:"lato",fontSize:"18px"}} >ShoppingCart</span>
             </div>
             <Divider/>
-            <div style={{minHeight : "120px",alignItems:"center",display:"flex",flexWrap:"wrap"}}>
+            <div style={{minHeight : "120px",alignItems:"center",display:"flex",flexWrap:"wrap",marginTop:"10px",marginBottom:"10px"}}>
 
                 <div style={{width:"90px",flexWrap:"wrap",backgroundColor:"grey",
                 borderRadius:"8px",justifyContent:"center",display:"flex",alignItems:"center",paddingLeft:"20px"}}>
@@ -127,7 +129,7 @@ class Cart extends Component {
                 <div style={{ fontFamily:"lato",color:"blue",fontSize:"16px"}}>per month</div>
                 </div>
 
-                <div style={{justifyContent:"center",alignItems:"center", border: '1px solid grey',width:"200px",height:"100px",display:"flex",flexDirection:"column"}}>
+                <div style={{padding :"2px",justifyContent:"center",alignItems:"center", border: '1px solid grey',width:"200px",height:"100px",display:"flex",flexDirection:"column"}}>
                     <div style={{ fontSize:"16px",fontFamily:"lato"}}>
                     Subtotal(1 item) : ${this.state.service.price}
                     </div>
@@ -136,7 +138,7 @@ class Cart extends Component {
             <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.checkout}>
                 Processed to checkout
             </div> </div> : 
-            <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
+            <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
             <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.placeOrder}>
                 Place Your Order
             </div> </div> }
