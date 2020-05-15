@@ -123,11 +123,12 @@ export default function AddCart(props) {
         <div style={{padding:"5px",color:"white"}}>
         FundooNotes
           </div></div>
-      <Stepper activeStep={props.cartStepper} style={{backgroundColor:"white"}}>
+      <Stepper activeStep={props.cartStepper}>
         {steps.map((label,index) => (
           <Step key={label}>
-            <StepLabel>
                 <div>{props.cartStepper === index?<ShoppingCartIcon fontSize='large' color='primary'/>:null}</div>
+
+            <StepLabel>
                 <div>{label}</div>
             </StepLabel>
           </Step>

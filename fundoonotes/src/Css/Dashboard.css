@@ -308,7 +308,7 @@
 
 
 
-@media only screen and (max-width : 375px){
+@media only screen and (max-width : 1023px){
     .ToolbarContainer1{
         display:flex;
         flex-direction:row;
@@ -441,7 +441,7 @@
 
 }
 
-@media only screen and (max-width : 768px){
+@media only screen and (max-width : 800px){
     .ToolbarContainer1{
         display:flex;
         flex-direction:row;
@@ -513,8 +513,6 @@
         justify-content:'center';
         align-items:center;
         justify-content:space-around;
-        flex-wrap: wrap;
-
         /* width :100% */
         /* padding-left: 30px; */
        }

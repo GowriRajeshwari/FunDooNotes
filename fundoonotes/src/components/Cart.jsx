@@ -53,15 +53,17 @@ class Cart extends Component {
         showCOD : true,
         address : '',
         cartId:'',
-        service : []
+        service : [],
+        isOrderPlaced:'',
     };
   }
   componentDidMount=()=>{
     myCart().then(response=>{
       console.log(response)
-      this.setState({ service : response.data.data[0].product})
-      this.setState({ cartId : response.data.data[0].id})
+      this.setState({isOrderPlaced:response.data.data[0].isOrderPlaced,cartStepper:response.data.data[0].isOrderPlaced?2:0,
+        service : response.data.data[0].product,cartId : response.data.data[0].id})
     })
+    console.log(this.state.isOrderPlaced)
   }
   checkout=()=>{
     this.cartChange();
@@ -133,7 +135,13 @@ class Cart extends Component {
                     <div style={{ fontSize:"16px",fontFamily:"lato"}}>
                     Subtotal(1 item) : ${this.state.service.price}
                     </div>
-                      {this.state.showCOD ? 
+                    {this.state.isOrderPlaced ? 
+                    <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
+                    <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}}>
+                        order Placed successully
+                    </div> </div> :
+
+                      this.state.showCOD ? 
             <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
             <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.checkout}>
                 Processed to checkout
