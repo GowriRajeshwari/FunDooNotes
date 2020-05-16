@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getReminderNoteList,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote } from '../services/notesService'
+import {getReminderNoteList,getNotesListByLabel, getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -21,6 +21,15 @@ import DeleteIcon from './DeleteIcon'
 import DateTimePicker from './DateTimePicker'
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
+import schedule from '../assets/schedule.png'
+import { Typography } from "@material-ui/core";
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import AskQuestion from './AskQuestion'
+import Divider from '@material-ui/core/Divider';
+
+
 
 require('dotenv').config();
 
@@ -42,7 +51,7 @@ class Reminder extends Component {
     open:false,
     anchorEl:null,
     setAnchorEl: null,
-    date : '',
+    date : new Date(),
     datashow : false,
     date_timeshow:true,
     startdate:new Date(),
@@ -62,40 +71,116 @@ class Reminder extends Component {
     noteIdList :[],
     nonDeleteData:[],
     query : this.props.query,
-    editdata : []
-   
+    editdata : [],
+    noteLabels:[],
+    choice :'',
+    askQuestion : false,
+    questionId : '',
+    showQuestion : false,
+    nmsg : '',
+    labelNoteShow : '',
+    label:''
+      
     };
   }
  
    handleDateChange = (date) => {
     this.setState({date : date})
   };
+  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+    if(nextProps.labelNoteShow){
+      await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
+    }
+    console.log(nextProps.labelNoteShow)
+    this.getCalled(nextProps.labelNoteShow,nextProps.label);
+  }
+  // componentWillMount=()=>{
+  //   this.setState({ labelNoteShow : this.props.labelNoteShow})
+  // }
+
   componentDidMount=()=>{
+    this.getCalled(this.state.labelNoteShow,this.state.label);
    
-   var d =new Date();
-   d.setDate(new Date().getDate()+1)
-    console.log(d.getTime())
-    this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-    getReminderNoteList().then(response => {
-      console.log(response);
-     if (response.status === 200) {
-          this.setState({data : []})
-        
-        // this.setState({data : response.data.data.data});
-        for(let i=0;i<response.data.data.data.length;i++){
-          if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
-            this.state.data.push(response.data.data.data[i]);
-          }else{
-            continue;
-          }
-        }
-        this.setState({data : this.state.data})
-        console.log(this.state.data);
-      
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
+    var d =new Date();
+    d.setDate(new Date().getDate()+1)
+     console.log(d.getTime())
+     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
+     getReminderNoteList().then(response => {
+       console.log(response);
+      if (response.status === 200) {
+           this.setState({data : []})
+         
+         // this.setState({data : response.data.data.data});
+         for(let i=0;i<response.data.data.data.length;i++){
+           if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+             this.state.data.push(response.data.data.data[i]);
+           }else{
+             continue;
+           }
+         }
+         this.setState({data : this.state.data})
+         console.log(this.state.data);
+       
+      } else {
+          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+   });
+   }
+  getCalled=(labelNoteShow,label)=>{
+        //  this.setState({ labelNoteShow : this.props.labelNoteShow})
+        console.log("show",labelNoteShow)
+        //  this.setState({gridView : this.props.gridView})
+         var d =new Date();
+         d.setDate(new Date().getDate()+1)
+          console.log(d.getTime())
+          this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
+          if(labelNoteShow === "true"){
+              getNotesListByLabel(label).then(response => {
+                console.log(response)
+               if (response.status === 200) {
+                this.setState({data : []})
+              
+                for(let i=0;i<response.data.data.data.length;i++){
+                  if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+                    this.state.data.push(response.data.data.data[i]);
+                  }else{
+                    continue;
+                  }
+                }
+                this.setState({data : this.state.data})
+                console.log(this.state.data);
+                  
+               } else {
+                   this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+               }
+            });
+          }else if(labelNoteShow === "false"){
+            console.log("labelNoet")
+          getNotes().then(response => {
+           
+           if (response.status === 200) {
+                this.setState({data : []})
+              
+              for(let i=0;i<response.data.data.data.length;i++){
+                if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+                  this.state.data.push(response.data.data.data[i]);
+                }else{
+                  continue;
+                }
+              }
+              this.setState({data : this.state.data})
+              console.log(this.state.data);
+              // for(let i=0;i<response.data.data.data.length;i++){
+              //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
+              // }
+              // this.setState({noteLabels : this.state.noteLabels})
+              // console.log(this.state.noteLabels);
+            
+           } else {
+               this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+           }
+        });
+      }
   }
   takeNote=(event)=>{
     event.preventDefault();
@@ -136,16 +221,14 @@ class Reminder extends Component {
       console.log(response);
      if (response.status === 200) {
         this.componentDidMount();
-        this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
+        this.setState({ title : '',description : '',next : true})
      } else {
-      this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
-
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
      }
   });
   }else
   {
-    this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
-
+    this.setState({ title : '',description : '',next : true})
   }
 
   }
@@ -234,11 +317,8 @@ archivebutton=(data)=>{
     console.log(response);
    if (response.status === 200) {
        this.componentDidMount();
-       this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
-
    } else {
-    this.setState({ title : '',description : '',next : true,color :'',date_timeshow : false,date: ''})
-
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
    }
 });
 }else
@@ -271,11 +351,12 @@ getData=(val,index,id)=>{
 });
 
 }
-dialogboxOpen=(data)=>{
+dialogboxOpen=(data,choice)=>{
   console.log(data);
   this.setState({
     dialogBoxOpen: !this.state.dialogBoxOpen,
-   editdata:data
+   editdata:data,
+   choice : choice
   })
 
 }
@@ -297,10 +378,13 @@ sendNewData=()=>{
 sendtimeDate=(date)=>{
   this.setState({date : date,date_timeshow : true,dateshow : false});
 }
-sendtrash=(val)=>{
+sendtrash=(val,id)=>{
   if(val == true){
   this.componentDidMount();
 
+  }
+  else{
+    this.setState({ askQuestion : true ,questionId : id })
   }
 }
 handleDelete = (id) => {
@@ -324,7 +408,7 @@ reminder = (reminder,id) =>{
   return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
    <Chip
     style={{width : '240px'}}
-    icon={<FaceIcon />}
+    icon={ <img src={schedule} />}
     label={reminder}
     onDelete={()=>this.handleDelete(id)}
     color="white"
@@ -356,20 +440,65 @@ sendtimeDate=(date,id)=>{
 });
 
 }
+archived=()=>{
+  this.componentDidMount();
+}
+handleDeletelabel=(labelId,id)=>{
+  console.log(labelId,id)
+  deletelabelNotes(id,labelId).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+      this.componentDidMount()
+  } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+});
+}
+close=(val)=>{
+  if(val == true){
+ this.setState({ askQuestion : false}) 
+ this.componentDidMount()
+  }
+}
+removetag=(message)=>{
+  var content = message.replace( /<[^>]*>/g , "");
+  // this.setState({ msg : content })
+  return content;
+}
+msg=(content)=>{
+  if(content.length > 0){
+   
+  this.setState({ msg :  "SHOW QUESTION" })
 
+  }else{
+  this.setState({ msg :  "ASK A QUESTION" })
+
+  }
+  // this.setState({ msg : content })
+}
 
   render() {
     
     return (
+      <div>
+      { this.state.askQuestion ? 
+        
+        <AskQuestion close={this.close}  questionId={this.state.questionId} msg={this.state.msg}/>
+        : 
+
+        <div>
       <div className='maincontainer'>
+       
           <NewNote sendNewData={this.sendNewData}/>
-    
-    <div className='notescontainer'>
+          </div>
+          <div className='maincontainer'>
+    <div className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 
     style={{borderRadius:'20px',cursor:'pointer',padding:'20px'}} >  
-      <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
+      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color
+      ,boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)" }}>
       <div style={{padding : '10px'}}>
         <div className='showicon'>
                       <div  className="typoText">
@@ -381,11 +510,55 @@ sendtimeDate=(date,id)=>{
                      
           </div>
         <div  className="typoText"
-        onClick={()=>this.dialogboxOpen(data)}>
+        onClick={()=>this.dialogboxOpen(data,"editNotes")}>
          {data.description}
         </div> 
         {this.state.date_timeshow ? this.reminder(data.reminder,data.id) : null }
-         
+         { data.noteCheckLists.map((notelist, index) => (
+          //  console.log(noteCheckLists)
+          
+                      <List>
+                 <div className="textdash1">
+
+                   <Typography style={{width : '100%'}}>{notelist.itemName}</Typography>
+                   
+                    </div>
+
+                    </List>
+                    ))
+
+                   } 
+                 <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'240px',paddingTop : '5px'}}>
+
+                   { data.noteLabels.map((labelNotes, index) => (
+                      
+                    <div style={{padding : '3px'}}>
+                    <Chip key={index}
+                      style={{width : 'auto'}}
+                      label={labelNotes.label}
+                      onDelete={()=>this.handleDeletelabel(labelNotes.id,data.id)}
+                      color="white"
+                      value={this.state.date}
+                    />
+                    </div>
+                    ))
+                   } 
+                   <div style={{display:'flex',flexWrap:'wrap',flexDirection : 'row',width:'200px',paddingTop : '5px'}}>
+                    {data.collaborators.map((collabatorArray, index) => (
+                      
+                        <div style={{padding :'5px'}}>
+                  <div style={{width : '40px',height : '40px',backgroundColor : 'white',borderRadius : '50px',
+                  justifyContent : 'center',alignItems :'center',display:'flex',border : '0.1px solid grey',
+                  boxShadow:'0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)'}}>
+                    <div>{collabatorArray.firstName.charAt(0).toUpperCase()}</div>
+                    </div>
+                
+                        </div>
+                      
+                    ))}
+
+                   </div>
+                   </div>
 
         <div  className="mybuttonoverlap" >
 
@@ -396,7 +569,7 @@ sendtimeDate=(date,id)=>{
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                      <DateTimePicker  sendtimeDate={(date)=>this.sendtimeDate(date,data.id)}/>
                     </div>
-                    <div style={{ padding :'5px'}} onClick={this.collabshow}>
+                    <div style={{ padding :'5px'}} onClick={()=>this.dialogboxOpen(data,"editcollaborator")}>
                         <img src={personAdd} id="imgdashnotes" />
                     </div>
                     <div style={{ padding :'5px'}}>
@@ -409,15 +582,24 @@ sendtimeDate=(date,id)=>{
                     <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
                         <img src={download} id="imgdashnotes" />
                     </div>
-                    <DeleteIcon id={data.id} sendtrash={this.sendtrash}/>
+                    <DeleteIcon msg={()=>this.msg(data.questionAndAnswerNotes)} message={this.state.msg} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
 
         
 
         </div>
-        
+        {data.questionAndAnswerNotes.length > 0 ? 
+       <div>
+        <Divider/>
+
+          <div  className="typoText">
+              Question Asked</div>
+              <div  className="typoText">{this.removetag(data.questionAndAnswerNotes[0].message)}</div>
+       </div> : null}
       </div>
+      
+     
      
     </Card>
 
@@ -425,14 +607,20 @@ sendtimeDate=(date,id)=>{
     
     })}
     </div>
+    </div>
             <Dialog
             open={this.state.dialogBoxOpen}
             onClose={this.handelNoteDialogBox}
             >
-                <EditNotes data={this.state.editdata}
-                sendupdate={this.getdataupdate}/>
+                <EditNotes data={this.state.editdata} choice={this.state.choice}
+                sendupdate={this.getdataupdate} />
               </Dialog>
+              {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
+  
+              
               </div>
+  }
+  </div>
     );
   }
 }
