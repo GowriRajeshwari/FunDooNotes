@@ -466,7 +466,7 @@ msg=(content)=>{
           <NewNote sendNewData={this.sendNewData}/>
           </div>
           <div className='maincontainer'>
-    <div className='notescontainer'>
+    <div className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)
     return <div key={index} onMouseMove={this._onMouseMove} onMouseLeave={this._onMouseOut} 

@@ -126,7 +126,7 @@ export default function AddCart(props) {
       <Stepper activeStep={props.cartStepper}>
         {steps.map((label,index) => (
           <Step key={label}>
-                <div>{props.cartStepper === index?<ShoppingCartIcon fontSize='large' color='primary'/>:null}</div>
+                <div>{props.cartStepper === index?<ShoppingCartIcon fontSize='medium' color='primary'/>:null}</div>
 
             <StepLabel>
                 <div style={{padding:"5px",fontFamily:"lato",fontSize:"16px"}}>{label}</div>

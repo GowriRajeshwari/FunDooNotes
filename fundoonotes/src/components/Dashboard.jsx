@@ -395,7 +395,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px"}}/>
+                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px",opacity:"0.9"}}/>
                          </IconButton>
                          <IconButton
                           size="medium"
@@ -405,7 +405,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             {this.state.gridView ? <img src={list} id="imgdash" /> :  <AppsIcon style={{color:"black",fontSize:"30px"}}/>}
+                             {this.state.gridView ? <img src={list} id="imgdash" /> :  <AppsIcon style={{opacity:"0.9",color:"black",fontSize:"30px"}}/>}
                          </IconButton>
 
                        

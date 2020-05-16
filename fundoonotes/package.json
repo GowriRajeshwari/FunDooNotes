@@ -24,6 +24,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "react-sidenav": "^4.0.6",
+    "react-spinners": "^0.8.3",
     "react-star-rating-component": "^1.4.1",
     "sinon": "^9.0.2"
   },
