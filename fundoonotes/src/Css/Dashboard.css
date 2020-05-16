@@ -571,3 +571,69 @@
     }
 
 } 
+
+@media only screen and (max-width : 1240px){
+    .ToolbarContainer1{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center;
+        justify-content:space-around;
+        /* width :100% */
+        /* padding-left: 30px; */
+       }
+       .ToolbarContainer2{
+        display:flex;
+        flex-direction:row;
+        /* justify-content:'center';
+        align-items:center; */
+    }
+    .searchDiv{
+        height: '50px';
+       width: 600px;
+       max-width :500px;
+       margin-left: 1px;
+       background-color: #ffffff;
+       flex-direction : row;
+       display: flex;
+       align-items: center;
+       /* border-radius: 3px; */
+       justify-content: center;
+       background-color :#f1f3f4;
+       border-radius : 8px;
+       position : relative;
+       /* border: 0.1px solid grey; */
+    }
+    .searchdiv1{
+        padding : 5px;
+        display : flex;
+       /* justify-content : center; */
+       height : 46px;
+       max-width : 380px;
+       align-items:center
+}
+.inputsearch{
+    background-color: #ff00;
+    height : 46px;
+    outline:none;
+    font-size:18px;
+    border: none;
+    width:300px 
+}
+    .icondash{
+        height: 30px;
+        width: 150px;
+        margin-left: 1px;
+        /* background-color:#ffffff; */
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        justify-content: space-around;
+    
+    }
+    .bulbicon{
+        margin-right: 1px;
+    }
+
+ }

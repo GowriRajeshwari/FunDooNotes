@@ -129,7 +129,7 @@ export default function AddCart(props) {
                 <div>{props.cartStepper === index?<ShoppingCartIcon fontSize='large' color='primary'/>:null}</div>
 
             <StepLabel>
-                <div>{label}</div>
+                <div style={{padding:"5px",fontFamily:"lato",fontSize:"16px"}}>{label}</div>
             </StepLabel>
           </Step>
         ))}

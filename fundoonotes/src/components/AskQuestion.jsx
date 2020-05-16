@@ -100,7 +100,7 @@ class AskQuestion extends Component {
     questionAndAnswerNotes(data).then(response => {
       console.log(response.data.data.details.message);
      if (response.status === 200) {
-       this.setState({ showQust : false,message : response.data.data.details.message })
+       this.setState({ showQust : false,message : response.data.data.details.message ,editorState :""})
         this.componentDidMount();
         //  this.props.showQuestion("showQuestion");
      } else {
@@ -159,7 +159,7 @@ class AskQuestion extends Component {
     reply(data,this.state.qustId).then(response => {
       console.log(response);
      if (response.status === 200) {
-       this.setState({ showReply : false,message : response.data.data.details.message })
+       this.setState({ showReply : false,message : response.data.data.details.message,editorState:"" })
         this.componentDidMount();
         //  this.props.sendtrash(true);
      } else {

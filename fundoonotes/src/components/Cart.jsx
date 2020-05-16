@@ -55,12 +55,14 @@ class Cart extends Component {
         cartId:'',
         service : [],
         isOrderPlaced:'',
+        order :  "Place Your Order"
     };
   }
   componentDidMount=()=>{
     myCart().then(response=>{
       console.log(response)
-      this.setState({isOrderPlaced:response.data.data[0].isOrderPlaced,cartStepper:response.data.data[0].isOrderPlaced?2:0,
+      this.setState({isOrderPlaced:response.data.data[0].isOrderPlaced,
+        cartStepper:response.data.data[0].isOrderPlaced?2:0,
         service : response.data.data[0].product,cartId : response.data.data[0].id})
     })
     console.log(this.state.isOrderPlaced)
@@ -87,7 +89,7 @@ class Cart extends Component {
     placeOrder(data).then(response => {
       console.log(response);
      if (response.status === 200) {
-    this.setState({cartStepper: this.state.cartStepper + 1,showCOD:true})
+    this.setState({cartStepper: this.state.cartStepper + 1,showCOD:true,order : "Order Placed Successully"})
          
      } else {
          this.setState({  snackbarmsg: "Register Not Successfull", snackbaropen: true });
@@ -137,8 +139,8 @@ class Cart extends Component {
                     </div>
                     {this.state.isOrderPlaced ? 
                     <div style={{boderRadius:"8px",backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
-                    <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}}>
-                        order Placed successully
+                    <div style={{fontSize:"15px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}}>
+                        Order Placed Successully
                     </div> </div> :
 
                       this.state.showCOD ? 
@@ -148,7 +150,7 @@ class Cart extends Component {
             </div> </div> : 
             <div style={{backgroundColor:"lightblue",display:"flex",alignItem:"center",justifyContent:"center"}}>
             <div style={{fontSize:"16px",fontFamily:"lato",padding:"5px",color:"black",cursor:"pointer"}} onClick={this.placeOrder}>
-                Place Your Order
+               {this.state.order}
             </div> </div> }
             
                 </div>
