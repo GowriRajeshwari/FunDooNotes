@@ -29,7 +29,7 @@
     flex-wrap: wrap;
     justify-content: center; */
     align-content: stretch;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: stretch;
     flex-direction: row;
     box-sizing: border-box;

@@ -23,6 +23,7 @@ import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
 import Trash from './Trash'
 import Archived from './Archived'
+import LabelIcon from '@material-ui/icons/Label';
 import keepBulb from "../assets/keepBulb.png";
 import list from "../assets/list.png";
 import shopping_cart from "../assets/shopping_cart.png";
@@ -36,8 +37,11 @@ import listview from '../assets/listview.png'
 import Reminder from './Reminder'
 import Collaborator from './Collaborator'
 import Logout from './Logout'
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Popover from '@material-ui/core/Popover';
 import Cart from './Cart'
+import AppsIcon from '@material-ui/icons/Apps';
+import AddIcon from '@material-ui/icons/Add';
 import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
 
 
@@ -391,7 +395,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             <img src={shopping_cart} id="imgdash" />
+                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px"}}/>
                          </IconButton>
                          <IconButton
                           size="medium"
@@ -401,7 +405,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             {this.state.gridView ? <img src={list} id="imgdash" /> : <img src={listview} id="imgdash" />}
+                             {this.state.gridView ? <img src={list} id="imgdash" /> :  <AppsIcon style={{color:"black",fontSize:"30px"}}/>}
                          </IconButton>
 
                        
@@ -501,7 +505,7 @@ render(){
         <List>
           {this.state.labelData.map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{<div><img src={label} id="imgdash1"/></div>}</ListItemIcon>
+              <ListItemIcon>{<LabelIcon style={{fontSize:"medium"}}/>}</ListItemIcon>
               <ListItemText primary={text.label} />
             </ListItem>
           ))}
@@ -509,7 +513,7 @@ render(){
         <List>
           {['Edit labels'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <div><img src={download} id="imgdash1"/></div> : <MailIcon />}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <AddIcon style={{color:"black"}}/> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -519,8 +523,8 @@ render(){
         <List >
           {['Archive','Trash'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <div><img src={download} id="imgdash1"/></div> :
-              <div><img src={delete_black} id="imgdash1"/></div>}</ListItemIcon>
+              <ListItemIcon>{index % 2 === 0 ? <img src={download} id="imgdash1"/> :
+              <img src={delete_black} id="imgdash1"/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
