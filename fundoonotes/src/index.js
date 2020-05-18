@@ -6,7 +6,7 @@ import './Css/Login.css'
 import './Css/Register.css'
 import './Css/ForgotPassword.css'
 import './Css/ResetPassword.css'
-import './Css/Dashboard.css'
+import './Css/Dashboard.scss'
 import './Css/service.css'
 import './Css/TakeaNotes.css'
 
