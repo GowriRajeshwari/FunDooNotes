@@ -26,6 +26,7 @@ import AskQuestion from './components/AskQuestion';
 import RatingStart from './components/Rating';
 import AddCart from './components/AddCart';
 import Cart from './components/Cart';
+import LabelShow from './components/LabelShow'
 
 
 
@@ -66,7 +67,9 @@ function App() {
         <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
         <Route path="/Addcart"  component={AddCart} />
-        <Route path="/cart"  component={Cart} />        
+        <Route path="/cart"  component={Cart} />    
+        <Route path="/labelShow"  component={LabelShow} />        
+
 
 
 

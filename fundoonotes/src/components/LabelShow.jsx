@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import {archiveNoteList,getNotesListByLabel, getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
+import {getNotesListByLabel, getNotes,setNotes,deleteNotes,removeRemainderNotes,updateReminderNotes,changeColor,archiveNote,deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -28,7 +28,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import AskQuestion from './AskQuestion'
 import Divider from '@material-ui/core/Divider';
-import unarchive from '../assets/unarchive.png'
 
 
 
@@ -39,7 +38,7 @@ function searchigFor(query){
     return x.title.toLowerCase().includes(query.toLowerCase())||x.description.toLowerCase().includes(query.toLowerCase())||!query;
   }
 }
-class Archived extends Component {
+class LabelShow extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,32 +87,42 @@ class Archived extends Component {
    handleDateChange = (date) => {
     this.setState({date : date})
   };
-  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
-    if(nextProps.labelNoteShow){
-      await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
-    }
-    console.log(nextProps.labelNoteShow)
-    this.getCalled(nextProps.labelNoteShow,nextProps.label);
-  }
+//   UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+//     if(nextProps.labelNoteShow){
+//       await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
+//     }
+//     console.log(nextProps.labelNoteShow)
+//     this.getCalled(nextProps.labelNoteShow,nextProps.label);
+//   }
   // componentWillMount=()=>{
   //   this.setState({ labelNoteShow : this.props.labelNoteShow})
   // }
- 
   componentDidMount=()=>{
-    this.getCalled(this.state.labelNoteShow,this.state.label);
-  
-    archiveNoteList().then(response => {
-       console.log(response);
-      if (response.status === 200) {
-          
-        this.setState({data : response.data.data.data});
-        console.log(this.state.data[0].id)
-        
-      } else {
-          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-      }
-   });
-   }
+    var d =new Date();
+    d.setDate(new Date().getDate()+1)
+     console.log(d.getTime())
+     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
+     
+         getNotesListByLabel(this.props.label).then(response => {
+           console.log(response)
+          if (response.status === 200) {
+           this.setState({data : []})
+         
+           for(let i=0;i<response.data.data.data.length;i++){
+             if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+               this.state.data.push(response.data.data.data[i]);
+             }else{
+               continue;
+             }
+           }
+           this.setState({data : this.state.data})
+           console.log(this.state.data);
+             
+          } else {
+              this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+          }
+       });
+  }
   getCalled=(labelNoteShow,label)=>{
         //  this.setState({ labelNoteShow : this.props.labelNoteShow})
         console.log("show",labelNoteShow)
@@ -122,7 +131,7 @@ class Archived extends Component {
          d.setDate(new Date().getDate()+1)
           console.log(d.getTime())
           this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-          if(labelNoteShow === "true"){
+          
               getNotesListByLabel(label).then(response => {
                 console.log(response)
                if (response.status === 200) {
@@ -142,33 +151,7 @@ class Archived extends Component {
                    this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
                }
             });
-          }else if(labelNoteShow === "false"){
-            console.log("labelNoet")
-          getNotes().then(response => {
-           
-           if (response.status === 200) {
-                this.setState({data : []})
-              
-              for(let i=0;i<response.data.data.data.length;i++){
-                if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
-                  this.state.data.push(response.data.data.data[i]);
-                }else{
-                  continue;
-                }
-              }
-              this.setState({data : this.state.data})
-              console.log(this.state.data);
-              // for(let i=0;i<response.data.data.data.length;i++){
-              //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
-              // }
-              // this.setState({noteLabels : this.state.noteLabels})
-              // console.log(this.state.noteLabels);
-            
-           } else {
-               this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-           }
-        });
-      }
+          
   }
   takeNote=(event)=>{
     event.preventDefault();
@@ -464,24 +447,7 @@ msg=(content)=>{
   }
   // this.setState({ msg : content })
 }
-archiveddata=async(dat)=>{
-  await this.state.noteIdList.push(dat.toString())
-  console.log(this.state.noteIdList);
- let data1 = {
-     isArchived : false,
-     noteIdList : this.state.noteIdList
- }
- archiveNote(data1).then(response => {
-  console.log(response);
- if (response.status === 200) {
-     
-   this.componentDidMount();
-   
- } else {
-     this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
- }
-});
-}
+
   render() {
     
     return (
@@ -584,9 +550,9 @@ archiveddata=async(dat)=>{
                     <div style={{ padding :'5px'}}>
                         <img src={galary} id="imgdashnotes" />
                     </div>
-                    <div style={{ padding :'5px'}} onClick={() => this.archiveddata(data.id)}  key={index}>
-                        <img src={unarchive} id="imgdashnotes" />
-                      </div>
+                    <div style={{ padding :'5px'}} onClick={()=>this.archivebutton(data)}>
+                        <img src={download} id="imgdashnotes" />
+                    </div>
                     <DeleteIcon msg={()=>this.msg(data.questionAndAnswerNotes)} message={this.state.msg} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels}/>
                     
                     </div>
@@ -629,4 +595,4 @@ archiveddata=async(dat)=>{
     );
   }
 }
-export default Archived;
+export default LabelShow;

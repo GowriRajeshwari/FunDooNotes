@@ -36,7 +36,7 @@ import label from '../assets/label.png'
 import listview from '../assets/listview.png'
 import Reminder from './Reminder'
 import Collaborator from './Collaborator'
-import Logout from './Logout'
+import LabelShow from './LabelShow'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Popover from '@material-ui/core/Popover';
 import Cart from './Cart'
@@ -251,7 +251,7 @@ const useStyles = theme => ({
 
       }
       else if(this.state.choice == 'Notes'){
-        return <TakeaNotes labelNoteShow="false" query={this.state.query} 
+        return <TakeaNotes query={this.state.query} 
         gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
@@ -267,7 +267,7 @@ const useStyles = theme => ({
         return <Cart/>
       }
       else{
-      return <TakeaNotes labelNoteShow="true" query={this.state.query} label={this.state.choice}
+      return <LabelShow query={this.state.query} label={this.state.choice}
       gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
 
       }
