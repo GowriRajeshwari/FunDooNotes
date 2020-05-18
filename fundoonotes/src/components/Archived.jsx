@@ -492,10 +492,7 @@ archiveddata=async(dat)=>{
         : 
 
         <div>
-      <div className='maincontainer'>
-       
-          <NewNote sendNewData={this.sendNewData}/>
-          </div>
+    
           <div className='maincontainer'>
     <div className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {

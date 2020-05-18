@@ -325,7 +325,7 @@ reminder = (reminder,id) =>{
 
          <div style={{ padding :'5px'}}  onClick={e=>this.handleClick(e)}>
                    
-                    <DeleteIcon id={data.id} sendtrash={this.sendtrash}/>
+                    <DeleteIcon id={data.id} true="true" sendtrash={this.sendtrash}/>
                     
                     </div>
                     </div>

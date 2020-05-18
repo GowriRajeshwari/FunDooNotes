@@ -80,7 +80,8 @@ class TakeaNotes extends Component {
       showQuestion: false,
       nmsg: '',
       labelNoteShow: '',
-      label: ''
+      label: '',
+      loading : true
 
     };
   }
@@ -116,7 +117,7 @@ class TakeaNotes extends Component {
             continue;
           }
         }
-        this.setState({ data: this.state.data })
+        this.setState({ data: this.state.data,loading:false })
         console.log(this.state.data);
         // for(let i=0;i<response.data.data.data.length;i++){
         //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
@@ -494,7 +495,13 @@ class TakeaNotes extends Component {
               <NewNote sendNewData={this.sendNewData} />
             </div>
             <div className='maincontainer'>
-              { this.state.data.length > 1 ?   
+                  <ClipLoader
+                // css={override}
+                css={{ width : "50px",height :"50px",marginTop : "45px"}}
+                size={150}
+                color={"#123abc"}
+                loading={this.state.loading}
+              />
               <div className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
                 {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
                   // if(data.isDeleted != true && data.isArchived !=true)
@@ -614,15 +621,9 @@ class TakeaNotes extends Component {
 
                 })}
               </div>
-        :
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100%"}}>
-        <ClipLoader
-          // css={override}
-          css={{ width : "50px",height :"50px",marginTop : "45px"}}
-          size={150}
-          color={"#123abc"}
-          loading={this.state.loading}
-        /></div> }
+        
+        
+        
             </div>
             <Dialog
               open={this.state.dialogBoxOpen}

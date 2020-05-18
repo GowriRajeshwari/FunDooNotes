@@ -177,13 +177,13 @@ class DeleteIcon extends Component {
   }
  render(){
      return(
+
         <div style={{ padding :'5px'}}  >
         <img src={setting} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
+
+          {this.props.true ?
         
-        {/* { this.state.askQuestion ? 
-        
-        <AskQuestion/>
-        : */}
+        <div>
         <Popover 
           anchorOrigin={{
             vertical: 'bottom',
@@ -226,19 +226,74 @@ class DeleteIcon extends Component {
                               <div>
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
                               onClick={()=>this.deletebutton(this.state.id)}>
-                              DELETE</div>
-                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
-                               onClick={()=>this.addLabelButton()}>
-                              ADD LABEL</div>
-                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
-                               onClick={()=>this.askQuestion()}>
-                              {this.state.ashshow}</div>
+                              DELETE FOREVER</div>
+                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
+                              onClick={()=>this.deletebutton(this.state.id)}>
+                              RESTORE</div>
                               </div>
+                              
+                              
                               
                           }
         </Popover>
+        </div>
  
-        
+                      : 
+                      <div>
+                      <Popover 
+                        anchorOrigin={{
+                          vertical: 'bottom',
+                          horizontal: 'center',
+                        }}
+                        transformOrigin={{
+                          vertical: 'top',
+                          horizontal: 'center',
+                        }}
+                      open={this.state.open}
+                      anchorEl={this.state.anchorEl}
+                      onClose={this.handleClick}
+                      style={{ cursor: 'pointer'}}>
+                         
+                      
+                    {  this.state.addlabel ? 
+                                        <div>
+                                          <div style={{padding : '10px'}}>
+                                             <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                                               <Typography onClick={()=>this.backbutton()}>Label Note</Typography>
+                                               { this.state.data.map((data, index) => (
+                                                  <List>
+                                                <div className="textdash">
+                                              <Checkbox
+                                                label={data.label}
+                                                onChange={() => this.handleCheck(data.id,this.state.id)}
+                                                checked={this.state.activeCheckboxes.includes(data.id)}
+                                              />
+                                              }
+                                                <Typography style={{width : '100%'}}>{data.label}</Typography>
+                                                </div>
+              
+                                                </List>
+                                                ))}
+                                             </MuiPickersUtilsProvider>
+                                             
+                                             </div>
+                                            </div>
+                                            :
+                                            <div>
+                                            <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
+                                            onClick={()=>this.deletebutton(this.state.id)}>
+                                            DELETE</div>
+                                            <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
+                                             onClick={()=>this.addLabelButton()}>
+                                            ADD LABEL</div>
+                                            <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
+                                             onClick={()=>this.askQuestion()}>
+                                            {this.state.ashshow}</div>
+                                            </div>
+                                            
+                                        }
+                      </Popover>
+                      </div>  }
     </div> 
      )}}
 
