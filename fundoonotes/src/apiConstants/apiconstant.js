@@ -29,6 +29,8 @@ module.exports = {
     REACT_APP_questionAndAnswerNotes :"/questionAndAnswerNotes/",
     REACT_APP_getNotesListByLabel : "/notes/getNotesListByLabel/",
     REACT_APP_placeOrder :"/productcarts/placeOrder",
-    REACT_APP_myCart :"/productcarts/myCart"
+    REACT_APP_myCart :"/productcarts/myCart",
+    REACT_APP_deleteForeverNotes : "/notes/deleteForeverNotes",
+    REACT_APP_trashNotes : "/notes/trashNotes"
 
 }

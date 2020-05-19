@@ -41,6 +41,7 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Popover from '@material-ui/core/Popover';
 import Cart from './Cart'
 import AppsIcon from '@material-ui/icons/Apps';
+import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
 
@@ -373,7 +374,8 @@ render(){
           <div className="searchDiv">
                               {/* <Paper> */}
                                   <div className="searchdiv1">
-                                  <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} />
+                                    <SearchIcon style={{color : "black",marginRight :"6px"}}/>
+                                  {/* <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} /> */}
                                 <input
                                    placeholder="Search"
                                     InputProps={{ disableUnderline: true }}

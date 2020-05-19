@@ -25,7 +25,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,getNoteLabelList,addlabelNotes,deletelabelNotes } from '../services/notesService'
+import { getNotes,setNotes,deleteNotes,getNoteLabelList,addlabelNotes,deletelabelNotes,deleteForeverNotes,trashNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -175,6 +175,44 @@ class DeleteIcon extends Component {
     // this.setState({askQuestion : true})
     this.props.sendtrash(false,this.state.id);
   }
+  deleteForever=async(id)=>{
+    console.log(id)
+    await this.state.noteIdList.push(id.toString());
+    let data={
+      noteIdList : this.state.noteIdList
+    }
+    console.log(data)
+    deleteForeverNotes(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+         this.setState({noteIdList : []});
+         this.props.sendtrash(true);
+     } else {
+         this.setState({noteIdList : []});
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }
+  restore=async(id)=>{
+    console.log(id)
+    await this.state.noteIdList.push(id.toString());
+    let data={
+      isDeleted : false,
+      noteIdList : this.state.noteIdList
+    }
+    console.log(data)
+    trashNotes(data).then(response => {
+      console.log(response);
+     if (response.status === 200) {
+         this.setState({noteIdList : []});
+         this.props.sendtrash(true);
+     } else {
+      this.setState({noteIdList : []});
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  
+  }
  render(){
      return(
 
@@ -225,10 +263,10 @@ class DeleteIcon extends Component {
                               :
                               <div>
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
-                              onClick={()=>this.deletebutton(this.state.id)}>
+                              onClick={()=>this.deleteForever(this.state.id)}>
                               DELETE FOREVER</div>
                               <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}} 
-                              onClick={()=>this.deletebutton(this.state.id)}>
+                              onClick={()=>this.restore(this.state.id)}>
                               RESTORE</div>
                               </div>
                               

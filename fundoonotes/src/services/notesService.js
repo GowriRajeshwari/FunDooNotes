@@ -321,6 +321,28 @@ export async function setNotes(data) {
       return error;
     }
   }
+  export async function deleteForeverNotes(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_deleteForeverNotes,data,
+         {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
+  export async function trashNotes(data) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ apiconstant.REACT_APP_trashNotes,data,
+         {params : { access_token }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
 
-  // http://fundoonotes.incubation.bridgelabz.com/api/productcarts/myCart
+  //http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes

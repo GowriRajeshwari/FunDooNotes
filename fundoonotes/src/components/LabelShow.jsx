@@ -79,7 +79,8 @@ class LabelShow extends Component {
     showQuestion : false,
     nmsg : '',
     labelNoteShow : '',
-    label:''
+    label:'',
+    labeldata:props.label
       
     };
   }
@@ -87,16 +88,16 @@ class LabelShow extends Component {
    handleDateChange = (date) => {
     this.setState({date : date})
   };
-//   UNSAFE_componentWillReceiveProps=async(nextProps)=>{
-//     if(nextProps.labelNoteShow){
-//       await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
-//     }
-//     console.log(nextProps.labelNoteShow)
-//     this.getCalled(nextProps.labelNoteShow,nextProps.label);
-//   }
-  // componentWillMount=()=>{
-  //   this.setState({ labelNoteShow : this.props.labelNoteShow})
-  // }
+  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+    
+      await this.setState({ label :nextProps.label})
+    
+    console.log(nextProps.labelNoteShow)
+    this.getCalled(nextProps.label);
+  }
+  componentWillMount=()=>{
+    this.setState({ labelNoteShow : this.props.labelNoteShow})
+  }
   componentDidMount=()=>{
     var d =new Date();
     d.setDate(new Date().getDate()+1)
@@ -123,9 +124,9 @@ class LabelShow extends Component {
           }
        });
   }
-  getCalled=(labelNoteShow,label)=>{
+  getCalled=(label)=>{
         //  this.setState({ labelNoteShow : this.props.labelNoteShow})
-        console.log("show",labelNoteShow)
+        console.log("show",label)
         //  this.setState({gridView : this.props.gridView})
          var d =new Date();
          d.setDate(new Date().getDate()+1)
