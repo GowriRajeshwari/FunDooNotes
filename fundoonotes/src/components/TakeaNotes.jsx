@@ -513,7 +513,7 @@ class TakeaNotes extends Component {
                     }}>
                       <div style={{ padding: '10px' }}>
                         <div className='showicon'>
-                          <div className="typoText">
+                          <div className={this.props.gridView ? 'typoText1' : "typoText"}>
                             {data.title}
                           </div>
                           <div className="mybuttonoverlap" style={{ padding: '5px' }}>

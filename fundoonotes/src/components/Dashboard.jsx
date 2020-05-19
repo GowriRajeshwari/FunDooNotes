@@ -43,6 +43,8 @@ import Cart from './Cart'
 import AppsIcon from '@material-ui/icons/Apps';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
+import CloseIcon from '@material-ui/icons/Close';
+import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
 import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
 
 
@@ -179,6 +181,7 @@ const useStyles = theme => ({
              imageFromUrl : '',
              profileImage :'',
              profileImageFromRes : '',
+             heading : "FunDoo"
              
 
         };
@@ -219,25 +222,25 @@ const useStyles = theme => ({
     event.preventDefault();
     console.log(text)
     if(text == 'Edit labels'){
-        this.setState({choice : 'Editlabels'})
+        this.setState({choice : 'Editlabels',heading : 'Editlabels'})
     }
     else if(text == 'Notes'){
-      this.setState({choice : 'Notes'})
+      this.setState({choice : 'Notes',heading:'Notes'})
     }
     else if(text == 'Archive'){
-      this.setState({choice : 'Archive'})
+      this.setState({choice : 'Archive',heading:'Archive'})
     }
     else if(text == 'Trash'){
-      this.setState({choice : 'Trash'})
+      this.setState({choice : 'Trash',heading:'Trash'})
     }
     else if(text == 'Reminder'){
-      this.setState({choice : 'Reminder'})
+      this.setState({choice : 'Reminder',heading:'Reminder'})
     }
     else if(text == 'shopping_cart'){
-      this.setState({ choice :'shopping_cart'})
+      this.setState({ choice :'shopping_cart',heading :'shopping_cart' })
     }
     else{
-      this.setState({choice : text.label})
+      this.setState({choice : text.label,heading :text.label })
     }
   }
   labeldata=()=>{
@@ -367,7 +370,7 @@ render(){
           </div>
 
           <Typography variant="h6" noWrap className="funnDooName" >
-           FunDoo
+           {this.state.heading}
           </Typography>
 
           </div>
@@ -383,7 +386,7 @@ render(){
                                     style={{disableUnderline : true,outline:'none',border: 'none'}}
                                      onChange={this.queryfunction}
                                 />
-                                <img src={clear} id="imgdash" />
+                                <CloseIcon style={{color:"black"}}/>
                                   </div>
                                 
                              {/* </Paper> */}
@@ -407,7 +410,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             {this.state.gridView ? <img src={list} id="imgdash" /> :  <AppsIcon style={{opacity:"0.9",color:"black",fontSize:"30px"}}/>}
+                             {this.state.gridView ? <ViewAgendaIcon style={{color : "black"}}/> :  <AppsIcon style={{opacity:"0.9",color:"black",fontSize:"30px"}}/>}
                          </IconButton>
 
                        

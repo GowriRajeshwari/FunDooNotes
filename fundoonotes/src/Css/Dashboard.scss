@@ -262,7 +262,9 @@
 }
 .funnDooName{
     color : black;
-    margin-right : 9px
+    margin-right : 9px;
+    width: 130px;
+    text-overflow: ellipsis;
   }
   .icondash{
     height: 30px;

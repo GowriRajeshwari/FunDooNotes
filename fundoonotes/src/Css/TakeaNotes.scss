@@ -143,6 +143,20 @@
     font-weight: 500;
     font-family: $primaryfontfamily;
 }
+.typoText1{
+    /* height: 100%; */
+    /* padding-bottom: 10px; */
+    width: 850px;
+    /* background-color: tomato; */
+    /* flex-wrap: wrap; */
+    /* text-overflow: ellipsis; */
+    /* overflow: initial; */
+    /* white-space: pre-wrap; */
+    word-wrap: break-word;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: $primaryfontfamily;
+}
 .carddiv{
     border-radius:'10px';
     cursor:pointer;
