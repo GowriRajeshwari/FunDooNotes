@@ -1,3 +1,5 @@
+@import "const.scss";
+
 .dashContainer{
     width:100%;
     height: 100%;
@@ -54,7 +56,7 @@
     height: 30px;
     width: 500px;
     margin-left: 100px;
-    background-color:#ffffff;
+    background-color:$primarycolor;
     flex-direction: row;
     display: flex;
     align-items: center;
@@ -116,7 +118,7 @@
     flex-direction: column;
     width: 100%;
     padding : 8px;
-    background-color: white;
+    background-color:$primarycolor;
     border-radius: 8px;
     border : 0.1px solid grey;
 }
@@ -126,7 +128,7 @@
     /* font-size: 14px; */
     /* font-weight: bold; */
     /* border-radius: 4px; */
-    background-color: #fff;
+    background-color:$primarycolor;
     cursor: pointer;
     width: 100%;
     /* padding:5px; */
@@ -140,7 +142,7 @@
     display: flex;
     align-items: center;
     /* border-radius: 15px; */
-    background-color: white;
+    background-color: $primarycolor;
     /* border: solid; */
     border-radius: 8px;
     border : 0.1px solid grey;
@@ -199,7 +201,7 @@
 .classespaper{
     /* position: 'absolute'; */
     width: 400px;
-    background-color: white;
+    background-color: $primarycolor;
     border: '2px solid #000';
     /* boxShadow: theme.shadows[5], */
     /* padding: theme.spacing(2, 4, 3), */
@@ -247,7 +249,7 @@
    width: 800px;
    max-width :720px;
    margin-left: 130px;
-   background-color: #ffffff;
+   background-color: $primarycolor;
    flex-direction : row;
    display: flex;
    align-items: center;
@@ -330,7 +332,7 @@
        width: 600px;
        max-width :500px;
        margin-left: 1px;
-       background-color: #ffffff;
+       background-color:$primarycolor;
        flex-direction : row;
        display: flex;
        align-items: center;
@@ -396,7 +398,7 @@
        width: 600px;
        max-width :500px;
        margin-left: 1px;
-       background-color: #ffffff;
+       background-color: $primarycolor;
        flex-direction : row;
        display: flex;
        align-items: center;
@@ -462,7 +464,7 @@
        width: 600px;
        max-width :500px;
        margin-left: 1px;
-       background-color: #ffffff;
+       background-color: $primarycolor;
        flex-direction : row;
        display: flex;
        align-items: center;
@@ -527,7 +529,7 @@
        width: 700px;
        max-width :500px;
        margin-left: 1px;
-       background-color: #ffffff;
+       background-color: $primarycolor;
        flex-direction : row;
        display: flex;
        align-items: center;
@@ -593,7 +595,7 @@
        width: 600px;
        max-width :500px;
        margin-left: 1px;
-       background-color: #ffffff;
+       background-color: $primarycolor;
        flex-direction : row;
        display: flex;
        align-items: center;
