@@ -29,6 +29,7 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import AskQuestion from './AskQuestion'
 import Divider from '@material-ui/core/Divider';
 import unarchive from '../assets/unarchive.png'
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 
@@ -80,7 +81,9 @@ class Archived extends Component {
     showQuestion : false,
     nmsg : '',
     labelNoteShow : '',
-    label:''
+    label:'',
+    loading : true
+
       
     };
   }
@@ -106,7 +109,7 @@ class Archived extends Component {
        console.log(response);
       if (response.status === 200) {
           
-        this.setState({data : response.data.data.data});
+        this.setState({data : response.data.data.data,loading:false});
         console.log(this.state.data[0].id)
         
       } else {
@@ -494,6 +497,13 @@ archiveddata=async(dat)=>{
         <div>
     
           <div className='maincontainer'>
+          <ClipLoader
+                // css={override}
+                css={{ width : "50px",height :"50px",marginTop : "45px"}}
+                size={150}
+                color={"#123abc"}
+                loading={this.state.loading}
+              />
     <div className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       // if(data.isDeleted != true && data.isArchived !=true)

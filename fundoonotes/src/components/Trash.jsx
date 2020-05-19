@@ -10,6 +10,7 @@ import NewNote from './NewNote'
 import DeleteIcon from './DeleteIcon'
 import Chip from '@material-ui/core/Chip';
 import schedule from '../assets/schedule.png'
+import ClipLoader from "react-spinners/ClipLoader"
 
 
 require('dotenv').config();
@@ -53,7 +54,9 @@ class Trash extends Component {
     dialogBoxOpen:false,
     noteIdList :[],
     nonDeleteData:[],
-    query : this.props.query
+    query : this.props.query,
+    loading : true
+
 
    
     };
@@ -72,7 +75,7 @@ class Trash extends Component {
       console.log(response.data.data.data[0].isDeleted);
      if (response.status === 200) {
         
-        this.setState({data : response.data.data.data});
+        this.setState({data : response.data.data.data,loading:false});
         
         console.log(this.state.data[0].title)
       
@@ -295,6 +298,13 @@ reminder = (reminder,id) =>{
     return (
       
       <div className='maincontainer'>
+        <ClipLoader
+                // css={override}
+                css={{ width : "50px",height :"50px",marginTop : "45px"}}
+                size={150}
+                color={"#123abc"}
+                loading={this.state.loading}
+              />
     <div className='notescontainer'>
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       if(data.isDeleted === true)
