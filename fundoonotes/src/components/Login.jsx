@@ -52,7 +52,7 @@ class Login extends Component {
         password: this.state.password
       };
 
-      // console.log(data);
+      console.log(data);
         
       login(data).then(response => {
           console.log(response);
@@ -67,6 +67,7 @@ class Login extends Component {
               localStorage.setItem("userId",response.data.userId);
               localStorage.setItem("email",response.data.email);
               localStorage.setItem("firstName",response.data.firstName)
+              localStorage.setItem("userProfile",response.data.imageUrl)
 
               this.props.history.push({
                   pathname: "/dashboard",

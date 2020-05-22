@@ -171,9 +171,9 @@ class Service extends Component {
           </Typography>
         </Toolbar>
       </AppBar>
-     <div className="twocardrow">
+     <div className="twocardrowcard">
       
-      <div className="twocard" >
+      <div className="twocardservice" >
         <div className="zoom" onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
                  <div>
                         <Card  className="serviceroot">
@@ -206,7 +206,7 @@ class Service extends Component {
                     </div>
                 </div>
 
-                <div className="twocard"  ><div className="zoom" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
+                <div className="twocardservice"  ><div className="zoom" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
                  onClick={e => this.servicebasic(e)}
                  >
                         <div >

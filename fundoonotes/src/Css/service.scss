@@ -72,6 +72,11 @@
 .twocard{
     padding : 50px;
 }
+.twocardservice{
+    // padding : 50px;
+   width: 450px;
+   height: 350px;
+}
 .centercard{
     display : flex;
 }
@@ -94,6 +99,14 @@
     transform: scale(1.15); 
   }
   .twocardrow{
+    display:flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width:100%;
+      height: 500px;
+}
+  .twocardrowcard{
       display:flex;
         flex-direction: row;
         align-items: center;

@@ -159,6 +159,12 @@ const useStyles = theme => ({
      position: 'relative'
   }
 });
+window.onLoad = function(){
+  if(!window.location.hash){
+    window.location = window.location + '#loaded';
+    window.location.reload()
+  }
+}
 
  class Dashboard extends Component {
      
@@ -187,6 +193,7 @@ const useStyles = theme => ({
         };
       }
       componentDidMount=()=>{
+        // window.location.reload(false);
         const profileImage = localStorage.getItem("userProfile");
         const email =  localStorage.getItem("email");
         const firstName = localStorage.getItem("firstName");
@@ -301,6 +308,7 @@ logout=()=>{
      if (response.status === 204) {
       localStorage.setItem("email","");
       localStorage.setItem("firstName","")
+      localStorage.setItem("userProfile","")
       this.props.history.push({
           pathname: "/",
       });
