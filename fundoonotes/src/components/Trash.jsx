@@ -305,15 +305,15 @@ reminder = (reminder,id) =>{
                 color={"#123abc"}
                 loading={this.state.loading}
               />
-    <div className='notescontainer'>
+    <div  className={this.props.gridView ? 'notescontainer1' : "notescontainer"} >
     {this.state.data.filter(searchigFor(this.props.query)).map((data, index) => {
       if(data.isDeleted === true)
     return <div key={index}  
     style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
-      <Card  className="mydivouter" style={{backgroundColor :  this.state.data[index].color }}>
+      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color }}>
       <CardContent>
         <div className='showicon'>
-                      <div  className="typoText">
+                      <div className={this.props.gridView ? 'typoText1' : "typoText"}>
                         {data.title}
                       </div>
                         <div className="mybuttonoverlap" style={{ padding :'5px'}}>

@@ -477,7 +477,7 @@ class Register extends Component {
                                    <Card>
                                    <div className="widthheight">
                                 <Typography className="price">
-                                Price : $49 per
+                                Price : $99 per
                                 </Typography>
                                 <Typography className="price" >
                                 month
@@ -486,7 +486,7 @@ class Register extends Component {
                                 advance
                                 </Typography>
                                 <Typography className="title" style={{fontSize : "14px"}}>
-                                . $49/month
+                                . $99/month
                                 </Typography>
                                 <Typography className="title" style={{fontSize : "14px"}}>
                                 . Ability to ad  only title and description

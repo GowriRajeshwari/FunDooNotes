@@ -266,16 +266,16 @@ window.onLoad = function(){
         gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
-        return <Archived query={this.state.query}/>
+        return <Archived gridView={this.state.gridView} query={this.state.query}/>
       }
       else if(this.state.choice == 'Trash'){
-        return <Trash query={this.state.query}/>
+        return <Trash gridView={this.state.gridView} query={this.state.query}/>
       }
       else if(this.state.choice == 'Reminder'){
-        return <Reminder query={this.state.query}/>
+        return <Reminder gridView={this.state.gridView} query={this.state.query}/>
       }
       else if(this.state.choice == 'shopping_cart'){
-        return <Cart/>
+        return <Cart gridView={this.state.gridView}/>
       }
       else{
       return <LabelShow query={this.state.query} label={this.state.choice}
