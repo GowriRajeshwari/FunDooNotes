@@ -9,8 +9,9 @@ import delete1 from '../assets/delete.png';
 import add from '../assets/add.png';
 import Dialog from '@material-ui/core/Dialog';
 import { getNoteLabelList,addLabels,deleteNoteLabel } from '../services/notesService'
-
-
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
+import TakeaNotes from './TakeaNotes'
 const useStyles = makeStyles(theme => ({
     paper: {
       position: 'absolute',
@@ -37,7 +38,7 @@ class EditLabel extends Component {
     };
   }
   componentDidMount=()=>{
-    
+    this.setState({dialogBoxOpen : true})
     getNoteLabelList().then(response => {
       console.log(response.data.data.details);
      if (response.status === 200) {
@@ -68,8 +69,9 @@ class EditLabel extends Component {
   };
   Done=()=>{
     // this.handelNoteDialogBox();
-    // this.setState({setOpen : false});
+    // this.setState({dialogBoxOpen : false});
     this.props.labeldata();
+
 
   }
   addlabel=()=>{
@@ -109,31 +111,30 @@ class EditLabel extends Component {
   render() {
     // const classes = useStyles();
     return (
+      <div>
+   
+      
         
-        <Dialog
-            open={this.state.dialogBoxOpen}
-            onClose={this.handelNoteDialogBox}
-            >
-        <div className="classespaper">
+        <div className="classespaper12">
                     <Typography>Edit Label</Typography>
-                    <div className="textdash">
-                    <Button style={{width : '50px',height : '50px'}} onClick={this.addlabel} >
-                    <img src={add} id="imgdashdelete" />
-                    </Button>
-                    <div style={{display : 'flex',justifyContent:'center'}}>
+                    <div className="textdashEdit">
+                    <div  onClick={this.addlabel} >
+                    <AddIcon/>
+                    </div>
+                    <div >
                     <TextField
                         id="btndash"
                         variant="filled"
                         placeholder="Create"
                         size='small'
-                        style={{display : 'flex',justifyContent:'center'}}
+                        // style={{display : 'flex',justifyContent:'center'}}
                         InputProps={{ disableUnderline: true }}
                          onChange={this.onchangelabel}
                     />
                     </div>
-                    <Button  >
-                    <img src={delete1} id="imgdashdelete" />
-                    </Button>
+                    <div  >
+                    <DeleteIcon/>
+                    </div>
                     </div>
                     <div className="buttondone" onClick={e => this.Done(e)}>
                     <Button  >
@@ -143,10 +144,11 @@ class EditLabel extends Component {
                     </div>
                     <div>
                     {this.state.data.map((data, index) => (
-                        <div className="textdash">
-                        <Button style={{width : '50px',height : '50px'}} onClick={this.addlabel} >
-                        <img src={add} id="imgdashdelete" />
-                        </Button>
+                        <div className="textdashEdit">
+                        <div  onClick={this.addlabel} >
+                        <AddIcon/>
+                        </div>
+                        <div>
                         <TextField
                             // error={this.state.red}
                             helperText={this.state.helperTextEmail}
@@ -157,18 +159,19 @@ class EditLabel extends Component {
                             InputProps={{ disableUnderline: true }}
                              onChange={this.onchangelabel}
                         />
-                        <Button onClick={()=>this.deletelabel(data.id)}>
-                        <img src={delete1} id="imgdashdelete" />
-                        </Button>
+                        </div>
+                        <div onClick={()=>this.deletelabel(data.id)}>
+                        <DeleteIcon/>
+                        </div>
                         </div>))}
                     </div>
 
                    
                   
         </div>
-      </Dialog>
+      
     
-     
+      </div>
     );
   }
 }

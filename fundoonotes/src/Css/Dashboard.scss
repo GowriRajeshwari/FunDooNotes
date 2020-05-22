@@ -120,7 +120,7 @@
     padding : 8px;
     background-color:$primarycolor;
     border-radius: 8px;
-    border : 0.1px solid grey;
+    // border : 0.1px solid grey;
 }
 #btndash{
     /* min-width: 270px; */
@@ -157,7 +157,7 @@
     /* background-color: greenyellow; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px;
-    border : 0.1px solid grey;
+    // border : 0.1px solid grey;
 
 }
 .paper4{
@@ -167,7 +167,7 @@
     /* background-color: greenyellow; */
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
     border-radius: 8px;
-    border : 0.1px solid grey;
+    // border : 0.1px solid grey;
 
 }
 .paper3{
@@ -313,74 +313,20 @@
 
 
 
-@media only screen and (max-width : 1023px){
-    .ToolbarContainer1{
-        display:flex;
-        flex-direction:row;
-        justify-content:'center';
-        align-items:center;
-        justify-content:space-around;
-        /* width :100% */
-        /* padding-left: 30px; */
-        
-       }
-       .ToolbarContainer2{
-        display:flex;
-        flex-direction:row;
-        /* justify-content:'center';
-        align-items:center; */
-    }
-    .searchDiv{
-        height: '50px';
-       width: 600px;
-       max-width :500px;
-       margin-left: 1px;
-       background-color:$primarycolor;
-       flex-direction : row;
-       display: flex;
-       align-items: center;
-       /* border-radius: 3px; */
-       justify-content: center;
-       background-color :#f1f3f4;
-       border-radius : 8px;
-       position : relative;
-       /* border: 0.1px solid grey; */
-    }
-    .searchdiv1{
-        padding : 5px;
-        display : flex;
-       /* justify-content : center; */
-       height : 46px;
-       max-width : 380px;
-       align-items:center
-}
-.inputsearch{
-    background-color: #ff00;
-    height : 46px;
-    outline:none;
-    font-size:18px;
-    border: none;
-    width:300px 
-}
-    .icondash{
-        height: 30px;
-        width: 150px;
-        margin-left: 1px;
-        /* background-color:#ffffff; */
-        flex-direction: row;
-        display: flex;
-        align-items: center;
-        border-radius: 3px;
-        justify-content: space-around;
-    
-    }
-    .bulbicon{
-        margin-right: 1px;
-    }
 
-}
 
-@media only screen and (max-width : 414px){
+
+
+
+
+
+
+
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    // .example {background: red;}
     .ToolbarContainer1{
         display:flex;
         flex-direction:row;
@@ -398,7 +344,7 @@
     }
     .searchDiv{
         height: '50px';
-       width: 600px;
+    //    width: 600px;
        max-width :500px;
        margin-left: 1px;
        background-color: $primarycolor;
@@ -417,138 +363,7 @@
         display : flex;
        /* justify-content : center; */
        height : 46px;
-       max-width : 380px;
-       align-items:center
-}
-.inputsearch{
-    background-color: #ff00;
-    height : 46px;
-    outline:none;
-    font-size:18px;
-    border: none;
-    width:300px 
-}
-    .icondash{
-        height: 30px;
-        width: 150px;
-        margin-left: 1px;
-        /* background-color:#ffffff; */
-        flex-direction: row;
-        display: flex;
-        align-items: center;
-        border-radius: 3px;
-        justify-content: space-around;
-    
-    }
-    .bulbicon{
-        margin-right: 1px;
-    }
-
-}
-
-@media only screen and (max-width : 800px){
-    .ToolbarContainer1{
-        display:flex;
-        flex-direction:row;
-        justify-content:'center';
-        align-items:center;
-        justify-content:space-around;
-        /* width :100% */
-        /* padding-left: 30px; */
-       }
-       .ToolbarContainer2{
-        display:flex;
-        flex-direction:row;
-        /* justify-content:'center';
-        align-items:center; */
-    }
-    .searchDiv{
-        height: '50px';
-       width: 600px;
-       max-width :500px;
-       margin-left: 1px;
-       background-color: $primarycolor;
-       flex-direction : row;
-       display: flex;
-       align-items: center;
-       /* border-radius: 3px; */
-       justify-content: center;
-       background-color :#f1f3f4;
-       border-radius : 8px;
-       position : relative;
-       /* border: 0.1px solid grey; */
-    }
-    .searchdiv1{
-        padding : 5px;
-        display : flex;
-       /* justify-content : center; */
-       height : 46px;
-       max-width : 380px;
-       align-items:center
-}
-.inputsearch{
-    background-color: #ff00;
-    height : 46px;
-    outline:none;
-    font-size:18px;
-    border: none;
-    width:300px 
-}
-    .icondash{
-        height: 30px;
-        width: 150px;
-        margin-left: 1px;
-        /* background-color:#ffffff; */
-        flex-direction: row;
-        display: flex;
-        align-items: center;
-        border-radius: 3px;
-        justify-content: space-around;
-    
-    }
-    .bulbicon{
-        margin-right: 1px;
-    }
-
- }
-@media  (width : 1024px){
-    .ToolbarContainer1{
-        display:flex;
-        flex-direction:row;
-        justify-content:'center';
-        align-items:center;
-        justify-content:space-around;
-        /* width :100% */
-        /* padding-left: 30px; */
-       }
-       .ToolbarContainer2{
-        display:flex;
-        flex-direction:row;
-        /* justify-content:'center';
-        align-items:center; */
-    }
-    .searchDiv{
-        height: '50px';
-       width: 700px;
-       max-width :500px;
-       margin-left: 1px;
-       background-color: $primarycolor;
-       flex-direction : row;
-       display: flex;
-       align-items: center;
-       /* border-radius: 3px; */
-       justify-content: center;
-       background-color :#f1f3f4;
-       border-radius : 8px;
-       position : relative;
-       /* border: 0.1px solid grey; */
-    }
-    .searchdiv1{
-        padding : 5px;
-        display : flex;
-       /* justify-content : center; */
-       height : 46px;
-       max-width : 480px;
+       max-width : 400px;
        align-items:center
 }
 .inputsearch{
@@ -574,10 +389,11 @@
     .bulbicon{
         margin-right: 1px;
     }
-
-} 
-
-@media only screen and (max-width : 1240px){
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .example {background: green;}
     .ToolbarContainer1{
         display:flex;
         flex-direction:row;
@@ -614,7 +430,7 @@
         display : flex;
        /* justify-content : center; */
        height : 46px;
-       max-width : 380px;
+       max-width : 400px;
        align-items:center
 }
 .inputsearch{
@@ -623,7 +439,7 @@
     outline:none;
     font-size:18px;
     border: none;
-    width:300px 
+    width:400px 
 }
     .icondash{
         height: 30px;
@@ -640,5 +456,224 @@
     .bulbicon{
         margin-right: 1px;
     }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    // .example {background: blue;}
+    .example {background: orange;}
+    .ToolbarContainer1{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center;
+        justify-content:space-around;
+         width :100% 
+        /* padding-left: 30px; */
+       }
+       .ToolbarContainer2{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center; 
+    }
+    .searchDiv{
+        height: '50px';
+    //    width: 600px;
+       max-width :400px;
+       margin-left: 1px;
+       background-color: $primarycolor;
+       flex-direction : row;
+       display: flex;
+       align-items: center;
+       /* border-radius: 3px; */
+       justify-content: center;
+       background-color :#f1f3f4;
+       border-radius : 8px;
+       position : relative;
+       /* border: 0.1px solid grey; */
+    }
+    .searchdiv1{
+        padding : 5px;
+        display : flex;
+       /* justify-content : center; */
+       height : 46px;
+       max-width : 400px;
+       align-items:center
+}
+.inputsearch{
+    background-color: #ff00;
+    height : 46px;
+    outline:none;
+    font-size:18px;
+    border: none;
+    width:400px 
+}
+    .icondash{
+        height: 30px;
+        width: 150px;
+        margin-left: 1px;
+        /* background-color:#ffffff; */
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        justify-content: space-around;
+    
+    }
+    .bulbicon{
+        margin-right: 1px;
+    }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .example {background: orange;}
+    .ToolbarContainer1{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center;
+        justify-content:space-around;
+         width :100% 
+        /* padding-left: 30px; */
+       }
+       .ToolbarContainer2{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center; 
+    }
+    .searchDiv{
+        height: '50px';
+    //    width: 600px;
+       max-width :600px;
+       margin-left: 1px;
+       background-color: $primarycolor;
+       flex-direction : row;
+       display: flex;
+       align-items: center;
+       /* border-radius: 3px; */
+       justify-content: center;
+       background-color :#f1f3f4;
+       border-radius : 8px;
+       position : relative;
+       /* border: 0.1px solid grey; */
+    }
+    .searchdiv1{
+        padding : 5px;
+        display : flex;
+       /* justify-content : center; */
+       height : 46px;
+       max-width : 600px;
+       align-items:center
+}
+.inputsearch{
+    background-color: #ff00;
+    height : 46px;
+    outline:none;
+    font-size:18px;
+    border: none;
+    width:600px 
+}
+    .icondash{
+        height: 30px;
+        width: 150px;
+        margin-left: 1px;
+        /* background-color:#ffffff; */
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        justify-content: space-around;
+    
+    }
+    .bulbicon{
+        margin-right: 1px;
+    }
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    // .example {background: pink;}
 
- }
+    .ToolbarContainer1{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center;
+        justify-content:space-around;
+        // width :100%
+       }
+       .ToolbarContainer2{
+           display:flex;
+           flex-direction:row;
+           justify-content:'center';
+           align-items:center;
+       }
+       .searchDiv{
+           height: '50px';
+        //   width: 800px;
+          max-width :800px;
+        //   min-width: 500px;
+          margin-left: 130px;
+          background-color: $primarycolor;
+          flex-direction : row;
+          display: flex;
+          align-items: center;
+          /* border-radius: 3px; */
+          justify-content: center;
+          background-color :#f1f3f4;
+          border-radius : 8px;
+          position : relative;
+           flex-wrap: wrap;
+
+          /* border: 0.1px solid grey; */
+       }
+       .funnDooName{
+           color : black;
+           margin-right : 9px;
+           width: 130px;
+           text-overflow: ellipsis;
+         }
+         .icondash{
+           height: 30px;
+           width: 150px;
+           margin-left: 100px;
+           /* background-color:#ffffff; */
+           flex-direction: row;
+           display: flex;
+           align-items: center;
+           border-radius: 3px;
+           justify-content: space-around;
+       
+       }
+       .searchdiv1{
+                padding : 5px;
+                display : flex;
+               justify-content : center;
+               height : 46px;
+               max-width : 580px;
+               align-items:center
+       }
+       .inputsearch{
+           background-color: #ff00;
+           height : 46px;
+           outline:none;
+           font-size:18px;
+           border: none;
+           width:580px
+       }
+       .bulbicon{
+           margin-right: 10px;
+       }
+       #imgdash{
+           width: 35px;
+           height: 35px;
+           color:white;
+           /* align-items: center; */
+           justify-content: space-around;
+           padding:1px;
+       }
+  }
+

@@ -110,7 +110,7 @@ class Archived extends Component {
       if (response.status === 200) {
           
         this.setState({data : response.data.data.data,loading:false});
-        console.log(this.state.data[0].id)
+        // console.log(this.state.data[0].id)
         
       } else {
           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });

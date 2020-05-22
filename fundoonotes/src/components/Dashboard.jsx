@@ -62,9 +62,7 @@ const useStyles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    ['@media (max-width:780px)']:{
-      transition :"0.5s"
-    }
+    
   },
   appBarShift: {
     // width: `calc(100% - ${drawerWidth}px)`,
@@ -74,9 +72,7 @@ const useStyles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     
-    ['@media (max-width:780px)']:{
-      transition : "transform "
-    }
+ 
     
   },
   menuButton: {
@@ -128,7 +124,11 @@ const useStyles = theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    // marginLeft: 0,
+    ['@media (min-width:414px)']:{
+      marginLeft : 0,
+      
+    }
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -187,7 +187,9 @@ window.onLoad = function(){
              imageFromUrl : '',
              profileImage :'',
              profileImageFromRes : '',
-             heading : "FunDoo"
+             heading : "FunDoo",
+             editlabel : false,
+             dialogBoxOpen : false
              
 
         };
@@ -229,7 +231,7 @@ window.onLoad = function(){
     event.preventDefault();
     console.log(text)
     if(text == 'Edit labels'){
-        this.setState({choice : 'Editlabels',heading : 'Editlabels'})
+        this.setState({heading : 'Editlabels',dialogBoxOpen :true})
     }
     else if(text == 'Notes'){
       this.setState({choice : 'Notes',heading:'Notes'})
@@ -250,19 +252,19 @@ window.onLoad = function(){
       this.setState({choice : text.label,heading :text.label })
     }
   }
-  labeldata=()=>{
+  labeldata=(dialoxBoxfalse)=>{
+    this.handelNoteDialogBox()
     this.componentDidMount();
-    this.setState({choice : ''})
   }
   getcomponents=()=>{
       console.log(this.state.choice)
-      if(this.state.choice == 'Editlabels'){
-        return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
-        // this.props.dialogbox();
-
-      }
-      else if(this.state.choice == 'Notes'){
-        return <TakeaNotes query={this.state.query} 
+      // if(this.state.choice == 'Editlabels'){
+      //   // return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
+      //   return <TakeaNotes query={this.state.query} dialogBoxOpen1={this.state.editlabel} labeldata={this.labeldata}
+      //   gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+      // }
+       if(this.state.choice == 'Notes'){
+        return <TakeaNotes query={this.state.query}
         gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
       }
       else if(this.state.choice == 'Archive'){
@@ -309,6 +311,7 @@ logout=()=>{
       localStorage.setItem("email","");
       localStorage.setItem("firstName","")
       localStorage.setItem("userProfile","")
+      localStorage.setItem("id",null)
       this.props.history.push({
           pathname: "/",
       });
@@ -345,7 +348,12 @@ handleClick12=(event)=>{
 // this.setState({fileshow :false,profileImage:'',file:''})
 
 }
-shopping_cart=()=>{
+
+handelNoteDialogBox = () => {
+  this.setState({
+    dialogBoxOpen: !this.state.dialogBoxOpen
+  })
+  this.componentDidMount();
 
 }
 render(){
@@ -554,6 +562,12 @@ render(){
        
         
       </main>
+      <Dialog
+              open={this.state.dialogBoxOpen}
+              onClose={this.handelNoteDialogBox}
+            >
+              <Edit labeldata={this.labeldata} />
+            </Dialog>
     </div>
   );
 }
