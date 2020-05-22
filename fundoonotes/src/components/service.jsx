@@ -172,7 +172,6 @@ class Service extends Component {
         </Toolbar>
       </AppBar>
      <div className="twocardrowcard">
-      
       <div className="twocardservice" >
         <div className="zoom" onMouseMove={this._onMouseMove} onMouseOut={this._onMouseOut} onClick={e => this.serviceadvance(e)}>
                  <div>
