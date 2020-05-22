@@ -525,7 +525,10 @@ class TakeaNotes extends Component {
                           onClick={() => this.dialogboxOpen(data, "editNotes")}>
                           {data.description}
                         </div>
+
+                        <div>
                         {this.state.date_timeshow ? this.reminder(data.reminder, data.id) : null}
+                        </div>
                         {data.noteCheckLists.map((notelist, index) => (
                           //  console.log(noteCheckLists)
 

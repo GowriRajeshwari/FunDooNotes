@@ -145,7 +145,7 @@
     background-color: $primarycolor;
     /* border: solid; */
     border-radius: 8px;
-    border : 0.1px solid grey;
+    // border : 0.1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     
     
@@ -218,7 +218,8 @@
 .modelmiddel{
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    border: none;
 }
 .textdash{
     display: flex;

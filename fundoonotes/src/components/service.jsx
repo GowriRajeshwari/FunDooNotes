@@ -12,7 +12,8 @@ import clsx from 'clsx';
 import Modal from '@material-ui/core/Modal';
 import Snackbar from '@material-ui/core/Snackbar';
 import { IconButton } from "@material-ui/core";
-
+import Dialog from '@material-ui/core/Dialog';
+import FullWidthTabs from './Tabs'
 
 
 const drawerWidth = 240;
@@ -256,30 +257,38 @@ class Service extends Component {
       <Typography style={{cursor:"pointer"}} className={classes.signin} onClick={e => this.signin(e)}>
                                Sign In Instead
                                 </Typography>
-                                
-                <Modal
-                
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={this.state.setOpen}
-                onClose={this.handleClose}
-                className="modelmiddel"
-            >
-                <div className="classespaper">
-                
-                    <div className="textdash">
-                      Hello
-                    </div>
-                    <div className="buttondone" onClick={e => this.Done(e)}>
-                    <Button  size="small" onClick={e => this.processtopay(e)}>
-                    Processed to checkout
-                    </Button>
-                    </div>
-                  
-        </div>
-      </Modal>
-      
 
+
+              <Dialog
+              open={this.state.setOpen}
+              onClose={this.handleClose}
+            >
+              {/* <EditNotes data={this.state.editdata} choice={this.state.choice}
+                sendupdate={this.getdataupdate} /> */}
+                 <div className="classespaper">
+                <div className="rowEnd"> 
+                  <div className="row1">
+                    Advance Pack Details
+                  </div>
+                  <div className="row2">
+                    {this.state.service === 'advance' ? <div>$99/month</div> : <div>$49/month</div>}
+                  </div>
+                </div>
+                <FullWidthTabs/>
+                
+                <div className="buttonCheckout">
+                <div  className="buttoncheck" onClick={e => this.Done(e)}>
+                  Remove
+                </div>
+                <div  size="small" className="buttoncheck" onClick={e => this.processtopay(e)}>
+                Processed to checkout
+                </div>
+                </div>
+                
+              
+    </div>
+            </Dialog>
+                              
                                 
       </div>
       

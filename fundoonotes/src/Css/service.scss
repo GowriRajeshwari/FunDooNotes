@@ -107,6 +107,39 @@
       height: 40px;
   }
   .classespaper{
-      width: 600px;
-      height: 100px;
+      width: 500px;
+    //   height: 100px;
+  }
+  .rowEnd{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      height: 40px;
+      align-items: center;
+      background-color: rgb(79, 79, 226);
+      color:white
+  }
+  .row1{
+      display: flex;
+      justify-content: flex-start;
+  }
+  .row2{
+      display: flex;
+      justify-content: flex-end;
+      padding:2px
+  }
+  .buttonCheckout{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    //   background-color: steelblue;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+  }
+  .buttoncheck{
+    border-radius: 5px;
+
+    padding:5px;
+    background-color: steelblue;
   }

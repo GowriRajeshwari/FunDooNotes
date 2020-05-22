@@ -41,7 +41,7 @@
     flex-shrink: 2;
     flex-basis: 750px;
     max-width: 900px;
-    /* min-width: 750px; */
+    min-width: 750px; 
     flex-wrap: wrap;
     margin-top: 15px;
  
@@ -64,7 +64,7 @@
     flex-shrink: 2;
     flex-basis: 750px;
     max-width: 900px;
-    /* min-width: 750px; */
+    min-width: 750px; 
     flex-wrap: wrap;
     margin-top: 15px;
  
@@ -83,7 +83,7 @@
       width: 255px;
     position:relative;
     border-radius:20px;
-    border: 0.1px solid grey;
+    // border: 0.1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
     /* margin: 0 auto; */
@@ -94,7 +94,7 @@
       width: 700px;
     /* position:relative; */
     border-radius:20px;
-    border: 0.1px solid grey;
+    // border: 0.1px solid grey;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     /* margin: 0 auto; */
     /* background-color: greenyellow; */
@@ -194,7 +194,7 @@
         width: 550px;
       position:relative;
       border-radius:20px;
-      border: 0.1px solid grey;
+    //   border: 0.1px solid grey;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
       /* margin: 0 auto; */
       /* background-color: greenyellow; */

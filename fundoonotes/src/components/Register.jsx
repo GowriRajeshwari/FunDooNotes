@@ -506,8 +506,9 @@ class Register extends Component {
                              </div> 
                 
                               </div>
-                              <div ><div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}
-                                >
+                              <div >
+                                  <div className="twocardR" onMouseMove={this._onMouseMove1} onMouseOut={this._onMouseOut1}>
+                                
                  
                                  <div className="servicerootR">
                                  <Card>
@@ -540,6 +541,7 @@ class Register extends Component {
                                     
                                     </div>
                              </div> 
+                             
                 
                               </div>
                             </div>}
