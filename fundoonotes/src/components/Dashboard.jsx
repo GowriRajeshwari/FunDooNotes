@@ -416,7 +416,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px",opacity:"0.9"}}/>
+                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px",opacity:"0.7"}}/>
                          </IconButton>
                          <IconButton
                           size="medium"
@@ -426,7 +426,7 @@ render(){
                           edge="start"
                           className="bulbicon"
                         >
-                             {this.state.gridView ? <ViewAgendaIcon style={{color : "black"}}/> :  <AppsIcon style={{opacity:"0.9",color:"black",fontSize:"30px"}}/>}
+                             {this.state.gridView ? <ViewAgendaIcon style={{color : "black"}}/> :  <AppsIcon style={{opacity:"0.7",color:"black",fontSize:"30px"}}/>}
                          </IconButton>
 
                        
@@ -516,7 +516,7 @@ render(){
             <ListItem button key={text} onClick={e => this.choice(e,text)} >
               <ListItemIcon>{index % 2 === 0 ? <div><img src={lightbulb_black} id="imgdash1"/></div> :
               <div>
-               <img src={reminder} id="imgdash1"/> </div>}</ListItemIcon>
+               <img src={reminder} id="imgdash1"  style={{opacity:"0.7"}}/> </div>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
@@ -545,7 +545,7 @@ render(){
           {['Archive','Trash'].map((text, index) => (
             <ListItem button key={text} onClick={e => this.choice(e,text)}>
               <ListItemIcon>{index % 2 === 0 ? <img src={download} id="imgdash1"/> :
-              <img src={delete_black} id="imgdash1"/>}</ListItemIcon>
+              <img src={delete_black} id="imgdash1" style={{opacity:"0.7"}}/>}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}

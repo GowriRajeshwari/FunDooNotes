@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import { searchUserList } from '../services/notesService'
-import { getNotesListByLabel, getNotes, setNotes, deleteNotes, removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes } from '../services/notesService'
+import { updateChecklist,getNotesListByLabel, getNotes, setNotes, deleteNotes, removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -29,7 +29,8 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import AskQuestion from './AskQuestion'
 import Divider from '@material-ui/core/Divider';
 import ClipLoader from "react-spinners/ClipLoader"
-
+import checkboxoutline from '../assets/checkboxoutline.png';
+import checkboxtick from '../assets/checkboxtick.png';
 
 
 require('dotenv').config();
@@ -479,7 +480,36 @@ class TakeaNotes extends Component {
     }
     // this.setState({ msg : content })
   }
-
+  checkbox=(id,checklistId,itemName)=>{
+    let data = {
+      itemName : itemName,
+      status : "close"
+    }
+    updateChecklist(data,id,checklistId).then(response => {
+      console.log(response);
+      if (response.status === 200) {
+        this.componentDidMount()
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+    });
+    console.log(id,checklistId,data)
+  }
+  checkboxoutline=(id,checklistId,itemName)=>{
+    let data = {
+      itemName : itemName,
+      status : "open"
+    }
+    updateChecklist(data,id,checklistId).then(response => {
+      console.log(response);
+      if (response.status === 200) {
+        this.componentDidMount()
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+    });
+    console.log(id,checklistId,data)
+  }
   render() {
 
     return (
@@ -533,11 +563,27 @@ class TakeaNotes extends Component {
                           //  console.log(noteCheckLists)
 
                           <List>
-                            <div className="textdash1">
-
-                              <Typography style={{ width: '100%' }}>{notelist.itemName}</Typography>
-
+                            {notelist.status === "close" ? 
+                            <div className="textdash12">
+                                    <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
+                                    onClick={()=>this.checkboxoutline(data.id,notelist.id,notelist.itemName)}>
+                            <img src={checkboxtick} id="imgdashnotes" />
                             </div>
+                          <Typography  style={{width : '100%',textDecoration : 'line-through'}}>{notelist.itemName}</Typography>
+                            
+                            
+
+                            </div> : 
+                            <div className="textdash12">
+                            <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
+                            onClick={()=>this.checkbox(data.id,notelist.id,notelist.itemName)} >
+                    <img src={checkboxoutline} id="imgdashnotes" />
+                    </div>
+                  <Typography  style={{width : '100%'}}>{notelist.itemName}</Typography>
+                    
+                    
+
+                    </div>}
 
                           </List>
                         ))

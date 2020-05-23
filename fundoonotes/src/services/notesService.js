@@ -351,6 +351,16 @@ export async function setNotes(data) {
       return error;
     }
   }
+  export async function updateChecklist(data,id,checklistId) {
+    try {
+      const response = await axios.post(process.env.REACT_APP_BASEURL+ "/notes/"+id+"/checklist/"+checklistId+"/update",data,
+        {headers : { Authorization : localStorage.getItem("id") }},
+      );
+      return response;
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+  }
 
-
-  //http://fundoonotes.incubation.bridgelabz.com/api/notes/trashNotes
+  //http://fundoonotes.incubation.bridgelabz.com/api/notes/5ea0627cad53b700227c5de0/checklist/5ea0627cad53b700227c5de1/update
