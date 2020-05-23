@@ -32,7 +32,7 @@
     flex-wrap: wrap;
     justify-content: center; */
     align-content: stretch;
-    /* justify-content: space-evenly; */
+    justify-content: flex-start; 
     align-items: stretch;
     flex-direction: row;
     box-sizing: border-box;
@@ -41,7 +41,7 @@
     flex-shrink: 2;
     flex-basis: 750px;
     max-width: 900px;
-    min-width: 750px; 
+    min-width: 550px; 
     flex-wrap: wrap;
     margin-top: 15px;
  
@@ -55,7 +55,7 @@
     flex-wrap: wrap;
     justify-content: center; */
     align-content: stretch;
-    justify-content: center;
+    justify-content: none;
     align-items: stretch;
     flex-direction: row;
     box-sizing: border-box;
@@ -64,7 +64,7 @@
     flex-shrink: 2;
     flex-basis: 750px;
     max-width: 900px;
-    min-width: 750px; 
+    min-width: 550px; 
     flex-wrap: wrap;
     margin-top: 15px;
  
@@ -163,7 +163,237 @@
     padding:20px;
 }
 
-@media only screen and (max-width : 600px){
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width : 414px){
+    // .notescontainer{
+    //     /* width : 80%;
+    //     display: flex;
+    //     align-items: center;
+    //     padding: 30px;
+    //     flex-direction: row;
+    //     flex-wrap: wrap;
+    //     justify-content: center; */
+    //     /* align-content: stretch; */
+    //     /* justify-content: center; */
+    //     /* align-items: stretch; */
+    //     flex-direction: row;
+    //     /* box-sizing: border-box; */
+    //     display: flex;
+    //     /* flex-grow: 1;
+    //     flex-shrink: 2;
+    //     flex-basis: 750px; */
+    //     justify-content: center;
+    //     /* max-width: 900px;
+    //     min-width: 40%; */
+    //     flex-wrap: wrap;
+    //     margin-top: 15px;
+    //     width : 30%;
+     
+    // }
+    .notescontainer{
+      
+        align-content: stretch;
+        justify-content: center; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+    .mydivouter{
+        /* padding : 10px; */
+        width: 500px;
+        min-width: 200px;
+    //   position:relative;
+      border-radius:20px;
+    //   border: 0.1px solid grey;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      /* margin: 0 auto; */
+      /* background-color: greenyellow; */
+      }
+      .paper{
+        width : 500px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 500px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
+    }
+ 
+}
+
+
+@media only screen and (max-width: 600px) {
+    .example {background: red;}
+    .notescontainer{
+       
+        align-content: stretch;
+        justify-content: center; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+    .mydivouter{
+        /* padding : 10px; */
+        width: 350px;
+        min-width: 200px;
+    //   position:relative;
+      border-radius:20px;
+    //   border: 0.1px solid grey;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      /* margin: 0 auto; */
+      /* background-color: greenyellow; */
+      }
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .notescontainer{
+   
+        align-content: stretch;
+        justify-content: center; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+    .mydivouter{
+        /* padding : 10px; */
+        width: 350px;
+        min-width: 200px;
+    //   position:relative;
+      border-radius:20px;
+    //   border: 0.1px solid grey;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+      /* margin: 0 auto; */
+      /* background-color: greenyellow; */
+      }
+  }
+  @media only screen and (min-width: 670px) {
+    .notescontainer{
+   
+        align-content: stretch;
+        justify-content: center; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+    .mydivouter{
+         /* padding : 10px; */
+      width: 255px;
+      position:relative;
+      border-radius:20px;
+      // border: 0.1px solid grey;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+      /* margin: 0 auto; */
+      /* background-color: greenyellow; */
+      }
+  }
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .example {background: blue;}
+    .notescontainer{
+       
+        align-content: stretch;
+        justify-content: center; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .notescontainer{
+        
+        align-content: stretch;
+        justify-content: flex-start; 
+        align-items: stretch;
+        flex-direction: row;
+        box-sizing: border-box;
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 2;
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
+        flex-wrap: wrap;
+        margin-top: 15px;
+     
+    }
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
     .notescontainer{
         /* width : 80%;
         display: flex;
@@ -172,34 +402,24 @@
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center; */
-        /* align-content: stretch; */
-        /* justify-content: center; */
-        /* align-items: stretch; */
+        align-content: stretch;
+        justify-content: flex-start; 
+        align-items: stretch;
         flex-direction: row;
-        /* box-sizing: border-box; */
+        box-sizing: border-box;
         display: flex;
-        /* flex-grow: 1;
+        flex-grow: 1;
         flex-shrink: 2;
-        flex-basis: 750px; */
-        justify-content: center;
-        /* max-width: 900px;
-        min-width: 40%; */
+        flex-basis: 750px;
+        max-width: 900px;
+        min-width: 550px; 
         flex-wrap: wrap;
         margin-top: 15px;
-        width : 30%;
      
     }
-    .mydivouter{
-        /* padding : 10px; */
-        width: 550px;
-      position:relative;
-      border-radius:20px;
-    //   border: 0.1px solid grey;
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-      /* margin: 0 auto; */
-      /* background-color: greenyellow; */
-      }
-}
+  }
+
+
 .textdash1{
     width : 100%;
     /* background-color: violet; */
@@ -222,3 +442,5 @@
     padding : 5px;
     height: 400px;
 }
+
+

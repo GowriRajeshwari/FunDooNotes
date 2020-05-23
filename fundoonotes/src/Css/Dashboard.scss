@@ -306,6 +306,11 @@
     justify-content: space-around;
     padding:1px;
 }
+.paddingChnage{
+    border-radius: 20px;
+     cursor : pointer;
+      padding: 20px
+}
 
 
 
@@ -322,10 +327,7 @@
 
 
 
-
-
-/* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 414px) {
     // .example {background: red;}
     .ToolbarContainer1{
         display:flex;
@@ -339,6 +341,7 @@
        .ToolbarContainer2{
         display:flex;
         flex-direction:row;
+        width: 170px;
         /* justify-content:'center';
         align-items:center; */
     }
@@ -389,30 +392,58 @@
     .bulbicon{
         margin-right: 1px;
     }
+    .paper{
+        width : 500px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 500px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
+    }
+   
   }
   
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    .example {background: green;}
-    .ToolbarContainer1{
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    // .example {background: red;}
+  .ToolbarContainer1{
         display:flex;
         flex-direction:row;
         justify-content:'center';
         align-items:center;
         justify-content:space-around;
-        /* width :100% */
+        // /* width :100% */
         /* padding-left: 30px; */
        }
        .ToolbarContainer2{
         display:flex;
         flex-direction:row;
+        width: 170px;
+
         /* justify-content:'center';
         align-items:center; */
     }
     .searchDiv{
         height: '50px';
-       width: 600px;
-       max-width :500px;
+    //    width: 600px;
+       width :400px;
+       min-width: 100px;
        margin-left: 1px;
        background-color: $primarycolor;
        flex-direction : row;
@@ -430,7 +461,8 @@
         display : flex;
        /* justify-content : center; */
        height : 46px;
-       max-width : 400px;
+       width : 300px;
+    min-width: 50px;
        align-items:center
 }
 .inputsearch{
@@ -439,11 +471,13 @@
     outline:none;
     font-size:18px;
     border: none;
-    width:400px 
+    width:300px ;
+    min-width: 50px;
+
 }
     .icondash{
         height: 30px;
-        width: 150px;
+        // width: 150px;
         margin-left: 1px;
         /* background-color:#ffffff; */
         flex-direction: row;
@@ -456,6 +490,147 @@
     .bulbicon{
         margin-right: 1px;
     }
+    .funnDooName{
+        color : black;
+        // margin-right : 9px;
+        // width: 130px;
+        text-overflow: ellipsis;
+      }
+      .paper{
+        width : 350px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 350px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
+    }
+  
+  }
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .example {background: green;}
+    .ToolbarContainer1{
+        display:flex;
+        flex-direction:row;
+        justify-content:'center';
+        align-items:center;
+        justify-content:space-around;
+        /* width :100% */
+        /* padding-left: 30px; */
+       }
+       .ToolbarContainer2{
+        display:flex;
+        flex-direction:row;
+        width: 170px;
+
+        /* justify-content:'center';
+        align-items:center; */
+    }
+    .searchDiv{
+        height: '50px';
+    //    width: 600px;
+       width :400px;
+       min-width: 100px;
+       margin-left: 1px;
+       background-color: $primarycolor;
+       flex-direction : row;
+       display: flex;
+       align-items: center;
+       /* border-radius: 3px; */
+       justify-content: center;
+       background-color :#f1f3f4;
+       border-radius : 8px;
+       position : relative;
+       /* border: 0.1px solid grey; */
+    }
+    .searchdiv1{
+        padding : 5px;
+        display : flex;
+       /* justify-content : center; */
+       height : 46px;
+       width : 300px;
+    min-width: 100px;
+       align-items:center
+}
+.inputsearch{
+    background-color: #ff00;
+    height : 46px;
+    outline:none;
+    font-size:18px;
+    border: none;
+    width:300px ;
+    min-width: 100px;
+
+}
+    .icondash{
+        height: 30px;
+        // width: 150px;
+        margin-left: 1px;
+        /* background-color:#ffffff; */
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+        border-radius: 3px;
+        justify-content: space-around;
+    
+    }
+    .bulbicon{
+        margin-right: 1px;
+    }
+    .funnDooName{
+        color : black;
+        // margin-right : 9px;
+        // width: 130px;
+        text-overflow: ellipsis;
+      }
+      .paper{
+        width : 400px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 400px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
+    }
+
+// .paddingChnage{
+//     border-radius: 20px;
+//      cursor : pointer;
+//       padding: 5px;
+//       background-color: blue;
+// }
   }
   
   /* Medium devices (landscape tablets, 768px and up) */
@@ -479,9 +654,9 @@
     }
     .searchDiv{
         height: '50px';
-    //    width: 600px;
-       max-width :400px;
-       margin-left: 1px;
+       width: 500px;
+    //    max-width :400px;
+    //    margin-left: 1px;
        background-color: $primarycolor;
        flex-direction : row;
        display: flex;
@@ -491,6 +666,7 @@
        background-color :#f1f3f4;
        border-radius : 8px;
        position : relative;
+       flex-wrap: wrap;
        /* border: 0.1px solid grey; */
     }
     .searchdiv1{
@@ -498,7 +674,9 @@
         display : flex;
        /* justify-content : center; */
        height : 46px;
-       max-width : 400px;
+    //    max-width : 400px;
+       width : 460px;
+       min-width: 300px;
        align-items:center
 }
 .inputsearch{
@@ -507,7 +685,9 @@
     outline:none;
     font-size:18px;
     border: none;
-    width:400px 
+    width:460px ;
+    min-width: 300px;
+
 }
     .icondash{
         height: 30px;
@@ -523,6 +703,30 @@
     }
     .bulbicon{
         margin-right: 1px;
+    }
+    .paper{
+        width : 700px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 700px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
     }
   } 
   
@@ -546,9 +750,9 @@
     }
     .searchDiv{
         height: '50px';
-    //    width: 600px;
-       max-width :600px;
-       margin-left: 1px;
+       width: 600px;
+    //    max-width :600px;
+    //    margin-left: 1px;
        background-color: $primarycolor;
        flex-direction : row;
        display: flex;
@@ -558,6 +762,7 @@
        background-color :#f1f3f4;
        border-radius : 8px;
        position : relative;
+       flex-wrap: wrap;
        /* border: 0.1px solid grey; */
     }
     .searchdiv1{
@@ -565,7 +770,8 @@
         display : flex;
        /* justify-content : center; */
        height : 46px;
-       max-width : 600px;
+       width : 560px;
+    //    max-width : 500px;
        align-items:center
 }
 .inputsearch{
@@ -574,7 +780,7 @@
     outline:none;
     font-size:18px;
     border: none;
-    width:600px 
+    width:560px 
 }
     .icondash{
         height: 30px;
@@ -590,6 +796,30 @@
     }
     .bulbicon{
         margin-right: 1px;
+    }
+    .paper{
+        width : 700px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 700px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
     }
   } 
   
@@ -613,10 +843,10 @@
        }
        .searchDiv{
            height: '50px';
-        //   width: 800px;
-          max-width :800px;
+          width: 800px;
+        //   max-width :800px;
         //   min-width: 500px;
-          margin-left: 130px;
+        //   margin-left: 130px;
           background-color: $primarycolor;
           flex-direction : row;
           display: flex;
@@ -653,7 +883,9 @@
                 display : flex;
                justify-content : center;
                height : 46px;
-               max-width : 580px;
+            //    max-width : 700px;
+               width : 680px;
+               
                align-items:center
        }
        .inputsearch{
@@ -662,7 +894,7 @@
            outline:none;
            font-size:18px;
            border: none;
-           width:580px
+           width:640px
        }
        .bulbicon{
            margin-right: 10px;
@@ -675,5 +907,29 @@
            justify-content: space-around;
            padding:1px;
        }
+       .paper{
+        width : 700px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        /* border-radius: 15px; */
+        background-color: $primarycolor;
+        /* border: solid; */
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        
+        
+    }
+    .paper2{
+        width : 700px;
+        /* height: 140px; */
+        /* border-radius: 15px; */
+        /* background-color: greenyellow; */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 8px;
+        // border : 0.1px solid grey;
+    
+    }
   }
 

@@ -385,7 +385,7 @@ render(){
              <img src={keepBulb} style={{ height : '45px',width : '45px'}} />
           </div>
 
-          <Typography variant="h6" noWrap className="funnDooName" >
+          <Typography variant="h6" className="funnDooName" >
            {this.state.heading}
           </Typography>
 
