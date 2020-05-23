@@ -570,9 +570,6 @@ class TakeaNotes extends Component {
                             <img src={checkboxtick} id="imgdashnotes" />
                             </div>
                           <Typography  style={{width : '100%',textDecoration : 'line-through'}}>{notelist.itemName}</Typography>
-                            
-                            
-
                             </div> : 
                             <div className="textdash12">
                             <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
@@ -580,8 +577,6 @@ class TakeaNotes extends Component {
                     <img src={checkboxoutline} id="imgdashnotes" />
                     </div>
                   <Typography  style={{width : '100%'}}>{notelist.itemName}</Typography>
-                    
-                    
 
                     </div>}
 
