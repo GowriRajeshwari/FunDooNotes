@@ -46,6 +46,8 @@ import FaceIcon from '@material-ui/icons/Face';
 import list_black from '../assets/list_black.png'
 import ListItemchecklist from './ListItemchecklist'
 import LabelNotes from './LabelNotes'
+import schedule from '../assets/schedule.png'
+
 
 require('dotenv').config();
 
@@ -338,7 +340,7 @@ collaboratorsave=(value,capitialInitial)=>{
                       {this.state.date_timeshow ? 
                       <Chip
                       style={{width : '300px'}}
-                      icon={<FaceIcon />}
+                      icon={<img src={schedule} />}
                       label={this.state.date}
                       onDelete={this.handleDelete}
                       color="white"

@@ -23,6 +23,7 @@ import { Typography } from "@material-ui/core";
 import Divider from '@material-ui/core/Divider';
 import Popover from '@material-ui/core/Popover';
 import {searchUserList,AddcollaboratorsNotes,removeCollaboratorsNotes} from '../services/notesService'
+import schedule from '../assets/schedule.png'
 
 
 require('dotenv').config();
@@ -152,7 +153,7 @@ class EditNotes extends Component {
     return <div  className="typoText" style={{paddingTop :'10px',width : '150px'}}>
      <Chip
       style={{width : '240px'}}
-      icon={<FaceIcon />}
+      icon={<img src={schedule} />}
       label={this.state.date}
       onDelete={()=>this.handleDelete(id)}
       color="white"

@@ -543,7 +543,7 @@ class TakeaNotes extends Component {
                     }}>
                       <div style={{ padding: '10px' }}>
                         <div className='showicon'>
-                          <div className={this.props.gridView ? 'typoText1' : "typoText"}>
+                          <div className={this.props.gridView ? 'typoText1' : "typoText"}  onClick={() => this.dialogboxOpen(data, "editNotes")}>
                             {data.title}
                           </div>
                           <div className="mybuttonoverlap" style={{ padding: '5px' }}>

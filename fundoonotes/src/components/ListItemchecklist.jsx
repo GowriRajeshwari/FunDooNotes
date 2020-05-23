@@ -19,6 +19,7 @@ import Color from './Color'
 import EditNotes from './EditNotes'
 import DateTimePicker from './DateTimePicker'
 import Chip from '@material-ui/core/Chip';
+import schedule from '../assets/schedule.png'
 import FaceIcon from '@material-ui/icons/Face';
 import list_black from '../assets/list_black.png'
 import delete1 from '../assets/delete.png';
@@ -372,7 +373,7 @@ collabshow=()=>{
                    {this.state.date_timeshow ? 
                    <Chip
                    style={{width : '300px'}}
-                   icon={<FaceIcon />}
+                   icon={<img src={schedule} />}
                    label={this.state.date}
                    onDelete={this.handleDelete}
                    color="white"
