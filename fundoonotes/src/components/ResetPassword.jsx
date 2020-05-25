@@ -42,7 +42,7 @@ class ResetPassword extends Component {
         const id = localStorage.getItem("id");
         console.log(data,id);
 
-        if (data.newPassword != '' ) {
+        if (this.state.helperTextpassowrd === '' ) {
         
           if(this.state.pass == true){
             resetPassword(data,id).then(response => {

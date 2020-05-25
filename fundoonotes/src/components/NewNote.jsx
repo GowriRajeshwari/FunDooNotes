@@ -48,7 +48,6 @@ import ListItemchecklist from './ListItemchecklist'
 import LabelNotes from './LabelNotes'
 import schedule from '../assets/schedule.png'
 
-
 require('dotenv').config();
 
 
@@ -311,6 +310,7 @@ collaboratorsave=(value,capitialInitial)=>{
 
                <div className='showicon' style={{paddingTop : '10px'}}>
                     <TextField
+                    value={this.state.title}
                         id="standard-multiline-flexible"
                         placeholder="Title"
                         multiline
@@ -327,6 +327,7 @@ collaboratorsave=(value,capitialInitial)=>{
                     </div>
                     <div style={{paddingTop : '20px'}}>
                         <TextField
+                    value={this.state.description}
                         id="standard-multiline-flexible"
                         placeholder="Take a Note"
                         multiline

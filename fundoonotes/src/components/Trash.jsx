@@ -310,8 +310,8 @@ reminder = (reminder,id) =>{
       if(data.isDeleted === true)
     return <div key={index}  
     style={{borderRadius:'10px',cursor:'pointer',padding:'10px'}} >  
-      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color }}>
-      <CardContent>
+      <Card  className={this.props.gridView ? "mydivoutergrid" : "mydivouter" } style={{backgroundColor :  this.state.data[index].color,padding : "5px" }}>
+     
         <div className='showicon'>
                       <div className={this.props.gridView ? 'typoText1' : "typoText"}>
                         {data.title}
@@ -344,7 +344,7 @@ reminder = (reminder,id) =>{
 
         </div>
         
-      </CardContent>
+     
      
     </Card>
 

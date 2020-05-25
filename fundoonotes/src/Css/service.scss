@@ -130,7 +130,8 @@
       height: 40px;
       align-items: center;
       background-color: rgb(79, 79, 226);
-      color:white
+      color:white;
+      padding : 5px
   }
   .row1{
       display: flex;
@@ -154,5 +155,6 @@
     border-radius: 5px;
 
     padding:5px;
-    background-color: steelblue;
+    background-color: rgb(79, 79, 226);
+
   }

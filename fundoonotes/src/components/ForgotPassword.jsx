@@ -41,11 +41,11 @@ class ForgotPassword extends Component {
         await this.validator();
         console.log("forgot button is clicked");
         
-        if(this.state.error == false){
             let data = {
                 email: this.state.email,
               };
               console.log(data);
+              if(this.state.helperTextEmail === ''){
             forgotpassword(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
@@ -61,7 +61,7 @@ class ForgotPassword extends Component {
                    this.setState({  snackbarmsg: "Mail is not sended successfully", snackbaropen: true });
                }
             });
-        }
+              }
         
 
     }

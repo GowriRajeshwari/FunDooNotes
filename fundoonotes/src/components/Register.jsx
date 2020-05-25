@@ -66,7 +66,7 @@ class Register extends Component {
     Register = async() => {
         await this.validator();
         // event.preventDefault();
-        if(this.state.error != true){
+        
             console.log("register clicked");
             let data = {
                 firstName: this.state.firstname,
@@ -75,8 +75,11 @@ class Register extends Component {
                 service: this.state.service,
                 password: this.state.password,
                 phoneNumber: this.state.phone
-            };
-            console.log(data);
+            }
+            // console.log(this.state.helperTextEmail ,this.state.helpTextFN  , this.state.helpTextLN ,
+            //     this.state.helperTextCountry , this.state.helperTextpassowrd  , this.state.helperTextCpassowrd);
+            if(this.state.helperTextEmail === '' && this.state.helpTextFN === '' && this.state.helpTextLN === ''&& 
+            this.state.helperTextCountry === ''&& this.state.helperTextpassowrd === '' && this.state.helperTextCpassowrd === ''){
             register(data).then(response => {
                 console.log(response);
                if (response.status === 200) {
@@ -100,7 +103,7 @@ class Register extends Component {
             if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.firstname)) {
                 this.setState({
                     firstname: this.state.firstname, helpTextFN: "",
-                    // error: false
+                    error: false
                 })
             } else {
                 this.setState({
@@ -121,7 +124,7 @@ class Register extends Component {
             if (/^[a-zA-Z].*[\s\.]*$/g.test(this.state.lastname )) {
                 this.setState({
                     lastname: this.state.lastname , helpTextLN: "",
-                    // error: false
+                    error: false
                 })
             } else {
                 this.setState({
@@ -183,7 +186,7 @@ class Register extends Component {
             if ( /\S+@\S+\.\S+/.test(this.state.email)) {
               this.setState({
                   email: this.state.email, helperTextEmail: "",
-                //   error: false
+                  error: false
               })
           } else{
             this.setState({
@@ -204,7 +207,7 @@ class Register extends Component {
           if(this.state.phone != ''){
             if (/^[0-9]*$/.test(this.state.phone)) {
                 this.setState({ phone: this.state.phone ,helperTextCountry: "",
-                // error: false
+                error: false
              })
               } else {
                   this.setState({
@@ -369,7 +372,7 @@ class Register extends Component {
                                 </div>
                             </div>
 
-                            <div className="rowReg2">
+                            <div className="rowReg">
 
                                 
                                 <div className="inputFieldReg">
@@ -381,6 +384,18 @@ class Register extends Component {
                                         error={this.state.helperTextCountry}
                                         helperText={this.state.helperTextCountry}
                                         onChange={this.onchangePhone}
+                                        // size="small"
+                                    />
+                                </div>
+                                <div className="inputFieldReg1">
+                                <TextField
+                                        id="btnReg"
+                                        variant="outlined"
+                                        type="password"
+                                        label="Confirm Password"
+                                        error={this.state.helperTextCpassowrd}
+                                        helperText={this.state.helperTextCpassowrd}
+                                        onChange={this.onchangePasswordagain}
                                         // size="small"
                                     />
                                 </div>

@@ -384,7 +384,7 @@ render(){
           <div className={classes.bulbImg} className="bulbicon"  >
              <img src={keepBulb} style={{ height : '45px',width : '45px'}} />
           </div>
-
+       
           <Typography variant="h6" className="funnDooName" >
            {this.state.heading}
           </Typography>
