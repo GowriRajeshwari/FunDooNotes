@@ -11,12 +11,14 @@ import Dashboard from './components/Dashboard';
 import TakeaNotes from './components/TakeaNotes';
 import EditLabel from './components/EditLabel';
 import EditNotes from './components/EditNotes';
+import Archived from './components/Archived';
 import Color from './components/Color';
 import NewNote from './components/NewNote';
 import DateTimePicker from './components/DateTimePicker';
 import Collaborator from './components/Collaborator'
 import DeleteIcon from './components/DeleteIcon'
 import Trash from './components/Trash'
+import Reminder from './components/Reminder';
 import ListItemchecklist from './components/ListItemchecklist';
 import LabelNotes from './components/LabelNotes';
 import AskQuestion from './components/AskQuestion';
@@ -49,6 +51,7 @@ function App() {
         <Route path="/dashboard" component={Dashboard} />
         <Route path="/TakeaNotes" component={TakeaNotes} />
         <Route path="/EditLabel" component={EditLabel} />
+        <Route path="/Archived" component={Archived} />
         <Route path="/color" component={Color} />
         <Route path="/EditNotes" component={EditNotes} />
         <Route path="/NewNote" component={NewNote} />
@@ -57,6 +60,7 @@ function App() {
         <Route path="/DeleteIcon" component={DeleteIcon} />
         <Route path="/Trash" component={Trash} />
         <Route path="/askQuestion" component={AskQuestion} />
+        <Route path="/reminder" component={Reminder} />
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />

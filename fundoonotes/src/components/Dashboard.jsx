@@ -38,6 +38,8 @@ import LabelShow from './LabelShow'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import Popover from '@material-ui/core/Popover';
 import Cart from './Cart'
+import Archive from './Archived'
+import Reminder from './Reminder'
 import AppsIcon from '@material-ui/icons/Apps';
 import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
@@ -266,13 +268,13 @@ window.onLoad = function(){
         gridView={this.state.gridView} gridfunction={this.gridview.bind(this)} choice="Notes"/>
       }
       else if(this.state.choice == 'Archive'){
-        return <TakeaNotes gridView={this.state.gridView} query={this.state.query} choice="Archive"/>
+        return <Archive gridView={this.state.gridView} query={this.state.query} choice="Archive"/>
       }
       else if(this.state.choice == 'Trash'){
         return <Trash gridView={this.state.gridView} query={this.state.query} choice="Trash"/>
       }
       else if(this.state.choice == 'Reminder'){
-        return <TakeaNotes gridView={this.state.gridView} query={this.state.query} choice="Reminder"/>
+        return <Reminder gridView={this.state.gridView} query={this.state.query} choice="Reminder"/>
       }
       else if(this.state.choice == 'shopping_cart'){
         return <Cart gridView={this.state.gridView}/>
