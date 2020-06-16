@@ -32,9 +32,9 @@ class ResetPassword extends Component {
     };
 
   }
- Reset=async()=>{
+ Reset=()=>{
     // event.preventDefault();
-        await this.validator();
+         this.validator();
         let data = {
           newPassword: this.state.password,
         };

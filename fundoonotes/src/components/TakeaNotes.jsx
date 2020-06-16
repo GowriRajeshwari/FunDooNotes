@@ -8,7 +8,9 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import { searchUserList } from '../services/notesService'
-import { updateChecklist,getNotesListByLabel, getNotes, setNotes, deleteNotes, removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes } from '../services/notesService'
+import unarchive from '../assets/unarchive.png'
+import { updateChecklist,getNotesListByLabel, getNotes, setNotes, deleteNotes,archiveNoteList, 
+  removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes,getReminderNoteList } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -82,7 +84,8 @@ class TakeaNotes extends Component {
       nmsg: '',
       labelNoteShow: '',
       label: '',
-      loading : true
+      loading : true,
+      arc : 'Notes'
 
     };
   }
@@ -90,22 +93,123 @@ class TakeaNotes extends Component {
   handleDateChange = (date) => {
     this.setState({ date: date })
   };
-  // UNSAFE_componentWillReceiveProps=async(nextProps)=>{
-  //   if(nextProps.labelNoteShow){
-  //     await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
-  //   }
-  //   console.log(nextProps.labelNoteShow)
-  //   this.getCalled(nextProps.labelNoteShow,nextProps.label);
-  // }
-  // componentWillMount=()=>{
-  //   this.setState({ labelNoteShow : this.props.labelNoteShow})
-  // }
+  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+    if(nextProps.choice === 'Archive'){
+      console.log("vcxbcvb",nextProps.choice)
+      this.setState({arc :nextProps.choice })
+              archiveNoteList().then(response => {
+       console.log(response);
+      if (response.status === 200) {
+          
+        this.setState({data : response.data.data.data,loading:false});
+        // console.log(this.state.data[0].id)
+        
+      } else {
+          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+   });
+    }
+    else if(nextProps.choice === 'Notes'){
+      this.setState({arc :nextProps.choice })
+      getNotes().then(response => {
+
+        if (response.status === 200) {
+          this.setState({ data: [] })
+  
+          for (let i = 0; i < response.data.data.data.length; i++) {
+            if (response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true) {
+              this.state.data.push(response.data.data.data[i]);
+            } else {
+              continue;
+            }
+          }
+          this.setState({ data: this.state.data,loading:false })
+          console.log(this.state.data);
+          // for(let i=0;i<response.data.data.data.length;i++){
+          //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
+          // }
+          // this.setState({noteLabels : this.state.noteLabels})
+          // console.log(this.state.noteLabels);
+  
+        } else {
+          this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+        }
+      });
+    }
+    else if(nextProps.choice === 'Reminder'){
+      this.setState({arc :nextProps.choice })
+
+      getReminderNoteList().then(response => {
+        console.log(response);
+       if (response.status === 200) {
+            this.setState({data : []})
+          
+          // this.setState({data : response.data.data.data});
+          for(let i=0;i<response.data.data.data.length;i++){
+            if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+              this.state.data.push(response.data.data.data[i]);
+            }else{
+              continue;
+            }
+          }
+          this.setState({data : this.state.data,loading : false})
+          console.log(this.state.data);
+        
+       } else {
+           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+       }
+    });
+    }
+    else if(nextProps.choice === 'Trash'){
+      this.setState({arc :nextProps.choice })
+
+      getNotes().then(response => {
+        console.log(response.data.data.data[0].isDeleted);
+       if (response.status === 200) {
+          
+          this.setState({data : response.data.data.data,loading:false});
+          
+          console.log(this.state.data[0].title)
+        
+       } else {
+           this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+       }
+    });
+    }
+    if(nextProps.labelNoteShow){
+      await this.setState({ labelNoteShow : nextProps.labelNoteShow ,label :nextProps.label})
+    }
+    console.log(nextProps.labelNoteShow)
+    this.getCalled(nextProps.labelNoteShow,nextProps.label);
+  }
+  componentWillMount=()=>{
+    this.setState({ labelNoteShow : this.props.labelNoteShow})
+  }
   componentDidMount = () => {
+    console.log("archive",this.state.arc)
+
     var d = new Date();
     d.setDate(new Date().getDate() + 1)
     console.log(d.getTime())
     this.setState({ tomorrow: d, time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() })
     console.log("labelNoet")
+
+    if(this.state.arc === 'Archive'){
+    console.log("archive",this.state.arc)
+
+        archiveNoteList().then(response => {
+       console.log(response);
+      if (response.status === 200) {
+          
+        this.setState({data : response.data.data.data,loading:false});
+        // console.log(this.state.data[0].id)
+        
+      } else {
+          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+   });
+    }
+    else if(this.state.arc === 'Notes'){
     getNotes().then(response => {
 
       if (response.status === 200) {
@@ -130,8 +234,48 @@ class TakeaNotes extends Component {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
+  }
+  else if(this.state.arc === 'Reminder'){
+    getReminderNoteList().then(response => {
+      console.log(response);
+     if (response.status === 200) {
+          this.setState({data : []})
+        
+        // this.setState({data : response.data.data.data});
+        for(let i=0;i<response.data.data.data.length;i++){
+          if(response.data.data.data[i].isDeleted != true && response.data.data.data[i].isArchived != true ){
+            this.state.data.push(response.data.data.data[i]);
+          }else{
+            continue;
+          }
+        }
+        this.setState({data : this.state.data,loading : false})
+        console.log(this.state.data);
+      
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }
+  else if(this.state.arc === 'Trash'){
+    getNotes().then(response => {
+      console.log(response.data.data.data[0].isDeleted);
+     if (response.status === 200) {
+        
+        this.setState({data : response.data.data.data,loading:false});
+        
+        console.log(this.state.data[0].title)
+      
+     } else {
+         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+     }
+  });
+  }
 
   }
+
+
+
   getCalled = (labelNoteShow, label) => {
     //  this.setState({ labelNoteShow : this.props.labelNoteShow})
     console.log("show", labelNoteShow)
@@ -188,6 +332,11 @@ class TakeaNotes extends Component {
       });
     }
   }
+
+
+
+
+
   takeNote = (event) => {
     event.preventDefault();
     this.setState({ next: false })
@@ -382,6 +531,9 @@ class TakeaNotes extends Component {
   sendtimeDate = (date) => {
     this.setState({ date: date, date_timeshow: true, dateshow: false });
   }
+  sendtrash1=(val)=>{
+    this.componentDidMount();
+  }
   sendtrash = (val, id) => {
     if (val == true) {
       this.componentDidMount();
@@ -391,6 +543,8 @@ class TakeaNotes extends Component {
       this.setState({ askQuestion: true, questionId: id })
     }
   }
+
+  
   handleDelete = (id) => {
     this.setState({ date: '', date_timeshow: true })
     let data = {
@@ -510,6 +664,26 @@ class TakeaNotes extends Component {
     });
     console.log(id,checklistId,data)
   }
+  archiveddata=async(dat)=>{
+  await this.state.noteIdList.push(dat.toString())
+   
+    // console.log(this.state.noteIdList);
+   let data1 = {
+       isArchived : false,
+       noteIdList : this.state.noteIdList
+   }
+   console.log(dat)
+   archiveNote(data1).then(response => {
+    console.log(response);
+   if (response.status === 200) {
+       
+     this.componentDidMount();
+     
+   } else {
+       this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+   }
+  });
+  }
   render() {
 
     return (
@@ -594,7 +768,7 @@ class TakeaNotes extends Component {
                                 label={labelNotes.label}
                                 onDelete={() => this.handleDeletelabel(labelNotes.id, data.id)}
                                 color="white"
-                                value={this.state.date}
+                                // value={this.state.date}
                               />
                             </div>
                           ))
@@ -620,7 +794,8 @@ class TakeaNotes extends Component {
 
                         <div className="mybuttonoverlap" >
 
-
+                        {this.props.choice === 'Trash'?
+                             <DeleteIcon id={data.id} true="true" sendtrash1={this.sendtrash1}/> :
 
                           <div style={{ display: 'flex', flexDirection: 'row', paddingTop: '5px', justifyContent: 'space-around' }}>
 
@@ -637,14 +812,24 @@ class TakeaNotes extends Component {
                             <div style={{ padding: '5px' }}>
                               <img src={galary} id="imgdashnotes" />
                             </div>
+                            {this.props.choice === 'Notes' ? 
                             <div style={{ padding: '5px' }} onClick={() => this.archivebutton(data)}>
                               <img src={download} id="imgdashnotes" />
                             </div>
-                            <DeleteIcon msg={() => this.msg(data.questionAndAnswerNotes)} message={this.state.msg} id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels} />
+                            : this.props.choice  === 'Archive' ?
+                            <div style={{ padding :'5px'}} onClick={() => this.archiveddata(data.id)}  key={index}>
+                             <img src={unarchive} id="imgdashnotes" />
+                            </div>
+                            : <div style={{ padding: '5px' }} onClick={() => this.archivebutton(data)}>
+                            <img src={download} id="imgdashnotes" />
+                          </div>}
+                            
+                            <DeleteIcon msg={() => this.msg(data.questionAndAnswerNotes)} message={this.state.msg} 
+                            id={data.id} ashShow={data.questionAndAnswerNotes.length} sendtrash={this.sendtrash} noteLabel={data.noteLabels} />
 
                           </div>
 
-
+                              }
 
                         </div>
                         {data.questionAndAnswerNotes.length > 0 ?

@@ -22,7 +22,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import TakeaNotes from './TakeaNotes'
 import Edit from './EditLabel'
 import Trash from './Trash'
-import Archived from './Archived'
 import LabelIcon from '@material-ui/icons/Label';
 import keepBulb from "../assets/keepBulb.png";
 import list from "../assets/list.png";
@@ -34,7 +33,6 @@ import delete_black from '../assets/delete_black.png'
 import download from '../assets/download.png'
 import label from '../assets/label.png'
 import listview from '../assets/listview.png'
-import Reminder from './Reminder'
 import Collaborator from './Collaborator'
 import LabelShow from './LabelShow'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
@@ -265,16 +263,16 @@ window.onLoad = function(){
       // }
        if(this.state.choice == 'Notes'){
         return <TakeaNotes query={this.state.query}
-        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)} choice="Notes"/>
       }
       else if(this.state.choice == 'Archive'){
-        return <Archived gridView={this.state.gridView} query={this.state.query}/>
+        return <TakeaNotes gridView={this.state.gridView} query={this.state.query} choice="Archive"/>
       }
       else if(this.state.choice == 'Trash'){
-        return <Trash gridView={this.state.gridView} query={this.state.query}/>
+        return <Trash gridView={this.state.gridView} query={this.state.query} choice="Trash"/>
       }
       else if(this.state.choice == 'Reminder'){
-        return <Reminder gridView={this.state.gridView} query={this.state.query}/>
+        return <TakeaNotes gridView={this.state.gridView} query={this.state.query} choice="Reminder"/>
       }
       else if(this.state.choice == 'shopping_cart'){
         return <Cart gridView={this.state.gridView}/>

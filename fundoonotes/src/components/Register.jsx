@@ -49,22 +49,22 @@ class Register extends Component {
     }
 
    
-        componentWillMount=async()=>{  // when params sent via url
+        componentWillMount=()=>{  // when params sent via url
             // console.log(classes)
         if (this.props.history.location.state.service) {
           let params = this.props.history.location.state.service;
         if(params == 'advance'){
-        await  this.setState({ service: params , showCardColor :true });
+          this.setState({ service: params , showCardColor :true });
         }
         else{
-            await this.setState({ service: params , showCardColor :false });
+         this.setState({ service: params , showCardColor :false });
         }
         }
       }
 
     //Register Button
-    Register = async() => {
-        await this.validator();
+    Register = () => {
+         this.validator();
         // event.preventDefault();
         
             console.log("register clicked");
@@ -266,12 +266,12 @@ class Register extends Component {
           this.setState({ password: event.target.value })
       }
     
-      onchangePasswordagain = async event => {
+      onchangePasswordagain =  event => {
 
-        await this.setState({
-          confirmpassword: event.target.value
-        })
-        this.checkPassword()
+         this.setState({
+          confirmpassword: event.target.value},()=>this.checkPassword()
+        )
+        // this.checkPassword()
       }
     
       checkPassword () {

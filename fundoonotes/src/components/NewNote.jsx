@@ -375,7 +375,7 @@ collaboratorsave=(value,capitialInitial)=>{
                       label={labelNotes.label}
                       onDelete={()=>this.handleDeletelabel(labelNotes.id,index)}
                       color="white"
-                      value={this.state.date}
+                      // value={this.state.date}
                     />
                     </div>
                     

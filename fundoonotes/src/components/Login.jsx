@@ -39,11 +39,9 @@ class Login extends Component {
       this.setState({ snackbaropen: false });
   }
   //sign in
-  SignIn=async()=>{
+  SignIn=()=>{
     // event.preventDefault();
-   
-    
-    await this.validator();
+     this.validator();
     console.log(this.state.error )
       console.log("login clicked");
       let data = {
