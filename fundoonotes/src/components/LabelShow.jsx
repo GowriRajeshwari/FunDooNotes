@@ -90,9 +90,9 @@ class LabelShow extends Component {
    handleDateChange = (date) => {
     this.setState({date : date})
   };
-  UNSAFE_componentWillReceiveProps=async(nextProps)=>{
+  UNSAFE_componentWillReceiveProps=(nextProps)=>{
     
-      await this.setState({ label :nextProps.label})
+       this.setState({ label :nextProps.label})
     
     console.log(nextProps.labelNoteShow)
     this.getCalled(nextProps.label);

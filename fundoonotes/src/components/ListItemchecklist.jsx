@@ -105,13 +105,18 @@ class ListItemchecklist extends Component {
   _onMouseOut=(event)=>{
     this.setState({show : false})
   }
-  close=async(event)=>{
+  close=(event)=>{
     event.preventDefault();
     for(let i=0;i< this.state.labelNotes.length;i++){
       this.state.labelIdList.push( this.state.labelNotes[i].id)
       console.log( this.state.labelNotes[i].id)
       }
-      await this.setState({labelIdList : this.state.labelIdList})
+  
+       this.setState({labelIdList : this.state.labelIdList}, this.dataPassing())
+   
+
+  }
+  dataPassing=()=>{
     const combineArray =this.state.itemsArray.concat(this.state.tickboxArray);
     const datetostring = this.state.date.toString();
     console.log(combineArray)
@@ -154,7 +159,6 @@ class ListItemchecklist extends Component {
     this.props.sendlist();
 
   }
-
   }
   timepicker=(event) =>{
     this.setState({timepicker : event.target.value})

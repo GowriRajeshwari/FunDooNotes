@@ -79,18 +79,20 @@ handleDateChange = (date) => {
     this.setState({timepicker : event.target.value})
 
   }
-  datesave=async()=>{
-    await this.setState({date : this.state.startdate.toDateString()+" " + this.state.timepicker,date_timeshow : true,dateshow : false});
-    this.props.sendtimeDate(this.state.date.toString());
+  datesave=()=>{
+     this.setState({date : this.state.startdate.toDateString()+" " + this.state.timepicker,date_timeshow : true,dateshow : false},()=>this.propsData());
+    // this.props.sendtimeDate(this.state.date.toString());
     
   }
-  todaydate=async()=>{
-   await this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true});
+  todaydate=()=>{
+    this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true},()=>this.propsData());
+  }
+  propsData=()=>{
     this.props.sendtimeDate(this.state.date.toString());
   }
-  tomorrowdate=async()=>{
-    await this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true});
-    this.props.sendtimeDate(this.state.date.toString());
+  tomorrowdate=()=>{
+    this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true},()=>this.propsData());
+    // this.props.sendtimeDate(this.state.date.toString());
 
   }
   dateshow=()=>{
