@@ -186,7 +186,7 @@ class DeleteIcon extends Component {
       console.log(response);
      if (response.status === 200) {
          this.setState({noteIdList : []});
-         this.props.sendtrash(true);
+         this.props.sendtrash1(true);
      } else {
          this.setState({noteIdList : []});
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -205,7 +205,7 @@ class DeleteIcon extends Component {
       console.log(response);
      if (response.status === 200) {
          this.setState({noteIdList : []});
-         this.props.sendtrash(true);
+         this.props.sendtrash1(true);
      } else {
       this.setState({noteIdList : []});
          this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });

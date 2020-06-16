@@ -23,8 +23,11 @@ import color from '../assets/color.png'
     });
   }
   changeColor=(color)=>{
-    this.setState({ changeColor : color })
+    this.setState({ changeColor : color },()=>this.colorprops)
+  }
+  colorprops=()=>{
     this.props.sendColor(color,this.state.index)
+
   }
   render() {
     return (
