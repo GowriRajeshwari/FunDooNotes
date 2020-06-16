@@ -195,12 +195,12 @@ class NewNote extends Component {
     this.setState({collabshow : true})
   }
  
-  onchangecollabator=async(event)=>{
-   await this.setState({
+  onchangecollabator=(event)=>{
+    this.setState({
       collabatorName: event.target.value  
   })
   let data = {
-    searchWord : this.state.collabatorName
+    searchWord : event.target.value
   }
   searchUserList(data).then(response => {
     // console.log(response.data.data.details[0]);
@@ -217,8 +217,8 @@ collabsave=()=>{
 time=()=>{
   this.setState({ timeShow : true})
 }
-archivebutton=async(event)=>{
-  await this.setState({ archived : true })
+archivebutton=(event)=>{
+   this.setState({ archived : true })
   event.preventDefault();
   if(this.state.title !='' ){
     const datetostring = this.state.date.toString();
@@ -227,7 +227,7 @@ archivebutton=async(event)=>{
       description	: this.state.description,
       isPined : this.state.pined,
       color : this.state.color,
-      isArchived : this.state.archived,
+      isArchived : true,
       labelIdList :this.state.labelIdList,
       reminder : datetostring,
       collaberator : this.state.originalArray

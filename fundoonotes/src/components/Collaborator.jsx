@@ -38,12 +38,12 @@ componentDidMount=()=>{
   this.setState({email : email,firstName : firstName,profileImageFromRes : profileImage })
 
 }
-onchangecollabator=async(event)=>{
-  await this.setState({
+onchangecollabator=(event)=>{
+   this.setState({
      collabatorName: event.target.value  
  })
  let data = {
-   searchWord : this.state.collabatorName
+   searchWord : event.target.value 
  }
  searchUserList(data).then(response => {
    console.log(response.data.data.details);

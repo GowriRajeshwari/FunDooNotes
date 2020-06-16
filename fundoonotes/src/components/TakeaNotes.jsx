@@ -424,12 +424,12 @@ class TakeaNotes extends Component {
     this.setState({ collabshow: false })
   }
 
-  onchangecollabator = async (event) => {
-    await this.setState({
+  onchangecollabator =  (event) => {
+     this.setState({
       collabatorName: event.target.value
     })
     let data = {
-      searchWord: this.state.collabatorName
+      searchWord: event.target.value
     }
     searchUserList(data).then(response => {
       // console.log(response.data.data.details[0]);

@@ -109,10 +109,10 @@ class AskQuestion extends Component {
   });
 
   }
-  likeButton=async(id)=>{
-   await this.setState({like : true})
+  likeButton=(id)=>{
+    this.setState({like : true})
    let data ={
-     like:this.state.like
+     like:true
    }
    console.log(id,data)
 
@@ -129,10 +129,10 @@ class AskQuestion extends Component {
      }
   });
   }
-  dislikeButton=async(id)=>{
-    await this.setState({like : false})
+  dislikeButton=(id)=>{
+     this.setState({like : false})
     let data ={
-      like:this.state.like
+      like:false
     }
     console.log(id,data)
      like(data,id).then(response => {

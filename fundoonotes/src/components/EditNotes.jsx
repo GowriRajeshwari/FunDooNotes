@@ -128,8 +128,8 @@ class EditNotes extends Component {
     this.setState({date : '',date_timeshow : false})
   };
 
-  sendtimeDate=async(date,id)=>{
-  await this.setState({date : date.toString()});
+  sendtimeDate=(date,id)=>{
+   this.setState({date : date.toString()});
     console.log(date)
     let data={
       reminder : date ,
@@ -166,8 +166,8 @@ class EditNotes extends Component {
     }
   }
 
-  archivebutton=async(event)=>{
-    await this.setState({ archived : true })
+  archivebutton=(event)=>{
+     this.setState({ archived : true })
     event.preventDefault();
     if(this.state.title !='' ){
       const datetostring = this.state.date.toString();
@@ -176,7 +176,7 @@ class EditNotes extends Component {
         description	: this.state.description,
         isPined : this.state.pined,
         color : this.state.color,
-        isArchived : this.state.archived,
+        isArchived : true,
         labelIdList :[],
         reminder : datetostring,
         collaberator : this.state.originalArray
@@ -231,17 +231,17 @@ class EditNotes extends Component {
     this.setState({email1 : email,firstName1 : firstName,profileImageFromRes1 : profileImage1 })
   
   }
-  onchangecollabator=async(event)=>{
+  onchangecollabator=(event)=>{
     // event.preventDefault()
     event.persist()
-    await this.setState({
+     this.setState({
        collabatorName1: event.target.value  
    })
    let data = {
-     searchWord : this.state.collabatorName1
+     searchWord : event.target.value
    }
    const form_data = new FormData();
-   form_data.append("searchWord", this.state.collabatorName1);
+   form_data.append("searchWord", event.target.value);
 
    console.log(form_data)
    searchUserList(data).then(response => {

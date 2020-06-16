@@ -283,12 +283,12 @@ window.onLoad = function(){
 
       }
   }
-  queryfunction=async(event)=>{
-    await this.setState({query : event.target.value});
+  queryfunction=(event)=>{
+   this.setState({query : event.target.value});
    //  <Tableadmin query={this.state.query}/>
  }
- gridview=async()=>{
-  await this.setState({gridView : !this.state.gridView})
+ gridview=()=>{
+   this.setState({gridView : !this.state.gridView})
   // console.log(this.state.gridView)
   // alert(this.state.gridView)
  }
@@ -330,11 +330,11 @@ onFormSubmit=(e)=>{
   })
 
 }
-onChange=async(e)=> {
+onChange=(e)=> {
   console.log(e.target.files[0].name,this.state.open12)
   // await this.setState({open12:true})
 
-  await this.setState({file:e.target.files[0],
+   this.setState({file:e.target.files[0],
     fileshow : true,profileImage : URL.createObjectURL(e.target.files[0]),open12:true})
 }
 

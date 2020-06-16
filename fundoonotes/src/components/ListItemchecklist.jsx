@@ -193,12 +193,12 @@ class ListItemchecklist extends Component {
     this.setState({collabshow : false})
   }
  
-  onchangecollabator=async(event)=>{
-   await this.setState({
+  onchangecollabator=(event)=>{
+    this.setState({
       collabatorName: event.target.value  
   })
   let data = {
-    searchWord : this.state.collabatorName
+    searchWord : event.target.value
   }
   const form_data = new FormData();
    form_data.append("searchWord", this.state.collabatorName);
@@ -230,8 +230,8 @@ collabsave=()=>{
 time=()=>{
   this.setState({ timeShow : true})
 }
-archivebutton=async(event)=>{
-  await this.setState({ archived : true })
+archivebutton=(event)=>{
+   this.setState({ archived : true })
   event.preventDefault();
   if(this.state.title !='' ){
     const datetostring = this.state.date.toString();
@@ -240,7 +240,7 @@ archivebutton=async(event)=>{
       description	: this.state.description,
       isPined : this.state.pined,
       color : this.state.color,
-      isArchived : this.state.archived,
+      isArchived : true,
       labelIdList :[],
       reminder : datetostring,
       collaberator : this.state.originalArray

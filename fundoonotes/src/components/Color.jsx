@@ -22,9 +22,9 @@ import color from '../assets/color.png'
         open: !this.state.open
     });
   }
-  changeColor=async(color)=>{
-   await this.setState({ changeColor : color })
-    this.props.sendColor(this.state.changeColor,this.state.index)
+  changeColor=(color)=>{
+    this.setState({ changeColor : color })
+    this.props.sendColor(color,this.state.index)
   }
   render() {
     return (
