@@ -24,8 +24,8 @@ import color from '../assets/color.png'
 import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
-import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes } from '../services/notesService'
+import { searchUserList } from '../services/notesService'
+import { getNotes, setNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -46,124 +46,127 @@ class DateTimePicker extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        anchorEl :false,
-        open:false,
-        dateshow : false,
-        date : new Date(),
-        startdate:new Date(),
-        tomorrow : '',
-        timeTodayTommorow : '08:00:00',
-        timepicker :'',
+      anchorEl: false,
+      open: false,
+      dateshow: false,
+      date: new Date(),
+      startdate: new Date(),
+      tomorrow: '',
+      timeTodayTommorow: '08:00:00',
+      timepicker: '',
 
 
     };
   }
-  componentDidMount=()=>{
-   
-    var d =new Date();
-    d.setDate(new Date().getDate()+1)
+  componentDidMount = () => {
+
+    var d = new Date();
+    d.setDate(new Date().getDate() + 1)
     //  console.log(d.getTime())
-     this.setState({ tomorrow : d,time : d.getHours() + ":" +d.getMinutes() + ":"+d.getSeconds()})
-   
-   }
+    this.setState({ tomorrow: d, time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() })
+
+  }
   handleClick = (event) => {
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open
-  });
-}
-handleDateChange = (date) => {
-    this.setState({startdate : date})
+    });
+  }
+  handleDateChange = (date) => {
+    this.setState({ startdate: date })
   };
-  timepicker=(event) =>{
-    this.setState({timepicker : event.target.value})
+  timepicker = (event) => {
+    this.setState({ timepicker: event.target.value })
 
   }
-  datesave=()=>{
-     this.setState({date : this.state.startdate.toDateString()+" " + this.state.timepicker,date_timeshow : true,dateshow : false},()=>this.propsData());
+  datesave = () => {
+    this.setState({ date: this.state.startdate.toDateString() + " " + this.state.timepicker, date_timeshow: true, dateshow: false },
+      () => this.propsData());
     // this.props.sendtimeDate(this.state.date.toString());
-    
+
   }
-  todaydate=()=>{
-    this.setState({date : new Date().toDateString() +" "+ this.state.timeTodayTommorow ,date_timeshow : true},()=>this.propsData());
+  todaydate = () => {
+    this.setState({ date: new Date().toDateString() + " " + this.state.timeTodayTommorow, date_timeshow: true }, () => this.propsData());
   }
-  propsData=()=>{
+  propsData = () => {
     this.props.sendtimeDate(this.state.date.toString());
   }
-  tomorrowdate=()=>{
-    this.setState({date : this.state.tomorrow.toDateString() +" "+ this.state.timeTodayTommorow,date_timeshow : true},()=>this.propsData());
+  tomorrowdate = () => {
+    this.setState({ date: this.state.tomorrow.toDateString() + " " + this.state.timeTodayTommorow, date_timeshow: true }, () => this.propsData());
     // this.props.sendtimeDate(this.state.date.toString());
 
   }
-  dateshow=()=>{
-    this.setState({dateshow : !this.state.dateshow})
+  dateshow = () => {
+    this.setState({ dateshow: !this.state.dateshow })
   }
- render(){
-     return(
-     <div style={{ cursor: 'pointer'}}>
-                        <img src={reminder} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
-                        <Popover 
-                          anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'center',
-                          }}
-                          transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'center',
-                          }}
-                        open={this.state.open}
-                        anchorEl={this.state.anchorEl}
-                        onClose={this.handleClick}
-                        style={{ cursor: 'pointer'}}>
-                          { this.state.dateshow ? 
-                          <div>
-                            <div style={{padding : '10px'}}>
-                              <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                            <Grid container justify="space-around">
-                              <KeyboardDatePicker
-                                disableToolbar
-                                variant="inline"
-                                format="MM/dd/yyyy"
-                                margin="normal"
-                                id="date-picker-inline"
-                                label="Date picker inline"
-                                value={this.state.startdate}
-                                onChange={date =>this.handleDateChange(date)}
-                                KeyboardButtonProps={{
-                                  'aria-label': 'change date',
-                                }}
-                              /></Grid></MuiPickersUtilsProvider>
-                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                               <TextField
-                                  id="time"
-                                  label="Alarm clock"
-                                  type="time"
-                                  defaultValue="07:30"
-                                   className="timepicker"
-                                  InputLabelProps={{
-                                    shrink: true,
-                                  }}
-                                  inputProps={{
-                                    step: 300, // 5 min
-                                  }}
-                                  onChange={this.timepicker}
-                                  style={{width : '100%'}}
-                                  />
-                               </MuiPickersUtilsProvider>
-                               <div onClick={this.datesave}  style={{height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer',display:'flex',justifyContent:"flex-end"}}>
-                                 <div>save</div>
-                                 </div></div>
-                              </div>
-                              :
-                          <div style={{width : '170px',height : '170px',padding : '15px'}}>
-                            <Typography style={{padding:'10px'}} onClick={this.todaydate}>Today</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.tomorrowdate}>Tommorow</Typography>
-                            <Typography style={{padding:'10px'}} onClick={this.dateshow}>pick date & time</Typography>
-                          </div>
-                          }
-                        
-                        </Popover>
-                    </div>
-     )}}
+  render() {
+    return (
+      <div style={{ cursor: 'pointer' }}>
+        <img src={reminder} id="imgdashnotes" onClick={e => this.handleClick(e)} />
+        <Popover
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClick}
+          style={{ cursor: 'pointer' }}>
+          {this.state.dateshow ?
+            <div>
+              <div style={{ padding: '10px' }}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                  <Grid container justify="space-around">
+                    <KeyboardDatePicker
+                      disableToolbar
+                      variant="inline"
+                      format="MM/dd/yyyy"
+                      margin="normal"
+                      id="date-picker-inline"
+                      label="Date picker inline"
+                      value={this.state.startdate}
+                      onChange={date => this.handleDateChange(date)}
+                      KeyboardButtonProps={{
+                        'aria-label': 'change date',
+                      }}
+                    /></Grid></MuiPickersUtilsProvider>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                  <TextField
+                    id="time"
+                    label="Alarm clock"
+                    type="time"
+                    defaultValue="07:30"
+                    className="timepicker"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    inputProps={{
+                      step: 300, // 5 min
+                    }}
+                    onChange={this.timepicker}
+                    style={{ width: '100%' }}
+                  />
+                </MuiPickersUtilsProvider>
+                <div onClick={this.datesave} style={{ height: "40px", padding: '10px', fontFamily: 'bold', cursor: 'pointer', display: 'flex', justifyContent: "flex-end" }}>
+                  <div>save</div>
+                </div></div>
+            </div>
+            :
+            <div style={{ width: '170px', height: '170px', padding: '15px' }}>
+              <Typography style={{ padding: '10px' }} onClick={this.todaydate}>Today</Typography>
+              <Typography style={{ padding: '10px' }} onClick={this.tomorrowdate}>Tommorow</Typography>
+              <Typography style={{ padding: '10px' }} onClick={this.dateshow}>pick date & time</Typography>
+            </div>
+          }
 
-     export default DateTimePicker;
+        </Popover>
+      </div>
+    )
+  }
+}
+
+export default DateTimePicker;

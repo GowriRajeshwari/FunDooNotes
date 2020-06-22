@@ -1,8 +1,8 @@
-import React ,{Component}from 'react';
+import React, { Component } from 'react';
 import clsx from 'clsx';
 import axios, { post } from 'axios';
 import Dialog from '@material-ui/core/Dialog';
-import { makeStyles, useTheme,withStyles } from '@material-ui/core/styles';
+import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
 import search_black from '../assets/search_black.png';
 import clear from '../assets/clear.png';
 import Drawer from '@material-ui/core/Drawer';
@@ -45,7 +45,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import ViewAgendaIcon from '@material-ui/icons/ViewAgenda';
-import { getNoteLabelList,addLabels,logout,fileUpload,getNotesListByLabel } from '../services/notesService'
+import { getNoteLabelList, addLabels, logout, fileUpload, getNotesListByLabel } from '../services/notesService'
 
 
 const drawerWidth = 300;
@@ -56,13 +56,13 @@ const useStyles = theme => ({
   },
   appBar: {
     // position : 'fixed',
-    height : '70px',
-    backgroundColor:'white',
+    height: '70px',
+    backgroundColor: 'white',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    
+
   },
   appBarShift: {
     // width: `calc(100% - ${drawerWidth}px)`,
@@ -71,27 +71,27 @@ const useStyles = theme => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    
- 
-    
+
+
+
   },
   menuButton: {
-   
+
     // marginRight: theme.spacing(1),
   },
   hide: {
     display: 'none',
   },
   drawer: {
-   
+
     width: drawerWidth,
     flexShrink: 0,
   },
   drawerPaper: {
     border: 'none',
-    marginTop:'70px',
+    marginTop: '70px',
     width: drawerWidth,
-    height : "90%"
+    height: "90%"
   },
   drawerHeader: {
     display: 'flex',
@@ -103,7 +103,7 @@ const useStyles = theme => ({
   },
   drawerHeader1: {
     display: 'flex',
-    marginTop : '10px',
+    marginTop: '10px',
     alignItems: 'center',
     padding: theme.spacing(0, 1),
     // necessary for content to be below app bar
@@ -125,452 +125,456 @@ const useStyles = theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     // marginLeft: 0,
-    ['@media (min-width:414px)']:{
-      marginLeft : 0,
-      
+    ['@media (min-width:414px)']: {
+      marginLeft: 0,
+
     }
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular,
   },
-  funnDooName:{
-    color : 'black',
-    marginRight : theme.spacing(19)
+  funnDooName: {
+    color: 'black',
+    marginRight: theme.spacing(19)
   },
-  bulbImg:{
-    display : 'flex',
-    justifyContent : 'center',
-    marginRight : theme.spacing(1)
+  bulbImg: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginRight: theme.spacing(1)
   },
-  searchDiv:{
-      height: '50px',
-     width: '800px',
-     maxWidth :'720px',
-     // marginLeft: '200px',
-     backgroundColor:'#ffffff',
-     flexDirection: 'row',
-     display: 'flex',
-     alignItems: 'center',
-     borderRadius: '3px',
-     justifyContent: 'center',
-     backgroundColor :'#f1f3f4',
-     borderRadius : '8px',
-     position: 'relative'
+  searchDiv: {
+    height: '50px',
+    width: '800px',
+    maxWidth: '720px',
+    // marginLeft: '200px',
+    backgroundColor: '#ffffff',
+    flexDirection: 'row',
+    display: 'flex',
+    alignItems: 'center',
+    borderRadius: '3px',
+    justifyContent: 'center',
+    backgroundColor: '#f1f3f4',
+    borderRadius: '8px',
+    position: 'relative'
   }
 });
-window.onLoad = function(){
-  if(!window.location.hash){
+window.onLoad = function () {
+  if (!window.location.hash) {
     window.location = window.location + '#loaded';
     window.location.reload()
   }
 }
 
- class Dashboard extends Component {
-     
-    constructor(props) {
-        super(props);
-        this.state = {
-            open : false,
-             setOpen : false,
-             choice:"Notes",
-             query:'',
-             labelData :[],
-             gridView : false,
-             profile:false,
-             anchorEl :false,
-             open1:false,
-             email : '',
-             firstName : '',
-             file : '',
-             open12 : true,
-             imageFromUrl : '',
-             profileImage :'',
-             profileImageFromRes : '',
-             heading : "FunDoo",
-             editlabel : false,
-             dialogBoxOpen : false
-             
+class Dashboard extends Component {
 
-        };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      setOpen: false,
+      choice: "Notes",
+      query: '',
+      labelData: [],
+      gridView: false,
+      profile: false,
+      anchorEl: false,
+      open1: false,
+      email: '',
+      firstName: '',
+      file: '',
+      open12: true,
+      imageFromUrl: '',
+      profileImage: '',
+      profileImageFromRes: '',
+      heading: "FunDoo",
+      editlabel: false,
+      dialogBoxOpen: false
+
+
+    };
+  }
+  componentDidMount = () => {
+    // window.location.reload(false);
+    const profileImage = localStorage.getItem("userProfile");
+    const email = localStorage.getItem("email");
+    const firstName = localStorage.getItem("firstName");
+    this.setState({ email: email, firstName: firstName, profileImageFromRes: profileImage })
+    getNoteLabelList().then(response => {
+      // console.log(response.data.data.details);
+      if (response.status === 200) {
+
+        this.setState({ labelData: response.data.data.details });
+
+
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
-      componentDidMount=()=>{
-        // window.location.reload(false);
-        const profileImage = localStorage.getItem("userProfile");
-        const email =  localStorage.getItem("email");
-        const firstName = localStorage.getItem("firstName");
-        this.setState({email : email,firstName : firstName,profileImageFromRes : profileImage })
-        getNoteLabelList().then(response => {
-          // console.log(response.data.data.details);
-         if (response.status === 200) {
-            
-            this.setState({labelData : response.data.data.details});
-           
-          
-         } else {
-             this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-         }
-      });
-      }
-      handleDrawerOpen = () => {
-        if(this.state.open == false){
-        this.setState({setOpen : true,open : true});
-        }
-        else{
-          this.setState({setOpen : false,open : false});
-        }
-      };
-    
-      handleDrawerClose = () => {
-        this.setState({setOpen : false,open:false});
-      };
+    });
+  }
+  handleDrawerOpen = () => {
+    if (this.state.open == false) {
+      this.setState({ setOpen: true, open: true });
+    }
+    else {
+      this.setState({ setOpen: false, open: false });
+    }
+  };
 
-  
+  handleDrawerClose = () => {
+    this.setState({ setOpen: false, open: false });
+  };
 
-    choice=(event,text)=>{
+
+
+  choice = (event, text) => {
     event.preventDefault();
     console.log(text)
-    if(text == 'Edit labels'){
-        this.setState({heading : 'Editlabels',dialogBoxOpen :true})
+    if (text == 'Edit labels') {
+      this.setState({ heading: 'Editlabels', dialogBoxOpen: true })
     }
-    else if(text == 'Notes'){
-      this.setState({choice : 'Notes',heading:'Notes'})
+    else if (text == 'Notes') {
+      this.setState({ choice: 'Notes', heading: 'Notes' })
     }
-    else if(text == 'Archive'){
-      this.setState({choice : 'Archive',heading:'Archive'})
+    else if (text == 'Archive') {
+      this.setState({ choice: 'Archive', heading: 'Archive' })
     }
-    else if(text == 'Trash'){
-      this.setState({choice : 'Trash',heading:'Trash'})
+    else if (text == 'Trash') {
+      this.setState({ choice: 'Trash', heading: 'Trash' })
     }
-    else if(text == 'Reminder'){
-      this.setState({choice : 'Reminder',heading:'Reminder'})
+    else if (text == 'Reminder') {
+      this.setState({ choice: 'Reminder', heading: 'Reminder' })
     }
-    else if(text == 'shopping_cart'){
-      this.setState({ choice :'shopping_cart',heading :'shopping_cart' })
+    else if (text == 'shopping_cart') {
+      this.setState({ choice: 'shopping_cart', heading: 'shopping_cart' })
     }
-    else{
-      this.setState({choice : text.label,heading :text.label })
+    else {
+      this.setState({ choice: text.label, heading: text.label })
     }
   }
-  labeldata=(dialoxBoxfalse)=>{
+  labeldata = (dialoxBoxfalse) => {
     this.handelNoteDialogBox()
     this.componentDidMount();
   }
-  getcomponents=()=>{
-      console.log(this.state.choice)
-      // if(this.state.choice == 'Editlabels'){
-      //   // return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
-      //   return <TakeaNotes query={this.state.query} dialogBoxOpen1={this.state.editlabel} labeldata={this.labeldata}
-      //   gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
-      // }
-       if(this.state.choice == 'Notes'){
-        return <TakeaNotes query={this.state.query}
-        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)} choice="Notes"/>
-      }
-      else if(this.state.choice == 'Archive'){
-        return <Archive gridView={this.state.gridView} query={this.state.query} choice="Archive"/>
-      }
-      else if(this.state.choice == 'Trash'){
-        return <Trash gridView={this.state.gridView} query={this.state.query} choice="Trash"/>
-      }
-      else if(this.state.choice == 'Reminder'){
-        return <Reminder gridView={this.state.gridView} query={this.state.query} choice="Reminder"/>
-      }
-      else if(this.state.choice == 'shopping_cart'){
-        return <Cart gridView={this.state.gridView}/>
-      }
-      else{
+  getcomponents = () => {
+    console.log(this.state.choice)
+    // if(this.state.choice == 'Editlabels'){
+    //   // return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
+    //   return <TakeaNotes query={this.state.query} dialogBoxOpen1={this.state.editlabel} labeldata={this.labeldata}
+    //   gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+    // }
+    if (this.state.choice == 'Notes') {
+      return <TakeaNotes query={this.state.query}
+        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)} choice="Notes" />
+    }
+    else if (this.state.choice == 'Archive') {
+      return <Archive gridView={this.state.gridView} query={this.state.query} choice="Archive" />
+    }
+    else if (this.state.choice == 'Trash') {
+      return <Trash gridView={this.state.gridView} query={this.state.query} choice="Trash" />
+    }
+    else if (this.state.choice == 'Reminder') {
+      return <Reminder gridView={this.state.gridView} query={this.state.query} choice="Reminder" />
+    }
+    else if (this.state.choice == 'shopping_cart') {
+      return <Cart gridView={this.state.gridView} />
+    }
+    else {
       return <LabelShow query={this.state.query} label={this.state.choice}
-      gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
+        gridView={this.state.gridView} gridfunction={this.gridview.bind(this)} />
 
-      }
+    }
   }
-  queryfunction=(event)=>{
-   this.setState({query : event.target.value});
-   //  <Tableadmin query={this.state.query}/>
- }
- gridview=()=>{
-   this.setState({gridView : !this.state.gridView})
-  // console.log(this.state.gridView)
-  // alert(this.state.gridView)
- }
- profile=()=>{
-      this.setState({profile : !this.state.profile})
- }
- handleClick = (event) => {
-  this.setState({
-    anchorEl: event.currentTarget,
-    open1: !this.state.open1
-});
-}
-logout=()=>{
-  let data={}
-  logout(data).then(response => {
+  queryfunction = (event) => {
+    this.setState({ query: event.target.value });
+    //  <Tableadmin query={this.state.query}/>
+  }
+  gridview = () => {
+    this.setState({ gridView: !this.state.gridView })
+    // console.log(this.state.gridView)
+    // alert(this.state.gridView)
+  }
+  profile = () => {
+    this.setState({ profile: !this.state.profile })
+  }
+  handleClick = (event) => {
+    this.setState({
+      anchorEl: event.currentTarget,
+      open1: !this.state.open1
+    });
+  }
+  logout = () => {
+    let data = {}
+    logout(data).then(response => {
       // console.log(response.data.data.details[0]);
-     if (response.status === 204) {
-      localStorage.setItem("email","");
-      localStorage.setItem("firstName","")
-      localStorage.setItem("userProfile","")
-      localStorage.setItem("id",null)
-      this.props.history.push({
+      if (response.status === 204) {
+        localStorage.setItem("email", "");
+        localStorage.setItem("firstName", "")
+        localStorage.setItem("userProfile", "")
+        localStorage.setItem("id", null)
+        this.props.history.push({
           pathname: "/",
-      });
-     } else {
-     }
-  });
-}
-profileImagePick=()=>{}
+        });
+      } else {
+      }
+    });
+  }
+  profileImagePick = () => { }
 
-onFormSubmit=(e)=>{
-  console.log("onformatsubmit")
-  e.preventDefault() // Stop form submit
-  let form_data = new FormData()
-  form_data.append('file',this.state.file)
-  fileUpload(form_data).then(response => {
-    this.setState({profileImageFromRes:response.data.status.imageUrl,open12 : true,fileshow :false,profileImage:'',file:''})
-    localStorage.setItem('userProfile',response.data.status.imageUrl)
-  })
+  onFormSubmit = (e) => {
+    console.log("onformatsubmit")
+    e.preventDefault() // Stop form submit
+    let form_data = new FormData()
+    form_data.append('file', this.state.file)
+    fileUpload(form_data).then(response => {
+      this.setState({ profileImageFromRes: response.data.status.imageUrl, open12: true, fileshow: false, profileImage: '', file: '' })
+      localStorage.setItem('userProfile', response.data.status.imageUrl)
+    })
 
-}
-onChange=(e)=> {
-  console.log(e.target.files[0].name,this.state.open12)
-  // await this.setState({open12:true})
+  }
+  onChange = (e) => {
+    console.log(e.target.files[0].name, this.state.open12)
+    // await this.setState({open12:true})
 
-   this.setState({file:e.target.files[0],
-    fileshow : true,profileImage : URL.createObjectURL(e.target.files[0]),open12:true})
-}
+    this.setState({
+      file: e.target.files[0],
+      fileshow: true, profileImage: URL.createObjectURL(e.target.files[0]), open12: true
+    })
+  }
 
-handleClick12=(event)=>{
-  this.setState({
-    // anchorEl: event.currentTarget,
-    open12: !this.state.open12,file:''
-});
-// this.setState({fileshow :false,profileImage:'',file:''})
+  handleClick12 = (event) => {
+    this.setState({
+      // anchorEl: event.currentTarget,
+      open12: !this.state.open12, file: ''
+    });
+    // this.setState({fileshow :false,profileImage:'',file:''})
 
-}
+  }
 
-handelNoteDialogBox = () => {
-  this.setState({
-    dialogBoxOpen: !this.state.dialogBoxOpen
-  })
-  this.componentDidMount();
+  handelNoteDialogBox = () => {
+    this.setState({
+      dialogBoxOpen: !this.state.dialogBoxOpen
+    })
+    this.componentDidMount();
 
-}
-render(){
-    const {classes} = this.props;
-  return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppBar
-        // position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: this.state.open,
-        })}
-      >
-        <Toolbar>
-        <div className="ToolbarContainer1">
-          <div className="ToolbarContainer2">
-          <IconButton
-            size="medium"
-            color="black"
-            aria-label="open drawer"
-            onClick={this.handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, this.state.open)}
-          >
-            <MenuIcon style={{ width:  '30px',
-              height : '30px',}} />
-          </IconButton>
-          <div className={classes.bulbImg} className="bulbicon"  >
-             <img src={keepBulb} style={{ height : '45px',width : '45px'}} />
-          </div>
-       
-          <Typography variant="h6" className="funnDooName" >
-           {this.state.heading}
-          </Typography>
+  }
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.root}>
+        <CssBaseline />
+        <AppBar
+          // position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: this.state.open,
+          })}
+        >
+          <Toolbar>
+            <div className="ToolbarContainer1">
+              <div className="ToolbarContainer2">
+                <IconButton
+                  size="medium"
+                  color="black"
+                  aria-label="open drawer"
+                  onClick={this.handleDrawerOpen}
+                  edge="start"
+                  className={clsx(classes.menuButton, this.state.open)}
+                >
+                  <MenuIcon style={{
+                    width: '30px',
+                    height: '30px',
+                  }} />
+                </IconButton>
+                <div className={classes.bulbImg} className="bulbicon"  >
+                  <img src={keepBulb} style={{ height: '45px', width: '45px' }} />
+                </div>
 
-          </div>
-          <div className="searchDiv">
-                              {/* <Paper> */}
-                                  <div className="searchdiv1">
-                                    <SearchIcon style={{color : "black",marginRight :"6px"}}/>
-                                  {/* <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} /> */}
-                                <input
-                                   placeholder="Search"
-                                    InputProps={{ disableUnderline: true }}
-                                    className="inputsearch"
-                                    style={{disableUnderline : true,outline:'none',border: 'none'}}
-                                     onChange={this.queryfunction}
-                                />
-                                <CloseIcon style={{color:"black"}}/>
-                                  </div>
-                                
-                             {/* </Paper> */}
-                    </div>
-                    <div className="icondash">
-                    <IconButton
-                          size="medium"
-                          color="black"
-                          aria-label="open drawer"
-                          onClick={(event)=>this.choice(event,"shopping_cart")}
-                          edge="start"
-                          className="bulbicon"
-                        >
-                             <ShoppingCartIcon  style={{color:"black",fontSize:"30px",opacity:"0.7"}}/>
-                         </IconButton>
-                         <IconButton
-                          size="medium"
-                          color="black"
-                          aria-label="open drawer"
-                          onClick={this.gridview}
-                          edge="start"
-                          className="bulbicon"
-                        >
-                             {this.state.gridView ? <ViewAgendaIcon style={{color : "black"}}/> :  <AppsIcon style={{opacity:"0.7",color:"black",fontSize:"30px"}}/>}
-                         </IconButton>
+                <Typography variant="h6" className="funnDooName" >
+                  {this.state.heading}
+                </Typography>
 
-                       
-                         <IconButton
-                          size="medium"
-                          color="black"
-                          aria-label="open drawer"
-                          onClick={this.handleClick}
-                          edge="start"
-                          className="bulbicon"
-                        >
-                          <Avatar>
-               <img src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
-                          
-                            </Avatar>
-                        </IconButton>
-        <Popover 
-          anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
-          }}
-        open={this.state.open1}
-        anchorEl={this.state.anchorEl}
-        onClose={this.handleClick}
-        style={{ cursor: 'pointer'}}>
-           
-           <div style={{width : '300px',height:'120px'}}>
-               <form style={{display : 'flex',flexDirection : 'row',padding : '10px'}} >
-               <label for="file-input">
-               <img 
-               src={this.state.profileImageFromRes  == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/"+this.state.profileImageFromRes } style={{width : '50px',height : '50px',backgroundColor : 'grey',borderRadius : '50px'}}/>
-               </label>
-              <input type="file" onChange={this.onChange} id="file-input" style={{ display: 'none'}}/>
-                       
-                        <div style={{display : 'flex',flexDirection : 'column',justifyContent : 'center',marginLeft : '5px'}}>
+              </div>
+              <div className="searchDiv">
+                {/* <Paper> */}
+                <div className="searchdiv1">
+                  <SearchIcon style={{ color: "black", marginRight: "6px" }} />
+                  {/* <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} /> */}
+                  <input
+                    placeholder="Search"
+                    InputProps={{ disableUnderline: true }}
+                    className="inputsearch"
+                    style={{ disableUnderline: true, outline: 'none', border: 'none' }}
+                    onChange={this.queryfunction}
+                  />
+                  <CloseIcon style={{ color: "black" }} />
+                </div>
+
+                {/* </Paper> */}
+              </div>
+              <div className="icondash">
+                <IconButton
+                  size="medium"
+                  color="black"
+                  aria-label="open drawer"
+                  onClick={(event) => this.choice(event, "shopping_cart")}
+                  edge="start"
+                  className="bulbicon"
+                >
+                  <ShoppingCartIcon style={{ color: "black", fontSize: "30px", opacity: "0.7" }} />
+                </IconButton>
+                <IconButton
+                  size="medium"
+                  color="black"
+                  aria-label="open drawer"
+                  onClick={this.gridview}
+                  edge="start"
+                  className="bulbicon"
+                >
+                  {this.state.gridView ? <ViewAgendaIcon style={{ color: "black" }} /> : <AppsIcon style={{ opacity: "0.7", color: "black", fontSize: "30px" }} />}
+                </IconButton>
+
+
+                <IconButton
+                  size="medium"
+                  color="black"
+                  aria-label="open drawer"
+                  onClick={this.handleClick}
+                  edge="start"
+                  className="bulbicon"
+                >
+                  <Avatar>
+                    <img src={this.state.profileImageFromRes == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/" + this.state.profileImageFromRes} style={{ width: '50px', height: '50px', backgroundColor: 'grey', borderRadius: '50px' }} />
+
+                  </Avatar>
+                </IconButton>
+                <Popover
+                  anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                  }}
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                  }}
+                  open={this.state.open1}
+                  anchorEl={this.state.anchorEl}
+                  onClose={this.handleClick}
+                  style={{ cursor: 'pointer' }}>
+
+                  <div style={{ width: '300px', height: '120px' }}>
+                    <form style={{ display: 'flex', flexDirection: 'row', padding: '10px' }} >
+                      <label for="file-input">
+                        <img
+                          src={this.state.profileImageFromRes == '' ? null : "http://fundoonotes.incubation.bridgelabz.com/" + this.state.profileImageFromRes} style={{ width: '50px', height: '50px', backgroundColor: 'grey', borderRadius: '50px' }} />
+                      </label>
+                      <input type="file" onChange={this.onChange} id="file-input" style={{ display: 'none' }} />
+
+                      <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', marginLeft: '5px' }}>
                         <Typography>{this.state.email}</Typography>
                         <Typography>{this.state.firstName}</Typography>
 
+                      </div>
+                      {this.state.fileshow ?
+                        <div style={{ width: '250px', height: '250px', display: 'none' }}>
+                          <Dialog
+                            open={this.state.open12}
+                            onClose={this.handleClick12}
+                          >
+                            <div style={{ width: '250px', height: '200px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+
+                              <img src={this.state.profileImage} style={{ width: '150px', height: '150px', borderRadius: '50px', justifyContent: 'center' }} />
+                              <div style={{ paddingTop: '10px' }}>
+                                <button type="submit" onClick={this.onFormSubmit}>Upload</button>
+                              </div></div></Dialog></div> : null}
+
+                    </form>
+
+                    <Divider />
+                    <div onClick={this.logout}
+                      style={{ display: 'flex', justifyContent: 'flex-end', padding: '10px', border: '1px' }}>
+                      LOGOUT
                         </div>
-                        {this.state.fileshow ? 
-                        <div style={{width : '250px',height : '250px',display:'none'}}>
-                       <Dialog
-                       open={this.state.open12}
-                       onClose={this.handleClick12}
-                       >
-                        <div style={{width : '250px',height : '200px',display:'flex',flexDirection :'column',justifyContent:'center',alignItems:'center'}}>
 
-                      <img src={this.state.profileImage} style={{width : '150px',height : '150px',borderRadius : '50px',justifyContent:'center'}}/>
-                        <div style={{paddingTop : '10px'}}>
-                        <button type="submit"  onClick={this.onFormSubmit}>Upload</button>
-                        </div></div></Dialog></div> : null }
-                        
-                        </form>   
+                  </div>
 
-                        <Divider/>
-                        <div onClick={this.logout}
-                        style={{display : 'flex',justifyContent : 'flex-end',padding : '10px',border : '1px'}}>
-                            LOGOUT
-                        </div>
-                        
-           </div>
-    
-        </Popover>
+                </Popover>
 
-                     </div>
-                    
-                     </div>   
-        </Toolbar>
+              </div>
 
-      </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="persistent"
-        anchor="left"
-        open={this.state.open}
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-      >
-        <Divider />
-        <List>
-          {['Notes', 'Reminder'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.choice(e,text)} >
-              <ListItemIcon>{index % 2 === 0 ? <div><img src={lightbulb_black} id="imgdash1"/></div> :
-              <div>
-               <img src={reminder} id="imgdash1"  style={{opacity:"0.7"}}/> </div>}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <div style={{ padding :'15px'}}>LABELS</div>
-        <List>
-          {this.state.labelData.map((text, index) => (
-            <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{<LabelIcon style={{fontSize:"medium"}}/>}</ListItemIcon>
-              <ListItemText primary={text.label} />
-            </ListItem>
-          ))}
-        </List>
-        <List>
-          {['Edit labels'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <AddIcon style={{color:"black"}}/> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-        <Divider/>
-        
-        <List >
-          {['Archive','Trash'].map((text, index) => (
-            <ListItem button key={text} onClick={e => this.choice(e,text)}>
-              <ListItemIcon>{index % 2 === 0 ? <img src={download} id="imgdash1"/> :
-              <img src={delete_black} id="imgdash1" style={{opacity:"0.7"}}/>}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
-      <main
-        className={clsx(classes.content, {
-          [classes.contentShift]: this.state.open,
-        })}
-      >
-        <div className={classes.drawerHeader} />
-       
-        {this.getcomponents()}
-       
-        
-      </main>
-      <Dialog
-              open={this.state.dialogBoxOpen}
-              onClose={this.handelNoteDialogBox}
-            >
-              <Edit labeldata={this.labeldata} />
-            </Dialog>
-    </div>
-  );
-}
+            </div>
+          </Toolbar>
+
+        </AppBar>
+        <Drawer
+          className={classes.drawer}
+          variant="persistent"
+          anchor="left"
+          open={this.state.open}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+        >
+          <Divider />
+          <List>
+            {['Notes', 'Reminder'].map((text, index) => (
+              <ListItem button key={text} onClick={e => this.choice(e, text)} >
+                <ListItemIcon>{index % 2 === 0 ? <div><img src={lightbulb_black} id="imgdash1" /></div> :
+                  <div>
+                    <img src={reminder} id="imgdash1" style={{ opacity: "0.7" }} /> </div>}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <div style={{ padding: '15px' }}>LABELS</div>
+          <List>
+            {this.state.labelData.map((text, index) => (
+              <ListItem button key={text} onClick={e => this.choice(e, text)}>
+                <ListItemIcon>{<LabelIcon style={{ fontSize: "medium" }} />}</ListItemIcon>
+                <ListItemText primary={text.label} />
+              </ListItem>
+            ))}
+          </List>
+          <List>
+            {['Edit labels'].map((text, index) => (
+              <ListItem button key={text} onClick={e => this.choice(e, text)}>
+                <ListItemIcon>{index % 2 === 0 ? <AddIcon style={{ color: "black" }} /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+
+          <List >
+            {['Archive', 'Trash'].map((text, index) => (
+              <ListItem button key={text} onClick={e => this.choice(e, text)}>
+                <ListItemIcon>{index % 2 === 0 ? <img src={download} id="imgdash1" /> :
+                  <img src={delete_black} id="imgdash1" style={{ opacity: "0.7" }} />}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
+        <main
+          className={clsx(classes.content, {
+            [classes.contentShift]: this.state.open,
+          })}
+        >
+          <div className={classes.drawerHeader} />
+
+          {this.getcomponents()}
+
+
+        </main>
+        <Dialog
+          open={this.state.dialogBoxOpen}
+          onClose={this.handelNoteDialogBox}
+        >
+          <Edit labeldata={this.labeldata} />
+        </Dialog>
+      </div>
+    );
   }
+}
 
-  export default withStyles(useStyles)(Dashboard);
+export default withStyles(useStyles)(Dashboard);

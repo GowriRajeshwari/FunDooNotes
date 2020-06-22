@@ -22,114 +22,115 @@ class Login extends Component {
       userdata: [],
       show: false,
       login: "Sign in",
-      next : false,
-      password:'',
-      helperTextpassowrd:"",
-      red :"",
-      email : '',
-      emailse : '',
+      next: false,
+      password: '',
+      helperTextpassowrd: "",
+      red: "",
+      email: '',
+      emailse: '',
       snackbaropen: false,
       snackbarmsg: '',
     };
   }
 
-    //close snackbar
-    handleClose=(event)=> {
-      // event.preventDefault();
-      this.setState({ snackbaropen: false });
+  //close snackbar
+  handleClose = (event) => {
+    // event.preventDefault();
+    this.setState({ snackbaropen: false });
   }
   //sign in
-  SignIn=()=>{
+  SignIn = () => {
     // event.preventDefault();
-     this.validator();
-    console.log(this.state.error )
-      console.log("login clicked");
-      let data = {
-        email: this.state.email,
-        password: this.state.password
-      };
+    this.validator();
+    console.log(this.state.error)
+    console.log("login clicked");
+    let data = {
+      email: this.state.email,
+      password: this.state.password
+    };
 
-      console.log(data);
-        if(this.state.helperTextEmail === "" && this.state.helperTextpassowrd === ''){
+    console.log(data);
+    if (this.state.helperTextEmail === "" && this.state.helperTextpassowrd === '') {
       login(data).then(response => {
-          console.log(response);
-         if (response.status === 200) {
-              this.setState({
-                snackbaropen: true,
-                  snackbarmsg: "Succefully Registered."
-                })
-                console.log(response.data.id);
+        console.log(response);
+        if (response.status === 200) {
+          this.setState({
+            snackbaropen: true,
+            snackbarmsg: "Succefully Registered."
+          })
+          console.log(response.data.id);
 
-              localStorage.setItem("id", response.data.id);
-              localStorage.setItem("userId",response.data.userId);
-              localStorage.setItem("email",response.data.email);
-              localStorage.setItem("firstName",response.data.firstName)
-              localStorage.setItem("userProfile",response.data.imageUrl)
-                console.log(localStorage.getItem("id"))
-              this.props.history.push({
-                  pathname: "/dashboard",
-              });
-         } else {
-             this.setState({  snackbarmsg: "Login Not Successfull,Make sure email & password is correct", snackbaropen: true });
-         }
+          localStorage.setItem("id", response.data.id);
+          localStorage.setItem("userId", response.data.userId);
+          localStorage.setItem("email", response.data.email);
+          localStorage.setItem("firstName", response.data.firstName)
+          localStorage.setItem("userProfile", response.data.imageUrl)
+          console.log(localStorage.getItem("id"))
+          this.props.history.push({
+            pathname: "/dashboard",
+          });
+        } else {
+          this.setState({ snackbarmsg: "Login Not Successfull,Make sure email & password is correct", snackbaropen: true });
+        }
       });
     }
-    
 
-      
-       
-       
+
+
+
+
   }
-  validator=()=>{
-    if(this.state.email != ''){
-      if ( /\S+@\S+\.\S+/.test(this.state.email)) {
+  validator = () => {
+    if (this.state.email != '') {
+      if (/\S+@\S+\.\S+/.test(this.state.email)) {
         this.setState({
-            email: this.state.email, helperTextEmail: "",
-            error: false
+          email: this.state.email, helperTextEmail: "",
+          error: false
         })
-    } else{
-      this.setState({
-        helperTextEmail: "Enter validate Email",
-        error: true,
-        email: this.state.email
-    })
+      } else {
+        this.setState({
+          helperTextEmail: "Enter validate Email",
+          error: true,
+          email: this.state.email
+        })
       }
-    }else if(this.state.email == ''){
+    } else if (this.state.email == '') {
       this.setState({
         helperTextEmail: "Enter Email",
         error: true,
         email: this.state.email
-    })
+      })
     }
 
-    if(this.state.password != ''){
+    if (this.state.password != '') {
       if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
-        this.setState({ password: this.state.password , helperTextpassowrd: "",
-        error: false
-      })
-      } else{
         this.setState({
-              helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
-              error: true,
-              password: this.state.password
-          })
+          password: this.state.password, helperTextpassowrd: "",
+          error: false
+        })
+      } else {
+        this.setState({
+          helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
+          error: true,
+          password: this.state.password
+        })
       }
-    }else if(this.state.password == ''){
+    } else if (this.state.password == '') {
       this.setState({
         helperTextpassowrd: "Enter the password",
         error: true,
         password: this.state.password
-    })
+      })
     }
   }
-  resetpassword(event){
+  resetpassword(event) {
     event.preventDefault();
     this.props.history.push({
       pathname: "/Reset",
     });
   }
   //ForgotButton
-  ForgotButton(event){
+  ForgotButton(event) {
     event.preventDefault();
     this.props.history.push({
       pathname: "/Forgot",
@@ -137,32 +138,32 @@ class Login extends Component {
     localStorage.setItem("email", this.state.email);
   }
   //Register Button
-  register(event){
+  register(event) {
     event.preventDefault();
     this.props.history.push({
       pathname: "/",
     });
 
   }
-  onchangeEmail=(event)=>{
+  onchangeEmail = (event) => {
     this.setState({
-      email: event.target.value  
-  })
+      email: event.target.value
+    })
 
-}
-
-onchangePassword = event => {
-  this.setState({ password: event.target.value})
   }
-//Next Button
-  Next=(event)=>{
+
+  onchangePassword = event => {
+    this.setState({ password: event.target.value })
+  }
+  //Next Button
+  Next = (event) => {
     event.preventDefault();
-    this.setState({next:true,emailse : this.state.email})
+    this.setState({ next: true, emailse: this.state.email })
   }
   //ArrowButton
-  arrowButton=(event)=>{
+  arrowButton = (event) => {
     event.preventDefault();
-    this.setState({next:false,email : this.state.emailse})
+    this.setState({ next: false, email: this.state.emailse })
   }
   render() {
     return (
@@ -170,9 +171,9 @@ onchangePassword = event => {
         <span class="username"><span>F</span><span>u</span><span>n</span><span>D</span><span>o</span><span>o</span></span>
         <div className="loginstyle">{this.state.login}</div>
 
-       
+
         <Paper id="rootpaper">
-        
+
           <div className="container">
 
             <div className="border">
@@ -185,20 +186,20 @@ onchangePassword = event => {
                     id="btnEmail"
                     variant="outlined"
                     label="Emails"
-                     onChange={this.onchangeEmail}
+                    onChange={this.onchangeEmail}
                   />
                 </div>
 
                 <div className="inputField">
                   <TextField
                     // error={this.state.red}
-                    error={this.state.helperTextpassowrd }
-                   id="btnPassword"
-                   variant="outlined"
-                   type="password"
-                   label="Password"
-                   helperText={this.state.helperTextpassowrd }
-                   onChange={this.onchangePassword}
+                    error={this.state.helperTextpassowrd}
+                    id="btnPassword"
+                    variant="outlined"
+                    type="password"
+                    label="Password"
+                    helperText={this.state.helperTextpassowrd}
+                    onChange={this.onchangePassword}
                   />
                 </div>
 
@@ -209,7 +210,7 @@ onchangePassword = event => {
                 </div>
                 <div className="belowlogin">
                   <Button id="forgotstyle" className="ForgotButton" onClick={e => this.ForgotButton(e)}>
-                   Forgot Password
+                    Forgot Password
                    </Button>
                 </div>
 
@@ -229,18 +230,18 @@ onchangePassword = event => {
         </Paper>
 
         <div className="registercontainer">
-        <Button id="register" className="register" onClick={e => this.register(e)}>
-              Create account
+          <Button id="register" className="register" onClick={e => this.register(e)}>
+            Create account
             </Button>
-       </div> 
-       <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
-                    message={<span>{this.state.snackbarmsg}</span>}
-                    action={[
-                        <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
-                            x</IconButton>
-                    ]}>
-                </Snackbar>
-       
+        </div>
+        <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+          message={<span>{this.state.snackbarmsg}</span>}
+          action={[
+            <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
+              x</IconButton>
+          ]}>
+        </Snackbar>
+
       </div>
     );
   }

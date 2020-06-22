@@ -85,7 +85,7 @@ class Cart extends Component {
     event.preventDefault();
     this.setState({ address: event.target.value })
   }
-  placeOrder =  () => {
+  placeOrder = () => {
     // this.setState({cartStepper: this.state.cartStepper + 1})
 
     // await this.setState({cartStepper: this.state.cartStepper + 1})

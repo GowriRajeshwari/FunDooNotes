@@ -24,8 +24,8 @@ import color from '../assets/color.png'
 import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
-import {searchUserList} from '../services/notesService'
-import { getNotes,setNotes,deleteNotes,getNoteLabelList,addlabelNotes,deletelabelNotes } from '../services/notesService'
+import { searchUserList } from '../services/notesService'
+import { getNotes, setNotes, deleteNotes, getNoteLabelList, addlabelNotes, deletelabelNotes } from '../services/notesService'
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -50,105 +50,105 @@ class LabelNotes extends Component {
   constructor(props) {
     super(props);
     this.state = {
-        anchorEl :false,
-        open:false,
-        id : this.props.id,
-        noteIdList :[],
-        addlabel : false,
-        data : [],
-        checked:false,
-        setChecked : true,
-        labelNotes:[],
-        activeCheckboxes :[]
+      anchorEl: false,
+      open: false,
+      id: this.props.id,
+      noteIdList: [],
+      addlabel: false,
+      data: [],
+      checked: false,
+      setChecked: true,
+      labelNotes: [],
+      activeCheckboxes: []
 
 
     };
   }
 
-  componentDidMount=()=>{
-    
+  componentDidMount = () => {
+
     getNoteLabelList().then(response => {
       // console.log(response.data.data.details);
-     if (response.status === 200) {
-        
-        this.setState({data : response.data.data.details});
-       
-      
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
+      if (response.status === 200) {
+
+        this.setState({ data: response.data.data.details });
+
+
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+    });
   }
 
   handleClick = (event) => {
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open
-  });
-}
+    });
+  }
 
-  deletebutton=async(id)=>{
+  deletebutton = async (id) => {
     console.log(id)
     await this.state.noteIdList.push(id.toString());
-    let data={
-      isDeleted : true,
-      noteIdList : this.state.noteIdList
+    let data = {
+      isDeleted: true,
+      noteIdList: this.state.noteIdList
     }
     console.log(data)
     deleteNotes(data).then(response => {
       console.log(response);
-     if (response.status === 200) {
-         this.setState({noteIdList : []});
-         this.props.sendtrash(true);
-     } else {
-         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-     }
-  });
-  
+      if (response.status === 200) {
+        this.setState({ noteIdList: [] });
+        this.props.sendtrash(true);
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+    });
+
   }
-  addLabelButton=()=>{
-    this.setState({addlabel : true })
- 
+  addLabelButton = () => {
+    this.setState({ addlabel: true })
+
   }
-  backbutton=()=>{
-    this.setState({addlabel : false })
+  backbutton = () => {
+    this.setState({ addlabel: false })
 
   }
   handleChange = (event) => {
-    this.setState({checked : !this.state.checked})
+    this.setState({ checked: !this.state.checked })
     // this.state.setChecked(event.target.this.state.checked);
   }
-  checkboxoutline=(data,index)=>{
+  checkboxoutline = (data, index) => {
     this.state.labelNotes.push(data);
     this.props.labelNotes(this.state.labelNotes);
   }
-  handleCheck=(data,labelId)=> {
+  handleCheck = (data, labelId) => {
     let found = this.state.activeCheckboxes.includes(labelId)
     if (found) {
-      this.setState({ 
+      this.setState({
         activeCheckboxes: this.state.activeCheckboxes.filter(x => x !== labelId)
       })
       const index = this.state.labelNotes.findIndex(labelNotes => labelNotes.id === labelId);
-    console.log(index,labelId)
-    if(index > -1){
-      this.state.labelNotes.splice(index,1)
-    }
-    this.setState({labelNotes : this.state.labelNotes})
+      console.log(index, labelId)
+      if (index > -1) {
+        this.state.labelNotes.splice(index, 1)
+      }
+      this.setState({ labelNotes: this.state.labelNotes })
       this.props.labelNotes(this.state.labelNotes);
 
     } else {
-      this.setState({ 
-        activeCheckboxes: [ ...this.state.activeCheckboxes, labelId ]
+      this.setState({
+        activeCheckboxes: [...this.state.activeCheckboxes, labelId]
       })
       this.state.labelNotes.push(data);
       this.props.labelNotes(this.state.labelNotes);
     }
   }
- render(){
-     return(
-        <div >
-        <img src={setting} id="imgdashnotes" onClick={e=>this.handleClick(e)}/>
-        <Popover 
+  render() {
+    return (
+      <div >
+        <img src={setting} id="imgdashnotes" onClick={e => this.handleClick(e)} />
+        <Popover
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'center',
@@ -157,18 +157,18 @@ class LabelNotes extends Component {
             vertical: 'top',
             horizontal: 'center',
           }}
-        open={this.state.open}
-        anchorEl={this.state.anchorEl}
-        onClose={this.handleClick}
-        style={{ cursor: 'pointer'}}>
-           
-        
-      { this.state.addlabel ? 
-                          <div>
-                            <div style={{padding : '10px'}}>
-                               <MuiPickersUtilsProvider utils={DateFnsUtils} >
-                                 <Typography onClick={()=>this.backbutton()}>Label Note</Typography>
-                                 {/* { this.state.data.map((data, index) => (
+          open={this.state.open}
+          anchorEl={this.state.anchorEl}
+          onClose={this.handleClick}
+          style={{ cursor: 'pointer' }}>
+
+
+          {this.state.addlabel ?
+            <div>
+              <div style={{ padding: '10px' }}>
+                <MuiPickersUtilsProvider utils={DateFnsUtils} >
+                  <Typography onClick={() => this.backbutton()}>Label Note</Typography>
+                  {/* { this.state.data.map((data, index) => (
                                     <List>
                                   <div className="textdash" key={index}>
 
@@ -182,46 +182,48 @@ class LabelNotes extends Component {
                                  onChange={this.handleChange}
                                  inputProps={{ 'aria-label': 'primary checkbox' }}
                                /> */}
-                 
-                               {/* <img src={checkboxoutline} id="imgdashnotes" /> */}
-                               {/* </div> */}
-                                {/* }  */}
-                                { this.state.data.map((data, index) => (
-                                    <List>
-                                  <div className="textdash">
-                                <Checkbox
-                                  label={data.label}
-                                  inputProps={{ 'aria-label': 'checkbox with default color' }}
-                                  onChange={() => this.handleCheck(data,data.id)}
-                                  checked={this.state.activeCheckboxes.includes(data.id)}
-                                />
+
+                  {/* <img src={checkboxoutline} id="imgdashnotes" /> */}
+                  {/* </div> */}
+                  {/* }  */}
+                  {this.state.data.map((data, index) => (
+                    <List>
+                      <div className="textdash">
+                        <Checkbox
+                          label={data.label}
+                          inputProps={{ 'aria-label': 'checkbox with default color' }}
+                          onChange={() => this.handleCheck(data, data.id)}
+                          checked={this.state.activeCheckboxes.includes(data.id)}
+                        />
                                 }
 
-                                  
 
-                                  <Typography style={{width : '100%'}}  
-                                  onClick={()=>this.checkboxoutline(data)}>{data.label}</Typography>
-                                  
-                                  </div>
 
-                                  </List>
-                                  ))}
-                               </MuiPickersUtilsProvider>
-                               
-                               </div>
-                              </div>
-                              :
-                              <div>
-                             
-                              <div style={{width : '200px',height:"40px",padding : '10px',fontFamily : 'bold',cursor: 'pointer'}}
-                               onClick={()=>this.addLabelButton()}>
-                              ADD LABEL</div>
-                              </div>
-                          }
+                                  <Typography style={{ width: '100%' }}
+                          onClick={() => this.checkboxoutline(data)}>{data.label}</Typography>
+
+                      </div>
+
+                    </List>
+                  ))}
+                </MuiPickersUtilsProvider>
+
+              </div>
+            </div>
+            :
+            <div>
+
+              <div style={{ width: '200px', height: "40px", padding: '10px', fontFamily: 'bold', cursor: 'pointer' }}
+                onClick={() => this.addLabelButton()}>
+                ADD LABEL</div>
+            </div>
+          }
         </Popover>
-       
-        
-    </div> 
-     )}}
 
-     export default LabelNotes;
+
+      </div>
+    )
+  }
+}
+
+export default LabelNotes;

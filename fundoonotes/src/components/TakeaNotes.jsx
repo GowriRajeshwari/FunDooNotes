@@ -8,7 +8,7 @@ import download from '../assets/download.png'
 import galary from '../assets/galary.png'
 import pin from '../assets/pin.svg'
 import { searchUserList } from '../services/notesService'
-import { updateChecklist,getNotesListByLabel, getNotes, setNotes, deleteNotes, removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes } from '../services/notesService'
+import { updateChecklist, getNotesListByLabel, getNotes, setNotes, deleteNotes, removeRemainderNotes, updateReminderNotes, changeColor, archiveNote, deletelabelNotes } from '../services/notesService'
 import Dialog from '@material-ui/core/Dialog';
 import PersonIcon from '@material-ui/icons/Person';
 import AddIcon from '@material-ui/icons/Add';
@@ -82,7 +82,7 @@ class TakeaNotes extends Component {
       nmsg: '',
       labelNoteShow: '',
       label: '',
-      loading : true
+      loading: true
 
     };
   }
@@ -101,7 +101,7 @@ class TakeaNotes extends Component {
   //   this.setState({ labelNoteShow : this.props.labelNoteShow})
   // }
   componentDidMount = () => {
-    console.log("archive",this.props.choice)
+    console.log("archive", this.props.choice)
 
     var d = new Date();
     d.setDate(new Date().getDate() + 1)
@@ -109,18 +109,18 @@ class TakeaNotes extends Component {
     this.setState({ tomorrow: d, time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() })
     console.log("labelNoet")
 
-    if(this.props.choice === 'Archive'){
-  //       archiveNoteList().then(response => {
-  //      console.log(response);
-  //     if (response.status === 200) {
-          
-  //       this.setState({data : response.data.data.data,loading:false});
-  //       // console.log(this.state.data[0].id)
-        
-  //     } else {
-  //         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-  //     }
-  //  });
+    if (this.props.choice === 'Archive') {
+      //       archiveNoteList().then(response => {
+      //      console.log(response);
+      //     if (response.status === 200) {
+
+      //       this.setState({data : response.data.data.data,loading:false});
+      //       // console.log(this.state.data[0].id)
+
+      //     } else {
+      //         this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      //     }
+      //  });
     }
     getNotes().then(response => {
 
@@ -134,7 +134,7 @@ class TakeaNotes extends Component {
             continue;
           }
         }
-        this.setState({ data: this.state.data,loading:false })
+        this.setState({ data: this.state.data, loading: false })
         console.log(this.state.data);
         // for(let i=0;i<response.data.data.data.length;i++){
         //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
@@ -299,8 +299,8 @@ class TakeaNotes extends Component {
     this.setState({ collabshow: false })
   }
 
-  onchangecollabator =  (event) => {
-     this.setState({
+  onchangecollabator = (event) => {
+    this.setState({
       collabatorName: event.target.value
     })
     let data = {
@@ -504,12 +504,12 @@ class TakeaNotes extends Component {
     }
     // this.setState({ msg : content })
   }
-  checkbox=(id,checklistId,itemName)=>{
+  checkbox = (id, checklistId, itemName) => {
     let data = {
-      itemName : itemName,
-      status : "close"
+      itemName: itemName,
+      status: "close"
     }
-    updateChecklist(data,id,checklistId).then(response => {
+    updateChecklist(data, id, checklistId).then(response => {
       console.log(response);
       if (response.status === 200) {
         this.componentDidMount()
@@ -517,14 +517,14 @@ class TakeaNotes extends Component {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
-    console.log(id,checklistId,data)
+    console.log(id, checklistId, data)
   }
-  checkboxoutline=(id,checklistId,itemName)=>{
+  checkboxoutline = (id, checklistId, itemName) => {
     let data = {
-      itemName : itemName,
-      status : "open"
+      itemName: itemName,
+      status: "open"
     }
-    updateChecklist(data,id,checklistId).then(response => {
+    updateChecklist(data, id, checklistId).then(response => {
       console.log(response);
       if (response.status === 200) {
         this.componentDidMount()
@@ -532,7 +532,7 @@ class TakeaNotes extends Component {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
-    console.log(id,checklistId,data)
+    console.log(id, checklistId, data)
   }
   render() {
 
@@ -549,9 +549,9 @@ class TakeaNotes extends Component {
               <NewNote sendNewData={this.sendNewData} />
             </div>
             <div className='maincontainer'>
-                  <ClipLoader
+              <ClipLoader
                 // css={override}
-                css={{ width : "50px",height :"50px",marginTop : "45px"}}
+                css={{ width: "50px", height: "50px", marginTop: "45px" }}
                 size={150}
                 color={"#123abc"}
                 loading={this.state.loading}
@@ -567,7 +567,7 @@ class TakeaNotes extends Component {
                     }}>
                       <div style={{ padding: '10px' }}>
                         <div className='showicon'>
-                          <div className={this.props.gridView ? 'typoText1' : "typoText"}  onClick={() => this.dialogboxOpen(data, "editNotes")}>
+                          <div className={this.props.gridView ? 'typoText1' : "typoText"} onClick={() => this.dialogboxOpen(data, "editNotes")}>
                             {data.title}
                           </div>
                           <div className="mybuttonoverlap" style={{ padding: '5px' }}>
@@ -581,28 +581,28 @@ class TakeaNotes extends Component {
                         </div>
 
                         <div>
-                        {this.state.date_timeshow ? this.reminder(data.reminder, data.id) : null}
+                          {this.state.date_timeshow ? this.reminder(data.reminder, data.id) : null}
                         </div>
                         {data.noteCheckLists.map((notelist, index) => (
                           //  console.log(noteCheckLists)
 
                           <List>
-                            {notelist.status === "close" ? 
-                            <div className="textdash12">
-                                    <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
-                                    onClick={()=>this.checkboxoutline(data.id,notelist.id,notelist.itemName)}>
-                            <img src={checkboxtick} id="imgdashnotes" />
-                            </div>
-                          <Typography  style={{width : '100%',textDecoration : 'line-through'}}>{notelist.itemName}</Typography>
-                            </div> : 
-                            <div className="textdash12">
-                            <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
-                            onClick={()=>this.checkbox(data.id,notelist.id,notelist.itemName)} >
-                    <img src={checkboxoutline} id="imgdashnotes" />
-                    </div>
-                  <Typography  style={{width : '100%'}}>{notelist.itemName}</Typography>
+                            {notelist.status === "close" ?
+                              <div className="textdash12">
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                  onClick={() => this.checkboxoutline(data.id, notelist.id, notelist.itemName)}>
+                                  <img src={checkboxtick} id="imgdashnotes" />
+                                </div>
+                                <Typography style={{ width: '100%', textDecoration: 'line-through' }}>{notelist.itemName}</Typography>
+                              </div> :
+                              <div className="textdash12">
+                                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+                                  onClick={() => this.checkbox(data.id, notelist.id, notelist.itemName)} >
+                                  <img src={checkboxoutline} id="imgdashnotes" />
+                                </div>
+                                <Typography style={{ width: '100%' }}>{notelist.itemName}</Typography>
 
-                    </div>}
+                              </div>}
 
                           </List>
                         ))
@@ -618,7 +618,7 @@ class TakeaNotes extends Component {
                                 label={labelNotes.label}
                                 onDelete={() => this.handleDeletelabel(labelNotes.id, data.id)}
                                 color="white"
-                                // value={this.state.date}
+                              // value={this.state.date}
                               />
                             </div>
                           ))
@@ -689,9 +689,9 @@ class TakeaNotes extends Component {
 
                 })}
               </div>
-        
-        
-        
+
+
+
             </div>
             <Dialog
               open={this.state.dialogBoxOpen}

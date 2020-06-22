@@ -22,85 +22,85 @@ class ForgotPassword extends Component {
             next: false,
             password: '',
             helperTextpassowrd: "",
-            emailfrom :'',
+            emailfrom: '',
             snackbaropen: false,
             snackbarmsg: '',
-            email : ''
+            email: ''
         };
     }
-    
+
     //close snackbar
-    handleClose=(event)=> {
+    handleClose = (event) => {
         // event.preventDefault();
         this.setState({ snackbaropen: false });
     }
 
     //Send Button
-    forgotButton=()=>{
+    forgotButton = () => {
         // event.preventDefault();
-         this.validator();
+        this.validator();
         console.log("forgot button is clicked");
-        
-            let data = {
-                email: this.state.email,
-              };
-              console.log(data);
-              if(this.state.helperTextEmail === ''){
+
+        let data = {
+            email: this.state.email,
+        };
+        console.log(data);
+        if (this.state.helperTextEmail === '') {
             forgotpassword(data).then(response => {
                 console.log(response);
-               if (response.status === 200) {
+                if (response.status === 200) {
                     this.setState({
                         snackbaropen: true,
                         snackbarmsg: "Mail is send Successfully."
-                      })
+                    })
                     // localStorage.setItem("username", this.state.username);
                     // this.props.history.push({
                     //     pathname: "/Dashboard",
                     // });
-               } else {
-                   this.setState({  snackbarmsg: "Mail is not sended successfully", snackbaropen: true });
-               }
+                } else {
+                    this.setState({ snackbarmsg: "Mail is not sended successfully", snackbaropen: true });
+                }
             });
-              }
-        
+        }
+
 
     }
 
-    validator=()=>{
-        if(this.state.email != ''){
-          if ( /\S+@\S+\.\S+/.test(this.state.email)) {
+    validator = () => {
+        if (this.state.email != '') {
+            if (/\S+@\S+\.\S+/.test(this.state.email)) {
+                this.setState({
+                    email: this.state.email, helperTextEmail: "",
+                    error: false
+                })
+            } else {
+                this.setState({
+                    helperTextEmail: "Enter validate Email",
+                    error: true,
+                    email: this.state.email
+                })
+            }
+        } else if (this.state.email == '') {
             this.setState({
-                email: this.state.email, helperTextEmail: "",
-                error: false
+                helperTextEmail: "Enter Email",
+                error: true,
+                email: this.state.email
             })
-        } else{
-          this.setState({
-            helperTextEmail: "Enter validate Email",
-            error: true,
-            email: this.state.email
-        })
-          }
-        }else if(this.state.email == ''){
-          this.setState({
-            helperTextEmail: "Enter Email",
-            error: true,
-            email: this.state.email
-        })
         }
 
     }
-    componentDidMount(){
+    componentDidMount() {
         const email = localStorage.getItem("email");
-        this.setState({emailfrom : email})
+        this.setState({ emailfrom: email })
     }
-    onChangeEmail=(event)=>{
+    onChangeEmail = (event) => {
         this.setState({
             email: event.target.value
         })
-    
+
     }
-   
- 
+
+
     render() {
         return (
             <div className="firstcontainerForgot">
@@ -118,7 +118,7 @@ class ForgotPassword extends Component {
                                 <div className="RecoveryForgot">Recovery email</div>
                                 <div className="inputFieldForgot">
                                     <TextField
-                                         error={this.state.helperTextEmail}
+                                        error={this.state.helperTextEmail}
                                         helperText={this.state.helperTextEmail}
                                         id="btnForgot"
                                         variant="outlined"
@@ -129,7 +129,7 @@ class ForgotPassword extends Component {
                                 </div>
 
                                 <div className="submitButtonForgot">
-                                <Button id="subbtnForgot" className="forgotButton" onClick={e => this.forgotButton(e)}>
+                                    <Button id="subbtnForgot" className="forgotButton" onClick={e => this.forgotButton(e)}>
                                         Send
                                       </Button>
                                 </div>
