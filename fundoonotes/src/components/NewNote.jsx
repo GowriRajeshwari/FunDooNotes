@@ -92,7 +92,6 @@ class NewNote extends Component {
   componentDidMount = () => {
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
@@ -120,7 +119,6 @@ class NewNote extends Component {
     event.preventDefault();
     for (let i = 0; i < this.state.labelNotes.length; i++) {
       this.state.labelIdList.push(this.state.labelNotes[i].id);
-      console.log(this.state.labelNotes[i].id);
     }
     this.setState({ labelIdList: this.state.labelIdList });
     if (this.state.title != "") {
@@ -138,10 +136,7 @@ class NewNote extends Component {
         JSON.stringify(this.state.originalArray)
       );
 
-      console.log(form_data);
-
       setNotes(form_data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendNewData();
           document.getElementById("NoteExpand").style.background = "white";
@@ -191,9 +186,7 @@ class NewNote extends Component {
   dateshow = () => {
     this.setState({ dateshow: !this.state.dateshow });
   };
-  back = () => {
-    console.log("back");
-  };
+  back = () => {};
   todaydate = () => {
     this.setState({
       date: new Date().toDateString() + " " + this.state.timeTodayTommorow,
@@ -263,11 +256,7 @@ class NewNote extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendNewData();
           this.setState({ title: "", description: "", next: true, color: "" });
@@ -284,7 +273,6 @@ class NewNote extends Component {
   };
 
   getData = (val) => {
-    console.log(val);
     this.setState({ color: val });
     document.getElementById("NoteExpand").style.background = val;
   };
@@ -304,7 +292,6 @@ class NewNote extends Component {
     this.props.sendNewData();
   };
   labelNotes = (value) => {
-    console.log(value);
     this.setState({ labelNotes: value });
   };
   handleDeletelabel = (id, index) => {
@@ -314,7 +301,6 @@ class NewNote extends Component {
     this.setState({ labelNotes: this.state.labelNotes });
   };
   collaboratorsave = (value, capitialInitial) => {
-    console.log(value);
     this.setState({
       originalArray: value,
       collabshow: false,

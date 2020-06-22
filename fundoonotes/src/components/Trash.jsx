@@ -15,10 +15,10 @@ import ClipLoader from "react-spinners/ClipLoader";
 require("dotenv").config();
 
 function searchigFor(query) {
-  return function (x) {
+  return function (search) {
     return (
-      x.title.toLowerCase().includes(query.toLowerCase()) ||
-      x.description.toLowerCase().includes(query.toLowerCase()) ||
+      search.title.toLowerCase().includes(query.toLowerCase()) ||
+      search.description.toLowerCase().includes(query.toLowerCase()) ||
       !query
     );
   };
