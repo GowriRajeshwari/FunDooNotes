@@ -45,8 +45,8 @@ import AddIcon from "@material-ui/icons/Add";
 import { blue } from "@material-ui/core/colors";
 import setting from "../assets/setting.png";
 import Checkbox from "@material-ui/core/Checkbox";
-import Color from "./Color";
-import EditNotes from "./EditNotes";
+import Color from "./color";
+import EditNotes from "./editNotes";
 import checkboxoutline from "../assets/checkboxoutline.png";
 import checkboxtick from "../assets/checkboxtick.png";
 

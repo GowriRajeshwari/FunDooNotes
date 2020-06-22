@@ -13,7 +13,7 @@ import Modal from "@material-ui/core/Modal";
 import Snackbar from "@material-ui/core/Snackbar";
 import { IconButton } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
-import FullWidthTabs from "./Tabs";
+import FullWidthTabs from "./tabs";
 
 const drawerWidth = 240;
 
@@ -304,8 +304,6 @@ class Service extends Component {
         </Typography>
 
         <Dialog open={this.state.setOpen} onClose={this.handleClose}>
-          {/* <EditNotes data={this.state.editdata} choice={this.state.choice}
-                sendupdate={this.getdataupdate} /> */}
           <div className="classespaper">
             <div className="rowEnd">
               <div className="row1">Advance Pack Details</div>

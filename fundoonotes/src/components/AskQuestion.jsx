@@ -18,7 +18,7 @@ import reply_black from "../assets/reply_black.png";
 import thumb_up from "../assets/thumb_up.png";
 import thumb_down from "../assets/thumb_down.png";
 import StarRatingComponent from "react-star-rating-component";
-import Rating from "./Rating";
+import Rating from "./rating";
 
 class AskQuestion extends Component {
   constructor(props) {

@@ -16,11 +16,11 @@ import {
   deletelabelNotes,
 } from "../services/notesService";
 import Dialog from "@material-ui/core/Dialog";
-import Color from "./Color";
-import EditNotes from "./EditNotes";
-import NewNote from "./NewNote";
-import DeleteIcon from "./DeleteIcon";
-import DateTimePicker from "./DateTimePicker";
+import Color from "./color";
+import EditNotes from "./editNotes";
+import NewNote from "./newNote";
+import DeleteIcon from "./deleteIcon";
+import DateTimePicker from "./dateTimePicker";
 import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 import schedule from "../assets/schedule.png";
@@ -32,7 +32,7 @@ import {
   Grid,
   List,
 } from "@material-ui/core";
-import AskQuestion from "./AskQuestion";
+import AskQuestion from "./askQuestion";
 import unarchive from "../assets/unarchive.png";
 import ClipLoader from "react-spinners/ClipLoader";
 

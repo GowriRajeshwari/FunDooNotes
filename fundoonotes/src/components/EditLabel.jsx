@@ -15,7 +15,7 @@ import {
 } from "../services/notesService";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
-import TakeaNotes from "./TakeaNotes";
+import TakeaNotes from "./takeaNotes";
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: "absolute",
