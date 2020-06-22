@@ -396,7 +396,7 @@ class Register extends Component {
                 <div>
                   <div className="twocardR">
                     <div className="servicerootR">
-                      <Card>
+                      <Card className="servicerootR">
                         <div className="widthheight">
                           <Typography className="price">
                             Price : $49 per
@@ -434,7 +434,7 @@ class Register extends Component {
                     onMouseOut={this._onMouseOut1}
                   >
                     <div className="servicerootR">
-                      <Card>
+                      <Card className="servicerootR">
                         <div className="widthheight">
                           <Typography className="price">
                             Price : $49 per
