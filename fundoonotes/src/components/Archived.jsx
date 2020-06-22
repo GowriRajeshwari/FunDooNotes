@@ -528,7 +528,6 @@ class Archived extends Component {
 
                           </List>
                         ))
-
                         }
                         <div style={{ display: 'flex', flexWrap: 'wrap', flexDirection: 'row', width: '240px', paddingTop: '5px' }}>
 
