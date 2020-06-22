@@ -119,7 +119,6 @@ class Cart extends Component {
           }}
         >
           <div>
-            {/* <AddCart cartStepper={this.state.cartStepper}/> */}
             <div
               style={{
                 display: "flex",
