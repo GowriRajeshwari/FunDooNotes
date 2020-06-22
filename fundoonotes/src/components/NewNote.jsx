@@ -163,7 +163,6 @@ class NewNote extends Component {
           });
         }
       });
-      // this.setState({ title : '',description : '',next : true,color:'',date_timeshow : false,date:'',labelIdList:[]})
     } else {
       document.getElementById("NoteExpand").style.background = "white";
       this.setState({
@@ -184,7 +183,6 @@ class NewNote extends Component {
   };
 
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -234,7 +232,6 @@ class NewNote extends Component {
       searchWord: event.target.value,
     };
     searchUserList(data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
       } else {
@@ -446,7 +443,6 @@ class NewNote extends Component {
                         this.handleDeletelabel(labelNotes.id, index)
                       }
                       color="white"
-                      // value={this.state.date}
                     />
                   </div>
                 ))}

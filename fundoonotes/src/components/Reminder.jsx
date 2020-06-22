@@ -108,28 +108,19 @@ class Reminder extends Component {
         () => this.getCalled(nextProps.labelNoteShow, nextProps.label)
       );
     }
-    console.log(nextProps.labelNoteShow);
   };
-  // componentWillMount=()=>{
-  //   this.setState({ labelNoteShow : this.props.labelNoteShow})
-  // }
-
   componentDidMount = () => {
     this.getCalled(this.state.labelNoteShow, this.state.label);
-
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
     });
     getReminderNoteList().then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ data: [] });
 
-        // this.setState({data : response.data.data.data});
         for (let i = 0; i < response.data.data.data.length; i++) {
           if (
             response.data.data.data[i].isDeleted != true &&
@@ -141,26 +132,20 @@ class Reminder extends Component {
           }
         }
         this.setState({ data: this.state.data, loading: false });
-        console.log(this.state.data);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
   };
   getCalled = (labelNoteShow, label) => {
-    //  this.setState({ labelNoteShow : this.props.labelNoteShow})
-    console.log("show", labelNoteShow);
-    //  this.setState({gridView : this.props.gridView})
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
     });
     if (labelNoteShow === "true") {
       getNotesListByLabel(label).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.setState({ data: [] });
 
@@ -175,7 +160,6 @@ class Reminder extends Component {
             }
           }
           this.setState({ data: this.state.data });
-          console.log(this.state.data);
         } else {
           this.setState({
             snackbarmsg: "Netwrork is slow",
@@ -184,7 +168,6 @@ class Reminder extends Component {
         }
       });
     } else if (labelNoteShow === "false") {
-      console.log("labelNoet");
       getNotes().then((response) => {
         if (response.status === 200) {
           this.setState({ data: [] });
@@ -200,12 +183,6 @@ class Reminder extends Component {
             }
           }
           this.setState({ data: this.state.data });
-          console.log(this.state.data);
-          // for(let i=0;i<response.data.data.data.length;i++){
-          //     this.state.noteLabels.push(response.data.data.data[i].noteLabels);
-          // }
-          // this.setState({noteLabels : this.state.noteLabels})
-          // console.log(this.state.noteLabels);
         } else {
           this.setState({
             snackbarmsg: "Netwrork is slow",
@@ -247,11 +224,7 @@ class Reminder extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.componentDidMount();
           this.setState({ title: "", description: "", next: true });
@@ -271,7 +244,6 @@ class Reminder extends Component {
   };
 
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -281,7 +253,6 @@ class Reminder extends Component {
     this.setState({ dateshow: !this.state.datashow });
   };
   back = () => {
-    console.log("back");
     this.setState({ dateshow: false });
   };
   todaydate = () => {
@@ -321,7 +292,6 @@ class Reminder extends Component {
       searchWord: event.target.value,
     };
     searchUserList(data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
       } else {
@@ -351,16 +321,12 @@ class Reminder extends Component {
     this.setState({ timeShow: true });
   };
   archivebutton = (data) => {
-    console.log(data.title);
     if (data.title != "") {
-      // {"isArchived":true,"noteIdList":["5e981759ad53b700227c5cb5"]}
       let data1 = {
         isArchived: true,
         noteIdList: [data.id],
       };
-      console.log(data1);
       archiveNote(data1).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.componentDidMount();
         } else {
@@ -375,11 +341,8 @@ class Reminder extends Component {
     }
   };
 
-  colorboxbutton = () => {
-    //  return <Color/>
-  };
+  colorboxbutton = () => {};
   getData = (val, index, id) => {
-    console.log(val, index, id);
     this.setState({ color: val });
     document.getElementsByClassName("mydivouter")[
       index
@@ -389,9 +352,7 @@ class Reminder extends Component {
       color: val,
       noteIdList: [id],
     };
-    console.log(data);
     changeColor(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -400,7 +361,6 @@ class Reminder extends Component {
     });
   };
   dialogboxOpen = (data, choice) => {
-    console.log(data);
     this.setState({
       dialogBoxOpen: !this.state.dialogBoxOpen,
       editdata: data,
@@ -436,9 +396,7 @@ class Reminder extends Component {
     let data = {
       noteIdList: [id],
     };
-    console.log(data);
     removeRemainderNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -469,15 +427,12 @@ class Reminder extends Component {
   };
 
   sendtimeDate = (date, id) => {
-    console.log(date);
     let data = {
       reminder: date,
       noteIdList: [id],
     };
-    console.log(data);
 
     updateReminderNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -489,9 +444,7 @@ class Reminder extends Component {
     this.componentDidMount();
   };
   handleDeletelabel = (labelId, id) => {
-    console.log(labelId, id);
     deletelabelNotes(id, labelId).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -507,7 +460,6 @@ class Reminder extends Component {
   };
   removetag = (message) => {
     var content = message.replace(/<[^>]*>/g, "");
-    // this.setState({ msg : content })
     return content;
   };
   msg = (content) => {
@@ -516,7 +468,6 @@ class Reminder extends Component {
     } else {
       this.setState({ msg: "ASK A QUESTION" });
     }
-    // this.setState({ msg : content })
   };
 
   render() {
@@ -535,7 +486,6 @@ class Reminder extends Component {
             </div>
             <div className="maincontainer">
               <ClipLoader
-                // css={override}
                 css={{ width: "50px", height: "50px", marginTop: "45px" }}
                 size={150}
                 color={"#123abc"}
@@ -549,7 +499,6 @@ class Reminder extends Component {
                 {this.state.data
                   .filter(searchigFor(this.props.query))
                   .map((data, index) => {
-                    // if(data.isDeleted != true && data.isArchived !=true)
                     return (
                       <div
                         key={index}
@@ -601,8 +550,6 @@ class Reminder extends Component {
                               ? this.reminder(data.reminder, data.id)
                               : null}
                             {data.noteCheckLists.map((notelist, index) => (
-                              //  console.log(noteCheckLists)
-
                               <List>
                                 <div className="textdash1">
                                   <Typography style={{ width: "100%" }}>
@@ -760,7 +707,6 @@ class Reminder extends Component {
                 sendupdate={this.getdataupdate}
               />
             </Dialog>
-            {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
           </div>
         )}
       </div>

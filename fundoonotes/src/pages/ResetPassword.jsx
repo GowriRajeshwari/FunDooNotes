@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import profile from '../assets/profile.png';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import profile from "../assets/profile.png";
+import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { resetPassword } from "../services/LoginService";
-import Snackbar from '@material-ui/core/Snackbar';
+import Snackbar from "@material-ui/core/Snackbar";
 import { IconButton } from "@material-ui/core";
-
-
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -21,134 +19,138 @@ class ResetPassword extends Component {
       show: false,
       login: "Reset Password",
       next: false,
-      password: '',
+      password: "",
       helperTextpassowrd: "",
-      confirmPassword: '',
-      helperTextCpassowrd: '',
+      confirmPassword: "",
+      helperTextCpassowrd: "",
       snackbaropen: false,
-      snackbarmsg: '',
-      confirmpassword: '',
-      pass: null
+      snackbarmsg: "",
+      confirmpassword: "",
+      pass: null,
     };
-
   }
   Reset = () => {
-    // event.preventDefault();
     this.validator();
     let data = {
       newPassword: this.state.password,
     };
 
     const id = localStorage.getItem("id");
-    console.log(data, id);
 
-    if (this.state.helperTextpassowrd === '') {
-
+    if (this.state.helperTextpassowrd === "") {
       if (this.state.pass == true) {
-        resetPassword(data, id).then(response => {
-          console.log(response);
+        resetPassword(data, id).then((response) => {
           if (response.statusText == "No Content") {
             this.setState({
               snackbaropen: true,
-              snackbarmsg: "Succefully changed."
-            })
-            //  localStorage.setItem("id", response.data.id);
-
+              snackbarmsg: "Succefully changed.",
+            });
             this.props.history.push({
               pathname: "/login",
             });
           } else {
-            this.setState({ snackbarmsg: "Password not successfull", snackbaropen: true });
+            this.setState({
+              snackbarmsg: "Password not successfull",
+              snackbaropen: true,
+            });
           }
         });
       }
+    } else {
+      this.setState({
+        snackbarmsg: "Make sure password and confirm is correct",
+        snackbaropen: true,
+      });
     }
-    else {
-      this.setState({ snackbarmsg: "Make sure password and confirm is correct", snackbaropen: true });
-
-    }
-  }
+  };
   validator = () => {
-    if (this.state.password != '') {
-      if (/[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) && /[a-z]/.test(this.state.password) && /[0-9]/.test(this.state.password) && /[A-Z]/.test(this.state.password)) {
+    if (this.state.password != "") {
+      if (
+        /[\@\#\$\%\^\&\*\(\)\_\+\!]/.test(this.state.password) &&
+        /[a-z]/.test(this.state.password) &&
+        /[0-9]/.test(this.state.password) &&
+        /[A-Z]/.test(this.state.password)
+      ) {
         this.setState({
-          password: this.state.password, helperTextpassowrd: "",
-          // error: false
-        })
+          password: this.state.password,
+          helperTextpassowrd: "",
+        });
       } else {
         this.setState({
           helperTextpassowrd: "Min 8 char, at least 1 letter,1 no & 1 spl char",
           error: true,
-          password: this.state.password
-        })
+          password: this.state.password,
+        });
       }
-    } else if (this.state.password == '') {
+    } else if (this.state.password == "") {
       this.setState({
         helperTextpassowrd: "Enter the password",
         error: true,
-        password: this.state.password
-      })
+        password: this.state.password,
+      });
     }
-    if (this.state.confirmpassword == '') {
+    if (this.state.confirmpassword == "") {
       this.setState({
         helperTextCpassowrd: "Enter the confirm password",
         error: true,
-        confirmpassword: this.state.confirmpassword
-      })
+        confirmpassword: this.state.confirmpassword,
+      });
     } else {
       this.checkPassword();
-
     }
-
-
-
-  }
+  };
 
   //close snackbar
   handleClose = (event) => {
-    // event.preventDefault();
     this.setState({ snackbaropen: false });
-  }
-  onchangePassword = event => {
-    this.setState({ password: event.target.value })
-  }
+  };
+  onchangePassword = (event) => {
+    this.setState({ password: event.target.value });
+  };
 
-  onchangePasswordagain = event => {
-
+  onchangePasswordagain = (event) => {
     this.setState({
-      confirmpassword: event.target.value
-    })
-  }
+      confirmpassword: event.target.value,
+    });
+  };
 
   checkPassword = () => {
     if (this.state.password === this.state.confirmpassword) {
-      this.setState({ snackbaropen: true, snackbarmsg: 'Password changed', pass: true });
       this.setState({
-        confirmpassword: this.state.confirmpassword, helperTextpassowrd: "",
-        error: false
-      })
+        snackbaropen: true,
+        snackbarmsg: "Password changed",
+        pass: true,
+      });
+      this.setState({
+        confirmpassword: this.state.confirmpassword,
+        helperTextpassowrd: "",
+        error: false,
+      });
     } else {
       this.setState({
         snackbaropen: true,
-        snackbarmsg: 'enter same password',
-        pass: false
-      })
+        snackbarmsg: "enter same password",
+        pass: false,
+      });
     }
-  }
+  };
   render() {
     return (
       <div className="firstcontainerReset">
-        <span class="usernameReset"><span>F</span><span>u</span><span>n</span><span>D</span><span>o</span><span>o</span></span>
+        <span class="usernameReset">
+          <span>F</span>
+          <span>u</span>
+          <span>n</span>
+          <span>D</span>
+          <span>o</span>
+          <span>o</span>
+        </span>
         <div className="loginstyleReset">{this.state.login}</div>
 
-
         <Paper id="rootpaperReset">
-
           <div className="containerReset">
-
             <div className="borderReset">
               <div className="loginFromReset">
-                {/* <div>Reset Your Password</div> */}
                 <div className="inputFieldReset">
                   <TextField
                     hintText="Password"
@@ -177,23 +179,34 @@ class ResetPassword extends Component {
                 </div>
 
                 <div className="submitButtonReset">
-                  <Button id="subbtnReset" className="Reset" onClick={e => this.Reset(e)}>
+                  <Button
+                    id="subbtnReset"
+                    className="Reset"
+                    onClick={(e) => this.Reset(e)}
+                  >
                     Change Password
-                </Button>
+                  </Button>
                 </div>
-
               </div>
             </div>
           </div>
         </Paper>
-        <Snackbar open={this.state.snackbaropen} autoHideDuration={6000} onClose={this.handleClose}
+        <Snackbar
+          open={this.state.snackbaropen}
+          autoHideDuration={6000}
+          onClose={this.handleClose}
           message={<span>{this.state.snackbarmsg}</span>}
           action={[
-            <IconButton key="close" arial-label="close" color="inherit" onClick={this.handleClose}>
-              x</IconButton>
-          ]}>
-        </Snackbar>
-
+            <IconButton
+              key="close"
+              arial-label="close"
+              color="inherit"
+              onClick={this.handleClose}
+            >
+              x
+            </IconButton>,
+          ]}
+        ></Snackbar>
       </div>
     );
   }

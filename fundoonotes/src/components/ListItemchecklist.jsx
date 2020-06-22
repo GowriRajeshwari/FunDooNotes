@@ -77,10 +77,8 @@ class ListItemchecklist extends Component {
     this.setState({ date: date });
   };
   componentDidMount = () => {
-    console.log("ddddddd");
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
@@ -108,7 +106,6 @@ class ListItemchecklist extends Component {
     event.preventDefault();
     for (let i = 0; i < this.state.labelNotes.length; i++) {
       this.state.labelIdList.push(this.state.labelNotes[i].id);
-      console.log(this.state.labelNotes[i].id);
     }
 
     this.setState({ labelIdList: this.state.labelIdList }, this.dataPassing());
@@ -116,7 +113,6 @@ class ListItemchecklist extends Component {
   dataPassing = () => {
     const combineArray = this.state.itemsArray.concat(this.state.tickboxArray);
     const datetostring = this.state.date.toString();
-    console.log(combineArray);
     if (this.state.title != "") {
       const form_data = new FormData();
       form_data.append("title", this.state.title);
@@ -142,10 +138,7 @@ class ListItemchecklist extends Component {
         collaberator: this.state.originalArray,
         checklist: combineArray,
       };
-      console.log(data);
-
       setNotes(form_data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendlist();
           this.setState({
@@ -171,7 +164,6 @@ class ListItemchecklist extends Component {
   };
 
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -180,9 +172,7 @@ class ListItemchecklist extends Component {
   dateshow = () => {
     this.setState({ dateshow: !this.state.dateshow });
   };
-  back = () => {
-    console.log("back");
-  };
+  back = () => {};
   todaydate = () => {
     this.setState({
       date: new Date().toDateString() + " " + this.state.timeTodayTommorow,
@@ -224,26 +214,12 @@ class ListItemchecklist extends Component {
     form_data.append("searchWord", this.state.collabatorName);
 
     searchUserList(form_data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
       } else {
       }
     });
   };
-  // showingCollabator=(event)=>{
-  //     this.setState({
-  //         anchorEl: event.currentTarget,
-  //         open: true
-  //     });
-  // }
-  // collabatorClick=(dat)=>{
-  //   this.setState({
-  //     open : false,collabatorValue: dat
-  // })
-  // this.state.collabatorArray.push(dat)
-
-  // }
   collabsave = () => {
     this.setState({
       collabshow: true,
@@ -268,11 +244,7 @@ class ListItemchecklist extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendNewData();
           this.setState({ title: "", description: "", next: true, color: "" });
@@ -289,7 +261,6 @@ class ListItemchecklist extends Component {
   };
 
   getData = (val) => {
-    console.log(val);
     this.setState({ color: val });
     document.getElementById("NoteExpand").style.background = val;
   };
@@ -310,15 +281,12 @@ class ListItemchecklist extends Component {
     this.setState({ items: event.target.value });
   };
   checkboxoutline = async (arrayvalue) => {
-    console.log(arrayvalue);
     let listData = { itemName: arrayvalue, status: "close" };
     this.state.tickboxArray.push(listData);
     await this.setState({ tickboxArray: this.state.tickboxArray });
     const index = this.state.itemsArray.findIndex(
       (itemsArray) => itemsArray.itemName === arrayvalue
     );
-    // const index= this.state.itemsArray.indexOf(listData.itemName);
-    console.log(index);
     if (index > -1) {
       this.state.itemsArray.splice(index, 1);
     }
@@ -328,7 +296,6 @@ class ListItemchecklist extends Component {
     this.setState({ items: "" });
   };
   labelNotes = (value) => {
-    console.log(value);
     this.setState({ labelNotes: value });
   };
   handleDeletelabel = (id, index) => {
@@ -338,7 +305,6 @@ class ListItemchecklist extends Component {
     this.setState({ labelNotes: this.state.labelNotes });
   };
   collaboratorsave = (value, capitialInitial) => {
-    console.log(value);
     this.setState({
       originalArray: value,
       collabshow: false,

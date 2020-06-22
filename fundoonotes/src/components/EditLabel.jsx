@@ -42,7 +42,6 @@ class EditLabel extends Component {
   componentDidMount = () => {
     this.setState({ dialogBoxOpen: true });
     getNoteLabelList().then((response) => {
-      console.log(response.data.data.details);
       if (response.status === 200) {
         this.setState({ data: response.data.data.details });
       } else {
@@ -65,20 +64,16 @@ class EditLabel extends Component {
     this.setState({ setOpen: false });
   };
   Done = () => {
-    // this.handelNoteDialogBox();
-    // this.setState({dialogBoxOpen : false});
     this.props.labeldata();
   };
   addlabel = () => {
     const userId = localStorage.getItem("userId");
-    console.log(userId);
     let data = {
       label: this.state.label,
       isDeleted: false,
       userId: userId,
     };
     addLabels(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
         this.setState({ label: "" });
@@ -92,17 +87,14 @@ class EditLabel extends Component {
   };
   deletelabel = (id) => {
     deleteNoteLabel(id).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
-        // this.setState({ label : ''})
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
   };
   render() {
-    // const classes = useStyles();
     return (
       <div>
         <div className="classespaper12">
@@ -117,7 +109,6 @@ class EditLabel extends Component {
                 variant="filled"
                 placeholder="Create"
                 size="small"
-                // style={{display : 'flex',justifyContent:'center'}}
                 InputProps={{ disableUnderline: true }}
                 onChange={this.onchangelabel}
               />
@@ -137,7 +128,6 @@ class EditLabel extends Component {
                 </div>
                 <div>
                   <TextField
-                    // error={this.state.red}
                     helperText={this.state.helperTextEmail}
                     id="btndash"
                     variant="filled"

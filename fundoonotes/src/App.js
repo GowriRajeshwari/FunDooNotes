@@ -1,48 +1,39 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
 import { Router, Switch, Route } from "react-router-dom";
-import service from './components/service';
+import service from "./components/service";
 import history from "./history";
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ForgotPassword from './pages/ForgotPassword';
-import ResetPassword from './pages/ResetPassword';
-import Dashboard from './components/Dashboard';
-import TakeaNotes from './components/TakeaNotes';
-import EditLabel from './components/EditLabel';
-import EditNotes from './components/EditNotes';
-import Archived from './components/Archived';
-import Color from './components/Color';
-import NewNote from './components/NewNote';
-import DateTimePicker from './components/DateTimePicker';
-import Collaborator from './components/Collaborator'
-import DeleteIcon from './components/DeleteIcon'
-import Trash from './components/Trash'
-import Reminder from './components/Reminder';
-import ListItemchecklist from './components/ListItemchecklist';
-import LabelNotes from './components/LabelNotes';
-import AskQuestion from './components/AskQuestion';
-import RatingStart from './components/Rating';
-import Cart from './components/Cart';
-import FullWidthTabs from './components/Tabs';
-import LabelShow from './components/LabelShow'
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+import Dashboard from "./components/Dashboard";
+import TakeaNotes from "./components/TakeaNotes";
+import EditLabel from "./components/EditLabel";
+import EditNotes from "./components/EditNotes";
+import Archived from "./components/Archived";
+import Color from "./components/Color";
+import NewNote from "./components/NewNote";
+import DateTimePicker from "./components/DateTimePicker";
+import Collaborator from "./components/Collaborator";
+import DeleteIcon from "./components/DeleteIcon";
+import Trash from "./components/Trash";
+import Reminder from "./components/Reminder";
+import ListItemchecklist from "./components/ListItemchecklist";
+import LabelNotes from "./components/LabelNotes";
+import AskQuestion from "./components/AskQuestion";
+import RatingStart from "./components/Rating";
+import Cart from "./components/Cart";
+import FullWidthTabs from "./components/Tabs";
+import LabelShow from "./components/LabelShow";
 
-
-
-let token =  window.location.href.split('/' )[4];
-let resetpassword="/resetpassword/"+token
-// console.log(token);
-// if('serviceWorker' in navigator){
-//   navigator.serviceWorker.register('./serviceWorker.js',{scope : './'})
-//     .then(reg => console.log('service worker registered',reg))
-//     .catch(err => console.log('service worker not registered',err));
-// }
+let token = window.location.href.split("/")[4];
+let resetpassword = "/resetpassword/" + token;
 
 function App() {
   return (
     <Router history={history}>
       <Switch>
-    
         <Route path="/" exact component={service} />
         <Route path="/login" component={Login} />
         <Route path="/Register" component={Register} />
@@ -64,15 +55,9 @@ function App() {
         <Route path="/LabelNotes" component={LabelNotes} />
         <Route path="/ratingStart" component={RatingStart} />
         <Route path="/ListItemchecklist" component={ListItemchecklist} />
-        <Route path="/cart"  component={Cart} />    
-        <Route path="/tabs"  component={FullWidthTabs} />    
-        <Route path="/labelShow"  component={LabelShow} />        
-
-
-
-
-
-
+        <Route path="/cart" component={Cart} />
+        <Route path="/tabs" component={FullWidthTabs} />
+        <Route path="/labelShow" component={LabelShow} />
       </Switch>
     </Router>
   );

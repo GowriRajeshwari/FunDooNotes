@@ -27,11 +27,7 @@ const useStyles = (theme) => ({
     margin: "0 2px",
     transform: "scale(0.8)",
   },
-  title: {
-    //   fontSize: 14,
-    //   width : '250px',
-    //   height : '250px'
-  },
+  title: {},
   widthheight: {
     width: "250px",
     height: "250px",
@@ -80,7 +76,6 @@ const useStyles = (theme) => ({
     display: "flex",
     justifyContent: "center",
     color: "blue",
-    // marginTop : '10px'
   },
 });
 
@@ -111,11 +106,9 @@ class Service extends Component {
     this.setState({ colorshow1: false });
   };
   serviceadvance = (event) => {
-    console.log("service");
     this.setState({ setOpen: true, service: "advance" });
   };
   servicebasic = (event) => {
-    console.log("service");
     this.setState({ setOpen: true, service: "basic" });
   };
   handleOpen = () => {
@@ -142,9 +135,7 @@ class Service extends Component {
     } else {
     }
   };
-  //close snackbar
   handleClose(event) {
-    // event.preventDefault();
     this.setState({ snackbaropen: false });
   }
   render() {

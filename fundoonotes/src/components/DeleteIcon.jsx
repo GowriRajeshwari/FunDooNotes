@@ -75,7 +75,6 @@ class DeleteIcon extends Component {
     };
   }
   componentDidMount = () => {
-    console.log(this.state.askshowlength);
     if (this.props.ashshow > 0) {
       this.setState({ ashshow: "SHOW QUESTION" });
     } else {
@@ -90,15 +89,12 @@ class DeleteIcon extends Component {
   };
 
   deletebutton = async (id) => {
-    console.log(id);
     await this.state.noteIdList.push(id.toString());
     let data = {
       isDeleted: true,
       noteIdList: this.state.noteIdList,
     };
-    console.log(data);
     deleteNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
         this.props.sendtrash(true);
@@ -108,7 +104,6 @@ class DeleteIcon extends Component {
     });
   };
   addLabelButton = async () => {
-    console.log(this.state.noteLabel);
     for (let i = 0; i < this.state.noteLabel.length; i++) {
       this.state.activeCheckboxes.push(this.state.noteLabel[i].id);
       this.setState({ activeCheckboxes: this.state.activeCheckboxes });
@@ -128,20 +123,8 @@ class DeleteIcon extends Component {
   };
   handleChange = (event) => {
     this.setState({ checked: !this.state.checked });
-    // this.state.setChecked(event.target.this.state.checked);
   };
-  checkboxoutline = (id, labelId) => {
-    // this.setState({checked : !this.state.checked})
-    console.log(this.state.checked);
-    //   addlabelNotes(id,labelId).then(response => {
-    //     console.log(response);
-    //    if (response.status === 200) {
-    //        this.props.sendtrash(true);
-    //    } else {
-    //        this.setState({  snackbarmsg: "Netwrork is slow", snackbaropen: true });
-    //    }
-    // });
-  };
+  checkboxoutline = (id, labelId) => {};
   handleCheck = (labelId, id) => {
     let found = this.state.activeCheckboxes.includes(labelId);
     if (found) {
@@ -151,7 +134,6 @@ class DeleteIcon extends Component {
         ),
       });
       deletelabelNotes(id, labelId).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendtrash(true);
         } else {
@@ -167,7 +149,6 @@ class DeleteIcon extends Component {
       });
 
       addlabelNotes(id, labelId).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendtrash(true);
         } else {
@@ -180,18 +161,14 @@ class DeleteIcon extends Component {
     }
   };
   askQuestion = () => {
-    // this.setState({askQuestion : true})
     this.props.sendtrash(false, this.state.id);
   };
   deleteForever = async (id) => {
-    console.log(id);
     await this.state.noteIdList.push(id.toString());
     let data = {
       noteIdList: this.state.noteIdList,
     };
-    console.log(data);
     deleteForeverNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
         this.props.sendtrash1(true);
@@ -202,15 +179,12 @@ class DeleteIcon extends Component {
     });
   };
   restore = async (id) => {
-    console.log(id);
     await this.state.noteIdList.push(id.toString());
     let data = {
       isDeleted: false,
       noteIdList: this.state.noteIdList,
     };
-    console.log(data);
     trashNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
         this.props.sendtrash1(true);

@@ -103,8 +103,6 @@ class LabelShow extends Component {
   };
   UNSAFE_componentWillReceiveProps = (nextProps) => {
     this.setState({ label: nextProps.label });
-
-    console.log(nextProps.labelNoteShow);
     this.getCalled(nextProps.label);
   };
   componentWillMount = () => {
@@ -113,14 +111,12 @@ class LabelShow extends Component {
   componentDidMount = () => {
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
     });
 
     getNotesListByLabel(this.props.label).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ data: [] });
 
@@ -135,27 +131,21 @@ class LabelShow extends Component {
           }
         }
         this.setState({ data: this.state.data, loading: false });
-        console.log(this.state.data);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
     });
   };
   getCalled = async (label) => {
-    //  this.setState({ labelNoteShow : this.props.labelNoteShow})
-    console.log("show", label);
     await this.setState({ loading: true, data: [] });
-    //  this.setState({gridView : this.props.gridView})
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
     });
 
     getNotesListByLabel(label).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ data: [] });
 
@@ -170,7 +160,6 @@ class LabelShow extends Component {
           }
         }
         this.setState({ data: this.state.data, loading: false });
-        console.log(this.state.data);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -208,11 +197,7 @@ class LabelShow extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.componentDidMount();
           this.setState({ title: "", description: "", next: true });
@@ -232,7 +217,6 @@ class LabelShow extends Component {
   };
 
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -242,7 +226,6 @@ class LabelShow extends Component {
     this.setState({ dateshow: !this.state.datashow });
   };
   back = () => {
-    console.log("back");
     this.setState({ dateshow: false });
   };
   todaydate = () => {
@@ -282,7 +265,6 @@ class LabelShow extends Component {
       searchWord: this.state.collabatorName,
     };
     searchUserList(data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
       } else {
@@ -312,16 +294,12 @@ class LabelShow extends Component {
     this.setState({ timeShow: true });
   };
   archivebutton = (data) => {
-    console.log(data.title);
     if (data.title != "") {
-      // {"isArchived":true,"noteIdList":["5e981759ad53b700227c5cb5"]}
       let data1 = {
         isArchived: true,
         noteIdList: [data.id],
       };
-      console.log(data1);
       archiveNote(data1).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.componentDidMount();
         } else {
@@ -336,11 +314,8 @@ class LabelShow extends Component {
     }
   };
 
-  colorboxbutton = () => {
-    //  return <Color/>
-  };
+  colorboxbutton = () => {};
   getData = (val, index, id) => {
-    console.log(val, index, id);
     this.setState({ color: val });
     document.getElementsByClassName("mydivouter")[
       index
@@ -350,9 +325,7 @@ class LabelShow extends Component {
       color: val,
       noteIdList: [id],
     };
-    console.log(data);
     changeColor(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -361,7 +334,6 @@ class LabelShow extends Component {
     });
   };
   dialogboxOpen = (data, choice) => {
-    console.log(data);
     this.setState({
       dialogBoxOpen: !this.state.dialogBoxOpen,
       editdata: data,
@@ -397,9 +369,7 @@ class LabelShow extends Component {
     let data = {
       noteIdList: [id],
     };
-    console.log(data);
     removeRemainderNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -430,15 +400,11 @@ class LabelShow extends Component {
   };
 
   sendtimeDate = (date, id) => {
-    console.log(date);
     let data = {
       reminder: date,
       noteIdList: [id],
     };
-    console.log(data);
-
     updateReminderNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -450,9 +416,7 @@ class LabelShow extends Component {
     this.componentDidMount();
   };
   handleDeletelabel = (labelId, id) => {
-    console.log(labelId, id);
     deletelabelNotes(id, labelId).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.componentDidMount();
       } else {
@@ -468,7 +432,6 @@ class LabelShow extends Component {
   };
   removetag = (message) => {
     var content = message.replace(/<[^>]*>/g, "");
-    // this.setState({ msg : content })
     return content;
   };
   msg = (content) => {
@@ -477,7 +440,6 @@ class LabelShow extends Component {
     } else {
       this.setState({ msg: "ASK A QUESTION" });
     }
-    // this.setState({ msg : content })
   };
 
   render() {
@@ -496,7 +458,6 @@ class LabelShow extends Component {
             </div>
             <div className="maincontainer">
               <ClipLoader
-                // css={override}
                 css={{ width: "50px", height: "50px", marginTop: "45px" }}
                 size={150}
                 color={"#123abc"}
@@ -510,7 +471,6 @@ class LabelShow extends Component {
                 {this.state.data
                   .filter(searchigFor(this.props.query))
                   .map((data, index) => {
-                    // if(data.isDeleted != true && data.isArchived !=true)
                     return (
                       <div
                         key={index}
@@ -562,8 +522,6 @@ class LabelShow extends Component {
                               ? this.reminder(data.reminder, data.id)
                               : null}
                             {data.noteCheckLists.map((notelist, index) => (
-                              //  console.log(noteCheckLists)
-
                               <List>
                                 <div className="textdash1">
                                   <Typography style={{ width: "100%" }}>
@@ -721,7 +679,6 @@ class LabelShow extends Component {
                 sendupdate={this.getdataupdate}
               />
             </Dialog>
-            {/* <Edit dialogBoxOpen="true" labeldata={this.labeldata} /> */}
           </div>
         )}
       </div>

@@ -54,12 +54,7 @@ class AskQuestion extends Component {
       profileImageFromRes: profileImage,
     });
     getNotesDetail(this.state.id).then((response) => {
-      console.log(
-        "qust&ans",
-        response.data.data.data[0].questionAndAnswerNotes
-      );
       if (response.status === 200) {
-        //  this.props.sendtrash(true);
         this.setState({
           data: response.data.data.data[0],
           questionAndAnswerNotes:
@@ -82,20 +77,16 @@ class AskQuestion extends Component {
     });
   };
   onStarClick(nextValue, id) {
-    //this.setState({rating: nextValue});
     let data = {
       rate: nextValue,
     };
-    console.log(data);
     rate(data, id).then((response) => {
-      console.log(response.data.data.details.message);
       if (response.status === 200) {
         this.setState({
           showQust: false,
           message: response.data.data.details.message,
         });
         this.componentDidMount();
-        //  this.props.sendtrash(true);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -118,9 +109,7 @@ class AskQuestion extends Component {
         "</p>",
       notesId: this.state.id,
     };
-    console.log(data);
     questionAndAnswerNotes(data).then((response) => {
-      console.log(response.data.data.details.message);
       if (response.status === 200) {
         this.setState({
           showQust: false,
@@ -128,7 +117,6 @@ class AskQuestion extends Component {
           editorState: "",
         });
         this.componentDidMount();
-        //  this.props.showQuestion("showQuestion");
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -139,16 +127,12 @@ class AskQuestion extends Component {
     let data = {
       like: true,
     };
-    console.log(id, data);
-
     const form_data = new FormData();
     form_data.append("like", this.state.like);
     like(data, id).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ count: response.data.data.details.count });
         this.componentDidMount();
-        //  this.props.sendtrash(true);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -159,13 +143,10 @@ class AskQuestion extends Component {
     let data = {
       like: false,
     };
-    console.log(id, data);
     like(data, id).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ count: response.data.data.details.count });
         this.componentDidMount();
-        //  this.props.sendtrash(true);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -181,9 +162,7 @@ class AskQuestion extends Component {
         this.state.editorState.getCurrentContent().getPlainText("\u0001") +
         "</p>",
     };
-    console.log(data);
     reply(data, this.state.qustId).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({
           showReply: false,
@@ -191,7 +170,6 @@ class AskQuestion extends Component {
           editorState: "",
         });
         this.componentDidMount();
-        //  this.props.sendtrash(true);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }

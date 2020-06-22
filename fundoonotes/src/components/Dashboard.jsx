@@ -60,7 +60,6 @@ const useStyles = (theme) => ({
     display: "flex",
   },
   appBar: {
-    // position : 'fixed',
     height: "70px",
     backgroundColor: "white",
     transition: theme.transitions.create(["margin", "width"], {
@@ -69,16 +68,13 @@ const useStyles = (theme) => ({
     }),
   },
   appBarShift: {
-    // width: `calc(100% - ${drawerWidth}px)`,
     marginLeft: drawerWidth,
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
-  menuButton: {
-    // marginRight: theme.spacing(1),
-  },
+  menuButton: {},
   hide: {
     display: "none",
   },
@@ -96,7 +92,6 @@ const useStyles = (theme) => ({
     display: "flex",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
@@ -105,7 +100,6 @@ const useStyles = (theme) => ({
     marginTop: "10px",
     alignItems: "center",
     padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: "flex-end",
   },
@@ -123,7 +117,6 @@ const useStyles = (theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    // marginLeft: 0,
     ["@media (min-width:414px)"]: {
       marginLeft: 0,
     },
@@ -145,7 +138,6 @@ const useStyles = (theme) => ({
     height: "50px",
     width: "800px",
     maxWidth: "720px",
-    // marginLeft: '200px',
     backgroundColor: "#ffffff",
     flexDirection: "row",
     display: "flex",
@@ -190,7 +182,6 @@ class Dashboard extends Component {
     };
   }
   componentDidMount = () => {
-    // window.location.reload(false);
     const profileImage = localStorage.getItem("userProfile");
     const email = localStorage.getItem("email");
     const firstName = localStorage.getItem("firstName");
@@ -200,7 +191,6 @@ class Dashboard extends Component {
       profileImageFromRes: profileImage,
     });
     getNoteLabelList().then((response) => {
-      // console.log(response.data.data.details);
       if (response.status === 200) {
         this.setState({ labelData: response.data.data.details });
       } else {
@@ -222,7 +212,6 @@ class Dashboard extends Component {
 
   choice = (event, text) => {
     event.preventDefault();
-    console.log(text);
     if (text == "Edit labels") {
       this.setState({ heading: "Editlabels", dialogBoxOpen: true });
     } else if (text == "Notes") {
@@ -244,12 +233,6 @@ class Dashboard extends Component {
     this.componentDidMount();
   };
   getcomponents = () => {
-    console.log(this.state.choice);
-    // if(this.state.choice == 'Editlabels'){
-    //   // return <Edit dialogBoxOpen="true" labeldata={this.labeldata} />
-    //   return <TakeaNotes query={this.state.query} dialogBoxOpen1={this.state.editlabel} labeldata={this.labeldata}
-    //   gridView={this.state.gridView} gridfunction={this.gridview.bind(this)}/>
-    // }
     if (this.state.choice == "Notes") {
       return (
         <TakeaNotes
@@ -298,12 +281,9 @@ class Dashboard extends Component {
   };
   queryfunction = (event) => {
     this.setState({ query: event.target.value });
-    //  <Tableadmin query={this.state.query}/>
   };
   gridview = () => {
     this.setState({ gridView: !this.state.gridView });
-    // console.log(this.state.gridView)
-    // alert(this.state.gridView)
   };
   profile = () => {
     this.setState({ profile: !this.state.profile });
@@ -317,7 +297,6 @@ class Dashboard extends Component {
   logout = () => {
     let data = {};
     logout(data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 204) {
         localStorage.setItem("email", "");
         localStorage.setItem("firstName", "");
@@ -333,8 +312,7 @@ class Dashboard extends Component {
   profileImagePick = () => {};
 
   onFormSubmit = (e) => {
-    console.log("onformatsubmit");
-    e.preventDefault(); // Stop form submit
+    e.preventDefault();
     let form_data = new FormData();
     form_data.append("file", this.state.file);
     fileUpload(form_data).then((response) => {
@@ -349,9 +327,6 @@ class Dashboard extends Component {
     });
   };
   onChange = (e) => {
-    console.log(e.target.files[0].name, this.state.open12);
-    // await this.setState({open12:true})
-
     this.setState({
       file: e.target.files[0],
       fileshow: true,
@@ -362,11 +337,9 @@ class Dashboard extends Component {
 
   handleClick12 = (event) => {
     this.setState({
-      // anchorEl: event.currentTarget,
       open12: !this.state.open12,
       file: "",
     });
-    // this.setState({fileshow :false,profileImage:'',file:''})
   };
   handelNoteDialogBox = () => {
     this.setState({
@@ -380,7 +353,6 @@ class Dashboard extends Component {
       <div className={classes.root}>
         <CssBaseline />
         <AppBar
-          // position="fixed"
           className={clsx(classes.appBar, {
             [classes.appBarShift]: this.state.open,
           })}
@@ -415,10 +387,8 @@ class Dashboard extends Component {
                 </Typography>
               </div>
               <div className="searchDiv">
-                {/* <Paper> */}
                 <div className="searchdiv1">
                   <SearchIcon style={{ color: "black", marginRight: "6px" }} />
-                  {/* <img src={search_black} style={{ width : '25px',height : '25px',marginRight : '6px'}} /> */}
                   <input
                     placeholder="Search"
                     InputProps={{ disableUnderline: true }}
@@ -432,8 +402,6 @@ class Dashboard extends Component {
                   />
                   <CloseIcon style={{ color: "black" }} />
                 </div>
-
-                {/* </Paper> */}
               </div>
               <div className="icondash">
                 <IconButton

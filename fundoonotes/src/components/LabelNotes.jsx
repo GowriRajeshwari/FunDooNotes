@@ -71,7 +71,6 @@ class LabelNotes extends Component {
 
   componentDidMount = () => {
     getNoteLabelList().then((response) => {
-      // console.log(response.data.data.details);
       if (response.status === 200) {
         this.setState({ data: response.data.data.details });
       } else {
@@ -88,15 +87,12 @@ class LabelNotes extends Component {
   };
 
   deletebutton = async (id) => {
-    console.log(id);
     await this.state.noteIdList.push(id.toString());
     let data = {
       isDeleted: true,
       noteIdList: this.state.noteIdList,
     };
-    console.log(data);
     deleteNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
         this.props.sendtrash(true);
@@ -113,7 +109,6 @@ class LabelNotes extends Component {
   };
   handleChange = (event) => {
     this.setState({ checked: !this.state.checked });
-    // this.state.setChecked(event.target.this.state.checked);
   };
   checkboxoutline = (data, index) => {
     this.state.labelNotes.push(data);
@@ -130,7 +125,6 @@ class LabelNotes extends Component {
       const index = this.state.labelNotes.findIndex(
         (labelNotes) => labelNotes.id === labelId
       );
-      console.log(index, labelId);
       if (index > -1) {
         this.state.labelNotes.splice(index, 1);
       }
@@ -173,24 +167,6 @@ class LabelNotes extends Component {
                   <Typography onClick={() => this.backbutton()}>
                     Label Note
                   </Typography>
-                  {/* { this.state.data.map((data, index) => (
-                                    <List>
-                                  <div className="textdash" key={index}>
-
-                                  {this.state.checked ? <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}}  >
-                                <img src={checkboxtick} id="imgdashnotes" />
-                                </div> : 
-                                <div style={{display : 'flex',justifyContent:'center',alignItems : 'center'}} 
-                               >
-                               {/* <Checkbox
-                                 checked={this.state.checked}
-                                 onChange={this.handleChange}
-                                 inputProps={{ 'aria-label': 'primary checkbox' }}
-                               /> */}
-
-                  {/* <img src={checkboxoutline} id="imgdashnotes" /> */}
-                  {/* </div> */}
-                  {/* }  */}
                   {this.state.data.map((data, index) => (
                     <List>
                       <div className="textdash">

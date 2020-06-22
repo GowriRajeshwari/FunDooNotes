@@ -88,17 +88,13 @@ class EditNotes extends Component {
   };
   close = (event) => {
     event.preventDefault();
-    // if(this.state.title !='' ){
     const datetostring = this.state.date.toString();
     let data = {
       noteId: this.state.data.id,
       title: this.state.title,
       description: this.state.description,
     };
-    console.log(data);
-
     updateNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.props.sendupdate();
       } else {
@@ -107,7 +103,6 @@ class EditNotes extends Component {
     });
   };
   getData = (val) => {
-    console.log(val);
     this.setState({ color: val });
     document.getElementById("NoteExpand").style.background = val;
 
@@ -115,11 +110,8 @@ class EditNotes extends Component {
       color: val,
       noteIdList: [this.state.data.id],
     };
-    console.log(data);
     changeColor(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
-        // this.props.sendupdate();
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -135,15 +127,11 @@ class EditNotes extends Component {
 
   sendtimeDate = (date, id) => {
     this.setState({ date: date.toString() });
-    console.log(date);
     let data = {
       reminder: date,
       noteIdList: [id],
     };
-    console.log(data);
-
     updateReminderNotes(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -188,11 +176,7 @@ class EditNotes extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.props.sendNewData();
           this.setState({ title: "", description: "", next: true, color: "" });
@@ -208,18 +192,13 @@ class EditNotes extends Component {
     }
   };
   archivebutton = (data) => {
-    console.log(data.title);
     if (data.title != "") {
-      // {"isArchived":true,"noteIdList":["5e981759ad53b700227c5cb5"]}
       let data1 = {
         isArchived: true,
         noteIdList: [data.id],
       };
-      console.log(data1);
       archiveNote(data1).then((response) => {
-        console.log(response);
         if (response.status === 200) {
-          //  this.componentDidMount();
           this.props.sendupdate();
         } else {
           this.setState({
@@ -244,7 +223,6 @@ class EditNotes extends Component {
     });
   };
   onchangecollabator = (event) => {
-    // event.preventDefault()
     event.persist();
     this.setState({
       collabatorName1: event.target.value,
@@ -255,9 +233,7 @@ class EditNotes extends Component {
     const form_data = new FormData();
     form_data.append("searchWord", event.target.value);
 
-    console.log(form_data);
     searchUserList(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({
           anchorEl1: event.currentTarget,
@@ -269,7 +245,6 @@ class EditNotes extends Component {
     });
   };
   collabatorClick = (dat, fullDetails, id, event) => {
-    console.log(dat, fullDetails);
     const res = dat.charAt(0).toUpperCase();
     this.setState({
       open1: false,
@@ -277,12 +252,9 @@ class EditNotes extends Component {
       capitalInitial1: res,
       anchorEl1: event.currentTarget,
     });
-    // this.state.collabatorArray1.push(dat)
     this.state.fullDetails1.push(fullDetails);
     AddcollaboratorsNotes(fullDetails, id).then((response) => {
-      console.log(response);
       if (response.status === 200) {
-        // this.componentDidMount()
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -295,7 +267,6 @@ class EditNotes extends Component {
     });
   };
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl1: event.currentTarget,
       open1: !this.state.open,
@@ -309,20 +280,16 @@ class EditNotes extends Component {
     this.props.sendupdate();
   };
   deleteCollabator = (data, fullData, id) => {
-    // console.log(id,fullData.userId)
     const index = this.state.fullDetails1.findIndex(
       (fullDetails1) => fullDetails1.firstName === data
     );
-    // console.log(index)
     if (index > -1) {
       this.state.fullDetails1.splice(index, 1);
     }
     this.setState({ fullDetails1: this.state.fullDetails1 });
 
     removeCollaboratorsNotes(id, fullData.userId).then((response) => {
-      console.log(response);
       if (response.status === 200) {
-        // this.componentDidMount()
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -516,7 +483,6 @@ class EditNotes extends Component {
                     style={{ width: "100%", paddingLeft: "15px" }}
                     value={this.state.collabatorName1}
                     onChange={this.onchangecollabator}
-                    // onClick={e => this.showingCollabator(e)}
                     InputProps={{ disableUnderline: true }}
                   />
                 </div>

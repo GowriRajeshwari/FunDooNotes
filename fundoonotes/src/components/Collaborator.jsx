@@ -47,7 +47,6 @@ class Collaborator extends Component {
       searchWord: event.target.value,
     };
     searchUserList(data).then((response) => {
-      console.log(response.data.data.details);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
         this.setState({
@@ -75,7 +74,6 @@ class Collaborator extends Component {
     });
   };
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -92,7 +90,6 @@ class Collaborator extends Component {
     const index = this.state.fullDetails.findIndex(
       (fullDetails) => fullDetails.firstName === data
     );
-    console.log(index);
     if (index > -1) {
       this.state.fullDetails.splice(index, 1);
     }
@@ -188,7 +185,6 @@ class Collaborator extends Component {
                 style={{ width: "100%", paddingLeft: "15px" }}
                 value={this.state.collabatorName}
                 onChange={this.onchangecollabator}
-                // onClick={e => this.showingCollabator(e)}
                 InputProps={{ disableUnderline: true }}
               />
             </div>

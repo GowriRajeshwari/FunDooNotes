@@ -6,7 +6,6 @@ export default class RatingStart extends React.Component {
     super(props);
 
     this.state = {
-      //   rating: 0,
       rating: this.props.rating,
     };
   }

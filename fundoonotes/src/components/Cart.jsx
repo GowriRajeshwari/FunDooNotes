@@ -65,7 +65,6 @@ class Cart extends Component {
   }
   componentDidMount = () => {
     myCart().then((response) => {
-      console.log(response);
       this.setState({
         isOrderPlaced: response.data.data[0].isOrderPlaced,
         cartStepper: response.data.data[0].isOrderPlaced ? 3 : 1,
@@ -73,7 +72,6 @@ class Cart extends Component {
         cartId: response.data.data[0].id,
       });
     });
-    console.log(this.state.isOrderPlaced);
   };
   checkout = () => {
     this.cartChange();
@@ -87,15 +85,11 @@ class Cart extends Component {
     this.setState({ address: event.target.value });
   };
   placeOrder = () => {
-    // this.setState({cartStepper: this.state.cartStepper + 1})
-
-    // await this.setState({cartStepper: this.state.cartStepper + 1})
     let data = {
       cartId: this.state.cartId,
       address: this.state.address,
     };
     placeOrder(data).then((response) => {
-      console.log(response);
       if (response.status === 200) {
         this.setState({
           cartStepper: this.state.cartStepper + 1,

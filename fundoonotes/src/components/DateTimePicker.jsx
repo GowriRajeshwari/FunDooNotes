@@ -58,7 +58,6 @@ class DateTimePicker extends Component {
   componentDidMount = () => {
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    //  console.log(d.getTime())
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
@@ -85,7 +84,6 @@ class DateTimePicker extends Component {
       },
       () => this.propsData()
     );
-    // this.props.sendtimeDate(this.state.date.toString());
   };
   todaydate = () => {
     this.setState(
@@ -110,7 +108,6 @@ class DateTimePicker extends Component {
       },
       () => this.propsData()
     );
-    // this.props.sendtimeDate(this.state.date.toString());
   };
   dateshow = () => {
     this.setState({ dateshow: !this.state.dateshow });

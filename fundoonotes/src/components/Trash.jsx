@@ -67,17 +67,13 @@ class Trash extends Component {
   componentDidMount = () => {
     var d = new Date();
     d.setDate(new Date().getDate() + 1);
-    console.log(d.getTime());
     this.setState({
       tomorrow: d,
       time: d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds(),
     });
     getNotes().then((response) => {
-      console.log(response.data.data.data[0].isDeleted);
       if (response.status === 200) {
         this.setState({ data: response.data.data.data, loading: false });
-
-        console.log(this.state.data[0].title);
       } else {
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
       }
@@ -115,11 +111,7 @@ class Trash extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.componentDidMount();
           this.setState({ title: "", description: "", next: true });
@@ -139,7 +131,6 @@ class Trash extends Component {
   };
 
   handleClick = (event) => {
-    // console.log("entered")
     this.setState({
       anchorEl: event.currentTarget,
       open: !this.state.open,
@@ -149,7 +140,6 @@ class Trash extends Component {
     this.setState({ dateshow: !this.state.datashow });
   };
   back = () => {
-    console.log("back");
     this.setState({ dateshow: false });
   };
   todaydate = () => {
@@ -189,7 +179,6 @@ class Trash extends Component {
       searchWord: this.state.collabatorName,
     };
     searchUserList(data).then((response) => {
-      // console.log(response.data.data.details[0]);
       if (response.status === 200) {
         this.setState({ details: response.data.data.details });
       } else {
@@ -233,11 +222,7 @@ class Trash extends Component {
         reminder: datetostring,
         collaberator: this.state.originalArray,
       };
-      console.log(this.state.date);
-      console.log(data);
-
       setNotes(data).then((response) => {
-        console.log(response);
         if (response.status === 200) {
           this.setState({ title: "", description: "", next: true });
         } else {
@@ -252,18 +237,14 @@ class Trash extends Component {
     }
   };
 
-  colorboxbutton = () => {
-    //  return <Color/>
-  };
+  colorboxbutton = () => {};
   getData = (val, index) => {
-    console.log(val, index);
     this.setState({ color: val });
     document.getElementsByClassName("mydivouter")[
       index
     ].style.backgroundColor = val;
   };
   dialogboxOpen = (title, description, id) => {
-    console.log(id);
     this.setState({
       dialogBoxOpen: !this.state.dialogBoxOpen,
       title: title,
@@ -315,7 +296,6 @@ class Trash extends Component {
     return (
       <div className="maincontainer">
         <ClipLoader
-          // css={override}
           css={{ width: "50px", height: "50px", marginTop: "45px" }}
           size={150}
           color={"#123abc"}
