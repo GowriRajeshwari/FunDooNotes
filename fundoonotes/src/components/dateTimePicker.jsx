@@ -1,23 +1,10 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import profile from "../assets/profile.png";
-import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { login } from "../services/LoginService";
-import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+import { TextField, Typography, Grid, Popover } from "@material-ui/core";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import Divider from "@material-ui/core/Divider";
-import Popper from "@material-ui/core/Popper";
-import Popover from "@material-ui/core/Popover";
 import reminder from "../assets/reminder.svg";
 require("dotenv").config();
 
@@ -94,7 +81,7 @@ class DateTimePicker extends Component {
   };
   render() {
     return (
-      <div style={{ cursor: "pointer" }}>
+      <div className="pointer">
         <img
           src={reminder}
           id="imgdashnotes"
@@ -112,11 +99,11 @@ class DateTimePicker extends Component {
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           onClose={this.handleClick}
-          style={{ cursor: "pointer" }}
+          className="pointer"
         >
           {this.state.dateshow ? (
             <div>
-              <div style={{ padding: "10px" }}>
+              <div className="padding2">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Grid container justify="space-around">
                     <KeyboardDatePicker
@@ -148,36 +135,23 @@ class DateTimePicker extends Component {
                       step: 300, // 5 min
                     }}
                     onChange={this.timepicker}
-                    style={{ width: "100%" }}
+                    className="widthStyle"
                   />
                 </MuiPickersUtilsProvider>
-                <div
-                  onClick={this.datesave}
-                  style={{
-                    height: "40px",
-                    padding: "10px",
-                    fontFamily: "bold",
-                    cursor: "pointer",
-                    display: "flex",
-                    justifyContent: "flex-end",
-                  }}
-                >
+                <div onClick={this.datesave} className="labelButton2">
                   <div>save</div>
                 </div>
               </div>
             </div>
           ) : (
-            <div style={{ width: "170px", height: "170px", padding: "15px" }}>
-              <Typography style={{ padding: "10px" }} onClick={this.todaydate}>
+            <div className="dateDiv">
+              <Typography className="padding2" onClick={this.todaydate}>
                 Today
               </Typography>
-              <Typography
-                style={{ padding: "10px" }}
-                onClick={this.tomorrowdate}
-              >
+              <Typography className="padding2" onClick={this.tomorrowdate}>
                 Tommorow
               </Typography>
-              <Typography style={{ padding: "10px" }} onClick={this.dateshow}>
+              <Typography className="padding2" onClick={this.dateshow}>
                 pick date & time
               </Typography>
             </div>

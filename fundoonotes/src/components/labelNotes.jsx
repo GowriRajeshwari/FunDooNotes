@@ -1,23 +1,13 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import { Typography, Popover, List, Checkbox } from "@material-ui/core";
 import profile from "../assets/profile.png";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { login } from "../services/LoginService";
-import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import Divider from "@material-ui/core/Divider";
-import Popper from "@material-ui/core/Popper";
-import Popover from "@material-ui/core/Popover";
 import reminder from "../assets/reminder.svg";
 import personAdd from "../assets/person_add.png";
 import color from "../assets/color.png";
@@ -33,18 +23,10 @@ import {
   addlabelNotes,
   deletelabelNotes,
 } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import { blue } from "@material-ui/core/colors";
 import setting from "../assets/setting.png";
-import Checkbox from "@material-ui/core/Checkbox";
 import Color from "./color";
 import EditNotes from "./editNotes";
 import checkboxoutline from "../assets/checkboxoutline.png";
@@ -158,11 +140,11 @@ class LabelNotes extends Component {
           open={this.state.open}
           anchorEl={this.state.anchorEl}
           onClose={this.handleClick}
-          style={{ cursor: "pointer" }}
+          className="pointer"
         >
           {this.state.addlabel ? (
             <div>
-              <div style={{ padding: "10px" }}>
+              <div className="padding2">
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Typography onClick={() => this.backbutton()}>
                     Label Note
@@ -182,7 +164,7 @@ class LabelNotes extends Component {
                         />
                         }
                         <Typography
-                          style={{ width: "100%" }}
+                          className="widthStyle"
                           onClick={() => this.checkboxoutline(data)}
                         >
                           {data.label}
@@ -196,13 +178,7 @@ class LabelNotes extends Component {
           ) : (
             <div>
               <div
-                style={{
-                  width: "200px",
-                  height: "40px",
-                  padding: "10px",
-                  fontFamily: "bold",
-                  cursor: "pointer",
-                }}
+                className="labelButton"
                 onClick={() => this.addLabelButton()}
               >
                 ADD LABEL

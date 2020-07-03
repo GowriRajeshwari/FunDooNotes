@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import {
+  Paper,
+  Button,
+  TextField,
+  Snackbar,
+  IconButton,
+} from "@material-ui/core";
 import profile from "../assets/profile.png";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { login } from "../services/LoginService";
-import Snackbar from "@material-ui/core/Snackbar";
-import { IconButton } from "@material-ui/core";
+import { login } from "../services/loginService";
 
 require("dotenv").config();
 

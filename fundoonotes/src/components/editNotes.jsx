@@ -1,7 +1,18 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import {
+  ListItemText,
+  ListItemAvatar,
+  Paper,
+  Button,
+  TextField,
+  Typography,
+  ListItem,
+  Divider,
+  Popover,
+  Avatar,
+  List,
+  Chip,
+} from "@material-ui/core";
 import personAdd from "../assets/person_add.png";
 import download from "../assets/download.png";
 import galary from "../assets/galary.png";
@@ -12,21 +23,12 @@ import {
   setNotes,
   archiveNote,
 } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
 import setting from "../assets/setting.png";
 import Color from "./color";
 import DateTimePicker from "./dateTimePicker";
 import { changeColor, updateReminderNotes } from "../services/notesService";
-import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
-import { Typography } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import Popover from "@material-ui/core/Popover";
 import {
   searchUserList,
   AddcollaboratorsNotes,
@@ -142,12 +144,9 @@ class EditNotes extends Component {
   reminder = (reminder, id) => {
     if (this.state.date != 0) {
       return (
-        <div
-          className="typoText"
-          style={{ paddingTop: "10px", width: "150px" }}
-        >
+        <div className="typoTextStyle">
           <Chip
-            style={{ width: "240px" }}
+            width={240}
             icon={<img src={schedule} />}
             label={this.state.date}
             onDelete={() => this.handleDelete(id)}
@@ -302,19 +301,19 @@ class EditNotes extends Component {
         {this.state.choice == "editNotes" ? (
           <div className="paper3">
             <div id="NoteExpand" style={{ backgroundColor: this.state.color }}>
-              <div className="showicon" style={{ paddingTop: "10px" }}>
+              <div className="showicon padding2">
                 <TextField
                   id="standard-multiline-flexible"
                   placeholder="Title"
                   multiline
                   rowsMax="4"
                   size="small"
-                  style={{ width: "100%" }}
+                  className="widthStyle"
                   value={this.state.title}
                   onChange={this.onChangeTitle}
                   InputProps={{ disableUnderline: true }}
                 />
-                <div style={{ padding: "5px" }}>
+                <div className="padding">
                   <img src={pin} id="imgdashnotes" />
                 </div>
               </div>
@@ -325,7 +324,7 @@ class EditNotes extends Component {
                   multiline
                   rowsMax="4"
                   size="small"
-                  style={{ width: "100%" }}
+                  className="widthStyle"
                   value={this.state.description}
                   onChange={this.onchangeText}
                   InputProps={{ disableUnderline: true }}
@@ -346,14 +345,7 @@ class EditNotes extends Component {
                   </ListItem>
                 ))}
               </List>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  paddingTop: "10px",
-                  justifyContent: "space-around",
-                }}
-              >
+              <div className="IconDiv">
                 <DateTimePicker
                   sendtimeDate={(date) =>
                     this.sendtimeDate(date, this.state.data.id)
@@ -374,7 +366,7 @@ class EditNotes extends Component {
                 <div>
                   <img src={setting} id="imgdashnotes" />
                 </div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="centerStyle">
                   <Button size="small" onClick={(e) => this.close(e)}>
                     Close
                   </Button>
@@ -385,16 +377,10 @@ class EditNotes extends Component {
         ) : (
           <div>
             <Paper className="paper4">
-              <div style={{ padding: "10px" }}>Collaborators</div>
+              <div className="padding2">Collaborators</div>
               <Divider />
-              <div style={{ padding: "5px" }}>
-                <form
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    padding: "10px",
-                  }}
-                >
+              <div className="padding">
+                <form className="formStyle">
                   <img
                     src={
                       this.state.profileImageFromRes1 == ""
@@ -402,22 +388,10 @@ class EditNotes extends Component {
                         : "http://fundoonotes.incubation.bridgelabz.com/" +
                           this.state.profileImageFromRes1
                     }
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      backgroundColor: "white",
-                      borderRadius: "50px",
-                    }}
+                    className="imgStyle"
                   />
 
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      justifyContent: "center",
-                      marginLeft: "15px",
-                    }}
-                  >
+                  <div className="formInside">
                     <Typography>{this.state.email1}</Typography>
                     <Typography>{this.state.firstName1}</Typography>
                   </div>
@@ -428,20 +402,7 @@ class EditNotes extends Component {
                   {this.state.fullDetails1.map((fullDetails, index) => (
                     <ListItem key={index}>
                       <ListItemAvatar>
-                        <div
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            backgroundColor: "white",
-                            borderRadius: "50px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            display: "flex",
-                            border: "0.1px solid grey",
-                            boxShadow:
-                              "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                          }}
-                        >
+                        <div className="collaboratorStyle">
                           <div>
                             {fullDetails.firstName.charAt(0).toUpperCase()}
                           </div>
@@ -462,15 +423,7 @@ class EditNotes extends Component {
                     </ListItem>
                   ))}
                 </List>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    padding: "15px",
-                  }}
-                >
+                <div className="avatarDiv">
                   <Avatar>
                     <PersonIcon />
                   </Avatar>
@@ -480,7 +433,7 @@ class EditNotes extends Component {
                     multiline
                     rowsMax="4"
                     size="small"
-                    style={{ width: "100%", paddingLeft: "15px" }}
+                    className="collabtext"
                     value={this.state.collabatorName1}
                     onChange={this.onchangecollabator}
                     InputProps={{ disableUnderline: true }}
@@ -488,7 +441,7 @@ class EditNotes extends Component {
                 </div>
                 <div
                   onClick={() => this.collabsave(this.state.data.id)}
-                  style={{ padding: "10px" }}
+                  className="padding2"
                 >
                   save
                 </div>

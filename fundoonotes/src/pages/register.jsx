@@ -1,12 +1,14 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import { register } from "../services/LoginService";
-import Snackbar from "@material-ui/core/Snackbar";
-import { IconButton } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import Typography from "@material-ui/core/Typography";
+import {
+  Paper,
+  Button,
+  TextField,
+  Snackbar,
+  Card,
+  Typography,
+  IconButton,
+} from "@material-ui/core";
+import { register } from "../services/loginService";
 import { withStyles } from "@material-ui/core/styles";
 
 class Register extends Component {
@@ -403,16 +405,10 @@ class Register extends Component {
                           </Typography>
                           <Typography className="price">month</Typography>
                           <Typography className="advance">advance</Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . $49/month
                           </Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . Ability to add only title and description
                           </Typography>
                         </div>
@@ -441,16 +437,10 @@ class Register extends Component {
                           </Typography>
                           <Typography className="price">month</Typography>
                           <Typography className="advance">basic</Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . $49/month
                           </Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . Ability to add only title and description
                           </Typography>
                         </div>
@@ -480,16 +470,10 @@ class Register extends Component {
                           </Typography>
                           <Typography className="price">month</Typography>
                           <Typography className="advance">advance</Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . $99/month
                           </Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . Ability to ad only title and description
                           </Typography>
                         </div>
@@ -516,16 +500,10 @@ class Register extends Component {
                           </Typography>
                           <Typography className="price">month</Typography>
                           <Typography className="advance">basic</Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . $49/month
                           </Typography>
-                          <Typography
-                            className="title"
-                            style={{ fontSize: "14px" }}
-                          >
+                          <Typography className="fontStyle">
                             . Ability to add only title and description
                           </Typography>
                         </div>

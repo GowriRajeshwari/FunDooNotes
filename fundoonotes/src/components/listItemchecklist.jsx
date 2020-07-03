@@ -1,24 +1,35 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import {
+  Dialog,
+  DialogTitle,
+  ListItemText,
+  ListItemAvatar,
+  Paper,
+  Button,
+  TextField,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  ListItem,
+  Popper,
+  Divider,
+  Popover,
+  Avatar,
+  List,
+  Chip,
+} from "@material-ui/core";
 import personAdd from "../assets/person_add.png";
 import color from "../assets/color.png";
 import download from "../assets/download.png";
 import galary from "../assets/galary.png";
 import pin from "../assets/pin.svg";
-import { Typography } from "@material-ui/core";
 import { searchUserList } from "../services/notesService";
-import Divider from "@material-ui/core/Divider";
 import { getNotes, setNotes } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import setting from "../assets/setting.png";
 import Color from "./color";
 import EditNotes from "./editNotes";
 import DateTimePicker from "./dateTimePicker";
-import Chip from "@material-ui/core/Chip";
 import schedule from "../assets/schedule.png";
 import FaceIcon from "@material-ui/icons/Face";
 import list_black from "../assets/list_black.png";
@@ -29,8 +40,6 @@ import checkboxoutline from "../assets/checkboxoutline.png";
 import checkboxtick from "../assets/checkboxtick.png";
 import LabelNotes from "./labelNotes";
 import Collaborator from "./collaborator";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
 
 require("dotenv").config();
 
@@ -327,18 +336,18 @@ class ListItemchecklist extends Component {
           <Collaborator collbasave={this.collaboratorsave} />
         ) : (
           <div id="NoteExpand">
-            <div className="showicon" style={{ paddingTop: "10px" }}>
+            <div className="showicon" className="padding2">
               <TextField
                 id="standard-multiline-flexible"
                 placeholder="Title"
                 multiline
                 rowsMax="4"
                 size="small"
-                style={{ width: "100%" }}
+                className="widthStyle"
                 onChange={this.onChangeTitle}
                 InputProps={{ disableUnderline: true }}
               />
-              <div style={{ padding: "5px" }}>
+              <div className="padding">
                 <img src={pin} id="imgdashnotes" />
               </div>
             </div>
@@ -347,27 +356,17 @@ class ListItemchecklist extends Component {
                   <List>
                     <div className="textdash">
                       <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
+                        className="ImageDiv"
                         onClick={() =>
                           this.checkboxoutline(itemsArray.itemName)
                         }
                       >
                         <img src={checkboxoutline} id="imgdashnotes" />
                       </div>
-                      <Typography style={{ width: "100%" }}>
+                      <Typography className="widthStyle">
                         {itemsArray.itemName}
                       </Typography>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                      <div className="ImageDiv">
                         <img src={delete1} id="imgdashnotes" />
                       </div>
                     </div>
@@ -376,7 +375,7 @@ class ListItemchecklist extends Component {
               : null}
             {this.state.date_timeshow ? (
               <Chip
-                style={{ width: "300px" }}
+                className="chipWidth"
                 icon={<img src={schedule} />}
                 label={this.state.date}
                 onDelete={this.handleDelete}
@@ -385,15 +384,8 @@ class ListItemchecklist extends Component {
               />
             ) : null}
             <Divider />
-            <div className="textdash" style={{ paddingTop: "10px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                onClick={this.additem}
-              >
+            <div className="textdash padding2">
+              <div className="ImageDiv" onClick={this.additem}>
                 <img src={add} id="imgdashnotes" />
               </div>
 
@@ -403,20 +395,13 @@ class ListItemchecklist extends Component {
                 multiline
                 rowsMax="4"
                 size="small"
-                style={{ width: "100%" }}
+                className="widthStyle"
                 value={this.state.items}
                 InputProps={{ disableUnderline: true }}
                 onChange={this.onchangelistItem}
               />
 
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                onClick={this.clear}
-              >
+              <div className="ImageDiv" onClick={this.clear}>
                 <img src={clear} id="imgdashnotes" />
               </div>
             </div>
@@ -427,13 +412,7 @@ class ListItemchecklist extends Component {
                   return (
                     <List>
                       <div className="textdash">
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
+                        <div className="ImageDiv">
                           <img src={checkboxtick} id="imgdashnotes" />
                         </div>
                         <Typography
@@ -444,13 +423,7 @@ class ListItemchecklist extends Component {
                         >
                           {tickboxArray.itemName}
                         </Typography>
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
+                        <div className="ImageDiv">
                           <img src={delete1} id="imgdashnotes" />
                         </div>
                       </div>
@@ -458,20 +431,12 @@ class ListItemchecklist extends Component {
                   );
                 })
               : null}
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                width: "100%",
-                padding: "5px",
-              }}
-            >
+            <div className="labelStyle">
               {this.state.labelNotes.map((labelNotes, index) => (
-                <div style={{ padding: "5px" }}>
+                <div className="padding">
                   <Chip
                     key={index}
-                    style={{ width: "auto" }}
+                    className="chipStyle"
                     label={labelNotes.label}
                     onDelete={() =>
                       this.handleDeletelabel(labelNotes.id, index)
@@ -482,33 +447,12 @@ class ListItemchecklist extends Component {
                 </div>
               ))}
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
-                width: "100%",
-                padding: "5px",
-              }}
-            >
+            <div className="labelStyle">
               {this.state.originalArray.map((originalArray, index) => (
-                <div style={{ padding: "5px" }}>
+                <div className="padding">
                   <ListItem key={index}>
                     <ListItemAvatar>
-                      <div
-                        style={{
-                          width: "40px",
-                          height: "40px",
-                          backgroundColor: "white",
-                          borderRadius: "50px",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          display: "flex",
-                          border: "0.1px solid grey",
-                          boxShadow:
-                            "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                        }}
-                      >
+                      <div className="collaboratorStyle">
                         <div>{this.state.capitialInitial}</div>
                       </div>
                     </ListItemAvatar>
@@ -517,14 +461,7 @@ class ListItemchecklist extends Component {
                 </div>
               ))}
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                paddingTop: "10px",
-                justifyContent: "space-around",
-              }}
-            >
+            <div className="IconDiv">
               <DateTimePicker sendtimeDate={this.sendtimeDate} />
               <div onClick={this.collabshow}>
                 <img src={personAdd} id="imgdashnotes" />
@@ -540,7 +477,7 @@ class ListItemchecklist extends Component {
               </div>
               <LabelNotes labelNotes={this.labelNotes} />
 
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div className="centerStyle">
                 <Button size="small" onClick={(e) => this.close(e)}>
                   Close
                 </Button>

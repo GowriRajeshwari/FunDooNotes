@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import { Card, CardContent, Dialog } from "@material-ui/core";
 import pin from "../assets/pin.svg";
 import { searchUserList } from "../services/notesService";
 import { getNotes, setNotes, deleteNotes } from "../services/notesService";
-import Dialog from "@material-ui/core/Dialog";
 import EditNotes from "./editNotes";
 import NewNote from "./newNote";
 import DeleteIcon from "./deleteIcon";
@@ -274,12 +272,9 @@ class Trash extends Component {
   reminder = (reminder, id) => {
     if (reminder != 0) {
       return (
-        <div
-          className="typoText"
-          style={{ paddingTop: "10px", width: "150px" }}
-        >
+        <div className="typoTextStyle">
           <Chip
-            style={{ width: "240px" }}
+            width={240}
             icon={<img src={schedule} />}
             label={reminder}
             onDelete={() => this.handleDelete(id)}
@@ -309,14 +304,7 @@ class Trash extends Component {
             .map((data, index) => {
               if (data.isDeleted === true)
                 return (
-                  <div
-                    key={index}
-                    style={{
-                      borderRadius: "10px",
-                      cursor: "pointer",
-                      padding: "10px",
-                    }}
-                  >
+                  <div className="dataDiv" key={index}>
                     <Card
                       className={
                         this.props.gridView ? "mydivoutergrid" : "mydivouter"
@@ -334,10 +322,7 @@ class Trash extends Component {
                         >
                           {data.title}
                         </div>
-                        <div
-                          className="mybuttonoverlap"
-                          style={{ padding: "5px" }}
-                        >
+                        <div className="mybuttonoverlap padding">
                           <img src={pin} id="imgdashnotes" />
                         </div>
                       </div>
@@ -358,16 +343,9 @@ class Trash extends Component {
                         : null}
 
                       <div className="mybuttonoverlap">
-                        <div
-                          style={{
-                            display: "flex",
-                            flexDirection: "row",
-                            paddingTop: "5px",
-                            justifyContent: "flex-start",
-                          }}
-                        >
+                        <div className="mybutton">
                           <div
-                            style={{ padding: "5px" }}
+                            className="padding"
                             onClick={(e) => this.handleClick(e)}
                           >
                             <DeleteIcon

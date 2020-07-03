@@ -1,23 +1,32 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import {
+  Dialog,
+  DialogTitle,
+  ListItemText,
+  ListItemAvatar,
+  Paper,
+  Button,
+  TextField,
+  Typography,
+  Card,
+  CardContent,
+  Grid,
+  ListItem,
+  Popper,
+  Divider,
+  Popover,
+  Avatar,
+  List,
+  Chip,
+} from "@material-ui/core";
 import profile from "../assets/profile.png";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { login } from "../services/LoginService";
-import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import Divider from "@material-ui/core/Divider";
-import Popper from "@material-ui/core/Popper";
-import Popover from "@material-ui/core/Popover";
 import reminder from "../assets/reminder.svg";
 import personAdd from "../assets/person_add.png";
 import color from "../assets/color.png";
@@ -26,13 +35,6 @@ import galary from "../assets/galary.png";
 import pin from "../assets/pin.svg";
 import { searchUserList } from "../services/notesService";
 import { getNotes, setNotes } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import { blue } from "@material-ui/core/colors";
@@ -41,7 +43,6 @@ import Color from "./color";
 import EditNotes from "./editNotes";
 import DateTimePicker from "./dateTimePicker";
 import Collaborator from "./collaborator";
-import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 import list_black from "../assets/list_black.png";
 import ListItemchecklist from "./listItemchecklist";
@@ -316,18 +317,8 @@ class NewNote extends Component {
               <Typography onClick={(e) => this.takeNote(e)} className="Typo">
                 Take a Notes
               </Typography>
-              <div
-                style={{
-                  padding: "5px",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-                onClick={this.listitem}
-              >
-                <img
-                  src={list_black}
-                  style={{ width: "40px", height: "40px" }}
-                />
+              <div className="listItem" onClick={this.listitem}>
+                <img src={list_black} className="ImageSize" />
               </div>
             </div>
           </div>
@@ -336,7 +327,7 @@ class NewNote extends Component {
         ) : this.state.listitem ? (
           <div className="paper2">
             <div id="NoteExpand">
-              <div className="showicon" style={{ paddingTop: "10px" }}>
+              <div className="showicon padding2">
                 <TextField
                   value={this.state.title}
                   id="standard-multiline-flexible"
@@ -344,15 +335,15 @@ class NewNote extends Component {
                   multiline
                   rowsMax="4"
                   size="small"
-                  style={{ width: "100%" }}
+                  className="widthStyle"
                   onChange={this.onChangeTitle}
                   InputProps={{ disableUnderline: true }}
                 />
-                <div style={{ padding: "5px" }}>
+                <div className="padding">
                   <img src={pin} id="imgdashnotes" />
                 </div>
               </div>
-              <div style={{ paddingTop: "20px" }}>
+              <div className="paddingTop">
                 <TextField
                   value={this.state.description}
                   id="standard-multiline-flexible"
@@ -360,14 +351,14 @@ class NewNote extends Component {
                   multiline
                   rowsMax="4"
                   size="small"
-                  style={{ width: "100%" }}
+                  className="widthStyle"
                   onChange={this.onchangeText}
                   InputProps={{ disableUnderline: true }}
                 />
               </div>
               {this.state.date_timeshow ? (
                 <Chip
-                  style={{ width: "300px" }}
+                  className="chipWidth"
                   icon={<img src={schedule} />}
                   label={this.state.date}
                   onDelete={this.handleDelete}
@@ -375,33 +366,12 @@ class NewNote extends Component {
                   value={this.state.date}
                 />
               ) : null}
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  width: "100%",
-                  padding: "5px",
-                }}
-              >
+              <div className="labelStyle">
                 {this.state.originalArray.map((originalArray, index) => (
-                  <div style={{ padding: "5px" }}>
+                  <div className="padding">
                     <ListItem key={index}>
                       <ListItemAvatar>
-                        <div
-                          style={{
-                            width: "40px",
-                            height: "40px",
-                            backgroundColor: "white",
-                            borderRadius: "50px",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            display: "flex",
-                            border: "0.1px solid grey",
-                            boxShadow:
-                              "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                          }}
-                        >
+                        <div className="collaboratorStyle">
                           <div>{this.state.capitialInitial}</div>
                         </div>
                       </ListItemAvatar>
@@ -410,20 +380,12 @@ class NewNote extends Component {
                   </div>
                 ))}
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  width: "100%",
-                  padding: "5px",
-                }}
-              >
+              <div className="labelStyle">
                 {this.state.labelNotes.map((labelNotes, index) => (
-                  <div style={{ padding: "5px" }}>
+                  <div className="padding">
                     <Chip
                       key={index}
-                      style={{ width: "auto" }}
+                      className="chipStyle"
                       label={labelNotes.label}
                       onDelete={() =>
                         this.handleDeletelabel(labelNotes.id, index)
@@ -433,14 +395,7 @@ class NewNote extends Component {
                   </div>
                 ))}
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  paddingTop: "10px",
-                  justifyContent: "space-around",
-                }}
-              >
+              <div className="mybutton2">
                 <DateTimePicker sendtimeDate={this.sendtimeDate} />
                 <div onClick={this.collabshow}>
                   <img src={personAdd} id="imgdashnotes" />
@@ -455,7 +410,7 @@ class NewNote extends Component {
                   <img src={download} id="imgdashnotes" />
                 </div>
                 <LabelNotes labelNotes={this.labelNotes} />
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className="centerStyle">
                   <Button size="small" onClick={(e) => this.close(e)}>
                     Close
                   </Button>

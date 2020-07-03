@@ -1,51 +1,51 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import profile from "../assets/profile.png";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
-import { login } from "../services/LoginService";
-import { Typography } from "@material-ui/core";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
 import DateFnsUtils from "@date-io/date-fns";
 import {
   MuiPickersUtilsProvider,
   KeyboardTimePicker,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
-import Divider from "@material-ui/core/Divider";
-import Popper from "@material-ui/core/Popper";
-import Popover from "@material-ui/core/Popover";
+import {
+  Typography,
+  Grid,
+  CardContent,
+  Card,
+  TextField,
+  Paper,
+  Button,
+  Divider,
+  Popper,
+  Popover,
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  DialogTitle,
+  Dialog,
+  Checkbox,
+  Stepper,
+  Step,
+  StepLabel,
+} from "@material-ui/core";
 import reminder from "../assets/reminder.svg";
 import personAdd from "../assets/person_add.png";
 import color from "../assets/color.png";
 import download from "../assets/download.png";
 import galary from "../assets/galary.png";
 import pin from "../assets/pin.svg";
-import { searchUserList } from "../services/notesService";
-import { placeOrder, myCart } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import Dialog from "@material-ui/core/Dialog";
+import { searchUserList, placeOrder, myCart } from "../services/notesService";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import { blue } from "@material-ui/core/colors";
 import setting from "../assets/setting.png";
-import Checkbox from "@material-ui/core/Checkbox";
 import Color from "./color";
 import EditNotes from "./editNotes";
 import checkboxoutline from "../assets/checkboxoutline.png";
 import checkboxtick from "../assets/checkboxtick.png";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
 function getSteps() {
   return ["signin", "review", "complete"];
 }
@@ -107,29 +107,12 @@ class Cart extends Component {
   render() {
     const steps = getSteps();
     return (
-      <div
-        style={{ display: "flex", justifyContent: "center", flexWrap: "wrap" }}
-      >
-        <div
-          style={{
-            marginTop: "30px",
-            width: "70%",
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
+      <div className="mainCart">
+        <div className="Main2Cart">
           <div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                alignItems: "center",
-              }}
-            >
-              <div style={{ borderRadius: "8px", backgroundColor: "#fb0" }}>
-                <div style={{ padding: "5px", color: "white" }}>
-                  FundooNotes
-                </div>
+            <div className="ratingContainer">
+              <div className="headingDiv">
+                <div className="headingStyle">FundooNotes</div>
               </div>
               <Stepper activeStep={this.state.cartStepper}>
                 {steps.map((label, index) => (
@@ -141,214 +124,58 @@ class Cart extends Component {
                     </div>
 
                     <StepLabel>
-                      <div
-                        style={{
-                          padding: "5px",
-                          fontFamily: "lato",
-                          fontSize: "16px",
-                        }}
-                      >
-                        {label}
-                      </div>
+                      <div className="labelStyle">{label}</div>
                     </StepLabel>
                   </Step>
                 ))}
               </Stepper>
             </div>
           </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-start",
-              paddingBottom: "10px",
-              fontFamily: "lato",
-              fontSize: "14px",
-              fontWeight: "bold",
-            }}
-          >
-            <span style={{ fontFamily: "lato", fontSize: "18px" }}>
-              ShoppingCart
-            </span>
+          <div className="shoppingDiv">
+            <span className="shoppingcartStyle">ShoppingCart</span>
           </div>
           <Divider />
-          <div
-            style={{
-              minHeight: "120px",
-              alignItems: "center",
-              display: "flex",
-              flexWrap: "wrap",
-              marginTop: "10px",
-              marginBottom: "10px",
-            }}
-          >
-            <div
-              style={{
-                width: "90px",
-                flexWrap: "wrap",
-                backgroundColor: "grey",
-                borderRadius: "8px",
-                justifyContent: "center",
-                display: "flex",
-                alignItems: "center",
-                paddingLeft: "20px",
-              }}
-            >
-              <div
-                style={{ color: "white", fontFamily: "lato", fontSize: "16px" }}
-              >
+          <div className="divContainer">
+            <div className="cash1Div">
+              <div className="cashDiv">
                 ${this.state.service.price} per month {this.state.service.name}
               </div>
             </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginLeft: "30px",
-                width: "250px",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{ color: "blue", fontSize: "16px", fontFamily: "lato" }}
-              >
-                advance Pack Details
-              </div>
-              <div style={{ fontSize: "16px", fontFamily: "lato" }}>
+            <div className="PaymentCashDiv">
+              <div className="cashDiv">advance Pack Details</div>
+              <div className="subtotalStyle">
                 Ability to add title, description, images, labels, checklist and
                 colors
               </div>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginLeft: "30px",
-                width: "100px",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "lato",
-                  color: "black",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                }}
-              >
-                price
-              </div>
-              <div
-                style={{ fontFamily: "lato", color: "blue", fontSize: "16px" }}
-              >
-                ${this.state.service.price}
-              </div>
+            <div className="priceDiv">
+              <div className="validityStyle">price</div>
+              <div className="cashDiv">${this.state.service.price}</div>
             </div>
 
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                width: "100px",
-                flexWrap: "wrap",
-              }}
-            >
-              <div
-                style={{
-                  fontFamily: "lato",
-                  color: "black",
-                  fontSize: "16px",
-                  fontWeight: "bold",
-                }}
-              >
-                validity
-              </div>
-              <div
-                style={{ fontFamily: "lato", color: "blue", fontSize: "16px" }}
-              >
-                per month
-              </div>
+            <div className="monthDiv">
+              <div className="validityStyle">validity</div>
+              <div className="monthStyle">per month</div>
             </div>
 
-            <div
-              style={{
-                padding: "2px",
-                justifyContent: "center",
-                alignItems: "center",
-                border: "1px solid grey",
-                width: "200px",
-                height: "100px",
-                display: "flex",
-                flexDirection: "column",
-              }}
-            >
-              <div style={{ fontSize: "16px", fontFamily: "lato" }}>
+            <div className="subtotalDiv">
+              <div className="subtotalStyle">
                 Subtotal(1 item) : ${this.state.service.price}
               </div>
               {this.state.isOrderPlaced ? (
-                <div
-                  style={{
-                    boderRadius: "8px",
-                    backgroundColor: "lightblue",
-                    display: "flex",
-                    alignItem: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "15px",
-                      fontFamily: "lato",
-                      padding: "5px",
-                      color: "black",
-                      cursor: "pointer",
-                    }}
-                  >
-                    Order Placed Successully
-                  </div>{" "}
+                <div className="processedDiv">
+                  <div className="plcedStyle">Order Placed Successully</div>{" "}
                 </div>
               ) : this.state.showCOD ? (
-                <div
-                  style={{
-                    boderRadius: "8px",
-                    backgroundColor: "lightblue",
-                    display: "flex",
-                    alignItem: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontFamily: "lato",
-                      padding: "5px",
-                      color: "black",
-                      cursor: "pointer",
-                    }}
-                    onClick={this.checkout}
-                  >
+                <div className="processedDiv">
+                  <div className="processedStyle" onClick={this.checkout}>
                     Processed to checkout
                   </div>{" "}
                 </div>
               ) : (
-                <div
-                  style={{
-                    backgroundColor: "lightblue",
-                    display: "flex",
-                    alignItem: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "16px",
-                      fontFamily: "lato",
-                      padding: "5px",
-                      color: "black",
-                      cursor: "pointer",
-                    }}
-                    onClick={this.placeOrder}
-                  >
+                <div classNAme="orderDiv">
+                  <div className="orderStyle" onClick={this.placeOrder}>
                     {this.state.order}
                   </div>{" "}
                 </div>
@@ -357,61 +184,21 @@ class Cart extends Component {
           </div>
           <Divider />
           {this.state.showCOD ? (
-            <span
-              style={{
-                color: "blue",
-                fontFamily: "lato",
-                fontSize: "16px",
-                marginTop: "10px",
-              }}
-            >
-              Subtotal ( 1 item ): $99
-            </span>
+            <span className="spanStyle">Subtotal ( 1 item ): $99</span>
           ) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                marginTop: " 10px",
-              }}
-            >
+            <div className="textareaDiv">
               <div>
                 <textarea
-                  style={{ resize: "none" }}
+                  className="textarea"
                   cols="25"
                   rows="5"
                   onChange={this.changeTextArea}
                   value={this.state.address}
                 ></textarea>
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  width: "250px",
-                  flexWrap: "wrap",
-                  marginLeft: " 30px",
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "lato",
-                    color: "black",
-                    fontSize: "14px",
-                    fontWeight: "bold",
-                  }}
-                >
-                  Payment method
-                </div>
-                <div
-                  style={{
-                    fontFamily: "lato",
-                    color: "blue",
-                    fontSize: "16px",
-                  }}
-                >
-                  Cash On Delivery
-                </div>
+              <div className="PaymentCashDiv">
+                <div className="paymentDiv">Payment method</div>
+                <div className="cashDiv">Cash On Delivery</div>
               </div>
             </div>
           )}

@@ -15,13 +15,11 @@ import {
   archiveNote,
   deletelabelNotes,
 } from "../services/notesService";
-import Dialog from "@material-ui/core/Dialog";
 import Color from "./color";
 import EditNotes from "./editNotes";
 import NewNote from "./newNote";
 import DeleteIcon from "./deleteIcon";
 import DateTimePicker from "./dateTimePicker";
-import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 import schedule from "../assets/schedule.png";
 import {
@@ -31,6 +29,8 @@ import {
   CardContent,
   Grid,
   List,
+  Dialog,
+  Chip,
 } from "@material-ui/core";
 import AskQuestion from "./askQuestion";
 import unarchive from "../assets/unarchive.png";
@@ -86,7 +86,6 @@ class Archived extends Component {
       askQuestion: false,
       questionId: "",
       showQuestion: false,
-      nmsg: "",
       labelNoteShow: "",
       label: "",
       loading: true,
@@ -386,12 +385,9 @@ class Archived extends Component {
   reminder = (reminder, id) => {
     if (reminder != 0) {
       return (
-        <div
-          className="typoText"
-          style={{ paddingTop: "10px", width: "150px" }}
-        >
+        <div className="typoTextStyle">
           <Chip
-            style={{ width: "240px" }}
+            className="reminderChip"
             icon={<img src={schedule} />}
             label={reminder}
             onDelete={() => this.handleDelete(id)}
@@ -491,11 +487,7 @@ class Archived extends Component {
                         key={index}
                         onMouseMove={this._onMouseMove}
                         onMouseLeave={this._onMouseOut}
-                        style={{
-                          borderRadius: "20px",
-                          cursor: "pointer",
-                          padding: "20px",
-                        }}
+                        className="carddiv"
                       >
                         <Card
                           className={
@@ -509,7 +501,7 @@ class Archived extends Component {
                               "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                           }}
                         >
-                          <div style={{ padding: "10px" }}>
+                          <div className="padding2">
                             <div className="showicon">
                               <div
                                 className={
@@ -518,10 +510,7 @@ class Archived extends Component {
                               >
                                 {data.title}
                               </div>
-                              <div
-                                className="mybuttonoverlap"
-                                style={{ padding: "5px" }}
-                              >
+                              <div className="mybuttonoverlap padding">
                                 <img src={pin} id="imgdashnotes" />
                               </div>
                             </div>
@@ -539,26 +528,18 @@ class Archived extends Component {
                             {data.noteCheckLists.map((notelist, index) => (
                               <List>
                                 <div className="textdash1">
-                                  <Typography style={{ width: "100%" }}>
+                                  <Typography className="widthStyle">
                                     {notelist.itemName}
                                   </Typography>
                                 </div>
                               </List>
                             ))}
-                            <div
-                              style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                flexDirection: "row",
-                                width: "240px",
-                                paddingTop: "5px",
-                              }}
-                            >
+                            <div className="collabstyle">
                               {data.noteLabels.map((labelNotes, index) => (
-                                <div style={{ padding: "3px" }}>
+                                <div className="padding3">
                                   <Chip
                                     key={index}
-                                    style={{ width: "auto" }}
+                                    className="chipStyle"
                                     label={labelNotes.label}
                                     onDelete={() =>
                                       this.handleDeletelabel(
@@ -571,32 +552,11 @@ class Archived extends Component {
                                   />
                                 </div>
                               ))}
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                  flexDirection: "row",
-                                  width: "200px",
-                                  paddingTop: "5px",
-                                }}
-                              >
+                              <div className="collabstyle">
                                 {data.collaborators.map(
                                   (collabatorArray, index) => (
-                                    <div style={{ padding: "5px" }}>
-                                      <div
-                                        style={{
-                                          width: "40px",
-                                          height: "40px",
-                                          backgroundColor: "white",
-                                          borderRadius: "50px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          display: "flex",
-                                          border: "0.1px solid grey",
-                                          boxShadow:
-                                            "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                                        }}
-                                      >
+                                    <div className="padding">
+                                      <div className="collaboratorStyle">
                                         <div>
                                           {collabatorArray.firstName
                                             .charAt(0)
@@ -610,16 +570,9 @@ class Archived extends Component {
                             </div>
 
                             <div className="mybuttonoverlap">
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  paddingTop: "5px",
-                                  justifyContent: "space-around",
-                                }}
-                              >
+                              <div className="mybutton2">
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={(e) => this.handleClick(e)}
                                 >
                                   <DateTimePicker
@@ -629,14 +582,14 @@ class Archived extends Component {
                                   />
                                 </div>
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={() =>
                                     this.dialogboxOpen(data, "editcollaborator")
                                   }
                                 >
                                   <img src={personAdd} id="imgdashnotes" />
                                 </div>
-                                <div style={{ padding: "5px" }}>
+                                <div className="padding">
                                   <Color
                                     index={index}
                                     sendColor={(val, index) =>
@@ -644,11 +597,11 @@ class Archived extends Component {
                                     }
                                   />
                                 </div>
-                                <div style={{ padding: "5px" }}>
+                                <div className="padding">
                                   <img src={galary} id="imgdashnotes" />
                                 </div>
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={() => this.archiveddata(data.id)}
                                   key={index}
                                 >

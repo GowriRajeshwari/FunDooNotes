@@ -1,18 +1,20 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import {
+  Paper,
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  Typography,
+  Snackbar,
+  IconButton,
+  Dialog,
+} from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import clsx from "clsx";
 import Modal from "@material-ui/core/Modal";
-import Snackbar from "@material-ui/core/Snackbar";
-import { IconButton } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
 import FullWidthTabs from "./tabs";
 
 const drawerWidth = 240;
@@ -76,6 +78,7 @@ const useStyles = (theme) => ({
     display: "flex",
     justifyContent: "center",
     color: "blue",
+    cursor: "pointer",
   },
 });
 
@@ -295,11 +298,7 @@ class Service extends Component {
           ></Snackbar>
         </div>
 
-        <Typography
-          style={{ cursor: "pointer" }}
-          className={classes.signin}
-          onClick={(e) => this.signin(e)}
-        >
+        <Typography className={classes.signin} onClick={(e) => this.signin(e)}>
           Sign In Instead
         </Typography>
 

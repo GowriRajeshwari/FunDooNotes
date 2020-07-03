@@ -19,9 +19,7 @@ export default class RatingStart extends React.Component {
     const { rating } = this.state;
 
     return (
-      <div
-        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-      >
+      <div className="ratingContainer">
         <StarRatingComponent
           name="rate1"
           starCount={5}

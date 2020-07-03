@@ -1,13 +1,8 @@
 import React, { Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Modal from "@material-ui/core/Modal";
-import Typography from "@material-ui/core/Typography";
+import { Button, TextField, Typography, Modal } from "@material-ui/core";
 import delete1 from "../assets/delete.png";
 import add from "../assets/add.png";
-import Dialog from "@material-ui/core/Dialog";
 import {
   getNoteLabelList,
   addLabels,

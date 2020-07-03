@@ -1,7 +1,12 @@
 import React, { Component } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Grid from "@material-ui/core/Grid";
+import {
+  Dialog,
+  Typography,
+  Card,
+  Divider,
+  List,
+  Chip,
+} from "@material-ui/core";
 import personAdd from "../assets/person_add.png";
 import color from "../assets/color.png";
 import download from "../assets/download.png";
@@ -19,7 +24,6 @@ import {
   archiveNote,
   deletelabelNotes,
 } from "../services/notesService";
-import Dialog from "@material-ui/core/Dialog";
 import PersonIcon from "@material-ui/icons/Person";
 import AddIcon from "@material-ui/icons/Add";
 import { blue } from "@material-ui/core/colors";
@@ -29,15 +33,9 @@ import EditNotes from "./editNotes";
 import NewNote from "./newNote";
 import DeleteIcon from "./deleteIcon";
 import DateTimePicker from "./dateTimePicker";
-import Chip from "@material-ui/core/Chip";
 import FaceIcon from "@material-ui/icons/Face";
 import schedule from "../assets/schedule.png";
-import { Typography } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import AskQuestion from "./askQuestion";
-import Divider from "@material-ui/core/Divider";
 import ClipLoader from "react-spinners/ClipLoader";
 
 require("dotenv").config();
@@ -380,12 +378,9 @@ class LabelShow extends Component {
   reminder = (reminder, id) => {
     if (reminder != 0) {
       return (
-        <div
-          className="typoText"
-          style={{ paddingTop: "10px", width: "150px" }}
-        >
+        <div className="typoTextStyle">
           <Chip
-            style={{ width: "240px" }}
+            className="reminderChip"
             icon={<img src={schedule} />}
             label={reminder}
             onDelete={() => this.handleDelete(id)}
@@ -476,11 +471,7 @@ class LabelShow extends Component {
                         key={index}
                         onMouseMove={this._onMouseMove}
                         onMouseLeave={this._onMouseOut}
-                        style={{
-                          borderRadius: "20px",
-                          cursor: "pointer",
-                          padding: "20px",
-                        }}
+                        className="carddiv"
                       >
                         <Card
                           className={
@@ -494,7 +485,7 @@ class LabelShow extends Component {
                               "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
                           }}
                         >
-                          <div style={{ padding: "10px" }}>
+                          <div className="padding2">
                             <div className="showicon">
                               <div
                                 className={
@@ -503,10 +494,7 @@ class LabelShow extends Component {
                               >
                                 {data.title}
                               </div>
-                              <div
-                                className="mybuttonoverlap"
-                                style={{ padding: "5px" }}
-                              >
+                              <div className="mybuttonoverlap padding">
                                 <img src={pin} id="imgdashnotes" />
                               </div>
                             </div>
@@ -524,26 +512,18 @@ class LabelShow extends Component {
                             {data.noteCheckLists.map((notelist, index) => (
                               <List>
                                 <div className="textdash1">
-                                  <Typography style={{ width: "100%" }}>
+                                  <Typography className="widthStyle">
                                     {notelist.itemName}
                                   </Typography>
                                 </div>
                               </List>
                             ))}
-                            <div
-                              style={{
-                                display: "flex",
-                                flexWrap: "wrap",
-                                flexDirection: "row",
-                                width: "240px",
-                                paddingTop: "5px",
-                              }}
-                            >
+                            <div className="labelcontainer">
                               {data.noteLabels.map((labelNotes, index) => (
-                                <div style={{ padding: "3px" }}>
+                                <div className="padding3">
                                   <Chip
                                     key={index}
-                                    style={{ width: "auto" }}
+                                    className="chipStyle"
                                     label={labelNotes.label}
                                     onDelete={() =>
                                       this.handleDeletelabel(
@@ -556,32 +536,11 @@ class LabelShow extends Component {
                                   />
                                 </div>
                               ))}
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexWrap: "wrap",
-                                  flexDirection: "row",
-                                  width: "200px",
-                                  paddingTop: "5px",
-                                }}
-                              >
+                              <div className="labelcontainer">
                                 {data.collaborators.map(
                                   (collabatorArray, index) => (
-                                    <div style={{ padding: "5px" }}>
-                                      <div
-                                        style={{
-                                          width: "40px",
-                                          height: "40px",
-                                          backgroundColor: "white",
-                                          borderRadius: "50px",
-                                          justifyContent: "center",
-                                          alignItems: "center",
-                                          display: "flex",
-                                          border: "0.1px solid grey",
-                                          boxShadow:
-                                            "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                                        }}
-                                      >
+                                    <div className="padding">
+                                      <div className="collaboratorStyle">
                                         <div>
                                           {collabatorArray.firstName
                                             .charAt(0)
@@ -595,16 +554,9 @@ class LabelShow extends Component {
                             </div>
 
                             <div className="mybuttonoverlap">
-                              <div
-                                style={{
-                                  display: "flex",
-                                  flexDirection: "row",
-                                  paddingTop: "5px",
-                                  justifyContent: "space-around",
-                                }}
-                              >
+                              <div className="mybutton2">
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={(e) => this.handleClick(e)}
                                 >
                                   <DateTimePicker
@@ -614,14 +566,14 @@ class LabelShow extends Component {
                                   />
                                 </div>
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={() =>
                                     this.dialogboxOpen(data, "editcollaborator")
                                   }
                                 >
                                   <img src={personAdd} id="imgdashnotes" />
                                 </div>
-                                <div style={{ padding: "5px" }}>
+                                <div className="padding">
                                   <Color
                                     index={index}
                                     sendColor={(val, index) =>
@@ -629,11 +581,11 @@ class LabelShow extends Component {
                                     }
                                   />
                                 </div>
-                                <div style={{ padding: "5px" }}>
+                                <div className="padding">
                                   <img src={galary} id="imgdashnotes" />
                                 </div>
                                 <div
-                                  style={{ padding: "5px" }}
+                                  className="padding"
                                   onClick={() => this.archivebutton(data)}
                                 >
                                   <img src={download} id="imgdashnotes" />

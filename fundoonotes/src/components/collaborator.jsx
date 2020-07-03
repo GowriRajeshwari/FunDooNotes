@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import Paper from "@material-ui/core/Paper";
-import TextField from "@material-ui/core/TextField";
-import { Typography } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
-import Popover from "@material-ui/core/Popover";
+import {
+  Paper,
+  TextField,
+  Typography,
+  Divider,
+  Popover,
+  Avatar,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+} from "@material-ui/core";
 import { searchUserList } from "../services/notesService";
-import Avatar from "@material-ui/core/Avatar";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import ListItemText from "@material-ui/core/ListItemText";
 import PersonIcon from "@material-ui/icons/Person";
 
 class Collaborator extends Component {
@@ -99,12 +101,10 @@ class Collaborator extends Component {
     return (
       <div>
         <Paper className="paper2">
-          <div style={{ padding: "10px" }}>Collaborators</div>
+          <div className="padding2">Collaborators</div>
           <Divider />
-          <div style={{ padding: "5px" }}>
-            <form
-              style={{ display: "flex", flexDirection: "row", padding: "10px" }}
-            >
+          <div className="padding">
+            <form className="formStyle">
               <img
                 src={
                   this.state.profileImageFromRes == ""
@@ -112,22 +112,10 @@ class Collaborator extends Component {
                     : "http://fundoonotes.incubation.bridgelabz.com/" +
                       this.state.profileImageFromRes
                 }
-                style={{
-                  width: "40px",
-                  height: "40px",
-                  backgroundColor: "white",
-                  borderRadius: "50px",
-                }}
+                className="imgStyle"
               />
 
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  marginLeft: "15px",
-                }}
-              >
+              <div className="formInside">
                 <Typography>{this.state.email}</Typography>
                 <Typography>{this.state.firstName}</Typography>
               </div>
@@ -138,20 +126,7 @@ class Collaborator extends Component {
               {this.state.fullDetails.map((fullDetails, index) => (
                 <ListItem key={index}>
                   <ListItemAvatar>
-                    <div
-                      style={{
-                        width: "40px",
-                        height: "40px",
-                        backgroundColor: "white",
-                        borderRadius: "50px",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        display: "flex",
-                        border: "0.1px solid grey",
-                        boxShadow:
-                          "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",
-                      }}
-                    >
+                    <div className="collaboratorStyle">
                       <div>{this.state.capitalInitial}</div>
                     </div>
                   </ListItemAvatar>
@@ -164,15 +139,7 @@ class Collaborator extends Component {
                 </ListItem>
               ))}
             </List>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignItems: "center",
-                padding: "15px",
-              }}
-            >
+            <div className="avatarDiv">
               <Avatar>
                 <PersonIcon />
               </Avatar>
@@ -182,13 +149,13 @@ class Collaborator extends Component {
                 multiline
                 rowsMax="4"
                 size="small"
-                style={{ width: "100%", paddingLeft: "15px" }}
+                className="collabtext"
                 value={this.state.collabatorName}
                 onChange={this.onchangecollabator}
                 InputProps={{ disableUnderline: true }}
               />
             </div>
-            <div onClick={this.collabsave} style={{ padding: "10px" }}>
+            <div onClick={this.collabsave} className="padding2">
               save
             </div>
           </div>

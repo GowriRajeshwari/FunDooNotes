@@ -2,13 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import "./Css/Login.scss";
-import "./Css/Register.scss";
-import "./Css/ForgotPassword.scss";
-import "./Css/ResetPassword.scss";
-import "./Css/Dashboard.scss";
-import "./Css/service.scss";
-import "./Css/TakeaNotes.scss";
+import "./css/login.scss";
+import "./css/register.scss";
+import "./css/forgotPassword.scss";
+import "./css/resetPassword.scss";
+import "./css/dashboard.scss";
+import "./css/service.scss";
+import "./css/takeaNotes.scss";
+import "./css/color.scss";
+import "./css/askQuestion.scss";
+import "./css/cart.scss";
 
 import * as serviceWorker from "./serviceWorker";
 

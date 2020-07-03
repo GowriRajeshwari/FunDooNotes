@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Editor } from "react-draft-wysiwyg";
-import { editorState } from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import {
   getNotesDetail,
@@ -9,11 +8,13 @@ import {
   reply,
   rate,
 } from "../services/notesService";
-import TextField from "@material-ui/core/TextField";
-import { Typography } from "@material-ui/core";
-import List from "@material-ui/core/List";
-import Dialog from "@material-ui/core/Dialog";
-import Divider from "@material-ui/core/Divider";
+import {
+  Divider,
+  List,
+  Typography,
+  TextField,
+  Dialog,
+} from "@material-ui/core";
 import reply_black from "../assets/reply_black.png";
 import thumb_up from "../assets/thumb_up.png";
 import thumb_down from "../assets/thumb_down.png";
@@ -182,14 +183,8 @@ class AskQuestion extends Component {
   render() {
     return (
       <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <div style={{ width: "80%" }}>
+        <div className="containerQtn">
+          <div className="widthQtn">
             <List>
               <Typography>{this.state.data.title}</Typography>
               <Typography>{this.state.data.description}</Typography>
@@ -198,15 +193,8 @@ class AskQuestion extends Component {
         </div>
         {this.state.showQust ? null : (
           <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                paddingTop: "10px",
-              }}
-            >
-              <div style={{ width: "80%" }}>
+            <div className="qustDiv">
+              <div className="widthQtn">
                 <Divider />
                 <List>
                   <Typography>Question Asked</Typography>
@@ -218,33 +206,13 @@ class AskQuestion extends Component {
           </div>
         )}
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            cursor: "pointer",
-          }}
-          onClick={this.close}
-        >
+        <div className="closeBtn" onClick={this.close}>
           Close
         </div>
         {this.state.showQust ? (
           <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: "80%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+            <div className="containerQtn">
+              <div className="questionPart">
                 <Editor
                   placeholder="Enter the Question"
                   editorState={this.state.editorState}
@@ -255,35 +223,14 @@ class AskQuestion extends Component {
                 />
               </div>
             </div>
-            <div
-              style={{
-                width: "90%",
-                display: "flex",
-                justifyContent: "flex-end",
-                cursor: "pointer",
-              }}
-              onClick={this.AskQuestion}
-            >
+            <div className="askBtn" onClick={this.AskQuestion}>
               Ask
             </div>
           </div>
         ) : this.state.showReply ? (
           <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  width: "80%",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+            <div className="containerQtn">
+              <div className="questionPart">
                 <Editor
                   placeholder="Enter the Reply"
                   editorState={this.state.editorState}
@@ -294,15 +241,7 @@ class AskQuestion extends Component {
                 />
               </div>
             </div>
-            <div
-              style={{
-                width: "90%",
-                display: "flex",
-                justifyContent: "flex-end",
-                cursor: "pointer",
-              }}
-              onClick={this.replyBack}
-            >
+            <div className="askBtn" onClick={this.replyBack}>
               Reply
             </div>
           </div>
@@ -311,23 +250,9 @@ class AskQuestion extends Component {
             {this.state.questionAndAnswerNotes.map((qustans, index) => {
               if (qustans.isApproved === true)
                 return (
-                  <div style={{ display: "flex", justifyContent: "center" }}>
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        padding: "10px",
-                        width: "80%",
-                      }}
-                    >
-                      <label
-                        for="file-input"
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
+                  <div className="centerStyleQtn">
+                    <div className="qustContainer">
+                      <label for="file-input" className="containerQtn">
                         <img
                           src={
                             this.state.profileImageFromRes == ""
@@ -335,29 +260,17 @@ class AskQuestion extends Component {
                               : "http://fundoonotes.incubation.bridgelabz.com/" +
                                 this.state.profileImageFromRes
                           }
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            backgroundColor: "grey",
-                            borderRadius: "50px",
-                          }}
+                          className="imgStyle1Qtn"
                         />
                       </label>
                       <input
                         type="file"
                         onChange={this.onChange}
                         id="file-input"
-                        style={{ display: "none" }}
+                        className="disaplyNone"
                       />
 
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          marginLeft: "5px",
-                        }}
-                      >
+                      <div className="messageDiv">
                         <Typography>
                           {this.state.data.user.firstName}{" "}
                           {this.state.data.user.lastName}
@@ -366,21 +279,8 @@ class AskQuestion extends Component {
 
                         <Typography></Typography>
                       </div>
-                      <div
-                        style={{
-                          padding: "10px",
-                          display: "flex",
-                          flexDirection: "row",
-                          marginLeft: "5px",
-                        }}
-                      >
-                        <div
-                          style={{
-                            display: "flex",
-                            justifyContent: "center",
-                            flexDirection: "column",
-                          }}
-                        >
+                      <div className="IconQtn">
+                        <div className="containerQtn">
                           <img
                             src={reply_black}
                             onClick={() =>
@@ -388,27 +288,14 @@ class AskQuestion extends Component {
                                 this.state.questionAndAnswerNotes[index].id
                               )
                             }
-                            style={{ width: "20px", height: "20px" }}
+                            className="ImgStyleQtn"
                           />
                         </div>
 
                         {qustans.like.length > 0 &&
                         qustans.like[0].like === true ? (
-                          <div
-                            style={{
-                              paddingLeft: "5px",
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              flexDirection: "row",
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                              }}
-                            >
+                          <div className="thumbDiv">
+                            <div className="containerQtn">
                               <img
                                 src={thumb_up}
                                 onClick={() =>
@@ -416,40 +303,16 @@ class AskQuestion extends Component {
                                     this.state.questionAndAnswerNotes[index].id
                                   )
                                 }
-                                style={{
-                                  display: "flex",
-                                  width: "20px",
-                                  height: "20px",
-                                }}
+                                className="ImgStyleQtn"
                               />{" "}
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                                paddingLeft: "5px",
-                              }}
-                            >
+                            <div className="likeDiv">
                               <div>1 Likes</div>
                             </div>
                           </div>
                         ) : (
-                          <div
-                            style={{
-                              paddingLeft: "5px",
-                              display: "flex",
-                              justifyContent: "flex-end",
-                              flexDirection: "row",
-                            }}
-                          >
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                              }}
-                            >
+                          <div className="thumbDiv">
+                            <div className="containerQtn">
                               <img
                                 src={thumb_down}
                                 onClick={() =>
@@ -457,27 +320,16 @@ class AskQuestion extends Component {
                                     this.state.questionAndAnswerNotes[index].id
                                   )
                                 }
-                                style={{
-                                  display: "flex",
-                                  width: "20px",
-                                  height: "20px",
-                                }}
+                                className="ImgStyleQtn"
                               />{" "}
                             </div>
-                            <div
-                              style={{
-                                display: "flex",
-                                justifyContent: "center",
-                                flexDirection: "column",
-                                paddingLeft: "5px",
-                              }}
-                            >
+                            <div className="likeDiv">
                               <div>0 Likes</div>
                             </div>
                           </div>
                         )}
 
-                        <div style={{ padding: "5px" }}>
+                        <div className="padding">
                           {qustans.rate.length > 0 &&
                           qustans.rate[0].rate > 0 ? (
                             <Rating

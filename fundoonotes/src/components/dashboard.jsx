@@ -1,22 +1,26 @@
 import React, { Component } from "react";
 import clsx from "clsx";
 import axios, { post } from "axios";
-import Dialog from "@material-ui/core/Dialog";
+import {
+  Avatar,
+  Popover,
+  ListItemIcon,
+  ListItemText,
+  ListItem,
+  IconButton,
+  Divider,
+  Typography,
+  List,
+  Toolbar,
+  AppBar,
+  CssBaseline,
+  Drawer,
+  Dialog,
+} from "@material-ui/core";
 import { makeStyles, useTheme, withStyles } from "@material-ui/core/styles";
 import search_black from "../assets/search_black.png";
 import clear from "../assets/clear.png";
-import Drawer from "@material-ui/core/Drawer";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
-import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import TakeaNotes from "./takeaNotes";
@@ -26,7 +30,6 @@ import LabelIcon from "@material-ui/icons/Label";
 import keepBulb from "../assets/keepBulb.png";
 import list from "../assets/list.png";
 import shopping_cart from "../assets/shopping_cart.png";
-import Avatar from "@material-ui/core/Avatar";
 import lightbulb_black from "../assets/lightbulb_black.png";
 import reminder from "../assets/reminder.svg";
 import delete_black from "../assets/delete_black.png";
@@ -36,7 +39,6 @@ import listview from "../assets/listview.png";
 import Collaborator from "./collaborator";
 import LabelShow from "./labelShow";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import Popover from "@material-ui/core/Popover";
 import Cart from "./cart";
 import Archive from "./archived";
 import Reminder from "./reminder";
@@ -368,18 +370,10 @@ class Dashboard extends Component {
                   edge="start"
                   className={clsx(classes.menuButton, this.state.open)}
                 >
-                  <MenuIcon
-                    style={{
-                      width: "30px",
-                      height: "30px",
-                    }}
-                  />
+                  <MenuIcon className="menudiv" />
                 </IconButton>
                 <div className={classes.bulbImg} className="bulbicon">
-                  <img
-                    src={keepBulb}
-                    style={{ height: "45px", width: "45px" }}
-                  />
+                  <img src={keepBulb} className="bulbImg" />
                 </div>
 
                 <Typography variant="h6" className="funnDooName">
@@ -388,7 +382,7 @@ class Dashboard extends Component {
               </div>
               <div className="searchDiv">
                 <div className="searchdiv1">
-                  <SearchIcon style={{ color: "black", marginRight: "6px" }} />
+                  <SearchIcon className="searchIcon" />
                   <input
                     placeholder="Search"
                     InputProps={{ disableUnderline: true }}
@@ -400,7 +394,7 @@ class Dashboard extends Component {
                     }}
                     onChange={this.queryfunction}
                   />
-                  <CloseIcon style={{ color: "black" }} />
+                  <CloseIcon className="blackColor" />
                 </div>
               </div>
               <div className="icondash">
@@ -412,9 +406,7 @@ class Dashboard extends Component {
                   edge="start"
                   className="bulbicon"
                 >
-                  <ShoppingCartIcon
-                    style={{ color: "black", fontSize: "30px", opacity: "0.7" }}
-                  />
+                  <ShoppingCartIcon className="cartIcon" />
                 </IconButton>
                 <IconButton
                   size="medium"
@@ -425,15 +417,9 @@ class Dashboard extends Component {
                   className="bulbicon"
                 >
                   {this.state.gridView ? (
-                    <ViewAgendaIcon style={{ color: "black" }} />
+                    <ViewAgendaIcon className="blackColor" />
                   ) : (
-                    <AppsIcon
-                      style={{
-                        opacity: "0.7",
-                        color: "black",
-                        fontSize: "30px",
-                      }}
-                    />
+                    <AppsIcon className="cartIcon" />
                   )}
                 </IconButton>
 
@@ -453,12 +439,7 @@ class Dashboard extends Component {
                           : "http://fundoonotes.incubation.bridgelabz.com/" +
                             this.state.profileImageFromRes
                       }
-                      style={{
-                        width: "50px",
-                        height: "50px",
-                        backgroundColor: "grey",
-                        borderRadius: "50px",
-                      }}
+                      className="profileImg"
                     />
                   </Avatar>
                 </IconButton>
@@ -474,16 +455,10 @@ class Dashboard extends Component {
                   open={this.state.open1}
                   anchorEl={this.state.anchorEl}
                   onClose={this.handleClick}
-                  style={{ cursor: "pointer" }}
+                  className="pointer"
                 >
-                  <div style={{ width: "300px", height: "120px" }}>
-                    <form
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        padding: "10px",
-                      }}
-                    >
+                  <div className="formUpperDiv">
+                    <form className="formStyle">
                       <label for="file-input">
                         <img
                           src={
@@ -492,64 +467,32 @@ class Dashboard extends Component {
                               : "http://fundoonotes.incubation.bridgelabz.com/" +
                                 this.state.profileImageFromRes
                           }
-                          style={{
-                            width: "50px",
-                            height: "50px",
-                            backgroundColor: "grey",
-                            borderRadius: "50px",
-                          }}
+                          className="profileImg"
                         />
                       </label>
                       <input
                         type="file"
                         onChange={this.onChange}
                         id="file-input"
-                        style={{ display: "none" }}
+                        className="disaplyNone"
                       />
 
-                      <div
-                        style={{
-                          display: "flex",
-                          flexDirection: "column",
-                          justifyContent: "center",
-                          marginLeft: "5px",
-                        }}
-                      >
+                      <div className="messageDiv">
                         <Typography>{this.state.email}</Typography>
                         <Typography>{this.state.firstName}</Typography>
                       </div>
                       {this.state.fileshow ? (
-                        <div
-                          style={{
-                            width: "250px",
-                            height: "250px",
-                            display: "none",
-                          }}
-                        >
+                        <div className="fileDiv">
                           <Dialog
                             open={this.state.open12}
                             onClose={this.handleClick12}
                           >
-                            <div
-                              style={{
-                                width: "250px",
-                                height: "200px",
-                                display: "flex",
-                                flexDirection: "column",
-                                justifyContent: "center",
-                                alignItems: "center",
-                              }}
-                            >
+                            <div classNAme="profileDiv">
                               <img
                                 src={this.state.profileImage}
-                                style={{
-                                  width: "150px",
-                                  height: "150px",
-                                  borderRadius: "50px",
-                                  justifyContent: "center",
-                                }}
+                                className="profileStyle"
                               />
-                              <div style={{ paddingTop: "10px" }}>
+                              <div className="padding2">
                                 <button
                                   type="submit"
                                   onClick={this.onFormSubmit}
@@ -564,15 +507,7 @@ class Dashboard extends Component {
                     </form>
 
                     <Divider />
-                    <div
-                      onClick={this.logout}
-                      style={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        padding: "10px",
-                        border: "1px",
-                      }}
-                    >
+                    <div className="logoutBtn" onClick={this.logout}>
                       LOGOUT
                     </div>
                   </div>
@@ -601,11 +536,7 @@ class Dashboard extends Component {
                     </div>
                   ) : (
                     <div>
-                      <img
-                        src={reminder}
-                        id="imgdash1"
-                        style={{ opacity: "0.7" }}
-                      />{" "}
+                      <img src={reminder} id="imgdash1" className="opacity" />{" "}
                     </div>
                   )}
                 </ListItemIcon>
@@ -614,12 +545,12 @@ class Dashboard extends Component {
             ))}
           </List>
           <Divider />
-          <div style={{ padding: "15px" }}>LABELS</div>
+          <div className="paddingDash">LABELS</div>
           <List>
             {this.state.labelData.map((text, index) => (
               <ListItem button key={text} onClick={(e) => this.choice(e, text)}>
                 <ListItemIcon>
-                  {<LabelIcon style={{ fontSize: "medium" }} />}
+                  {<LabelIcon className="labelIcon" />}
                 </ListItemIcon>
                 <ListItemText primary={text.label} />
               </ListItem>
@@ -630,7 +561,7 @@ class Dashboard extends Component {
               <ListItem button key={text} onClick={(e) => this.choice(e, text)}>
                 <ListItemIcon>
                   {index % 2 === 0 ? (
-                    <AddIcon style={{ color: "black" }} />
+                    <AddIcon className="blackColor" />
                   ) : (
                     <MailIcon />
                   )}
@@ -648,11 +579,7 @@ class Dashboard extends Component {
                   {index % 2 === 0 ? (
                     <img src={download} id="imgdash1" />
                   ) : (
-                    <img
-                      src={delete_black}
-                      id="imgdash1"
-                      style={{ opacity: "0.7" }}
-                    />
+                    <img src={delete_black} id="imgdash1" />
                   )}
                 </ListItemIcon>
                 <ListItemText primary={text} />
