@@ -130,7 +130,7 @@ class DeleteIcon extends Component {
     deleteForeverNotes(data).then((response) => {
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
-        this.props.sendtrash1(true);
+        this.props.sendtrash(true);
       } else {
         this.setState({ noteIdList: [] });
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
@@ -146,7 +146,7 @@ class DeleteIcon extends Component {
     trashNotes(data).then((response) => {
       if (response.status === 200) {
         this.setState({ noteIdList: [] });
-        this.props.sendtrash1(true);
+        this.props.sendtrash(true);
       } else {
         this.setState({ noteIdList: [] });
         this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });

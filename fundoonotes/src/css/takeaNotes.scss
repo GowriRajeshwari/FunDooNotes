@@ -27,8 +27,13 @@
 }
 .collabtext {
   width: 100%;
-  padding-left: 15px;
+  margin-left: 15px;
 }
+.collabtext2 {
+  width: 100%;
+  margin-left: 15px;
+}
+
 .listItem {
   padding: 5px;
   display: flex;
@@ -52,7 +57,7 @@
 .labelButton2 {
   display: flex;
   justify-content: flex-end;
-  width: 200px;
+  width: 240px;
   height: 40px;
   padding: 10px;
   font-family: bold;

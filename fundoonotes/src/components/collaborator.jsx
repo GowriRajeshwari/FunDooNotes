@@ -143,17 +143,18 @@ class Collaborator extends Component {
               <Avatar>
                 <PersonIcon />
               </Avatar>
-              <TextField
-                id="standard-multiline-flexible"
-                placeholder="Emails"
-                multiline
-                rowsMax="4"
-                size="small"
-                className="collabtext"
-                value={this.state.collabatorName}
-                onChange={this.onchangecollabator}
-                InputProps={{ disableUnderline: true }}
-              />
+              <div className="collabtext2">
+                <TextField
+                  id="standard-multiline-flexible"
+                  placeholder="Emails"
+                  multiline
+                  rowsMax="4"
+                  size="small"
+                  value={this.state.collabatorName}
+                  onChange={this.onchangecollabator}
+                  InputProps={{ disableUnderline: true }}
+                />
+              </div>
             </div>
             <div onClick={this.collabsave} className="padding2">
               save

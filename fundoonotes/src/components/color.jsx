@@ -19,7 +19,10 @@ class Color extends React.Component {
     });
   };
   changeColor = (color) => {
-    this.setState({ changeColor: color }, () => this.colorprops);
+    this.setState(
+      { changeColor: color },
+      this.props.sendColor(color, this.state.index)
+    );
   };
   colorprops = () => {
     this.props.sendColor(color, this.state.index);

@@ -444,9 +444,10 @@ class Archived extends Component {
     }
   };
   archiveddata = (dat) => {
+    this.state.noteIdList.push(dat.toString());
     let data1 = {
       isArchived: false,
-      noteIdList: this.state.noteIdList.push(dat.toString()),
+      noteIdList: this.state.noteIdList,
     };
     archiveNote(data1).then((response) => {
       if (response.status === 200) {

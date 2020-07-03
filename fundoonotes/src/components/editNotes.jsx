@@ -22,6 +22,7 @@ import {
   updateNotes,
   setNotes,
   archiveNote,
+  removeRemainderNotes,
 } from "../services/notesService";
 import PersonIcon from "@material-ui/icons/Person";
 import setting from "../assets/setting.png";
@@ -123,8 +124,18 @@ class EditNotes extends Component {
     this.setState({ date: date, date_timeshow: true, dateshow: false });
   };
 
-  handleDelete = () => {
+  handleDelete = (id) => {
     this.setState({ date: "", date_timeshow: false });
+    let data = {
+      noteIdList: [id],
+    };
+    removeRemainderNotes(data).then((response) => {
+      if (response.status === 200) {
+        // this.componentDidMount();
+      } else {
+        this.setState({ snackbarmsg: "Netwrork is slow", snackbaropen: true });
+      }
+    });
   };
 
   sendtimeDate = (date, id) => {

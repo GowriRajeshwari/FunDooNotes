@@ -336,7 +336,7 @@ class ListItemchecklist extends Component {
           <Collaborator collbasave={this.collaboratorsave} />
         ) : (
           <div id="NoteExpand">
-            <div className="showicon" className="padding2">
+            <div className="showicon padding2">
               <TextField
                 id="standard-multiline-flexible"
                 placeholder="Title"

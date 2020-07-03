@@ -274,7 +274,7 @@ class Trash extends Component {
       return (
         <div className="typoTextStyle">
           <Chip
-            width={240}
+            className="reminderChip"
             icon={<img src={schedule} />}
             label={reminder}
             onDelete={() => this.handleDelete(id)}
