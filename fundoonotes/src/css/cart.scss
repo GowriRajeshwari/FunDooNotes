@@ -1,0 +1,158 @@
+.cashDiv {
+  font-family: lato;
+  color: blue;
+  font-size: 16px;
+}
+.paymentDiv {
+  font-family: lato;
+  color: black;
+  font-size: 14px;
+  font-weight: bold;
+}
+.PaymentCashDiv {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  flex-wrap: wrap;
+  margin-left: 30px;
+}
+.mainCart {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.Main2Cart {
+  margin-top: 30px;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+.textarea {
+  resize: none;
+}
+.textareaDiv {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+}
+.spanStyle {
+  color: blue;
+  font-family: lato;
+  font-size: 16px;
+  margin-top: 10px;
+}
+.orderStyle {
+  font-size: 16px;
+  font-family: lato;
+  padding: 5px;
+  color: black;
+  cursor: pointer;
+}
+.orderDiv {
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.processedStyle {
+  font-size: 16px;
+  font-family: lato;
+  padding: 5px;
+  color: black;
+  cursor: pointer;
+}
+.processedDiv {
+  border-radius: 8px;
+  background-color: lightblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.plcedStyle {
+  font-size: 15px;
+  font-family: lato;
+  padding: 5px;
+  color: black;
+  cursor: pointer;
+}
+.subtotalStyle {
+  font-size: 16px;
+  font-family: lato;
+}
+.subtotalDiv {
+  padding: 2px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid grey;
+  width: 200px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+}
+.monthStyle {
+  font-size: 16px;
+  font-family: lato;
+  color: blue;
+}
+.validityStyle {
+  font-size: 16px;
+  font-family: lato;
+  font-weight: bold;
+  color: black;
+}
+.headingDiv {
+  border-radius: 8px;
+  background-color: #fb0;
+}
+.headingStyle {
+  padding: 5px;
+  color: white;
+}
+.labelStyle {
+  font-size: 16px;
+  font-family: lato;
+  padding: 5px;
+}
+.monthDiv {
+  display: flex;
+  flex-direction: column;
+  width: 100px;
+  flex-wrap: wrap;
+}
+.priceDiv {
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+  width: 100px;
+  flex-wrap: wrap;
+}
+.cash1Div {
+  width: 90px;
+  flex-wrap: wrap;
+  background-color: grey;
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding-left: 20px;
+}
+.divContainer {
+  min-height: 120px;
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.shoppingcartStyle {
+  font-size: 18px;
+  font-family: lato;
+}
+.shoppingDiv {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 10px;
+  font-family: lato;
+  font-size: 14px;
+  font-weight: bold;
+}

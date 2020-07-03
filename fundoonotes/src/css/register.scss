@@ -1,0 +1,332 @@
+#rootpaperReg {
+  margin-top: 70px;
+  margin-bottom: 70px;
+  width: 65%;
+  height: 800px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.firstcontainerReg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.containerReg {
+  width: 100%;
+  height: 750px;
+  font-size: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.loginstyleReg {
+  margin-top: 10px;
+  font-size: 25px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container2Reg {
+  height: 700px;
+  font-size: 15px;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+}
+.usernameReg span {
+  color: red;
+  font-size: 25px;
+}
+.usernameReg span:nth-child(2n + 1) {
+  color: blue;
+}
+.rowReg2 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 62%;
+}
+.rowReg1 {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 80%;
+  justify-content: center;
+}
+.rowReg {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  width: 80%;
+  justify-content: center;
+}
+#btnReg {
+  width: 230px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+#FirstName {
+  width: 230px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+#btnRegLastName {
+  width: 230px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+#btnRegconfirm {
+  width: 230px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+#btnRegPhone {
+  width: 230px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+.inputFieldReg {
+  padding: 1px;
+  margin-right: 10px;
+}
+.inputFieldReg1 {
+  padding: 1px;
+  margin-right: 10px;
+  visibility: hidden;
+}
+#btnEmailReg {
+  width: 500px;
+  color: #565656;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  height: 20px;
+}
+.submitButtonReg {
+  display: flex;
+  justify-content: flex-end;
+  width: 520px;
+}
+#subbtnReg {
+  justify-content: flex-end;
+  background-color: #1189de;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+}
+.servicerootR {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  z-index: 9;
+  margin-bottom: 15px;
+}
+.serviceroot1R {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  z-index: 8;
+  margin-top: -190px;
+  margin-left: 40px;
+}
+.boxwidth {
+  width: 30%;
+  height: 100%;
+}
+.twocardR {
+  padding: 10px;
+  width: 250px;
+  height: 200px;
+}
+.title1R {
+  height: 200px;
+  width: 200px;
+  font-size: 14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: grey;
+}
+.title1Radvance {
+  height: 200px;
+  width: 200px;
+  font-size: 14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: yellow;
+}
+.title1Rbasic {
+  height: 200px;
+  width: 200px;
+  font-size: 14;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: yellow;
+}
+.boldpointR {
+  font-size: 8px;
+  list-style-type: circle;
+}
+.price {
+  font-size: 13px;
+  font-weight: bold;
+}
+.title {
+  font-size: 22px;
+}
+
+.advance {
+  color: blue;
+}
+.boldpoint {
+  height: 10px;
+  list-style-type: circle;
+}
+
+.widthheight {
+  width: 170px;
+  height: 150px;
+  padding: 20px;
+}
+
+@media only screen and (max-width: 414px) {
+  #rootpaperReg {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    width: 100%;
+    height: 500px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .firstcontainerReg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .containerReg {
+    width: 100%;
+    height: 500px;
+    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(160, 23, 23);
+  }
+  .loginstyleReg {
+    margin-top: 10px;
+    font-size: 25px;
+    /* padding: 16px; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .container2Reg {
+    padding: 35px;
+    height: 500px;
+    font-size: 15px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff;
+    width: 100%;
+  }
+  .usernameReg span {
+    color: red;
+    font-size: 25px;
+  }
+  .usernameReg span:nth-child(2n + 1) {
+    color: blue;
+  }
+  .rowReg {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+  }
+  #btnReg {
+    width: 90px;
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  .inputFieldReg {
+    padding: 1px;
+    margin-right: 10px;
+  }
+  #btnEmailReg {
+    width: 210px;
+    color: #565656;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    height: 20px;
+  }
+  .submitButtonReg {
+    display: flex;
+    justify-content: flex-end;
+    padding: 1px;
+    width: 215px;
+    margin-top: 20px;
+  }
+  #subbtnReg {
+    justify-content: flex-end;
+    background-color: #1189de;
+    font-weight: bold;
+    color: #fff;
+    width: 50px;
+  }
+  .servicerootR {
+    height: 250px;
+    width: 250px;
+    position: relative;
+    z-index: 9;
+    margin-bottom: 15px;
+  }
+  .twocardR {
+    width: 200px;
+    height: 200px;
+  }
+}

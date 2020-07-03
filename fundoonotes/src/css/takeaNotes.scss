@@ -1,0 +1,466 @@
+@import "const.scss";
+
+.maincontainer {
+  align-content: stretch;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+}
+.maincontainer1 {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+}
+.ratingContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.formStyle {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+.collabtext {
+  width: 100%;
+  padding-left: 15px;
+}
+.listItem {
+  padding: 5px;
+  display: flex;
+  justify-content: center;
+}
+.chipWidth {
+  width: 300px;
+}
+.labelButton {
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  font-family: bold;
+  cursor: pointer;
+}
+.dateDiv {
+  width: 170px;
+  height: 170px;
+  padding: 15px;
+}
+.labelButton2 {
+  display: flex;
+  justify-content: flex-end;
+  width: 200px;
+  height: 40px;
+  padding: 10px;
+  font-family: bold;
+  cursor: pointer;
+}
+.ImageDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.paddingTop {
+  padding-top: 20px;
+}
+.centerStyle {
+  display: flex;
+  justify-content: center;
+}
+.labelStyle {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 100%;
+  padding: 5px;
+}
+.ImageSize {
+  height: 40px;
+  width: 40px;
+}
+.dataDiv {
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+.labelcontainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 240px;
+  padding-top: 5px;
+}
+.formInside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+}
+.avatarDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+.imgStyle {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50px;
+}
+.notescontainer {
+  align-content: stretch;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 2;
+  flex-basis: 750px;
+  max-width: 900px;
+  min-width: 550px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.notescontainer1 {
+  align-content: stretch;
+  justify-content: center;
+  align-items: stretch;
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 2;
+  flex-basis: 750px;
+  max-width: 900px;
+  min-width: 550px;
+  flex-wrap: wrap;
+  margin-top: 15px;
+}
+.showicon {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.mydivouter {
+  width: 255px;
+  position: relative;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.mydivoutergrid {
+  width: 700px;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.padding {
+  padding: 5px;
+}
+.reminderChip {
+  width: 240px;
+}
+.widthStyle {
+  width: 100%;
+}
+.chipStyle {
+  width: auto;
+}
+.paddingStyle {
+  padding: 5px;
+}
+.collabstyle {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  width: 200px;
+  padding-top: 5px;
+}
+.collaboratorStyle {
+  width: 40px;
+  height: 40px;
+  background-color: white;
+  border-radius: 50px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  border: 0.1px solid grey;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.padding3 {
+  padding: 3px;
+}
+.mybutton {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
+  justify-content: flex-start;
+}
+.padding2 {
+  padding: 10px;
+}
+.mybutton2 {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
+  justify-content: space-around;
+}
+.mybuttonoverlap {
+  margin: 0 auto;
+  visibility: hidden;
+}
+.mydivouter:hover .mybuttonoverlap {
+  display: block;
+  visibility: visible;
+}
+.mydivoutergrid:hover .mybuttonoverlap {
+  display: block;
+  visibility: visible;
+}
+.iconbtn {
+  border: none;
+  background-color: white;
+}
+.timepicker {
+  width: 200px;
+}
+#colorchange {
+  background-color: greenyellow;
+}
+.typoText {
+  width: 200px;
+  word-wrap: break-word;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: $primaryfontfamily;
+}
+.typoTextStyle {
+  width: 200px;
+  word-wrap: break-word;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: $primaryfontfamily;
+  padding-top: 10px;
+  width: 150px;
+}
+.IconDiv {
+  display: flex;
+  flex-direction: row;
+  padding-top: 10px;
+  justify-content: space-around;
+}
+.typoText1 {
+  width: 850px;
+  word-wrap: break-word;
+  font-size: 18px;
+  font-weight: 500;
+  font-family: $primaryfontfamily;
+}
+.carddiv {
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 20px;
+}
+.pointer {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 414px) {
+  .notescontainer {
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .mydivouter {
+    width: 350px;
+    min-width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .paper {
+    width: 350px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: $primarycolor;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .paper2 {
+    width: 400px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 8px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .example {
+    background: red;
+  }
+  .notescontainer {
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .mydivouter {
+    width: 350px;
+    min-width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .notescontainer {
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .mydivouter {
+    width: 350px;
+    min-width: 200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+@media only screen and (min-width: 670px) {
+  .notescontainer {
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+  .mydivouter {
+    width: 255px;
+    position: relative;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .example {
+    background: blue;
+  }
+  .notescontainer {
+    align-content: stretch;
+    justify-content: center;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .notescontainer {
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .notescontainer {
+    align-content: stretch;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-direction: row;
+    box-sizing: border-box;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 2;
+    flex-basis: 750px;
+    max-width: 900px;
+    min-width: 550px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+  }
+}
+
+.textdash1 {
+  width: 100%;
+}
+.textdash12 {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.textdashEdit {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: flex-end;
+}
+.classespaper12 {
+  width: 400px;
+  background-color: $primarycolor;
+  border: "2px solid #000";
+  padding: 5px;
+  height: 400px;
+}

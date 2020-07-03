@@ -1,0 +1,79 @@
+.containerQtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.widthQtn {
+  width: 80%;
+}
+.qutnDiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 10px;
+}
+.closeBtn {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.questionPart {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.askBtn {
+  width: 90%;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.likeDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-left: 5px;
+}
+.ImgStyleQtn {
+  display: flex;
+  width: 20px;
+  height: 20px;
+}
+.thumbDiv {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  padding-left: 5px;
+}
+.centerStyleQtn {
+  display: flex;
+  justify-content: center;
+}
+.qustContainer {
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+  width: 80%;
+}
+.imgStyle1Qtn {
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+  border-radius: 50px;
+}
+.disaplyNone {
+  display: none;
+}
+.messageDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 5px;
+}
+.IconQtn {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 5px;
+}

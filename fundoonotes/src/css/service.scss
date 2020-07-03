@@ -1,0 +1,143 @@
+.servicecontainer {
+  font-size: 28px;
+  color: rgb(228, 86, 86);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.containeservice {
+  width: 100%;
+  height: 100%;
+}
+.serviceroot {
+  height: 250px;
+  width: 250px;
+  position: relative;
+  z-index: 9;
+  background-color: blue;
+  margin-bottom: 15px;
+}
+.serviceroot1 {
+  height: 250px;
+  width: 250px;
+  position: relative;
+  z-index: 8;
+  margin-top: -230px;
+  margin-left: 40px;
+}
+.cardcontent {
+  height: 200px;
+  width: 250px;
+}
+.cardcontent1 {
+  height: 200px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+.title1 {
+  font-size: 14;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: grey;
+  margin-right: 2px;
+}
+.title2 {
+  font-size: 14;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background-color: yellow;
+  margin-right: 2px;
+}
+.twocard {
+  padding: 50px;
+}
+.twocardservice {
+  width: 450px;
+  height: 350px;
+}
+.centercard {
+  display: flex;
+}
+.boldpoint {
+  height: 10px;
+  list-style-type: circle;
+}
+.zoom {
+  padding: 50px;
+  transition: transform 0.2s;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.15); /* IE 9 */
+  -webkit-transform: scale(1.15); /* Safari 3-8 */
+  transform: scale(1.15);
+}
+.twocardrow {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+}
+.twocardrowcard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 500px;
+}
+.textdash {
+  width: 100%;
+  height: 40px;
+}
+.classespaper {
+  width: 500px;
+}
+.rowEnd {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 40px;
+  align-items: center;
+  background-color: rgb(79, 79, 226);
+  color: white;
+  padding: 5px;
+}
+.row1 {
+  display: flex;
+  justify-content: flex-start;
+}
+.row2 {
+  display: flex;
+  justify-content: flex-end;
+  padding: 2px;
+}
+.buttonCheckout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.buttoncheck {
+  border-radius: 5px;
+
+  padding: 5px;
+  background-color: rgb(79, 79, 226);
+}
