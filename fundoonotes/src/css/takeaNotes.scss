@@ -98,6 +98,12 @@
   width: 240px;
   padding-top: 5px;
 }
+.marginTop {
+  margin-top: 10px;
+}
+.marginBottom {
+  margin-bottom: 10px;
+}
 .formInside {
   display: flex;
   flex-direction: column;
@@ -114,7 +120,7 @@
 .imgStyle {
   width: 40px;
   height: 40px;
-  background-color: white;
+  background-color: $primarycolor;
   border-radius: 50px;
 }
 .notescontainer {

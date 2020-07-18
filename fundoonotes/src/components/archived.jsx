@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import personAdd from "../assets/person_add.png";
 import galary from "../assets/galary.png";
 import pin from "../assets/pin.svg";
-import { searchUserList } from "../services/notesService";
 import {
   archiveNoteList,
   getNotesListByLabel,
@@ -14,6 +13,7 @@ import {
   changeColor,
   archiveNote,
   deletelabelNotes,
+  searchUserList,
 } from "../services/notesService";
 import Color from "./color";
 import EditNotes from "./editNotes";

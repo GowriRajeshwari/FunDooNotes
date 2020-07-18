@@ -375,7 +375,7 @@ class ListItemchecklist extends Component {
               : null}
             {this.state.date_timeshow ? (
               <Chip
-                className="chipWidth"
+                className="chipWidth marginBottom"
                 icon={<img src={schedule} />}
                 label={this.state.date}
                 onDelete={this.handleDelete}
@@ -384,7 +384,7 @@ class ListItemchecklist extends Component {
               />
             ) : null}
             <Divider />
-            <div className="textdash padding2">
+            <div className="textdash padding2 ">
               <div className="ImageDiv" onClick={this.additem}>
                 <img src={add} id="imgdashnotes" />
               </div>

@@ -95,6 +95,7 @@
   height: 150px;
   border-radius: 50px;
   justify-content: center;
+  margin: 20px;
 }
 .profileDiv {
   width: 250px;
@@ -103,6 +104,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: transparent;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .fileDiv {
   width: 250px;

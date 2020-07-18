@@ -116,7 +116,7 @@ class NewNote extends Component {
   _onMouseOut = (event) => {
     this.setState({ show: false });
   };
-  close = async (event) => {
+  close = (event) => {
     event.preventDefault();
     for (let i = 0; i < this.state.labelNotes.length; i++) {
       this.state.labelIdList.push(this.state.labelNotes[i].id);
@@ -139,8 +139,8 @@ class NewNote extends Component {
 
       setNotes(form_data).then((response) => {
         if (response.status === 200) {
-          this.props.sendNewData();
           document.getElementById("NoteExpand").style.background = "white";
+          this.props.sendNewData();
           this.setState({
             originalArray: [],
             title: "",
@@ -153,6 +153,7 @@ class NewNote extends Component {
             labelIdList: [],
           });
         } else {
+          document.getElementById("NoteExpand").style.background = "white";
           this.setState({
             snackbarmsg: "Netwrork is slow",
             snackbaropen: true,
@@ -259,6 +260,7 @@ class NewNote extends Component {
       };
       setNotes(data).then((response) => {
         if (response.status === 200) {
+          document.getElementById("NoteExpand").style.background = "white";
           this.props.sendNewData();
           this.setState({ title: "", description: "", next: true, color: "" });
         } else {

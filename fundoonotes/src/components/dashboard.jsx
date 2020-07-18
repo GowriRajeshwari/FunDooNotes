@@ -492,7 +492,7 @@ class Dashboard extends Component {
                                 src={this.state.profileImage}
                                 className="profileStyle"
                               />
-                              <div className="padding2">
+                              <div className="padding2 center">
                                 <button
                                   type="submit"
                                   onClick={this.onFormSubmit}

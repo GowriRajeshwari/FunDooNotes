@@ -193,7 +193,7 @@ class AskQuestion extends Component {
         </div>
         {this.state.showQust ? null : (
           <div>
-            <div className="qustDiv">
+            <div className="qutnDiv">
               <div className="widthQtn">
                 <Divider />
                 <List>
